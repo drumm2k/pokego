@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
-import Meta from './Meta';
 import { normalize } from 'styled-normalize';
+import Meta from './Meta';
+import Header from './Header';
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -18,10 +19,68 @@ const GlobalStyle = createGlobalStyle`
   p {margin:0;}
   cite {font-style:normal;}
   fieldset {border-width:0; padding:0; margin:0;}
+
+  html {
+   font-size: 10px;
+  }
+
+  body {
+   font-family: 'Noah', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+   font-size: 1.8rem;
+   font-weight: 400;
+   line-height: 1.4;
+   color: #222;
+  }
+
+  @font-face {
+    font-family: 'Noah';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Noah Regular'), local('Noah Regular'),
+        url('/static/fonts/Noah-Regular.woff2') format('woff2'),
+        url('/static/fonts/Noah-Regular.woff') format('woff');
+  }
+
+  @font-face {
+    font-family: 'Noah';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Noah Bold'), local('Noah Bold'),
+        url('/static/fonts/Noah-Bold.woff2') format('woff2'),
+        url('/static/fonts/Noah-Bold.woff') format('woff');
+  }
+
+  ::selection {
+    background-color: #ccc;
+  }
+
+  h1 {
+    font-size: 4.8rem;
+    font-weight: 700;
+    line-height: 1.125;
+  }
+
+  h2 {
+    font-size: 3.6rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  h3 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  h4 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.22;
+  }
 `;
 
 const Wrapper = styled.div`
-  padding: 2rem;
+  padding: 0 3rem;
   margin: 0 auto;
 `;
 
@@ -31,7 +90,10 @@ class Page extends Component {
       <div>
         <Meta />
         <GlobalStyle />
-        <Wrapper>{this.props.children}</Wrapper>
+        <Wrapper>
+          <Header />
+          {this.props.children}
+        </Wrapper>
       </div>
     );
   }
