@@ -1,0 +1,34 @@
+{
+  "name": "pokego",
+  "version": "1.0.0",
+  "description": "Web app with useful tools for Pokemon GO community",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drumm2k/pokego.git"
+  },
+  "keywords": [],
+  "author": "Ruslan D",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/drumm2k/pokego/issues"
+  },
+  "homepage": "https://github.com/drumm2k/pokego#readme",
+  "dependencies": {
+    "next": "^9.0.4",
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "styled-components": "^4.3.2"
+  },
+  "devDependencies": {
+    "babel-plugin-styled-components": "^1.10.6",
+    "styled-normalize": "^8.0.6"
+  }
+}
