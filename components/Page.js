@@ -19,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
   p {margin:0;}
   cite {font-style:normal;}
   fieldset {border-width:0; padding:0; margin:0;}
+  img{max-width:100%;}
 
   html {
    font-size: 10px;
@@ -51,7 +52,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   ::selection {
-    background-color: #ccc;
+    background-color: #222;
+    color: #fff;
+  }
+
+  :focus {
+    outline-color: #222;
   }
 
   h1 {
@@ -80,8 +86,12 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Wrapper = styled.div`
-  padding: 0 3rem;
+  padding: 0 2rem;
   margin: 0 auto;
+
+  @media screen and (min-device-width: 768px) {
+    max-width: 720px;
+  }
 `;
 
 class Page extends Component {
