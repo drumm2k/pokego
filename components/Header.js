@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Link from 'next/link';
-import Hamburger from './Hamburger';
+import MobileNav from './MobileNav';
 
 const StyledHeader = styled.header`
   margin: 3rem 0;
@@ -14,18 +14,7 @@ const Logo = styled.a`
   font-size: 3.6rem;
   line-height: 1.125;
   font-weight: 700;
-`;
-
-const Nav = styled.ul`
-  display: flex;
-  font-size: 1.8rem;
-  flex-wrap: wrap;
-  color: #000;
-  font-weight: 700;
-`;
-
-const NavItem = styled.li`
-  margin-left: 2rem;
+  z-index: 1;
 `;
 
 const Header = () => (
@@ -33,15 +22,7 @@ const Header = () => (
     <Link href="/">
       <Logo>PokéGO</Logo>
     </Link>
-    <Hamburger />
-    {/* <Nav>
-      <NavItem>
-        <Link href="/events">Ивенты</Link>
-      </NavItem>
-      <NavItem>
-        <Link href="/pokedex">Покедекс</Link>
-      </NavItem>
-    </Nav> */}
+    <MobileNav />
   </StyledHeader>
 );
 
