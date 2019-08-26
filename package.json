@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/drumm2k/pokego#readme",
   "dependencies": {
+    "@svgr/webpack": "^4.3.2",
     "next": "^9.0.4",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
@@ -28,7 +29,6 @@
     "styled-components": "^4.3.2"
   },
   "devDependencies": {
-    "babel-plugin-inline-react-svg": "^1.1.0",
     "babel-plugin-styled-components": "^1.10.6",
     "styled-normalize": "^8.0.6"
   }
