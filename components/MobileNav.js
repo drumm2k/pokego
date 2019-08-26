@@ -8,14 +8,14 @@ const NavList = styled.ul`
   font-size: 2.4rem;
   font-weight: 700;
   text-align: center;
-  position: fixed;
+  position: absolute;
   height: 100%;
   width: 100%;
   left: 0;
   top: 0;
   display: flex;
   flex-direction: column;
-  background: #fef7ec;
+  background-image: linear-gradient(to top, #ddd 0%, #fff 100%);
   padding: 15rem 0;
   transition: opacity 0.25s, left 0s 0s;
 `;

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import MobileNav from './MobileNav';
 
 const StyledHeader = styled.header`
-  margin: 3rem 0;
+  margin: 3rem 0 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
