@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 56.3 (81716) - https://sketch.com -->
+    <title>Arrow</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Arrow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <path d="M3.125,6.125 L9.875,12.875" id="Line" stroke="#FCD768"></path>
+        <path d="M10.125,6.125 L16.875,12.875" id="Line-Copy" stroke="#FCD768" transform="translate(13.375000, 9.375000) scale(-1, 1) translate(-13.375000, -9.375000) "></path>
+    </g>
+</svg>

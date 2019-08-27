@@ -8,36 +8,39 @@ const Title = styled.h2`
 
 const EventList = styled.div``;
 
-const eventData = {
-  name: 'Water Festival 2019',
-  desc: 'Двойные конфеты и много водных покемонов.',
-  timer: 'Осталось 5 д 1 ч 39 м 55 с',
-  img: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/130.png'
+const Data = {
+  events: [
+    {
+      name: 'Water Festival 2019',
+      desc: 'Двойные конфеты и много водных покемонов.',
+      start: 'Aug 27 2019 16:06:48 GMT-0700',
+      end: 'Sep 27 2019 16:06:48 GMT-0700',
+      img: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/130.png'
+    },
+    {
+      name: 'MewTwo in Raids',
+      desc:
+        'Mewtwo возвращается, на этот раз с шайни версией и новой атакой psystrike.',
+      start: 'Aug 27 2019 16:06:48 GMT-0700',
+      end: 'Sep 27 2019 16:06:48 GMT-0700',
+      img: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/150.png'
+    }
+  ]
 };
 
-const eventData2 = {
-  name: 'MewTwo in Raids',
-  desc:
-    'Mewtwo возвращается, на этот раз с шайни версией и новой атакой psystrike.',
-  timer: 'Старт через 3 д 1 ч 39 м 55 с',
-  img: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/150.png'
-};
+const now = new Date();
+console.log(now);
+console.log(now.getTime());
 
 const Index = () => (
   <div>
     <Title>Ивенты</Title>
     <EventList>
       <Event
-        name={eventData.name}
-        desc={eventData.desc}
-        timer={eventData.timer}
-        img={eventData.img}
-      />
-      <Event
-        name={eventData2.name}
-        desc={eventData2.desc}
-        timer={eventData2.timer}
-        img={eventData2.img}
+        name={Data.events[0].name}
+        desc={Data.events[0].desc}
+        timer={Data.events[0].start}
+        img={Data.events[0].img}
       />
     </EventList>
   </div>

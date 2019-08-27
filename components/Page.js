@@ -86,7 +86,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Wrapper = styled.div`
-  padding: 0 2rem;
+  padding: 0 1.5rem;
   margin: 0 auto;
 
   @media screen and (min-device-width: 768px) {
