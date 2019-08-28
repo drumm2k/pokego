@@ -15,7 +15,7 @@ const Data = {
       name: 'Water Festival 2019',
       desc: 'Двойные конфеты и много водных покемонов.',
       start: 'Aug 28 2019 13:13:00 GMT-0700',
-      end: 'Aug 29 2019 15:36:20 GMT-0700',
+      end: 'Aug 28 2019 15:32:00 GMT-0700',
       img: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/130.png'
     },
     {
@@ -39,6 +39,13 @@ const Events = () => (
         start={Data.events[0].start}
         end={Data.events[0].end}
         img={Data.events[0].img}
+      />
+      <Event
+        name={Data.events[1].name}
+        desc={Data.events[1].desc}
+        start={Data.events[1].start}
+        end={Data.events[1].end}
+        img={Data.events[1].img}
       />
     </EventList>
   </div>

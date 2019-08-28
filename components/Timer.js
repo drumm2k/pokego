@@ -22,36 +22,19 @@ class Timer extends Component {
     this.state = {
       start: this.props.start,
       end: this.props.end,
-      status: 'init',
+      status: '',
       output: ''
     };
   }
 
   componentDidMount() {
+    this.tick();
     this.intervalID = setInterval(() => this.tick(), 1000);
   }
 
   componentWillUnmount() {
     clearInterval(this.intervalID);
   }
-
-  checkStatus = (start, end) => {
-    const diffStart = Date.parse(start) - Date.parse(new Date());
-    const diffEnd = Date.parse(end) - Date.parse(new Date());
-    if (diffStart > 0) {
-      this.setState({
-        status: 'upcoming'
-      });
-    } else if (diffStart < 0 && diffEnd > 0) {
-      this.setState({
-        status: 'active'
-      });
-    } else if (diffEnd < 0) {
-      this.setState({
-        status: 'finished'
-      });
-    }
-  };
 
   calcDuration = date => {
     const milliseconds = Date.parse(date) - Date.parse(new Date());
@@ -95,32 +78,36 @@ class Timer extends Component {
   };
 
   tick() {
-    this.checkStatus(this.state.start, this.state.end);
-
-    switch (this.state.status) {
-      case 'active':
-        this.calcDuration(this.state.end);
-        break;
-
-      case 'upcoming':
+    const diffStart = Date.parse(this.state.start) - Date.parse(new Date());
+    const diffEnd = Date.parse(this.state.end) - Date.parse(new Date());
+    if (diffStart > 0) {
+      this.setState({
+        status: 'upcoming'
+      }),
         this.calcDuration(this.state.start);
-        break;
-
-      case 'finished':
-        this.setState({
-          output: `Закончился`
-        });
+    } else if (diffStart < 0 && diffEnd > 0) {
+      this.setState({
+        status: 'active'
+      }),
+        this.calcDuration(this.state.end);
+    } else if (diffEnd < 0) {
+      this.setState({
+        status: 'finished',
+        output: `Закончился`
+      }),
         clearInterval(this.intervalID);
-        break;
     }
   }
 
   render() {
     return (
-      <EventTimeWrapper>
-        <ClockIcon />
-        <EventTimer>{this.state.output}</EventTimer>
-      </EventTimeWrapper>
+      <div>
+        <div>{this.state.status}</div>
+        <EventTimeWrapper>
+          <ClockIcon />
+          <EventTimer>{this.state.output}</EventTimer>
+        </EventTimeWrapper>
+      </div>
     );
   }
 }
