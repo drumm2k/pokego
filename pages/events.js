@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import Event from '../components/Event';
 
@@ -13,8 +14,8 @@ const Data = {
     {
       name: 'Water Festival 2019',
       desc: 'Двойные конфеты и много водных покемонов.',
-      start: 'Aug 27 2019 16:06:48 GMT-0700',
-      end: 'Sep 27 2019 16:06:48 GMT-0700',
+      start: 'Aug 28 2019 13:13:00 GMT-0700',
+      end: 'Aug 29 2019 15:36:20 GMT-0700',
       img: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/130.png'
     },
     {
@@ -28,22 +29,19 @@ const Data = {
   ]
 };
 
-const now = new Date();
-console.log(now);
-console.log(now.getTime());
-
-const Index = () => (
+const Events = () => (
   <div>
     <Title>Ивенты</Title>
     <EventList>
       <Event
         name={Data.events[0].name}
         desc={Data.events[0].desc}
-        timer={Data.events[0].start}
+        start={Data.events[0].start}
+        end={Data.events[0].end}
         img={Data.events[0].img}
       />
     </EventList>
   </div>
 );
 
-export default Index;
+export default Events;
