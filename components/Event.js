@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Clock from '../assets/clock.svg';
-import Arrow from '../assets/arrow.svg';
+import Timer from './Timer';
+import ArrowIcon from '../assets/arrow.svg';
 
 const StyledEvent = styled.div`
   display: flex;
@@ -41,18 +41,6 @@ const EventDesc = styled.p`
   flex-grow: 1;
 `;
 
-const EventTimeWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 1rem;
-  font-size: 1.6rem;
-  color: #fcd768;
-`;
-
-const EventTimer = styled.p`
-  margin-left: 1rem;
-`;
-
 const EventImg = styled.div`
   background: url(${props => props.imgUrl}) 50% 50% no-repeat;
   background-size: 10rem;
@@ -72,6 +60,17 @@ const Unfold = styled.div`
 `;
 
 class Event extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      days: 0,
+      hours: 0,
+      min: 0,
+      sec: 0
+    };
+  }
+
   render() {
     return (
       <StyledEvent>
@@ -80,14 +79,11 @@ class Event extends Component {
           <EventDataWrapper>
             <EventTitle>{this.props.name}</EventTitle>
             <EventDesc>{this.props.desc}</EventDesc>
-            <EventTimeWrapper>
-              <Clock />
-              <EventTimer>{this.props.timer}</EventTimer>
-            </EventTimeWrapper>
+            <Timer start={this.props.start} end={this.props.end} />
           </EventDataWrapper>
         </EventCard>
         <Unfold>
-          <Arrow />
+          <ArrowIcon />
         </Unfold>
       </StyledEvent>
     );
