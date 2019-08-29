@@ -2,27 +2,31 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import ClockIcon from '../assets/clock.svg';
 
-const EventTimeWrapper = styled.div`
+const EventTimerWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 1rem;
+`;
+
+const ClockContainer = styled.div`
+  height: 20px;
+  width: 20px;
+`;
+
+const EventTimerOutput = styled.p`
   font-size: 1.4rem;
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier,
     monospace;
   color: #fcd768;
-`;
-
-const EventTimer = styled.p`
   margin-left: 1rem;
 `;
 
-class Timer extends Component {
+class EventTimer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       start: this.props.start,
       end: this.props.end,
-      status: '',
+      isFinished: false,
       output: ''
     };
   }
@@ -81,19 +85,16 @@ class Timer extends Component {
     const diffStart = Date.parse(this.state.start) - Date.parse(new Date());
     const diffEnd = Date.parse(this.state.end) - Date.parse(new Date());
     if (diffStart > 0) {
-      this.setState({
-        status: 'upcoming'
-      }),
-        this.calcDuration(this.state.start);
+      this.props.statusHandler('Скоро');
+      this.calcDuration(this.state.start);
     } else if (diffStart < 0 && diffEnd > 0) {
-      this.setState({
-        status: 'active'
-      }),
-        this.calcDuration(this.state.end);
+      this.props.statusHandler('Активен');
+      this.calcDuration(this.state.end);
     } else if (diffEnd < 0) {
+      this.props.statusHandler('Окончен');
       this.setState({
-        status: 'finished',
-        output: `Закончился`
+        output: `${new Date(this.state.end).toLocaleString()}`,
+        isFinished: true
       }),
         clearInterval(this.intervalID);
     }
@@ -101,15 +102,14 @@ class Timer extends Component {
 
   render() {
     return (
-      <div>
-        <div>{this.state.status}</div>
-        <EventTimeWrapper>
+      <EventTimerWrapper>
+        <ClockContainer>
           <ClockIcon />
-          <EventTimer>{this.state.output}</EventTimer>
-        </EventTimeWrapper>
-      </div>
+        </ClockContainer>
+        <EventTimerOutput>{this.state.output}</EventTimerOutput>
+      </EventTimerWrapper>
     );
   }
 }
 
-export default Timer;
+export default EventTimer;

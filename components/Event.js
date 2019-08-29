@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import Timer from './Timer';
+import EventTimer from './EventTimer';
 import ArrowIcon from '../assets/arrow.svg';
 
 const StyledEvent = styled.div`
@@ -15,19 +14,16 @@ const StyledEvent = styled.div`
 `;
 
 const EventCard = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 10rem auto;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
   padding: 1.5rem 1rem;
   border-radius: 15px;
   background-image: linear-gradient(to right, #cc2b5e, #753a88);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
   /* background: #aa306f; */
-`;
-
-const EventDataWrapper = styled.div`
-  margin-left: 0.5rem;
-  display: flex;
-  flex-direction: column;
 `;
 
 const EventTitle = styled.p`
@@ -44,8 +40,28 @@ const EventDesc = styled.p`
 const EventImg = styled.div`
   background: url(${props => props.imgUrl}) 50% 50% no-repeat;
   background-size: 10rem;
-  min-width: 10rem;
+  width: 10rem;
   height: 10rem;
+`;
+
+const StatusContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const EventStatus = styled.span`
+  display: inline-block;
+  padding: 0.1rem 0.7rem;
+  color: #753a88;
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  background-color: #fcd768;
+  border-radius: 15px;
 `;
 
 const Unfold = styled.div`
@@ -62,13 +78,14 @@ const Unfold = styled.div`
 class Event extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      days: 0,
-      hours: 0,
-      min: 0,
-      sec: 0
+      status: ''
     };
+    this.statusHandler = this.statusHandler.bind(this);
+  }
+
+  statusHandler(status) {
+    this.setState({ status: status });
   }
 
   render() {
@@ -76,25 +93,26 @@ class Event extends Component {
       <StyledEvent>
         <EventCard>
           <EventImg imgUrl={this.props.img} />
-          <EventDataWrapper>
+          <div>
             <EventTitle>{this.props.name}</EventTitle>
             <EventDesc>{this.props.desc}</EventDesc>
-            <Timer start={this.props.start} end={this.props.end} />
-          </EventDataWrapper>
+          </div>
+          <StatusContainer>
+            <EventStatus>{this.state.status}</EventStatus>
+          </StatusContainer>
+          <EventTimer
+            start={this.props.start}
+            end={this.props.end}
+            status={this.props.status}
+            statusHandler={this.statusHandler}
+          />
         </EventCard>
-        <Unfold>
+        {/* <Unfold>
           <ArrowIcon />
-        </Unfold>
+        </Unfold> */}
       </StyledEvent>
     );
   }
 }
-
-Event.propTypes = {
-  img: PropTypes.string,
-  name: PropTypes.string,
-  desc: PropTypes.string,
-  timer: PropTypes.string
-};
 
 export default Event;
