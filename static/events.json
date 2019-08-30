@@ -2,11 +2,11 @@
   "events": [
     {
       "id": 1,
-      "name": "Водный фестиваль 2019",
+      "name": "Water Festival 2019",
       "desc": "Двойные конфеты с яиц и бадди, увеличенный спаун водных покемонов.",
       "start": "Aug 23 2019 13:00:00 GMT-0700",
       "end": "Aug 30 2019 13:00:00 GMT-0700",
-      "img": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/130.png"
+      "img": "/static/img/pokemon/130.png"
     },
     {
       "id": 2,
@@ -14,7 +14,7 @@
       "desc": "Rayquaza возвращается, на этот раз с шайни версией.",
       "start": "Jul 31 2019 13:00:00 GMT-0700",
       "end": "Sep 2 2019 13:00:00 GMT-0700",
-      "img": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/150.png"
+      "img": "/static/img/pokemon/384.png"
     },
     {
       "id": 3,
@@ -22,7 +22,7 @@
       "desc": "Ультра бонус, первая неделя.",
       "start": "Sep 2 2019 13:00:00 GMT-0700",
       "end": "Sep 9 2019 13:00:00 GMT-0700",
-      "img": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/201.png"
+      "img": "/static/img/pokemon/201-f.png"
     },
     {
       "id": 4,
@@ -30,7 +30,7 @@
       "desc": "Ультра бонус, вторая неделя.",
       "start": "Sep 9 2019 13:00:00 GMT-0700",
       "end": "Sep 16 2019 13:00:00 GMT-0700",
-      "img": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/083.png"
+      "img": "/static/img/pokemon/83.png"
     },
     {
       "id": 5,
@@ -38,7 +38,7 @@
       "desc": "Ультра бонус, третья неделя.",
       "start": "Sep 16 2019 13:00:00 GMT-0700",
       "end": "Sep 23 2019 13:00:00 GMT-0700",
-      "img": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/498.png"
+      "img": "/static/img/pokemon/286.png"
     },
     {
       "id": 6,
@@ -46,7 +46,7 @@
       "desc": "Just testing",
       "start": "Aug 16 2019 13:00:00 GMT-0700",
       "end": "Aug 23 2019 13:00:00 GMT-0700",
-      "img": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/150.png"
+      "img": "/static/img/pokemon/201-f.png"
     }
   ]
 }

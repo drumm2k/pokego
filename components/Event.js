@@ -15,7 +15,7 @@ const StyledEvent = styled.div`
 
 const EventCard = styled.div`
   display: grid;
-  grid-template-columns: 10rem auto;
+  grid-template-columns: 9.6rem auto;
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
   padding: 1.5rem 1rem;
@@ -39,9 +39,9 @@ const EventDesc = styled.p`
 
 const EventImg = styled.div`
   background: url(${props => props.imgUrl}) 50% 50% no-repeat;
-  background-size: 10rem;
-  width: 10rem;
-  height: 10rem;
+  background-size: 9.6rem;
+  width: 9.6rem;
+  height: 9.6rem;
 `;
 
 const StatusContainer = styled.div`

@@ -7,7 +7,7 @@ const Title = styled.h2`
   margin-bottom: 1.5rem;
 `;
 
-const API = 'http://localhost:3000/static/events.json';
+const API = 'http://192.168.1.229:3000/static/events.json';
 
 class events extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class events extends Component {
       .then(data => {
         this.setState({ eventsData: data.events, isFetching: false });
       })
-      .catch(error => this.setState({ error, isLoading: false }));
+      .catch(error => this.setState({ error, isFetching: false }));
   }
 
   render() {
