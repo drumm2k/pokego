@@ -2,51 +2,35 @@
   "events": [
     {
       "id": 1,
-      "name": "Water Festival 2019",
-      "desc": "Двойные конфеты с яиц и бадди, увеличенный спаун водных покемонов.",
-      "start": "Aug 23 2019 13:00:00 GMT-0700",
-      "end": "Aug 30 2019 13:00:00 GMT-0700",
-      "img": "/static/img/pokemon/130.png"
-    },
-    {
-      "id": 2,
       "name": "Rayquaza в рейдах",
       "desc": "Rayquaza возвращается, на этот раз с шайни версией.",
-      "start": "Jul 31 2019 13:00:00 GMT-0700",
-      "end": "Sep 2 2019 13:00:00 GMT-0700",
+      "start": "Feb 31 2020 13:00:00 GMT-0700",
+      "end": "Mar 2 2020 13:00:00 GMT-0700",
       "img": "/static/img/pokemon/384.png"
     },
     {
-      "id": 3,
+      "id": 2,
       "name": "Week 1: Johto Journey",
       "desc": "Ультра бонус, первая неделя.",
-      "start": "Sep 2 2019 13:00:00 GMT-0700",
-      "end": "Sep 9 2019 13:00:00 GMT-0700",
+      "start": "Mar 2 2020 13:00:00 GMT-0700",
+      "end": "Mar 9 2020 13:00:00 GMT-0700",
       "img": "/static/img/pokemon/201-f.png"
     },
     {
-      "id": 4,
+      "id": 3,
       "name": "Week 2: Global Challenge, Global Hatches",
       "desc": "Ультра бонус, вторая неделя.",
-      "start": "Sep 9 2019 13:00:00 GMT-0700",
-      "end": "Sep 16 2019 13:00:00 GMT-0700",
+      "start": "Mar 9 2020 13:00:00 GMT-0700",
+      "end": "Mar 16 2020 13:00:00 GMT-0700",
       "img": "/static/img/pokemon/83.png"
     },
     {
-      "id": 5,
+      "id": 4,
       "name": "Week 3: A Unova Unveiling",
       "desc": "Ультра бонус, третья неделя.",
-      "start": "Sep 16 2019 13:00:00 GMT-0700",
-      "end": "Sep 23 2019 13:00:00 GMT-0700",
+      "start": "Mar 16 2020 13:00:00 GMT-0700",
+      "end": "Mar 23 2020 13:00:00 GMT-0700",
       "img": "/static/img/pokemon/286.png"
-    },
-    {
-      "id": 6,
-      "name": "Test",
-      "desc": "Just testing",
-      "start": "Aug 16 2019 13:00:00 GMT-0700",
-      "end": "Aug 23 2019 13:00:00 GMT-0700",
-      "img": "/static/img/pokemon/201-f.png"
     }
   ]
 }

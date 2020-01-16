@@ -7,7 +7,7 @@ const Title = styled.h2`
   margin-bottom: 1.5rem;
 `;
 
-const API = 'http://192.168.1.229:3000/static/events.json';
+const API = '/static/events.json';
 
 class events extends Component {
   constructor(props) {
