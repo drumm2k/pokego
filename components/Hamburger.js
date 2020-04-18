@@ -73,7 +73,12 @@ const ButtonElem = styled.span`
 class Hamburger extends Component {
   render() {
     return (
-      <Button onClick={this.props.toggleNav}>
+      <Button
+        aria-label="Navigation Menu"
+        aria-haspopup="true"
+        aria-expanded={this.props.toggleNav}
+        onClick={this.props.toggleNav}
+      >
         <ButtonElem className={this.props.navOpened ? 'opened' : null} />
         <ButtonElem className={this.props.navOpened ? 'opened' : null} />
         <ButtonElem className={this.props.navOpened ? 'opened' : null} />

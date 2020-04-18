@@ -7,7 +7,7 @@ const Title = styled.h2`
   margin-bottom: 1.5rem;
 `;
 
-const API = '/static/events.json';
+const API = '/events.json';
 
 class events extends Component {
   constructor(props) {
@@ -19,15 +19,15 @@ class events extends Component {
     this.setState({ isFetching: true });
 
     fetch(API)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         this.setState({ eventsData: data.events, isFetching: false });
       })
-      .catch(error => this.setState({ error, isFetching: false }));
+      .catch((error) => this.setState({ error, isFetching: false }));
   }
 
   render() {
-    const { eventsData, isFetching } = this.state;
+    const { eventsData, isFetching, error } = this.state;
 
     if (isFetching) {
       return (
@@ -38,10 +38,19 @@ class events extends Component {
       );
     }
 
+    if (error !== null) {
+      return (
+        <div>
+          <Title>Ивенты</Title>
+          <p>Ошибка...</p>
+        </div>
+      );
+    }
+
     return (
       <div>
         <Title>Ивенты</Title>
-        {eventsData.map(event => (
+        {eventsData.map((event) => (
           <Event
             key={event.id}
             name={event.name}

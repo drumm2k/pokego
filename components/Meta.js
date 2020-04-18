@@ -8,7 +8,7 @@ const Meta = () => (
       name="description"
       content="PokeGO.ru - useful tools for Pokemon GO community"
     />
-    <link rel="shortcut icon" href="/static/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.png" />
     <title>PokeGO.ru - useful tools for Pokemon GO community</title>
   </Head>
 );

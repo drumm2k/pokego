@@ -38,8 +38,8 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
     font-weight: 400;
     src: local('Noah Regular'), local('Noah Regular'),
-        url('/static/fonts/Noah-Regular.woff2') format('woff2'),
-        url('/static/fonts/Noah-Regular.woff') format('woff');
+        url('/fonts/Noah-Regular.woff2') format('woff2'),
+        url('/fonts/Noah-Regular.woff') format('woff');
   }
 
   @font-face {
@@ -47,8 +47,8 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
     font-weight: 700;
     src: local('Noah Bold'), local('Noah Bold'),
-        url('/static/fonts/Noah-Bold.woff2') format('woff2'),
-        url('/static/fonts/Noah-Bold.woff') format('woff');
+        url('/fonts/Noah-Bold.woff2') format('woff2'),
+        url('/fonts/Noah-Bold.woff') format('woff');
   }
 
   ::selection {

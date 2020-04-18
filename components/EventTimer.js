@@ -27,7 +27,7 @@ class EventTimer extends Component {
       start: this.props.start,
       end: this.props.end,
       isFinished: false,
-      output: ''
+      output: '',
     };
   }
 
@@ -40,7 +40,7 @@ class EventTimer extends Component {
     clearInterval(this.intervalID);
   }
 
-  calcDuration = date => {
+  calcDuration = (date) => {
     const milliseconds = Date.parse(date) - Date.parse(new Date());
     let seconds = Math.floor(milliseconds / 1000);
     let minutes = Math.floor(seconds / 60);
@@ -64,19 +64,19 @@ class EventTimer extends Component {
 
     if (days === 0 && hours === 0 && minutes === 0) {
       this.setState({
-        output: `${seconds}с`
+        output: `${seconds}с`,
       });
     } else if (days === 0 && hours === 0) {
       this.setState({
-        output: `${minutes}м ${seconds}с`
+        output: `${minutes}м ${seconds}с`,
       });
     } else if (days === 0) {
       this.setState({
-        output: `${hours}ч ${minutes}м ${seconds}с`
+        output: `${hours}ч ${minutes}м ${seconds}с`,
       });
     } else {
       this.setState({
-        output: `${days}д ${hours}ч ${minutes}м ${seconds}с`
+        output: `${days}д ${hours}ч ${minutes}м ${seconds}с`,
       });
     }
   };
@@ -94,7 +94,7 @@ class EventTimer extends Component {
       this.props.statusHandler('Окончен');
       this.setState({
         output: `${new Date(this.state.end).toLocaleString()}`,
-        isFinished: true
+        isFinished: true,
       }),
         clearInterval(this.intervalID);
     }

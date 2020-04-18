@@ -24,10 +24,10 @@ class Header extends Component {
     super(props);
     this.toggleNav = this.toggleNav.bind(this);
     this.state = {
-      navOpened: false
+      navOpened: false,
     };
 
-    Router.events.on('routeChangeComplete', url => {
+    Router.events.on('routeChangeComplete', (url) => {
       this.setState({ navOpened: false });
     });
   }
