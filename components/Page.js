@@ -83,6 +83,11 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 700;
     line-height: 1.22;
   }
+
+  .leaflet-container {
+  height: 600px;
+  width: 100%;
+  }
 `;
 
 const Wrapper = styled.div`

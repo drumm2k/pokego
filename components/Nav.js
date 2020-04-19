@@ -38,6 +38,11 @@ class Nav extends Component {
             <a>Покедекс</a>
           </Link>
         </NavItem>
+        <NavItem>
+          <Link href="/map">
+            <a>Карта</a>
+          </Link>
+        </NavItem>
       </NavList>
     );
   }
