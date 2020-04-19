@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import Router from 'next/router';
-import Hamburger from './Hamburger';
+import NavMenu from './NavMenu';
 import Nav from './Nav';
 
 const StyledHeader = styled.header`
@@ -44,7 +44,7 @@ class Header extends Component {
           <Link href="/">
             <Logo>PokéGO</Logo>
           </Link>
-          <Hamburger
+          <NavMenu
             toggleNav={this.toggleNav}
             navOpened={this.state.navOpened}
           />

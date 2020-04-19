@@ -70,7 +70,7 @@ const ButtonElem = styled.span`
   }
 `;
 
-class Hamburger extends Component {
+class NavMenu extends Component {
   render() {
     return (
       <Button
@@ -88,4 +88,4 @@ class Hamburger extends Component {
   }
 }
 
-export default Hamburger;
+export default NavMenu;
