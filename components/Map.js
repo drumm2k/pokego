@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import { LeafletStyles } from 'styled-leaflet';
 
@@ -33,7 +33,7 @@ for (let x = 0; x < 300; x++) {
   generateCoords(x);
 }
 
-class MyMap extends React.Component {
+class MyMap extends Component {
   state = {
     center: [59.93863, 30.31413],
     zoom: 13,

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
+
+import NavItem from './NavItem';
 
 const NavList = styled.ul`
   color: #000;
@@ -15,34 +16,14 @@ const NavList = styled.ul`
   }
 `;
 
-const NavItem = styled.li`
-  padding-bottom: 1rem;
-`;
-
 class Nav extends Component {
   render() {
     return (
       <NavList className={this.props.navOpened ? 'opened' : null}>
-        <NavItem>
-          <Link href="/events">
-            <a>Ивенты</a>
-          </Link>
-        </NavItem>
-        <NavItem>
-          <Link href="/tasks">
-            <a>Задания</a>
-          </Link>
-        </NavItem>
-        <NavItem>
-          <Link href="/pokedex">
-            <a>Покедекс</a>
-          </Link>
-        </NavItem>
-        <NavItem>
-          <Link href="/map">
-            <a>Карта</a>
-          </Link>
-        </NavItem>
+        <NavItem url={'/events'} name={'Ивенты'} />
+        <NavItem url={'/tasks'} name={'Задания'} />
+        <NavItem url={'/pokedex'} name={'Покедекс'} />
+        <NavItem url={'/map'} name={'Карта'} />
       </NavList>
     );
   }

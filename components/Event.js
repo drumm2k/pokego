@@ -83,6 +83,12 @@ class Event extends Component {
     desc: PropTypes.string.isRequired,
   };
 
+  static defaultProps = {
+    img: '',
+    name: '???',
+    desc: '',
+  };
+
   constructor(props) {
     super(props);
     this.state = {
