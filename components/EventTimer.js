@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ClockIcon from '../assets/clock.svg';
 
@@ -21,6 +22,12 @@ const EventTimerOutput = styled.p`
 `;
 
 class EventTimer extends Component {
+  static propTypes = {
+    start: PropTypes.string.isRequired,
+    end: PropTypes.string.isRequired,
+    statusHandler: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
     this.state = {

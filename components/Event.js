@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import EventTimer from './EventTimer';
 import ArrowIcon from '../assets/arrow.svg';
@@ -76,6 +77,12 @@ const Unfold = styled.div`
 `;
 
 class Event extends Component {
+  static propTypes = {
+    img: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    desc: PropTypes.string.isRequired,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
