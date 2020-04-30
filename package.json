@@ -24,13 +24,14 @@
   "dependencies": {
     "@svgr/webpack": "^4.3.3",
     "leaflet": "^1.6.0",
-    "next": "^9.3.5",
+    "leaflet.markercluster": "^1.4.1",
+    "next": "^9.3.6",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-leaflet": "^2.6.3",
-    "styled-components": "^4.4.1",
-    "styled-leaflet": "^1.4.0"
+    "react-leaflet-markercluster": "^2.0.0",
+    "styled-components": "^4.4.1"
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^1.10.7",

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
-import { LeafletStyles } from 'styled-leaflet';
+import { LeafletStyles, MarkerClusterStyles } from './MapStyles';
+import MarkerClusterGroup from 'react-leaflet-markercluster';
 
 // Coordinates array
 let coords = [];
@@ -29,7 +30,7 @@ function generateCoords(id) {
 }
 
 // Working slow with so many DOM elements, need to use canvas or webgl
-for (let x = 0; x < 300; x++) {
+for (let x = 0; x < 9900; x++) {
   generateCoords(x);
 }
 
@@ -43,16 +44,19 @@ class MyMap extends Component {
     return (
       <div>
         <LeafletStyles />
+        <MarkerClusterStyles />
         <Map center={this.state.center} zoom={this.state.zoom}>
           <TileLayer
             url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
           />
-          {coords.map((marker) => (
-            <Marker key={marker.id} position={[marker.x, marker.y]}>
-              <Popup>{marker.id}</Popup>
-            </Marker>
-          ))}
+          <MarkerClusterGroup>
+            {coords.map((marker) => (
+              <Marker key={marker.id} position={[marker.x, marker.y]}>
+                <Popup>{marker.id}</Popup>
+              </Marker>
+            ))}
+          </MarkerClusterGroup>
         </Map>
       </div>
     );
