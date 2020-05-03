@@ -20,9 +20,10 @@ class Nav extends Component {
   render() {
     return (
       <NavList className={this.props.navOpened ? 'opened' : null}>
-        <NavItem url={'/events'} name={'Ивенты'} />
-        <NavItem url={'/tasks'} name={'Задания'} />
         <NavItem url={'/pokedex'} name={'Покедекс'} />
+        <NavItem url={'/events'} name={'Ивенты'} />
+        <NavItem url={'/raids'} name={'Рейды'} />
+        <NavItem url={'/tasks'} name={'Задания'} />
         <NavItem url={'/map'} name={'Карта'} />
       </NavList>
     );
