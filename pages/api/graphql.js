@@ -13,8 +13,8 @@ const eventsData = [
     id: 2,
     name: 'Week 1: Johto Journey',
     desc: 'Ультра бонус, первая неделя.',
-    start: 'Mar 2 2020 13:00:00 GMT-0700',
-    end: 'Mar 9 2020 13:00:00 GMT-0700',
+    start: 'Jun 2 2020 13:00:00 GMT-0700',
+    end: 'Jul 9 2020 13:00:00 GMT-0700',
     img: '/img/pokemon/201-f.png',
   },
   {

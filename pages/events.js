@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Event from '../components/Event';
 import useSWR from 'swr';
@@ -25,12 +25,27 @@ export default function events() {
     fetcher
   );
 
-  if (error) return <div>Ошибка, не удалось загрузить данные...</div>;
-  if (!data) return <div>Загружаю данные...</div>;
+  if (error)
+    return (
+      <div>
+        <Title>Ивенты</Title> Ошибка, не удалось загрузить данные...
+      </div>
+    );
+  if (!data)
+    return (
+      <div>
+        <Title>Ивенты</Title> Загружаю данные...
+      </div>
+    );
 
   const { getEvents } = data;
 
-  if (getEvents.length === 0) return <div>Ивентов в данный момент нет.</div>;
+  if (getEvents.length === 0)
+    return (
+      <div>
+        <Title>Ивенты</Title> Ивентов в данный момент нет.
+      </div>
+    );
 
   return (
     <div>
