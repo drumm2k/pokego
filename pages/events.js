@@ -19,7 +19,7 @@ const fetcher = (query) =>
     .then((res) => res.json())
     .then((json) => json.data);
 
-export default function events() {
+export default function Events() {
   const { data, error } = useSWR(
     '{ getEvents { id, name, desc, start, end, img } }',
     fetcher
