@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import Event from '../components/Event';
 import useSWR from 'swr';
