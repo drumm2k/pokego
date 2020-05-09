@@ -40,7 +40,7 @@ const EventDesc = styled.p`
 
 const EventImg = styled.div`
   background: url(${(props) => props.imgUrl}) 50% 50% no-repeat;
-  background-size: 9.6rem;
+  background-size: cover;
   width: 9.6rem;
   height: 9.6rem;
 `;
