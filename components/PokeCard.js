@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { func } from 'prop-types';
 
 const Card = styled.div`
   background: url(${(props) => '/img/pokemon/' + props.imgUrl + '.png'}) 50% 50%
@@ -7,20 +6,12 @@ const Card = styled.div`
   background-size: cover;
   width: ${(props) => props.cardWidth + 'rem'};
   height: ${(props) => props.cardHeight + 'rem'};
+  user-select: none;
 `;
-
-function selectCard() {
-  console.log('Select');
-}
 
 const PokeCard = (props) => {
   return (
-    <Card
-      imgUrl={props.id}
-      cardWidth={props.width}
-      cardHeight={props.height}
-      onClick={selectCard}
-    >
+    <Card imgUrl={props.id} cardWidth={props.width} cardHeight={props.height}>
       <p>{props.id}</p>
     </Card>
   );

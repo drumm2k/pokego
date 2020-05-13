@@ -9,8 +9,7 @@ const Title = styled.h2`
 const Pokedex = () => (
   <div>
     <Title>Покедекс</Title>
-    <PokeGenList gen={'1'} />
-    <PokeGenList gen={'2'} />
+    <PokeGenList />
   </div>
 );
 
