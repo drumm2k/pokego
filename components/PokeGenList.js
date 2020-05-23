@@ -15,13 +15,30 @@ const PokeList = styled.div`
 const PokeSelector = styled.div`
   box-sizing: border-box;
   border-radius: 5px;
-  border: 2px solid white;
-  margin: 2px;
+  border: 2px solid lightgrey;
+  margin: 1px;
 
   &.selected {
     border: 2px solid green;
   }
 `;
+
+let input = '1, 2,3-5,,,a%#.//!';
+let output = formatInput(input);
+
+function formatInput(input) {
+  // Remove everything except number and , -
+  let result = input.replace(/[^0-9,-]/g, '');
+
+  // If no , and - return result
+  if (result.slice(-1) !== ',' && result.slice(-1) !== '-') {
+    return result;
+  }
+
+  // Remove last character
+  result = result.slice(0, -1);
+  return formatInput(result);
+}
 
 let firstPokemon, lastPokemon;
 

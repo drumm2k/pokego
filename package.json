@@ -23,15 +23,15 @@
   "homepage": "https://github.com/drumm2k/pokego#readme",
   "dependencies": {
     "@svgr/webpack": "^4.3.3",
-    "apollo-server-micro": "^2.13.0",
+    "apollo-server-micro": "^2.13.1",
     "graphql": "^15.0.0",
     "leaflet": "^1.6.0",
     "leaflet.markercluster": "^1.4.1",
-    "next": "^9.3.6",
+    "next": "^9.4.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-leaflet": "^2.6.3",
+    "react-leaflet": "^2.7.0",
     "react-leaflet-markercluster": "^2.0.0",
     "styled-components": "^4.4.1",
     "swr": "^0.2.0"
