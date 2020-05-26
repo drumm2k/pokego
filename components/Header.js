@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import Router from 'next/router';
 import NavMenu from './NavMenu';
-import Nav from './Nav';
+import NavList from './NavList';
 
 const StyledHeader = styled.header`
   margin: 3rem 0 1.5rem;
@@ -49,7 +49,7 @@ class Header extends Component {
             navOpened={this.state.navOpened}
           />
         </StyledHeader>
-        <Nav navOpened={this.state.navOpened} />
+        <NavList navOpened={this.state.navOpened} />
       </div>
     );
   }

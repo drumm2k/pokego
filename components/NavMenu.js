@@ -1,79 +1,63 @@
-import { Component } from 'react';
 import styled from 'styled-components';
 
-const Button = styled.button`
+const Button = styled.div`
   width: 30px;
   height: 30px;
   transform: rotate(0deg);
   transition: 0.5s ease-in-out;
-  display: inline-block;
-
-  &:focus {
-    outline: none;
-  }
 `;
 
-const ButtonElem = styled.span`
+const ButtonElem = styled.div`
   display: block;
   position: absolute;
-  height: 4px;
+  height: 3px;
   width: 100%;
   background: #000;
   opacity: 1;
   left: 0;
-  -webkit-transform: rotate(0deg);
-  -moz-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
   transform: rotate(0deg);
-  -webkit-transition: 0.15s ease-in-out;
-  -moz-transition: 0.15s ease-in-out;
-  -o-transition: 0.15s ease-in-out;
   transition: 0.15s ease-in-out;
 
   &:nth-child(1) {
-    top: 0px;
+    top: 4px;
   }
 
   &:nth-child(2),
   :nth-child(3) {
-    top: 10px;
+    top: 14px;
   }
 
   &:nth-child(4) {
-    top: 20px;
+    top: 24px;
   }
 
   &.opened :nth-child(1) {
-    top: 10px;
+    top: 14px;
     width: 0%;
     left: 50%;
   }
 
   &.opened :nth-child(2) {
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
     transform: rotate(45deg);
   }
 
   &.opened :nth-child(3) {
-    -webkit-transform: rotate(-45deg);
-    -moz-transform: rotate(-45deg);
-    -o-transform: rotate(-45deg);
     transform: rotate(-45deg);
   }
 
   &.opened :nth-child(4) {
-    top: 10px;
+    top: 14px;
     width: 0%;
     left: 50%;
   }
 `;
 
-class NavMenu extends Component {
+export default class NavMenu extends React.Component {
   render() {
     return (
       <Button
+        role="button"
+        tabindex="1"
         aria-label="Navigation Menu"
         aria-haspopup="true"
         aria-expanded={this.props.toggleNav}
@@ -87,5 +71,3 @@ class NavMenu extends Component {
     );
   }
 }
-
-export default NavMenu;

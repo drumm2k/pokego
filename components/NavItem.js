@@ -3,7 +3,15 @@ import styled from 'styled-components';
 import Link from 'next/link';
 
 const StyledNavItem = styled.li`
-  padding-bottom: 1rem;
+  display: inline-block;
+  border-bottom: 1px solid #eaeaea;
+  height: 4.8rem;
+  line-height: 4.8rem;
+  margin: 0 1.6rem;
+
+  &:last-child {
+    border-bottom: none;
+  }
 `;
 
 const NavItem = (props) => {
