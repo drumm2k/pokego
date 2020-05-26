@@ -15,11 +15,11 @@ const PokeList = styled.div`
 const PokeSelector = styled.div`
   box-sizing: border-box;
   border-radius: 5px;
-  border: 2px solid lightgrey;
+  border: 1px solid #edf2f4;
   margin: 1px;
 
   &.selected {
-    border: 2px solid green;
+    border-color: #25ced1;
   }
 `;
 
