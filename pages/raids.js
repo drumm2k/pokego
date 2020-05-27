@@ -40,7 +40,7 @@ class raids extends Component {
     if (error !== null) {
       return (
         <div>
-          <Title>Ивенты</Title>
+          <Title>Рейды</Title>
           <p>Ошибка...</p>
         </div>
       );
