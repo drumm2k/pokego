@@ -245,6 +245,23 @@ const pokemonData = [
   },
 ];
 
+const userData = [
+  {
+    id: 1,
+    email: 'email@email.com',
+    password: '123',
+    trainer: {
+      name: 'drumm2k',
+      level: 40,
+    },
+    location: {
+      city: 'Saint-Petersburg',
+      country: 'Russia',
+      pin: [59.93863, 30.31413],
+    },
+  },
+];
+
 const typeDefs = gql`
   type Event {
     id: ID!
@@ -258,6 +275,7 @@ const typeDefs = gql`
   type Query {
     getEvents: [Event]!
     getPokemons: [Template]!
+    getUsers: [User]!
   }
 
   type Template {
@@ -277,6 +295,27 @@ const typeDefs = gql`
     baseAttack: Int
     baseDefense: Int
   }
+
+  type User {
+    id: ID!
+    email: String!
+    password: String!
+    trainer: Trainer!
+    location: Location!
+  }
+
+  type Trainer {
+    name: String!
+    level: Int!
+  }
+
+  type Location {
+    city: String
+    country: String
+    pin: Pin
+  }
+
+  scalar Pin
 `;
 
 const resolvers = {
@@ -286,6 +325,9 @@ const resolvers = {
     },
     getPokemons(parent, args, context, info) {
       return pokemonData;
+    },
+    getUsers(parent, args, context, info) {
+      return userData;
     },
   },
 };
