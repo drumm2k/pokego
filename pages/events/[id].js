@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
-import Event from '../../../components/Event';
+import Event from '../../components/Event';
 
 const Title = styled.h2`
   color: #ff3163;
@@ -45,8 +45,7 @@ const EventById = () => {
 
   return (
     <div>
-      <Title>Ивент</Title>
-
+      <Title>{getEvent.name}</Title>
       <Event
         name={getEvent.name}
         desc={getEvent.desc}

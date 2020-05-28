@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import useSWR from 'swr';
 import Link from 'next/link';
-import Event from '../components/Event';
+import Event from '../../components/Event';
 
 const Title = styled.h2`
   color: #ff3163;
@@ -51,7 +51,7 @@ export default function Events() {
     <div>
       <Title>Ивенты</Title>
       {getEvents.map((event) => (
-        <Link key={event.id} href="/event/[id]" as={`/event/${event.id}`}>
+        <Link key={event.id} href="/events/[id]" as={`/events/${event.id}`}>
           <a>
             <Event
               name={event.name}
