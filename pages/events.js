@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import Event from '../components/Event';
 import useSWR from 'swr';
+import Link from 'next/link';
+import Event from '../components/Event';
 
 const Title = styled.h2`
   color: #ff3163;
@@ -50,14 +51,17 @@ export default function Events() {
     <div>
       <Title>Ивенты</Title>
       {getEvents.map((event) => (
-        <Event
-          key={event.id}
-          name={event.name}
-          desc={event.desc}
-          start={event.start}
-          end={event.end}
-          img={event.img}
-        />
+        <Link key={event.id} href="/event/[id]" as={`/event/${event.id}`}>
+          <a>
+            <Event
+              name={event.name}
+              desc={event.desc}
+              start={event.start}
+              end={event.end}
+              img={event.img}
+            />
+          </a>
+        </Link>
       ))}
     </div>
   );

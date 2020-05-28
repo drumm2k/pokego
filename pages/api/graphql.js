@@ -2,7 +2,7 @@ import { ApolloServer, gql } from 'apollo-server-micro';
 
 const eventsData = [
   {
-    id: 1,
+    id: 0,
     name: 'Rayquaza в рейдах',
     desc: 'Rayquaza возвращается, на этот раз с шайни версией.',
     start: 'Feb 31 2020 05:00:00 GMT-0700',
@@ -10,7 +10,7 @@ const eventsData = [
     img: '/img/pokemon/384.png',
   },
   {
-    id: 2,
+    id: 1,
     name: 'Week 1: Johto Journey',
     desc: 'Ультра бонус, первая неделя.',
     start: 'Jun 2 2020 13:00:00 GMT-0700',
@@ -18,7 +18,7 @@ const eventsData = [
     img: '/img/pokemon/201-f.png',
   },
   {
-    id: 3,
+    id: 2,
     name: 'Week 2: Global Challenge, Global Hatches',
     desc: 'Ультра бонус, вторая неделя.',
     start: 'Mar 9 2020 13:00:00 GMT-0700',
@@ -26,7 +26,7 @@ const eventsData = [
     img: '/img/pokemon/83.png',
   },
   {
-    id: 4,
+    id: 3,
     name: 'Week 3: A Unova Unveiling',
     desc: 'Ультра бонус, третья неделя.',
     start: 'Mar 16 2020 13:00:00 GMT-0700',
@@ -274,6 +274,7 @@ const typeDefs = gql`
 
   type Query {
     getEvents: [Event]!
+    getEvent(id: ID!): Event!
     getPokemons: [Template]!
     getUsers: [User]!
   }
@@ -322,6 +323,9 @@ const resolvers = {
   Query: {
     getEvents(parent, args, context, info) {
       return eventsData;
+    },
+    getEvent(obj, args, context, info) {
+      return eventsData[args.id];
     },
     getPokemons(parent, args, context, info) {
       return pokemonData;
