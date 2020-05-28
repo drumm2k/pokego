@@ -31,7 +31,10 @@ const StyledNavList = styled.ul`
 class NavList extends Component {
   render() {
     return (
-      <StyledNavList className={this.props.navOpened ? 'opened' : null}>
+      <StyledNavList
+        role="menu"
+        className={this.props.navOpened ? 'opened' : null}
+      >
         <NavItem url={'/pokedex'} name={'Покедекс'} />
         <NavItem url={'/events'} name={'Ивенты'} />
         <NavItem url={'/raids'} name={'Рейды'} />

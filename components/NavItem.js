@@ -16,7 +16,7 @@ const StyledNavItem = styled.li`
 
 const NavItem = (props) => {
   return (
-    <StyledNavItem>
+    <StyledNavItem role="menuitem">
       <Link href={props.url}>
         <a>{props.name}</a>
       </Link>

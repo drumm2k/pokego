@@ -1,6 +1,12 @@
 import styled from 'styled-components';
+import Auth from './Auth';
 
-const Button = styled.div`
+const NavPanel = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Button = styled.button`
   width: 30px;
   height: 30px;
   transform: rotate(0deg);
@@ -55,19 +61,20 @@ const ButtonElem = styled.div`
 export default class NavMenu extends React.Component {
   render() {
     return (
-      <Button
-        role="button"
-        tabindex="1"
-        aria-label="Navigation Menu"
-        aria-haspopup="true"
-        aria-expanded={this.props.toggleNav}
-        onClick={this.props.toggleNav}
-      >
-        <ButtonElem className={this.props.navOpened ? 'opened' : null} />
-        <ButtonElem className={this.props.navOpened ? 'opened' : null} />
-        <ButtonElem className={this.props.navOpened ? 'opened' : null} />
-        <ButtonElem className={this.props.navOpened ? 'opened' : null} />
-      </Button>
+      <NavPanel>
+        <Auth />
+        <Button
+          aria-label="Navigation Menu"
+          aria-haspopup="true"
+          aria-expanded={this.props.toggleNav}
+          onClick={this.props.toggleNav}
+        >
+          <ButtonElem className={this.props.navOpened ? 'opened' : null} />
+          <ButtonElem className={this.props.navOpened ? 'opened' : null} />
+          <ButtonElem className={this.props.navOpened ? 'opened' : null} />
+          <ButtonElem className={this.props.navOpened ? 'opened' : null} />
+        </Button>
+      </NavPanel>
     );
   }
 }
