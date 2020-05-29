@@ -2,7 +2,7 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import EventTimer from './EventTimer';
-import ArrowIcon from '../assets/arrow.svg';
+// import ArrowIcon from '../assets/arrow.svg';
 
 const StyledEvent = styled.div`
   display: flex;
@@ -22,8 +22,7 @@ const EventCard = styled.div`
   padding: 1.5rem 1rem;
   border-radius: 15px;
   background-image: linear-gradient(to right, #cc2b5e, #753a88);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   /* background: #aa306f; */
 `;
 
@@ -65,30 +64,18 @@ const EventStatus = styled.span`
   border-radius: 15px;
 `;
 
-const Unfold = styled.div`
-  text-align: center;
-  align-self: center;
-  width: 7rem;
-  height: 2rem;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  background: #901d58;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-`;
+// const Unfold = styled.div`
+//   text-align: center;
+//   align-self: center;
+//   width: 7rem;
+//   height: 2rem;
+//   border-bottom-left-radius: 15px;
+//   border-bottom-right-radius: 15px;
+//   background: #901d58;
+//   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+// `;
 
 class Event extends Component {
-  static propTypes = {
-    img: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    desc: PropTypes.string.isRequired,
-  };
-
-  static defaultProps = {
-    img: '',
-    name: '???',
-    desc: '',
-  };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -98,25 +85,27 @@ class Event extends Component {
   }
 
   statusHandler(status) {
-    this.setState({ status: status });
+    this.setState({ status });
   }
 
   render() {
+    const { img, name, desc, start, end } = this.props;
+    const { status } = this.state;
     return (
       <StyledEvent>
         <EventCard>
-          <EventImg imgUrl={this.props.img} />
+          <EventImg imgUrl={img} />
           <div>
-            <EventTitle>{this.props.name}</EventTitle>
-            <EventDesc>{this.props.desc}</EventDesc>
+            <EventTitle>{name}</EventTitle>
+            <EventDesc>{desc}</EventDesc>
           </div>
           <StatusContainer>
-            <EventStatus>{this.state.status}</EventStatus>
+            <EventStatus>{status}</EventStatus>
           </StatusContainer>
           <EventTimer
-            start={this.props.start}
-            end={this.props.end}
-            status={this.props.status}
+            start={start}
+            end={end}
+            status={status}
             statusHandler={this.statusHandler}
           />
         </EventCard>
@@ -127,5 +116,13 @@ class Event extends Component {
     );
   }
 }
+
+Event.propTypes = {
+  img: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  desc: PropTypes.string.isRequired,
+  start: PropTypes.string.isRequired,
+  end: PropTypes.string.isRequired,
+};
 
 export default Event;

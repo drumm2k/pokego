@@ -33,23 +33,22 @@ class Header extends Component {
   }
 
   toggleNav() {
-    const currentState = this.state.navOpened;
+    const { navOpened } = this.state;
+    const currentState = navOpened;
     this.setState({ navOpened: !currentState });
   }
 
   render() {
+    const { navOpened } = this.state;
     return (
       <div>
         <StyledHeader>
           <Link href="/">
             <Logo>PokéGO</Logo>
           </Link>
-          <NavMenu
-            toggleNav={this.toggleNav}
-            navOpened={this.state.navOpened}
-          />
+          <NavMenu toggleNav={this.toggleNav} navOpened={navOpened} />
         </StyledHeader>
-        <NavList navOpened={this.state.navOpened} />
+        <NavList navOpened={navOpened} />
       </div>
     );
   }

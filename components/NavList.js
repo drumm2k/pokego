@@ -1,6 +1,5 @@
-import { Component } from 'react';
 import styled from 'styled-components';
-
+import PropTypes from 'prop-types';
 import NavItem from './NavItem';
 
 const StyledNavList = styled.ul`
@@ -28,21 +27,22 @@ const StyledNavList = styled.ul`
   }
 `;
 
-class NavList extends Component {
-  render() {
-    return (
-      <StyledNavList
-        role="menu"
-        className={this.props.navOpened ? 'opened' : null}
-      >
-        <NavItem url={'/pokedex'} name={'Покедекс'} />
-        <NavItem url={'/events'} name={'Ивенты'} />
-        <NavItem url={'/raids'} name={'Рейды'} />
-        <NavItem url={'/tasks'} name={'Задания'} />
-        <NavItem url={'/map'} name={'Карта'} />
-      </StyledNavList>
-    );
-  }
+function NavList(props) {
+  const { navOpened } = props;
+
+  return (
+    <StyledNavList role="menu" className={navOpened ? 'opened' : null}>
+      <NavItem url="/pokedex" name="Покедекс" />
+      <NavItem url="/events" name="Ивенты" />
+      <NavItem url="/raids" name="Рейды" />
+      <NavItem url="/tasks" name="Задания" />
+      <NavItem url="/map" name="Карта" />
+    </StyledNavList>
+  );
 }
+
+NavList.propTypes = {
+  navOpened: PropTypes.bool.isRequired,
+};
 
 export default NavList;

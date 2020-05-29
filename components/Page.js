@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { normalize } from 'styled-normalize';
+import PropTypes from 'prop-types';
 import Meta from './Meta';
 import Header from './Header';
 
@@ -99,19 +99,23 @@ const Wrapper = styled.div`
   }
 `;
 
-class Page extends Component {
-  render() {
-    return (
-      <div>
-        <Meta />
-        <GlobalStyle />
-        <Wrapper>
-          <Header />
-          {this.props.children}
-        </Wrapper>
-      </div>
-    );
-  }
+function Page(props) {
+  const { children } = props;
+
+  return (
+    <div>
+      <Meta />
+      <GlobalStyle />
+      <Wrapper>
+        <Header />
+        {children}
+      </Wrapper>
+    </div>
+  );
 }
+
+Page.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.object]).isRequired,
+};
 
 export default Page;

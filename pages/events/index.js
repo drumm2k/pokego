@@ -28,13 +28,15 @@ export default function Events() {
   if (error)
     return (
       <div>
-        <Title>Ивенты</Title> Ошибка, не удалось загрузить данные...
+        <Title>Ивенты</Title>
+        <p>Ошибка, не удалось загрузить данные...</p>
       </div>
     );
   if (!data)
     return (
       <div>
-        <Title>Ивенты</Title> Загружаю данные...
+        <Title>Ивенты</Title>
+        <p>Загружаю данные...</p>
       </div>
     );
 
@@ -43,7 +45,8 @@ export default function Events() {
   if (getEvents.length === 0)
     return (
       <div>
-        <Title>Ивенты</Title> Ивентов в данный момент нет.
+        <Title>Ивенты</Title>
+        Ивентов в данный момент нет.
       </div>
     );
 

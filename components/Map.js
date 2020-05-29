@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Map, TileLayer, Marker, Popup, LayerGroup } from 'react-leaflet';
-import { LeafletStyles, MarkerClusterStyles } from './MapStyles';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
+import { LeafletStyles, MarkerClusterStyles } from './MapStyles';
 
 // Coordinates array
-let coords = [];
+const coords = [];
 
 // Generate random coordinate
 function generateRandomCoord(min, max) {
@@ -23,20 +23,23 @@ function generateCoords(id) {
   coords.push({
     x: generateRandomCoord(amin, amax),
     y: generateRandomCoord(bmin, bmax),
-    id: id,
+    id,
   });
 }
 
 // Generate X random coordinates
-for (let x = 0; x < 500; x++) {
+for (let x = 0; x < 500; x += 1) {
   generateCoords(x);
 }
 
 class MyMap extends Component {
-  state = {
-    center: [59.93863, 30.31413],
-    zoom: 13,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      center: [59.93863, 30.31413],
+      zoom: 13,
+    };
+  }
 
   render() {
     // Canvas Markers shaped as circles (good performance)
@@ -61,21 +64,22 @@ class MyMap extends Component {
     const Markers = coords.map((marker) => (
       <Marker key={marker.id} position={[marker.x, marker.y]}>
         <Popup>
-          <div>User {marker.id}</div>
+          <div>
+            User
+            {marker.id}
+          </div>
           <div>Trainer Code: 123456789</div>
         </Popup>
       </Marker>
     ));
 
+    const { center, zoom } = this.state;
+
     return (
       <div>
         <LeafletStyles />
         <MarkerClusterStyles />
-        <Map
-          preferCanvas={true}
-          center={this.state.center}
-          zoom={this.state.zoom}
-        >
+        <Map preferCanvas center={center} zoom={zoom}>
           <TileLayer
             url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
             attribution=""

@@ -5,12 +5,12 @@ const Title = styled.h2`
   margin-bottom: 1.5rem;
 `;
 
-export default class User extends React.Component {
-  render() {
-    return (
-      <>
-        <Title>Войти</Title>
-      </>
-    );
-  }
+function login() {
+  return (
+    <>
+      <Title>Войти</Title>
+    </>
+  );
 }
+
+export default login;

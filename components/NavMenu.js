@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import Auth from './Auth';
 
 const NavPanel = styled.div`
@@ -58,23 +59,29 @@ const ButtonElem = styled.div`
   }
 `;
 
-export default class NavMenu extends React.Component {
-  render() {
-    return (
-      <NavPanel>
-        <Auth />
-        <Button
-          aria-label="Navigation Menu"
-          aria-haspopup="true"
-          aria-expanded={this.props.toggleNav}
-          onClick={this.props.toggleNav}
-        >
-          <ButtonElem className={this.props.navOpened ? 'opened' : null} />
-          <ButtonElem className={this.props.navOpened ? 'opened' : null} />
-          <ButtonElem className={this.props.navOpened ? 'opened' : null} />
-          <ButtonElem className={this.props.navOpened ? 'opened' : null} />
-        </Button>
-      </NavPanel>
-    );
-  }
+function NavMenu(props) {
+  const { navOpened, toggleNav } = props;
+  return (
+    <NavPanel>
+      <Auth />
+      <Button
+        aria-label="Navigation Menu"
+        aria-haspopup="true"
+        aria-expanded={toggleNav}
+        onClick={toggleNav}
+      >
+        <ButtonElem className={navOpened ? 'opened' : null} />
+        <ButtonElem className={navOpened ? 'opened' : null} />
+        <ButtonElem className={navOpened ? 'opened' : null} />
+        <ButtonElem className={navOpened ? 'opened' : null} />
+      </Button>
+    </NavPanel>
+  );
 }
+
+NavMenu.propTypes = {
+  navOpened: PropTypes.bool.isRequired,
+  toggleNav: PropTypes.func.isRequired,
+};
+
+export default NavMenu;

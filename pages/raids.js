@@ -14,13 +14,15 @@ function Raids() {
   if (error)
     return (
       <div>
-        <Title>Рейды</Title> Ошибка, не удалось загрузить данные...
+        <Title>Рейды</Title>
+        <p>Ошибка, не удалось загрузить данные...</p>
       </div>
     );
   if (!data)
     return (
       <div>
-        <Title>Рейды</Title> Загружаю данные...
+        <Title>Рейды</Title>
+        <p>Загружаю данные...</p>
       </div>
     );
 

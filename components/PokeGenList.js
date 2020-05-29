@@ -1,3 +1,4 @@
+import { Component } from 'react';
 import styled from 'styled-components';
 import PokeCard from './PokeCard';
 
@@ -23,12 +24,11 @@ const PokeSelector = styled.div`
   }
 `;
 
-let input = '1, 2,3-5,,,a%#.//!';
-let output = formatInput(input);
+const input = '1, 2,3-5,,,a%#.//!';
 
-function formatInput(input) {
+function formatInput(val) {
   // Remove everything except number and , -
-  let result = input.replace(/[^0-9,-]/g, '');
+  let result = val.replace(/[^0-9,-]/g, '');
 
   // If no , and - return result
   if (result.slice(-1) !== ',' && result.slice(-1) !== '-') {
@@ -40,7 +40,11 @@ function formatInput(input) {
   return formatInput(result);
 }
 
-let firstPokemon, lastPokemon;
+const output = formatInput(input);
+console.log(output);
+
+let firstPokemon;
+let lastPokemon;
 
 switch (1) {
   case 1:
@@ -55,17 +59,17 @@ switch (1) {
     console.log('This genereation of pokemons has not been found');
 }
 
-let pokemons = [];
-for (let id = firstPokemon; id <= lastPokemon; id++) {
+const pokemons = [];
+for (let id = firstPokemon; id <= lastPokemon; id += 1) {
   pokemons.push(id);
 }
 
 const INITIAL_STATE = {
-  pokemons: pokemons,
+  pokemons,
   selectedPokemons: [1, 2, 3, 4, 5],
 };
 
-class PokeGenList extends React.Component {
+class PokeGenList extends Component {
   constructor(props) {
     super(props);
 
@@ -104,7 +108,7 @@ class PokeGenList extends React.Component {
           type="text"
           value={this.state.selectedPokemons}
           onChange={(e) => this.fiterInputHandler(e)}
-        ></FilterInput>
+        />
         <button type="button" onClick={this.onResetArray}>
           Reset
         </button>

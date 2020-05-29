@@ -22,17 +22,12 @@ const EventTimerOutput = styled.p`
 `;
 
 class EventTimer extends Component {
-  static propTypes = {
-    start: PropTypes.string.isRequired,
-    end: PropTypes.string.isRequired,
-    statusHandler: PropTypes.func.isRequired,
-  };
-
   constructor(props) {
     super(props);
+    const { start, end } = this.props;
     this.state = {
-      start: this.props.start,
-      end: this.props.end,
+      start,
+      end,
       isFinished: false,
       output: '',
     };
@@ -51,22 +46,22 @@ class EventTimer extends Component {
     const milliseconds = Date.parse(date) - Date.parse(new Date());
     let seconds = Math.floor(milliseconds / 1000);
     let minutes = Math.floor(seconds / 60);
-    seconds = seconds % 60;
+    seconds %= 60;
     let hours = Math.floor(minutes / 60);
-    minutes = minutes % 60;
-    let days = Math.floor(hours / 24);
-    hours = hours % 24;
+    minutes %= 60;
+    const days = Math.floor(hours / 24);
+    hours %= 24;
 
     if (seconds < 10) {
-      seconds = '0' + seconds;
+      seconds = `0${seconds}`;
     }
 
     if (minutes < 10) {
-      minutes = '0' + minutes;
+      minutes = `0${minutes}`;
     }
 
     if (hours < 10) {
-      hours = '0' + hours;
+      hours = `0${hours}`;
     }
 
     if (days === 0 && hours === 0 && minutes === 0) {
@@ -118,5 +113,11 @@ class EventTimer extends Component {
     );
   }
 }
+
+EventTimer.propTypes = {
+  start: PropTypes.string.isRequired,
+  end: PropTypes.string.isRequired,
+  statusHandler: PropTypes.func.isRequired,
+};
 
 export default EventTimer;

@@ -7,12 +7,12 @@ const LoginLink = styled.a`
   margin: 0 2rem;
 `;
 
-export default class Auth extends React.Component {
-  render() {
-    return (
-      <Link href="/login">
-        <LoginLink>Login</LoginLink>
-      </Link>
-    );
-  }
+function Auth() {
+  return (
+    <Link href="/login">
+      <LoginLink>Login</LoginLink>
+    </Link>
+  );
 }
+
+export default Auth;

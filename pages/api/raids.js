@@ -2496,8 +2496,7 @@ const raidsData = {
           minCp: 0,
           article: {
             id: 14,
-            articleSlug:
-              'pokebattlers-comprehensive-deoxys_attack_form-raid-guide',
+            articleSlug: 'pokebattlers-comprehensive-deoxys_attack_form-raid-guide',
             articleThumbnailURL:
               'https://articles.pokebattler.com/wp-content/uploads/2019/09/DEOXYS_ATTACK_FORM_650.png',
             articleURL:
@@ -2524,8 +2523,7 @@ const raidsData = {
           minCp: 0,
           article: {
             id: 15,
-            articleSlug:
-              'pokebattlers-comprehensive-deoxy_defense_form-raid-guide',
+            articleSlug: 'pokebattlers-comprehensive-deoxy_defense_form-raid-guide',
             articleThumbnailURL:
               'https://articles.pokebattler.com/wp-content/uploads/2019/09/DEOXYS_DEFENSE_FORM_650.png',
             articleURL:
@@ -2552,8 +2550,7 @@ const raidsData = {
           minCp: 0,
           article: {
             id: 16,
-            articleSlug:
-              'pokebattlers-comprehensive-deoxys_speed_form-raid-guide',
+            articleSlug: 'pokebattlers-comprehensive-deoxys_speed_form-raid-guide',
             articleThumbnailURL:
               'https://articles.pokebattler.com/wp-content/uploads/2019/09/DEOXYS_SPEED_FORM_650.png',
             articleURL:

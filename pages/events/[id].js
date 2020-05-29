@@ -31,13 +31,15 @@ const EventById = () => {
   if (error)
     return (
       <div>
-        <Title>Ивент</Title> Ошибка, не удалось загрузить данные...
+        <Title>Ивент</Title>
+        <p>Ошибка, не удалось загрузить данные...</p>
       </div>
     );
   if (!data)
     return (
       <div>
-        <Title>Ивент</Title> Загружаю данные...
+        <Title>Ивент</Title>
+        <p>Загружаю данные...</p>
       </div>
     );
 

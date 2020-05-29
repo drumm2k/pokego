@@ -15,10 +15,12 @@ const StyledNavItem = styled.li`
 `;
 
 const NavItem = (props) => {
+  const { url, name } = props;
+
   return (
     <StyledNavItem role="menuitem">
-      <Link href={props.url}>
-        <a>{props.name}</a>
+      <Link href={url}>
+        <a>{name}</a>
       </Link>
     </StyledNavItem>
   );
