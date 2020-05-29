@@ -7,12 +7,13 @@ const Card = styled.div`
   width: ${(props) => props.cardWidth + 'rem'};
   height: ${(props) => props.cardHeight + 'rem'};
   user-select: none;
+  overflow: hidden;
 `;
 
 const PokeCard = (props) => {
   return (
     <Card imgUrl={props.id} cardWidth={props.width} cardHeight={props.height}>
-      <p>{props.id}</p>
+      {props.name ? <p>{props.name}</p> : null}
     </Card>
   );
 };
