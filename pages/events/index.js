@@ -2,26 +2,16 @@ import styled from 'styled-components';
 import useSWR from 'swr';
 import Link from 'next/link';
 import Event from '../../components/Event';
+import fetcher from '../../lib/fetcher';
 
 const Title = styled.h2`
   color: #ff3163;
   margin-bottom: 1.5rem;
 `;
 
-const fetcher = (query) =>
-  fetch(`${process.env.API}`, {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/json',
-    },
-    body: JSON.stringify({ query }),
-  })
-    .then((res) => res.json())
-    .then((json) => json.data);
-
 export default function Events() {
   const { data, error } = useSWR(
-    '{ getEvents { id, name, desc, start, end, img } }',
+    'query { getEvents { id, name, desc, start, end, img } }',
     fetcher
   );
 

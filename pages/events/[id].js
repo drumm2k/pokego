@@ -2,29 +2,19 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import Event from '../../components/Event';
+import fetcher from '../../lib/fetcher';
 
 const Title = styled.h2`
   color: #ff3163;
   margin-bottom: 1.5rem;
 `;
 
-const fetcher = (query) =>
-  fetch(`${process.env.API}`, {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/json',
-    },
-    body: JSON.stringify({ query }),
-  })
-    .then((res) => res.json())
-    .then((json) => json.data);
-
 const EventById = () => {
   const router = useRouter();
   const { id } = router.query;
 
   const { data, error } = useSWR(
-    `{ getEvent(id: ${id}) { id, name, desc, start, end, img } }`,
+    `query { getEvent(id: ${id}) { id, name, desc, start, end, img } }`,
     fetcher
   );
 
