@@ -7,4 +7,7 @@ module.exports = {
 
     return config;
   },
+  env: {
+    GRAPHQL_ENDPOINT: 'http://localhost:4000',
+  },
 };

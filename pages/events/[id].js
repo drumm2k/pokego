@@ -9,7 +9,7 @@ const Title = styled.h2`
 `;
 
 const fetcher = (query) =>
-  fetch('/api/graphql', {
+  fetch(`${process.env.GRAPHQL_ENDPOINT}`, {
     method: 'POST',
     headers: {
       'Content-type': 'application/json',

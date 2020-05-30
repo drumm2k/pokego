@@ -26,7 +26,7 @@
   "homepage": "https://github.com/drumm2k/pokego#readme",
   "dependencies": {
     "@svgr/webpack": "^4.3.3",
-    "apollo-server-micro": "^2.13.1",
+    "apollo-server-micro": "^2.14.1",
     "graphql": "^15.0.0",
     "leaflet": "^1.6.0",
     "leaflet.markercluster": "^1.4.1",
