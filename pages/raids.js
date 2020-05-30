@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import useSWR from 'swr';
-
-const fetcher = (url) => fetch(url).then((res) => res.json());
+import fetcher from '../lib/fetcher';
 
 const Title = styled.h2`
   color: #ff3163;
@@ -9,7 +8,13 @@ const Title = styled.h2`
 `;
 
 function Raids() {
-  const { data, error } = useSWR('/api/raids', fetcher);
+  //
+  // TODO: Load raids by Tier
+  //
+  const { data, error } = useSWR(
+    'query { getRaids { raids { pokemon } } }',
+    fetcher
+  );
 
   if (error)
     return (
@@ -26,11 +31,11 @@ function Raids() {
       </div>
     );
 
-  const tier1 = data.raids.tiers[0].raids;
-  const tier2 = data.raids.tiers[2].raids;
-  const tier3 = data.raids.tiers[4].raids;
-  const tier4 = data.raids.tiers[6].raids;
-  const tier5 = data.raids.tiers[12].raids;
+  const tier1 = data.getRaids[0].raids;
+  const tier2 = data.getRaids[2].raids;
+  const tier3 = data.getRaids[4].raids;
+  const tier4 = data.getRaids[6].raids;
+  const tier5 = data.getRaids[12].raids;
 
   return (
     <div>
