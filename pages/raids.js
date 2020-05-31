@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import useSWR from 'swr';
 import fetcher from '../lib/fetcher';
+import RaidTier from '../components/RaidTier';
 
 const Title = styled.h2`
   color: #ff3163;
@@ -40,26 +41,11 @@ function Raids() {
   return (
     <div>
       <Title>Рейды</Title>
-      <h4>Tier1</h4>
-      {tier1.map((pokemon) => (
-        <p key={pokemon.pokemon}>{pokemon.pokemon}</p>
-      ))}
-      <h4>Tier2</h4>
-      {tier2.map((raids) => (
-        <p key={raids.pokemon}>{raids.pokemon}</p>
-      ))}
-      <h4>Tier3</h4>
-      {tier3.map((raids) => (
-        <p key={raids.pokemon}>{raids.pokemon}</p>
-      ))}
-      <h4>Tier4</h4>
-      {tier4.map((raids) => (
-        <p key={raids.pokemon}>{raids.pokemon}</p>
-      ))}
-      <h4>Tier5</h4>
-      {tier5.map((raids) => (
-        <p key={raids.pokemon}>{raids.pokemon}</p>
-      ))}
+      <RaidTier id={1} tier={tier1} />
+      <RaidTier id={2} tier={tier2} />
+      <RaidTier id={3} tier={tier3} />
+      <RaidTier id={4} tier={tier4} />
+      <RaidTier id={5} tier={tier5} />
     </div>
   );
 }
