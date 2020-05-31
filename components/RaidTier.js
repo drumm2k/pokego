@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import useSWR from 'swr';
+import PropTypes from 'prop-types';
 import PokeCard from './PokeCard';
 import fetcher from '../lib/fetcher';
 
@@ -18,9 +19,12 @@ const TierItem = styled.div`
 `;
 
 const RaidTier = (props) => {
-  let tierQuery = '';
-  props.tier.map((pokemon) => {
-    tierQuery += `${pokemon.pokemon}: getPokemonByName(name: "${pokemon.pokemon}") { pokedex { pokemonNum } }`;
+  const { id, tier } = props;
+
+  const tierQuery = tier.map((pokemon) => {
+    let request = '';
+    request += `${pokemon.pokemon}: getPokemonByName(name: "${pokemon.pokemon}") { pokedex { pokemonNum } }`;
+    return request;
   });
 
   const { data, error } = useSWR(`query { ${tierQuery} }`, fetcher);
@@ -39,17 +43,18 @@ const RaidTier = (props) => {
       </div>
     );
 
-  // const tier1 = data.getRaids.raids;
-
   return (
     <>
-      <h4>Tier {props.id}</h4>
+      <h4>
+        Tier
+        {id}
+      </h4>
       <Tier>
         {Object.keys(data).map((pokemon) => (
           <TierItem>
             <PokeCard
               key={pokemon}
-              id={parseInt(data[pokemon].pokedex.pokemonNum)}
+              id={parseInt(data[pokemon].pokedex.pokemonNum, 10)}
             />
             <p>{pokemon}</p>
           </TierItem>
@@ -57,6 +62,11 @@ const RaidTier = (props) => {
       </Tier>
     </>
   );
+};
+
+RaidTier.propTypes = {
+  id: PropTypes.string.isRequired,
+  tier: PropTypes.oneOfType([PropTypes.object]).isRequired,
 };
 
 export default RaidTier;

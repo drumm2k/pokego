@@ -10,7 +10,7 @@ const Title = styled.h2`
 
 function Raids() {
   //
-  // TODO: Load raids by Tier
+  // TODO: Query all pokemons at once, not 5 times from RaidTier component
   //
   const { data, error } = useSWR(
     'query { getRaids { raids { pokemon } } }',
