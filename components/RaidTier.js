@@ -24,6 +24,8 @@ export const GET_ALL_POKEMONS_BY_NAMES = gql`
   query getPokemonGroupByName($names: [String]!) {
     getPokemonGroupByName(names: $names) {
       pokemonId
+      type
+      type2
       pokedex {
         pokemonNum
       }
@@ -46,12 +48,12 @@ export default function RaidTier(props) {
 
   return (
     <>
-      <h4>{id}</h4>
+      <h3>{id.replace(/[^0-9]/g, '')}</h3>
       <Tier>
         {Object.keys(pokemonData).map((pokemon) => (
           <TierItem key={pokemon}>
             <PokeCard id={parseInt(pokemonData[pokemon].pokedex.pokemonNum, 10)} />
-            <p>{pokemonData[pokemon].pokemonId}</p>
+            <p>{pokemonData[pokemon].pokemonId.toLowerCase()}</p>
           </TierItem>
         ))}
       </Tier>

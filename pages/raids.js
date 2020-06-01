@@ -15,6 +15,7 @@ export const GET_ALL_RAID_TIERS = gql`
       tier
       raids {
         pokemon
+        shiny
       }
     }
   }

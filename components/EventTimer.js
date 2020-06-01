@@ -28,7 +28,6 @@ class EventTimer extends Component {
     this.state = {
       start,
       end,
-      isFinished: false,
       output: '',
     };
   }
@@ -84,31 +83,34 @@ class EventTimer extends Component {
   };
 
   tick() {
-    const diffStart = Date.parse(this.state.start) - Date.parse(new Date());
-    const diffEnd = Date.parse(this.state.end) - Date.parse(new Date());
+    const { start, end } = this.state;
+    const { statusHandler } = this.props;
+    const diffStart = Date.parse(start) - Date.parse(new Date());
+    const diffEnd = Date.parse(end) - Date.parse(new Date());
     if (diffStart > 0) {
-      this.props.statusHandler('Скоро');
-      this.calcDuration(this.state.start);
+      statusHandler('Скоро');
+      this.calcDuration(start);
     } else if (diffStart < 0 && diffEnd > 0) {
-      this.props.statusHandler('Активен');
-      this.calcDuration(this.state.end);
+      statusHandler('Активен');
+      this.calcDuration(end);
     } else if (diffEnd < 0) {
-      this.props.statusHandler('Окончен');
+      statusHandler('Окончен');
+
       this.setState({
         output: `${new Date(this.state.end).toLocaleString()}`,
-        isFinished: true,
       }),
         clearInterval(this.intervalID);
     }
   }
 
   render() {
+    const { output } = this.state;
     return (
       <EventTimerWrapper>
         <ClockContainer>
           <ClockIcon />
         </ClockContainer>
-        <EventTimerOutput>{this.state.output}</EventTimerOutput>
+        <EventTimerOutput>{output}</EventTimerOutput>
       </EventTimerWrapper>
     );
   }
