@@ -25,9 +25,16 @@
   },
   "homepage": "https://github.com/drumm2k/pokego#readme",
   "dependencies": {
+    "@apollo/react-hooks": "^3.1.5",
+    "@apollo/react-ssr": "^3.1.5",
     "@svgr/webpack": "^4.3.3",
+    "apollo-cache-inmemory": "^1.6.6",
+    "apollo-client": "^2.6.10",
+    "apollo-link-http": "^1.5.17",
+    "apollo-link-rest": "^0.8.0-beta.0",
     "apollo-server-micro": "^2.14.1",
     "graphql": "^15.0.0",
+    "graphql-tag": "^2.10.3",
     "leaflet": "^1.6.0",
     "leaflet.markercluster": "^1.4.1",
     "next": "^9.4.1",
@@ -37,8 +44,7 @@
     "react-leaflet": "^2.7.0",
     "react-leaflet-markercluster": "^2.0.0",
     "styled-components": "^4.4.1",
-    "styled-normalize": "^8.0.7",
-    "swr": "^0.2.0"
+    "styled-normalize": "^8.0.7"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

@@ -8,6 +8,7 @@ module.exports = {
     return config;
   },
   env: {
+    // API: 'http://localhost:4000/graphql',
     API: 'https://pokego-graphql.herokuapp.com/graphql',
   },
 };

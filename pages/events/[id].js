@@ -1,37 +1,38 @@
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
-import useSWR from 'swr';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
+import { withApollo } from '../../lib/apollo';
 import Event from '../../components/Event';
-import fetcher from '../../lib/fetcher';
 
 const Title = styled.h2`
   color: #ff3163;
   margin-bottom: 1.5rem;
 `;
 
+export const GET_EVENT = gql`
+  query getEvent($id: ID!) {
+    getEvent(id: $id) {
+      id
+      name
+      desc
+      start
+      end
+      img
+    }
+  }
+`;
+
 const EventById = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  const { data, error } = useSWR(
-    `query { getEvent(id: ${id}) { id, name, desc, start, end, img } }`,
-    fetcher
-  );
+  const { data, loading, error } = useQuery(GET_EVENT, {
+    variables: { id },
+  });
 
-  if (error)
-    return (
-      <div>
-        <Title>Ивент</Title>
-        <p>Ошибка, не удалось загрузить данные...</p>
-      </div>
-    );
-  if (!data)
-    return (
-      <div>
-        <Title>Ивент</Title>
-        <p>Загружаю данные...</p>
-      </div>
-    );
+  if (error) return <div>Error</div>;
+  if (loading) return <div>Loading</div>;
 
   const { getEvent } = data;
 
@@ -49,4 +50,4 @@ const EventById = () => {
   );
 };
 
-export default EventById;
+export default withApollo({ ssr: true })(EventById);

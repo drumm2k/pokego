@@ -1,12 +1,14 @@
 import styled from 'styled-components';
-import useSWR from 'swr';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
 import PropTypes from 'prop-types';
+import { withApollo } from '../lib/apollo';
 import PokeCard from './PokeCard';
-import fetcher from '../lib/fetcher';
 
 const Tier = styled.div`
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
 `;
 
@@ -18,55 +20,46 @@ const TierItem = styled.div`
   align-items: center;
 `;
 
-const RaidTier = (props) => {
-  const { id, tier } = props;
+export const GET_ALL_POKEMONS_BY_NAMES = gql`
+  query getPokemonGroupByName($names: [String]!) {
+    getPokemonGroupByName(names: $names) {
+      pokemonId
+      pokedex {
+        pokemonNum
+      }
+    }
+  }
+`;
 
-  const tierQuery = tier.map((pokemon) => {
-    let request = '';
-    request += `${pokemon.pokemon}: getPokemonByName(name: "${pokemon.pokemon}") { pokedex { pokemonNum } }`;
-    return request;
+export default function RaidTier(props) {
+  const { id, tier } = props;
+  const pokemonQuery = tier.map((pokemon) => pokemon.pokemon);
+
+  const { data, loading, error } = useQuery(GET_ALL_POKEMONS_BY_NAMES, {
+    variables: { names: pokemonQuery },
   });
 
-  const { data, error } = useSWR(`query { ${tierQuery} }`, fetcher);
+  if (error) return null;
+  if (loading) return null;
 
-  if (error)
-    return (
-      <div>
-        <p>Ошибка, не удалось загрузить данные...</p>
-      </div>
-    );
-
-  if (!data)
-    return (
-      <div>
-        <p>Загружаю данные...</p>
-      </div>
-    );
+  const pokemonData = data.getPokemonGroupByName;
 
   return (
     <>
-      <h4>
-        Tier
-        {id}
-      </h4>
+      <h4>{id}</h4>
       <Tier>
-        {Object.keys(data).map((pokemon) => (
-          <TierItem>
-            <PokeCard
-              key={pokemon}
-              id={parseInt(data[pokemon].pokedex.pokemonNum, 10)}
-            />
-            <p>{pokemon}</p>
+        {Object.keys(pokemonData).map((pokemon) => (
+          <TierItem key={pokemon}>
+            <PokeCard id={parseInt(pokemonData[pokemon].pokedex.pokemonNum, 10)} />
+            <p>{pokemonData[pokemon].pokemonId}</p>
           </TierItem>
         ))}
       </Tier>
     </>
   );
-};
+}
 
 RaidTier.propTypes = {
   id: PropTypes.string.isRequired,
-  tier: PropTypes.oneOfType([PropTypes.object]).isRequired,
+  tier: PropTypes.oneOfType([PropTypes.array]).isRequired,
 };
-
-export default RaidTier;

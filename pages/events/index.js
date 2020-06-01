@@ -1,34 +1,33 @@
 import styled from 'styled-components';
-import useSWR from 'swr';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
 import Link from 'next/link';
+import { withApollo } from '../../lib/apollo';
 import Event from '../../components/Event';
-import fetcher from '../../lib/fetcher';
 
 const Title = styled.h2`
   color: #ff3163;
   margin-bottom: 1.5rem;
 `;
 
-export default function Events() {
-  const { data, error } = useSWR(
-    'query { getEvents { id, name, desc, start, end, img } }',
-    fetcher
-  );
+export const GET_ALL_EVENTS = gql`
+  query {
+    getEvents {
+      id
+      name
+      desc
+      start
+      end
+      img
+    }
+  }
+`;
 
-  if (error)
-    return (
-      <div>
-        <Title>Ивенты</Title>
-        <p>Ошибка, не удалось загрузить данные...</p>
-      </div>
-    );
-  if (!data)
-    return (
-      <div>
-        <Title>Ивенты</Title>
-        <p>Загружаю данные...</p>
-      </div>
-    );
+function Events() {
+  const { data, loading, error } = useQuery(GET_ALL_EVENTS);
+
+  if (error) return <div>Error</div>;
+  if (loading) return <div>Loading</div>;
 
   const { getEvents } = data;
 
@@ -59,3 +58,5 @@ export default function Events() {
     </div>
   );
 }
+
+export default withApollo({ ssr: true })(Events);
