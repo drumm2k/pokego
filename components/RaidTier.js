@@ -44,16 +44,19 @@ export default function RaidTier(props) {
   if (error) return null;
   if (loading) return null;
 
-  const pokemonData = data.getPokemonGroupByName;
+  const { getPokemonGroupByName } = data;
 
   return (
     <>
       <h3>{id.replace(/[^0-9]/g, '')}</h3>
       <Tier>
-        {Object.keys(pokemonData).map((pokemon) => (
-          <TierItem key={pokemon}>
-            <PokeCard id={parseInt(pokemonData[pokemon].pokedex.pokemonNum, 10)} />
-            <p>{pokemonData[pokemon].pokemonId.toLowerCase()}</p>
+        {getPokemonGroupByName.map((pokemon) => (
+          <TierItem key={pokemon.pokemonId}>
+            <PokeCard
+              imgUrl={`/img/pokemon/${pokemon.pokedex.pokemonNum}.png`}
+              id={pokemon.pokedex.pokemonNum}
+            />
+            <p>{pokemon.pokemonId.toLowerCase()}</p>
           </TierItem>
         ))}
       </Tier>

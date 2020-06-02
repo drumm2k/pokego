@@ -49,7 +49,7 @@ let lastPokemon;
 switch (1) {
   case 1:
     firstPokemon = 1;
-    lastPokemon = 151;
+    lastPokemon = 200;
     break;
   case 2:
     firstPokemon = 152;
@@ -121,7 +121,7 @@ class PokeGenList extends Component {
               }
               onClick={() => this.selectPokemon(id)}
             >
-              <PokeCard id={id} width={6.5} height={6.5} />
+              <PokeCard imgUrl={`/img/pokemon/${id}.png`} id={id} />
             </PokeSelector>
           ))}
         </PokeList>
