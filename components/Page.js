@@ -85,8 +85,16 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .leaflet-container {
-  height: 600px;
-  width: 100%;
+    height: 600px;
+    width: 100%;
+  }
+
+  #nprogress .bar {
+  background: #aaa;
+}
+
+  #nprogress .peg {
+    box-shadow: 0 0 10px #ddd, 0 0 5px #ddd;
   }
 `;
 
