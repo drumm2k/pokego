@@ -15,10 +15,10 @@ export const GET_ALL_EVENTS = gql`
     getEvents {
       id
       name
-      desc
-      start
-      end
       img
+      description
+      starts
+      ends
     }
   }
 `;
@@ -47,10 +47,10 @@ function Events() {
           <a>
             <Event
               name={event.name}
-              desc={event.desc}
-              start={event.start}
-              end={event.end}
+              description={event.description}
               img={event.img}
+              starts={event.starts}
+              ends={event.ends}
             />
           </a>
         </Link>

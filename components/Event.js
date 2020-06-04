@@ -89,7 +89,7 @@ class Event extends Component {
   }
 
   render() {
-    const { img, name, desc, start, end } = this.props;
+    const { img, name, description, starts, ends } = this.props;
     const { status } = this.state;
     return (
       <StyledEvent>
@@ -97,14 +97,14 @@ class Event extends Component {
           <EventImg imgUrl={img} />
           <div>
             <EventTitle>{name}</EventTitle>
-            <EventDesc>{desc}</EventDesc>
+            <EventDesc>{description}</EventDesc>
           </div>
           <StatusContainer>
             <EventStatus>{status}</EventStatus>
           </StatusContainer>
           <EventTimer
-            start={start}
-            end={end}
+            start={starts}
+            end={ends}
             status={status}
             statusHandler={this.statusHandler}
           />
@@ -120,9 +120,9 @@ class Event extends Component {
 Event.propTypes = {
   img: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  desc: PropTypes.string.isRequired,
-  start: PropTypes.string.isRequired,
-  end: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  starts: PropTypes.string.isRequired,
+  ends: PropTypes.string.isRequired,
 };
 
 export default Event;
