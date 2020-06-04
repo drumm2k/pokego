@@ -54,9 +54,9 @@ export default function RaidTier(props) {
           <TierItem key={pokemon.pokemonId}>
             <PokeCard
               imgUrl={`/img/pokemon/${pokemon.pokedex.pokemonNum}.png`}
-              id={pokemon.pokedex.pokemonNum}
+              id={parseInt(pokemon.pokedex.pokemonNum, 10)}
+              name={pokemon.pokemonId}
             />
-            <p>{pokemon.pokemonId.toLowerCase()}</p>
           </TierItem>
         ))}
       </Tier>

@@ -12,8 +12,7 @@ const Card = styled.div`
 
 const CardContent = styled.div`
   font-size: 1.2rem;
-  display: flex;
-  justify-content: space-between;
+  text-align: center;
   padding-left: 0.3rem;
   padding-right: 0.3rem;
 `;
@@ -24,8 +23,10 @@ const PokeCard = (props) => {
     <Card imgUrl={id}>
       <img src={imgUrl} alt={id} width={width} height={height} />
       <CardContent>
-        <div>Name</div>
         <div>{id}</div>
+        <div>
+          {name.toLowerCase().replace(/^[^]/, (match) => match.toUpperCase())}
+        </div>
       </CardContent>
     </Card>
   );
