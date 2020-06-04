@@ -35,7 +35,7 @@ function NavList(props) {
       <NavItem url="/pokedex" name="Покедекс" />
       <NavItem url="/events" name="Ивенты" />
       <NavItem url="/raids" name="Рейды" />
-      <NavItem url="/tasks" name="Задания" />
+      {/* <NavItem url="/tasks" name="Задания" /> */}
       <NavItem url="/map" name="Карта" />
     </StyledNavList>
   );

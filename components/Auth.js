@@ -10,7 +10,7 @@ const LoginLink = styled.a`
 function Auth() {
   return (
     <Link href="/login">
-      <LoginLink>Login</LoginLink>
+      <LoginLink>Войти</LoginLink>
     </Link>
   );
 }
