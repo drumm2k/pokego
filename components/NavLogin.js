@@ -2,12 +2,13 @@ import styled from 'styled-components';
 import Link from 'next/link';
 
 const LoginLink = styled.a`
-  padding: 1rem;
+  font-weight: 700;
   line-height: 1;
+  padding: 1rem;
   margin: 0 2rem;
 `;
 
-function Auth() {
+function NavLogin() {
   return (
     <Link href="/login">
       <LoginLink>Войти</LoginLink>
@@ -15,4 +16,4 @@ function Auth() {
   );
 }
 
-export default Auth;
+export default NavLogin;

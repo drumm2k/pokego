@@ -9,7 +9,6 @@ const StyledEvent = styled.div`
   flex-direction: column;
   margin-bottom: 1rem;
   max-width: 40rem;
-  border-radius: 15px;
   font-size: 1.4rem;
   color: #eee;
 `;
@@ -20,7 +19,7 @@ const EventCard = styled.div`
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
   padding: 1.5rem 1rem;
-  border-radius: 15px;
+  border-radius: 10px;
   background-image: linear-gradient(to right, #cc2b5e, #753a88);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   /* background: #aa306f; */

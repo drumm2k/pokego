@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Auth from './Auth';
+import NavLogin from './NavLogin';
 
 const NavPanel = styled.div`
   display: flex;
@@ -63,7 +63,7 @@ function NavMenu(props) {
   const { navOpened, toggleNav } = props;
   return (
     <NavPanel>
-      <Auth />
+      <NavLogin />
       <Button
         aria-label="Navigation Menu"
         aria-haspopup="true"
