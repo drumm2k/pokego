@@ -24,7 +24,7 @@ const TierItem = styled.div`
   grid-row-gap: 1rem;
   padding: 1.5rem 1rem;
   border-radius: 10px;
-  min-width: 30rem;
+  max-width: 40rem;
   background-image: linear-gradient(to right, #0082c8, #3a5888);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 `;

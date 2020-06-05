@@ -4,22 +4,17 @@ import styled from 'styled-components';
 import EventTimer from './EventTimer';
 // import ArrowIcon from '../assets/arrow.svg';
 
-const StyledEvent = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-  max-width: 40rem;
-  font-size: 1.4rem;
-  color: #eee;
-`;
-
 const EventCard = styled.div`
+  color: #eee;
+  font-size: 1.4rem;
   display: grid;
+  margin-bottom: 1rem;
   grid-template-columns: 10rem auto;
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
   padding: 1.5rem 1rem;
   border-radius: 10px;
+  max-width: 40rem;
   background-image: linear-gradient(to right, #cc2b5e, #753a88);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   /* background: #aa306f; */
@@ -80,7 +75,7 @@ class Event extends Component {
     const { img, name, description, starts, ends } = this.props;
     const { status } = this.state;
     return (
-      <StyledEvent>
+      <>
         <EventCard>
           <EventImg imgUrl={img} />
           <div>
@@ -97,7 +92,7 @@ class Event extends Component {
             statusHandler={this.statusHandler}
           />
         </EventCard>
-      </StyledEvent>
+      </>
     );
   }
 }

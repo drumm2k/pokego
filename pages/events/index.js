@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import Link from 'next/link';
@@ -15,6 +16,15 @@ export const GET_ALL_EVENTS = gql`
       starts
       ends
     }
+  }
+`;
+
+const EventList = styled.div`
+  display: grid;
+
+  @media (min-width: 768px) {
+    grid-column-gap: 1rem;
+    grid-template-columns: 50% 50%;
   }
 `;
 
@@ -67,48 +77,54 @@ function Events() {
   return (
     <div>
       <Title color="#ff3163">Ивенты</Title>
-      {events &&
-        events.map((event) => (
-          <Link key={event.id} href="/events/[id]" as={`/events/${event.id}`}>
-            <a>
-              <Event
-                name={event.name}
-                description={event.description}
-                img={event.img}
-                starts={event.starts}
-                ends={event.ends}
-              />
-            </a>
-          </Link>
-        ))}
-      {eventsUpcoming &&
-        eventsUpcoming.map((event) => (
-          <Link key={event.id} href="/events/[id]" as={`/events/${event.id}`}>
-            <a>
-              <Event
-                name={event.name}
-                description={event.description}
-                img={event.img}
-                starts={event.starts}
-                ends={event.ends}
-              />
-            </a>
-          </Link>
-        ))}
-      {eventsEnded &&
-        eventsEnded.map((event) => (
-          <Link key={event.id} href="/events/[id]" as={`/events/${event.id}`}>
-            <a>
-              <Event
-                name={event.name}
-                description={event.description}
-                img={event.img}
-                starts={event.starts}
-                ends={event.ends}
-              />
-            </a>
-          </Link>
-        ))}
+      <EventList>
+        <div>
+          {events &&
+            events.map((event) => (
+              <Link key={event.id} href="/events/[id]" as={`/events/${event.id}`}>
+                <a>
+                  <Event
+                    name={event.name}
+                    description={event.description}
+                    img={event.img}
+                    starts={event.starts}
+                    ends={event.ends}
+                  />
+                </a>
+              </Link>
+            ))}
+          {eventsUpcoming &&
+            eventsUpcoming.map((event) => (
+              <Link key={event.id} href="/events/[id]" as={`/events/${event.id}`}>
+                <a>
+                  <Event
+                    name={event.name}
+                    description={event.description}
+                    img={event.img}
+                    starts={event.starts}
+                    ends={event.ends}
+                  />
+                </a>
+              </Link>
+            ))}
+        </div>
+        <div>
+          {eventsEnded &&
+            eventsEnded.map((event) => (
+              <Link key={event.id} href="/events/[id]" as={`/events/${event.id}`}>
+                <a>
+                  <Event
+                    name={event.name}
+                    description={event.description}
+                    img={event.img}
+                    starts={event.starts}
+                    ends={event.ends}
+                  />
+                </a>
+              </Link>
+            ))}
+        </div>
+      </EventList>
     </div>
   );
 }
