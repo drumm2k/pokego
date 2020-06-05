@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import PropTypes from 'prop-types';
+import pokeTypes from '../lib/poke-types';
 
 const Tier = styled.div`
   display: grid;
@@ -15,8 +16,8 @@ const Tier = styled.div`
 `;
 
 const TierItem = styled.div`
-  color: #fcd768;
-  font-size: 1.6rem;
+  color: #eee;
+  font-size: 1.4rem;
   font-weight: 700;
   display: grid;
   grid-template-columns: 7rem auto;
@@ -34,6 +35,21 @@ const RaidImg = styled.div`
   background-size: cover;
   width: 7.5rem;
   height: 7.5rem;
+`;
+
+const PokeType = styled.span`
+  display: inline-block;
+  padding: 0.1rem 0.7rem;
+  margin: 0.2rem;
+  color: #3a5888;
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  background-color: #fcd768;
+  border-radius: 15px;
 `;
 
 export const GET_ALL_POKEMONS_BY_NAMES = gql`
@@ -72,8 +88,8 @@ export default function RaidTier(props) {
 
             <div>
               <div>{pokemon.pokemonId}</div>
-              <div>{pokemon.type}</div>
-              <div>{pokemon.type2}</div>
+              <PokeType>{pokeTypes(pokemon.type)}</PokeType>
+              {pokemon.type2 && <PokeType>{pokeTypes(pokemon.type2)}</PokeType>}
             </div>
           </TierItem>
         ))}
