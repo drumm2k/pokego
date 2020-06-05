@@ -1,14 +1,9 @@
-import styled from 'styled-components';
+import Title from '../components/Title';
 import PokeGenList from '../components/PokeGenList';
-
-const Title = styled.h2`
-  color: #bb00c8;
-  margin-bottom: 1.5rem;
-`;
 
 const Pokedex = () => (
   <div>
-    <Title>Покедекс</Title>
+    <Title color="#bb00c8">Покедекс</Title>
     <PokeGenList />
   </div>
 );

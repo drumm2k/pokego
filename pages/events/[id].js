@@ -1,13 +1,8 @@
-import styled from 'styled-components';
 import Router, { useRouter } from 'next/router';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { withApollo } from '../../lib/apollo';
-
-const Title = styled.h2`
-  color: #ff3163;
-  margin-bottom: 1.5rem;
-`;
+import Title from '../../components/Title';
 
 export const GET_EVENT = gql`
   query getEvent($id: ID!) {
@@ -39,7 +34,7 @@ const EventById = () => {
 
   return (
     <div>
-      <Title>{getEvent.name}</Title>
+      <Title color="#ff3163">{getEvent.name}</Title>
       <img src={getEvent.img} alt={getEvent.name} />
       <p>{getEvent.description}</p>
       <p>{getEvent.descriptionFull}</p>

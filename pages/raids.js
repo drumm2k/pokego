@@ -1,13 +1,8 @@
-import styled from 'styled-components';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { withApollo } from '../lib/apollo';
 import RaidTier from '../components/RaidTier';
-
-const Title = styled.h2`
-  color: #009dc8;
-  margin-bottom: 1.5rem;
-`;
+import Title from '../components/Title';
 
 export const GET_ALL_RAID_TIERS = gql`
   query {
@@ -33,7 +28,7 @@ function Raids() {
 
   return (
     <div>
-      <Title>Рейды</Title>
+      <Title color="#009dc8">Рейды</Title>
       {tiers.getRaidTiers.map((tier) => (
         <RaidTier key={tier.tier} id={tier.tier} tier={tier.raids} />
       ))}

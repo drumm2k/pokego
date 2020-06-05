@@ -1,14 +1,9 @@
-import styled from 'styled-components';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import Link from 'next/link';
 import { withApollo } from '../../lib/apollo';
 import Event from '../../components/Event';
-
-const Title = styled.h2`
-  color: #ff3163;
-  margin-bottom: 1.5rem;
-`;
+import Title from '../../components/Title';
 
 export const GET_ALL_EVENTS = gql`
   query {
@@ -34,7 +29,7 @@ function Events() {
   if (getEvents.length === 0)
     return (
       <div>
-        <Title>Ивенты</Title>
+        <Title color="#ff3163">Ивенты</Title>
         Ивентов в данный момент нет.
       </div>
     );
@@ -71,7 +66,7 @@ function Events() {
 
   return (
     <div>
-      <Title>Ивенты</Title>
+      <Title color="#ff3163">Ивенты</Title>
       {events &&
         events.map((event) => (
           <Link key={event.id} href="/events/[id]" as={`/events/${event.id}`}>
