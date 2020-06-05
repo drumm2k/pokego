@@ -90,11 +90,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #nprogress .bar {
-  background: #aaa;
+  background: #555;
 }
 
   #nprogress .peg {
-    box-shadow: 0 0 10px #ddd, 0 0 5px #ddd;
+    box-shadow: 0 0 10px #000, 0 0 5px #000;
   }
 `;
 
