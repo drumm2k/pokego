@@ -5,7 +5,7 @@ import { withApollo } from '../lib/apollo';
 import RaidTier from '../components/RaidTier';
 
 const Title = styled.h2`
-  color: #ff3163;
+  color: #009dc8;
   margin-bottom: 1.5rem;
 `;
 

@@ -15,7 +15,7 @@ const StyledEvent = styled.div`
 
 const EventCard = styled.div`
   display: grid;
-  grid-template-columns: 9.6rem auto;
+  grid-template-columns: 10rem auto;
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
   padding: 1.5rem 1rem;

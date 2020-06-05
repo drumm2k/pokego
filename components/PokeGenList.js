@@ -20,7 +20,7 @@ const PokeSelector = styled.div`
   margin: 1px;
 
   &.selected {
-    border-color: #25ced1;
+    border-color: #753a88;
   }
 `;
 
@@ -41,7 +41,6 @@ function formatInput(val) {
 }
 
 const output = formatInput(input);
-console.log(output);
 
 let firstPokemon;
 let lastPokemon;

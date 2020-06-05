@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import PokeGenList from '../components/PokeGenList';
 
 const Title = styled.h2`
-  color: #ff3163;
+  color: #bb00c8;
   margin-bottom: 1.5rem;
 `;
 

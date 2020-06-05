@@ -6,7 +6,7 @@ const MapWithNoSSR = dynamic(() => import('../components/Map'), {
 });
 
 const Title = styled.h2`
-  color: #ff3163;
+  color: #aa306f;
   margin-bottom: 1.5rem;
 `;
 
