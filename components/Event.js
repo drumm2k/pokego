@@ -63,17 +63,6 @@ const EventStatus = styled.span`
   border-radius: 15px;
 `;
 
-// const Unfold = styled.div`
-//   text-align: center;
-//   align-self: center;
-//   width: 7rem;
-//   height: 2rem;
-//   border-bottom-left-radius: 15px;
-//   border-bottom-right-radius: 15px;
-//   background: #901d58;
-//   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-// `;
-
 class Event extends Component {
   constructor(props) {
     super(props);
@@ -108,9 +97,6 @@ class Event extends Component {
             statusHandler={this.statusHandler}
           />
         </EventCard>
-        {/* <Unfold>
-          <ArrowIcon />
-        </Unfold> */}
       </StyledEvent>
     );
   }
