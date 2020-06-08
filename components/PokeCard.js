@@ -2,28 +2,34 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const Card = styled.div`
-  /* background: url(${(props) =>
-    `/img/pokemon/${props.imgUrl}.png`}) 50% 50% no-repeat;
-  background-size: cover; */
+  max-width: 6.5rem;
+  overflow: hidden;
+  font-size: 1.2rem;
+`;
+
+const CardImg = styled.div.attrs((props) => ({
+  style: {
+    backgroundImage: props.imgUrl,
+  },
+}))`
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
   min-width: 6.5rem;
   min-height: 6.5rem;
   overflow: hidden;
 `;
 
 const CardContent = styled.div`
-  font-size: 1.2rem;
   text-align: center;
-  padding-left: 0.3rem;
-  padding-right: 0.3rem;
 `;
 
 const PokeCard = (props) => {
-  const { id, width, height, name, imgUrl } = props;
+  const { id, name } = props;
   return (
-    <Card imgUrl={id}>
-      <img src={imgUrl} alt={id} width={width} height={height} />
+    <Card>
+      <CardImg imgUrl={`url(/img/pokemon/${id}.png)`}>#{id}</CardImg>
       <CardContent>
-        <div>{id}</div>
         <div>
           {name.toLowerCase().replace(/^[^]/, (match) => match.toUpperCase())}
         </div>
@@ -33,16 +39,11 @@ const PokeCard = (props) => {
 };
 
 PokeCard.propTypes = {
-  imgUrl: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
-  width: PropTypes.string,
-  height: PropTypes.string,
   name: PropTypes.string,
 };
 
 PokeCard.defaultProps = {
-  width: `65px`,
-  height: `65px`,
   name: '',
 };
 

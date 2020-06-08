@@ -20,8 +20,8 @@ function PokedexList({ pokemons }) {
       {pokemons.map((pokemon) => (
         <StyledCard key={pokemon.pokemonId}>
           <PokeCard
-            imgUrl={`/img/pokemon/${pokemon.pokedex.pokemonNum}.png`}
             id={parseInt(pokemon.pokedex.pokemonNum, 10)}
+            name={pokemon.pokemonId}
           />
         </StyledCard>
       ))}
