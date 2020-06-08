@@ -61,5 +61,5 @@ export default function RaidTier(props) {
 
 RaidTier.propTypes = {
   id: PropTypes.string.isRequired,
-  tier: PropTypes.oneOfType([PropTypes.array]).isRequired,
+  tier: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

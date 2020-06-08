@@ -1,11 +1,47 @@
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
+import { withApollo } from '../lib/apollo';
 import Title from '../components/Title';
-import PokeGenList from '../components/PokeGenList';
+import Pdex from '../components/Pokedex';
 
-const Pokedex = () => (
-  <>
-    <Title color="#bb00c8">Покедекс</Title>
-    <PokeGenList />
-  </>
-);
+export const GET_ALL_POKEMONS = gql`
+  query {
+    getPokemonsPure {
+      pokemonId
+      type
+      type2
+      stats {
+        baseStamina
+        baseAttack
+        baseDefense
+      }
+      familyId
+      candyToEvolve
+      movesets {
+        quickMove
+        cinematicMove
+      }
+      pokedex {
+        pokemonNum
+      }
+    }
+  }
+`;
 
-export default Pokedex;
+function Pokedex() {
+  const { data, loading, error } = useQuery(GET_ALL_POKEMONS);
+
+  if (error) return <div>Error</div>;
+  if (loading) return <div>Loading</div>;
+
+  const { getPokemonsPure } = data;
+
+  return (
+    <>
+      <Title color="#bb00c8">Покедекс</Title>
+      <Pdex pokemons={getPokemonsPure} />
+    </>
+  );
+}
+
+export default withApollo({ ssr: true })(Pokedex);
