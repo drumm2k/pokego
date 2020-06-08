@@ -27,12 +27,12 @@ function Raids() {
   if (tiersQueryLoading) return <div>Loading</div>;
 
   return (
-    <div>
+    <>
       <Title color="#009dc8">Рейды</Title>
       {tiers.getRaidTiers.map((tier) => (
         <RaidTier key={tier.tier} id={tier.tier} tier={tier.raids} />
       ))}
-    </div>
+    </>
   );
 }
 

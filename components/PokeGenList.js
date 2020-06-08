@@ -102,7 +102,7 @@ class PokeGenList extends Component {
 
   render() {
     return (
-      <div>
+      <>
         <FilterInput
           type="text"
           value={this.state.selectedPokemons}
@@ -124,7 +124,7 @@ class PokeGenList extends Component {
             </PokeSelector>
           ))}
         </PokeList>
-      </div>
+      </>
     );
   }
 }

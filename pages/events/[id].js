@@ -33,7 +33,7 @@ const EventById = () => {
   const { getEvent } = data;
 
   return (
-    <div>
+    <>
       <Title color="#ff3163">{getEvent.name}</Title>
       <img src={getEvent.img} alt={getEvent.name} />
       <p>{getEvent.description}</p>
@@ -43,7 +43,7 @@ const EventById = () => {
       <button type="button" onClick={() => Router.back()}>
         Назад
       </button>
-    </div>
+    </>
   );
 };
 

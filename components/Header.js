@@ -41,7 +41,7 @@ class Header extends Component {
   render() {
     const { navOpened } = this.state;
     return (
-      <div>
+      <>
         <StyledHeader>
           <Link href="/">
             <Logo>PokéGO</Logo>
@@ -49,7 +49,7 @@ class Header extends Component {
           <NavMenu toggleNav={this.toggleNav} navOpened={navOpened} />
         </StyledHeader>
         <NavList navOpened={navOpened} />
-      </div>
+      </>
     );
   }
 }

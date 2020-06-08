@@ -75,7 +75,7 @@ function Events() {
   sortAndReverseEvents(eventsEnded);
 
   return (
-    <div>
+    <>
       <Title color="#ff3163">Ивенты</Title>
       <EventList>
         <div>
@@ -125,7 +125,7 @@ function Events() {
             ))}
         </div>
       </EventList>
-    </div>
+    </>
   );
 }
 

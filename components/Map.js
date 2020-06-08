@@ -76,7 +76,7 @@ class MyMap extends Component {
     const { center, zoom } = this.state;
 
     return (
-      <div>
+      <>
         <LeafletStyles />
         <MarkerClusterStyles />
         <Map preferCanvas center={center} zoom={zoom}>
@@ -89,7 +89,7 @@ class MyMap extends Component {
             <LayerGroup>{Markers}</LayerGroup>
           </MarkerClusterGroup>
         </Map>
-      </div>
+      </>
     );
   }
 }

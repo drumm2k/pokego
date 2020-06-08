@@ -6,10 +6,10 @@ const MapWithNoSSR = dynamic(() => import('../components/Map'), {
 });
 
 const MyMap = () => (
-  <div>
+  <>
     <Title color="#aa306f">Карта</Title>
     <MapWithNoSSR />
-  </div>
+  </>
 );
 
 export default MyMap;
