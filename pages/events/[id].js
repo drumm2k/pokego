@@ -46,8 +46,10 @@ export default function EventById() {
       <img src={getEvent.img} alt={getEvent.name} />
       <p>{getEvent.description}</p>
       <p>{getEvent.descriptionFull}</p>
-      <p>{getEvent.starts}</p>
-      <p>{getEvent.ends}</p>
+      <p>Начало: {new Date(getEvent.starts).toLocaleString()}</p>
+      <p>Конец: {new Date(getEvent.ends).toLocaleString()}</p>
+      <p>(местное время)</p>
+
       <button type="button" onClick={() => Router.back()}>
         Назад
       </button>
