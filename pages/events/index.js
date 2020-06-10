@@ -1,8 +1,8 @@
-import styled from 'styled-components';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
+import { initializeApollo } from '../../lib/apolloClient';
+import styled from 'styled-components';
 import Link from 'next/link';
-import { withApollo } from '../../lib/apollo';
 import Event from '../../components/Event';
 import Title from '../../components/Title';
 
@@ -28,7 +28,7 @@ const EventList = styled.div`
   }
 `;
 
-function Events() {
+export default function Events() {
   const { data, loading, error } = useQuery(GET_ALL_EVENTS);
 
   if (error) return <div>Error</div>;
@@ -129,4 +129,17 @@ function Events() {
   );
 }
 
-export default withApollo({ ssr: true })(Events);
+export async function getStaticProps() {
+  const apolloClient = initializeApollo();
+
+  await apolloClient.query({
+    query: GET_ALL_EVENTS,
+  });
+
+  return {
+    props: {
+      initialApolloState: apolloClient.cache.extract(),
+    },
+    unstable_revalidate: 1,
+  };
+}

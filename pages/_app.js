@@ -1,8 +1,10 @@
-import App from 'next/app';
 import Router from 'next/router';
 import NProgress from 'nprogress'; // nprogress module
 import 'nprogress/nprogress.css'; // styles of nprogress
 import Page from '../components/Page';
+
+import { ApolloProvider } from '@apollo/react-hooks';
+import { useApollo } from '../lib/apolloClient';
 
 NProgress.configure({ showSpinner: false });
 
@@ -10,16 +12,14 @@ Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
-class MyApp extends App {
-  render() {
-    const { Component, pageProps } = this.props;
+export default function App({ Component, pageProps }) {
+  const apolloClient = useApollo(pageProps.initialApolloState);
 
-    return (
+  return (
+    <ApolloProvider client={apolloClient}>
       <Page>
         <Component {...pageProps} />
       </Page>
-    );
-  }
+    </ApolloProvider>
+  );
 }
-
-export default MyApp;

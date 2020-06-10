@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import { withApollo } from '../lib/apollo';
+import { initializeApollo } from '../lib/apolloClient';
 import RaidTier from '../components/RaidTier';
 import Title from '../components/Title';
 
@@ -16,24 +16,35 @@ export const GET_ALL_RAID_TIERS = gql`
   }
 `;
 
-function Raids() {
-  const {
-    data: tiers,
-    loading: tiersQueryLoading,
-    error: tiersQueryError,
-  } = useQuery(GET_ALL_RAID_TIERS);
+export default function Raids() {
+  const { data, loading, error } = useQuery(GET_ALL_RAID_TIERS);
 
-  if (tiersQueryError) return <div>Error</div>;
-  if (tiersQueryLoading) return <div>Loading</div>;
+  if (error) return <div>Error</div>;
+  if (loading) return <div>Loading</div>;
+
+  const { getRaidTiers } = data;
 
   return (
     <>
       <Title color="#009dc8">Рейды</Title>
-      {tiers.getRaidTiers.map((tier) => (
+      {getRaidTiers.map((tier) => (
         <RaidTier key={tier.tier} id={tier.tier} tier={tier.raids} />
       ))}
     </>
   );
 }
 
-export default withApollo({ ssr: true })(Raids);
+export async function getStaticProps() {
+  const apolloClient = initializeApollo();
+
+  await apolloClient.query({
+    query: GET_ALL_RAID_TIERS,
+  });
+
+  return {
+    props: {
+      initialApolloState: apolloClient.cache.extract(),
+    },
+    unstable_revalidate: 1,
+  };
+}

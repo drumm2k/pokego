@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import { withApollo } from '../lib/apollo';
+import { initializeApollo } from '../lib/apolloClient';
 import Title from '../components/Title';
 import Pdex from '../components/Pokedex';
 
@@ -17,10 +17,6 @@ export const GET_ALL_POKEMONS = gql`
       }
       familyId
       candyToEvolve
-      movesets {
-        quickMove
-        cinematicMove
-      }
       pokedex {
         pokemonNum
       }
@@ -28,7 +24,7 @@ export const GET_ALL_POKEMONS = gql`
   }
 `;
 
-function Pokedex() {
+export default function Pokedex() {
   const { data, loading, error } = useQuery(GET_ALL_POKEMONS);
 
   if (error) return <div>Error</div>;
@@ -44,4 +40,17 @@ function Pokedex() {
   );
 }
 
-export default withApollo({ ssr: true })(Pokedex);
+export async function getStaticProps() {
+  const apolloClient = initializeApollo();
+
+  await apolloClient.query({
+    query: GET_ALL_POKEMONS,
+  });
+
+  return {
+    props: {
+      initialApolloState: apolloClient.cache.extract(),
+    },
+    unstable_revalidate: 1,
+  };
+}

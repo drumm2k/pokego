@@ -28,7 +28,7 @@ export default class Pokedex extends Component {
     return (
       <>
         <label>
-          Search:
+          Поиск:
           <FilterInput
             type="text"
             name="search"
