@@ -4,31 +4,46 @@ import { initializeApollo } from '../lib/apolloClient';
 import RaidTier from '../components/RaidTier';
 import Title from '../components/Title';
 
-export const GET_ALL_RAID_TIERS = gql`
+export const GET_ALL_RAIDS_FULL = gql`
   query {
-    getRaidTiers {
-      tier
+    getRaidsFull {
       raids {
-        pokemon
-        shiny
+        tier
+        raids {
+          pokemon
+          shiny
+        }
+      }
+      pokemons {
+        pokemonId
+        type
+        type2
+        pokedex {
+          pokemonNum
+        }
       }
     }
   }
 `;
 
 export default function Raids() {
-  const { data, loading, error } = useQuery(GET_ALL_RAID_TIERS);
+  const { data, loading, error } = useQuery(GET_ALL_RAIDS_FULL);
 
   if (error) return <div>Error</div>;
   if (loading) return <div>Loading</div>;
 
-  const { getRaidTiers } = data;
+  const { getRaidsFull } = data;
 
   return (
     <>
       <Title color="#009dc8">Рейды</Title>
-      {getRaidTiers.map((tier) => (
-        <RaidTier key={tier.tier} id={tier.tier} tier={tier.raids} />
+      {getRaidsFull.raids.map((tier) => (
+        <RaidTier
+          key={tier.tier}
+          id={tier.tier}
+          tiersData={tier.raids}
+          pokemonsData={getRaidsFull.pokemons}
+        />
       ))}
     </>
   );
@@ -38,7 +53,7 @@ export async function getStaticProps() {
   const apolloClient = initializeApollo();
 
   await apolloClient.query({
-    query: GET_ALL_RAID_TIERS,
+    query: GET_ALL_RAIDS_FULL,
   });
 
   return {

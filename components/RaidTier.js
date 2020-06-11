@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
 import PropTypes from 'prop-types';
 import RaidCard from './RaidCard';
 
@@ -15,37 +13,18 @@ const Tier = styled.div`
   }
 `;
 
-export const GET_ALL_POKEMONS_BY_NAMES = gql`
-  query getPokemonGroupByName($names: [String]!) {
-    getPokemonGroupByName(names: $names) {
-      pokemonId
-      type
-      type2
-      pokedex {
-        pokemonNum
-      }
-    }
-  }
-`;
-
 export default function RaidTier(props) {
-  const { id, tier } = props;
-  const pokemonQuery = tier.map((pokemon) => pokemon.pokemon);
+  const { id, tiersData, pokemonsData } = props;
 
-  const { data, loading, error } = useQuery(GET_ALL_POKEMONS_BY_NAMES, {
-    variables: { names: pokemonQuery },
-  });
-
-  if (error) return null;
-  if (loading) return null;
-
-  const { getPokemonGroupByName } = data;
+  const filteredData = tiersData.map((tier) =>
+    pokemonsData.find((pokemon) => pokemon.pokemonId === tier.pokemon)
+  );
 
   return (
     <>
       <h3>{id.replace(/[^0-9]/g, '')}</h3>
       <Tier>
-        {getPokemonGroupByName.map((pokemon) => (
+        {filteredData.map((pokemon) => (
           <RaidCard
             key={pokemon.pokemonId}
             id={pokemon.pokedex.pokemonNum}
@@ -61,5 +40,6 @@ export default function RaidTier(props) {
 
 RaidTier.propTypes = {
   id: PropTypes.string.isRequired,
-  tier: PropTypes.arrayOf(PropTypes.object).isRequired,
+  tiersData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  pokemonsData: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
