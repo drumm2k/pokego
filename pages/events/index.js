@@ -1,8 +1,8 @@
+import Link from 'next/link';
+import styled from 'styled-components';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { initializeApollo } from '../../lib/apolloClient';
-import styled from 'styled-components';
-import Link from 'next/link';
 import Event from '../../components/Event';
 import Title from '../../components/Title';
 

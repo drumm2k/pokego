@@ -4,7 +4,7 @@ import { initializeApollo } from '../lib/apolloClient';
 import RaidTier from '../components/RaidTier';
 import Title from '../components/Title';
 
-export const GET_ALL_RAIDS_FULL = gql`
+export const GET_ALL_RAIDS = gql`
   query {
     getRaidsFull {
       raids {
@@ -27,7 +27,7 @@ export const GET_ALL_RAIDS_FULL = gql`
 `;
 
 export default function Raids() {
-  const { data, loading, error } = useQuery(GET_ALL_RAIDS_FULL);
+  const { data, loading, error } = useQuery(GET_ALL_RAIDS);
 
   if (error) return <div>Error</div>;
   if (loading) return <div>Loading</div>;
@@ -53,7 +53,7 @@ export async function getStaticProps() {
   const apolloClient = initializeApollo();
 
   await apolloClient.query({
-    query: GET_ALL_RAIDS_FULL,
+    query: GET_ALL_RAIDS,
   });
 
   return {

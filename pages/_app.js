@@ -1,10 +1,10 @@
 import Router from 'next/router';
+import { ApolloProvider } from '@apollo/react-hooks';
 import NProgress from 'nprogress'; // nprogress module
+import PropTypes from 'prop-types';
+import { useApollo } from '../lib/apolloClient';
 import 'nprogress/nprogress.css'; // styles of nprogress
 import Page from '../components/Page';
-
-import { ApolloProvider } from '@apollo/react-hooks';
-import { useApollo } from '../lib/apolloClient';
 
 NProgress.configure({ showSpinner: false });
 
@@ -23,3 +23,8 @@ export default function App({ Component, pageProps }) {
     </ApolloProvider>
   );
 }
+
+App.propTypes = {
+  Component: PropTypes.func.isRequired,
+  pageProps: PropTypes.oneOfType([PropTypes.object]).isRequired,
+};

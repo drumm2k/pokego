@@ -70,7 +70,7 @@ const Icon = styled.span`
   margin-right: 5px;
 `;
 
-function login() {
+function Login() {
   return (
     <>
       <Form>
@@ -97,4 +97,4 @@ function login() {
   );
 }
 
-export default login;
+export default Login;

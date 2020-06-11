@@ -32,6 +32,8 @@ module.exports = {
     'no-console': 0,
     'no-unused-vars': 0,
     'react/jsx-props-no-spreading': 0,
-    'react/jsx-one-expression-per-line': ['single-child'],
+    'react/jsx-one-expression-per-line': 0,
+    'no-underscore-dangle': 0,
+    'jsx-a11y/label-has-associated-control': 0,
   },
 };

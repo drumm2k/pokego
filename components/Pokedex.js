@@ -11,20 +11,22 @@ const FilterInput = styled.input`
 export default class Pokedex extends Component {
   constructor(props) {
     super(props);
-    this.state = { searchTerm: '', pokemons: this.props.pokemons };
+    const { pokemons } = this.props;
+    this.state = { searchTerm: '', pokemons };
   }
 
   onChangeValue = (event) => {
-    const result = this.props.pokemons.filter(
+    const { pokemons } = this.props;
+    const result = pokemons.filter(
       (pokemon) =>
-        pokemon.pokedex.pokemonNum == event.target.value ||
+        pokemon.pokedex.pokemonNum === event.target.value ||
         pokemon.pokemonId.includes(event.target.value.toUpperCase())
     );
     this.setState({ searchTerm: event.target.value, pokemons: result });
   };
 
   render() {
-    const { pokemons } = this.state;
+    const { pokemons, searchTerm } = this.state;
     return (
       <>
         <label>
@@ -32,7 +34,7 @@ export default class Pokedex extends Component {
           <FilterInput
             type="text"
             name="search"
-            value={this.state.searchTerm}
+            value={searchTerm}
             onChange={this.onChangeValue}
           />
         </label>

@@ -1,7 +1,7 @@
+import Router, { useRouter } from 'next/router';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { initializeApollo } from '../../lib/apolloClient';
-import Router, { useRouter } from 'next/router';
 import Title from '../../components/Title';
 
 export const GET_EVENT = gql`
