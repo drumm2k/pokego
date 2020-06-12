@@ -23,8 +23,8 @@ const EventList = styled.div`
   display: grid;
 
   @media (min-width: 768px) {
-    grid-column-gap: 1rem;
-    grid-template-columns: 50% 50%;
+    grid-column-gap: 2%;
+    grid-template-columns: 49% 49%;
   }
 `;
 

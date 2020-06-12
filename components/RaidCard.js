@@ -24,6 +24,7 @@ const Card = styled.div`
 `;
 
 const CardImg = styled.div`
+  position: relative;
   border-radius: 5px;
   background-size: cover;
   background-repeat: no-repeat;
@@ -31,6 +32,54 @@ const CardImg = styled.div`
   background-image: url(${(props) => props.imgUrl});
   width: 7.5rem;
   height: 7.5rem;
+`;
+
+const Shiny = styled.div`
+  position: absolute;
+  right: 0.3rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #fcd768;
+    width: 1.3rem;
+    height: 1.3rem;
+    clip-path: polygon(
+      50% 0%,
+      65% 35%,
+      100% 50%,
+      65% 65%,
+      50% 100%,
+      35% 65%,
+      0 50%,
+      35% 35%
+    );
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0.5rem;
+    background-color: #fcd768;
+    width: 1.5rem;
+    height: 1.5rem;
+    clip-path: polygon(
+      50% 0%,
+      65% 35%,
+      100% 50%,
+      65% 65%,
+      50% 100%,
+      35% 65%,
+      0 50%,
+      35% 35%
+    );
+  }
 `;
 
 const PokeType = styled.span`
@@ -49,7 +98,7 @@ const PokeType = styled.span`
 `;
 
 const RaidCard = (props) => {
-  const { id, name, type, type2 } = props;
+  const { id, name, type, type2, shiny } = props;
 
   // Get type names
   const typeOne = pokeTypeName(type);
@@ -61,7 +110,7 @@ const RaidCard = (props) => {
 
   return (
     <Card typeOneColor={typeOneColor} typeTwoColor={typeTwoColor}>
-      <CardImg imgUrl={`/img/pokemon/${id}.png`} />
+      <CardImg imgUrl={`/img/pokemon/${id}.png`}>{shiny && <Shiny />}</CardImg>
 
       <div>
         <div>{name}</div>
@@ -77,6 +126,7 @@ RaidCard.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   type2: PropTypes.string,
+  shiny: PropTypes.bool.isRequired,
 };
 
 RaidCard.defaultProps = {
