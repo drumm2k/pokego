@@ -34,8 +34,8 @@ const CardImg = styled.div`
 
 const Shiny = styled.div`
   position: absolute;
-  right: 0.3rem;
-  top: 0.3rem;
+  right: 0.2rem;
+  top: 0.2rem;
   width: 2.6rem;
   height: 2.6rem;
   filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
@@ -119,7 +119,7 @@ const RaidCard = (props) => {
         <div>{name}</div>
         <div>
           {typeWeatherImg.map((icon) => (
-            <img src={icon} alt="weather" width="25" height="25" />
+            <img src={icon} alt="weather" width="25" height="25" key={icon} />
           ))}
         </div>
         <PokeType>{typeOne}</PokeType>

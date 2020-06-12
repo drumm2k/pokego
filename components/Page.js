@@ -60,28 +60,25 @@ const GlobalStyle = createGlobalStyle`
     outline-color: #222;
   }
 
-  h1 {
-    font-size: 4.8rem;
+  h1, h2, h3, h4 {
     font-weight: 700;
-    line-height: 1.125;
+    line-height: 1.2;
+  }
+
+  h1 {
+    font-size: 3.4rem;
   }
 
   h2 {
-    font-size: 3.6rem;
-    font-weight: 700;
-    line-height: 1.25;
+    font-size: 2.8rem;
   }
 
   h3 {
-    font-size: 2.8rem;
-    font-weight: 700;
-    line-height: 1.25;
+    font-size: 2.2rem;
   }
 
   h4 {
     font-size: 1.8rem;
-    font-weight: 700;
-    line-height: 1.22;
   }
 
   .leaflet-container {

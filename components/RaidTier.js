@@ -2,10 +2,16 @@ import styled from 'styled-components';
 import PropTypes, { object } from 'prop-types';
 import RaidCard from './RaidCard';
 
+const TierTitle = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 const Tier = styled.div`
   display: grid;
   grid-row-gap: 1rem;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
 
   @media (min-width: 768px) {
     grid-column-gap: 2%;
@@ -29,9 +35,21 @@ export default function RaidTier(props) {
     })
   );
 
+  const tier = id.replace(/[^0-9]/g, '');
+  const tierIcon = [...Array(parseInt(tier, 10))].map((e, index) => {
+    const key = tier + index;
+    return (
+      <img src="/img/raid.png" height="30" width="30" alt="raid tier" key={key} />
+    );
+  });
+
   return (
     <>
-      <h3>{id.replace(/[^0-9]/g, '')}</h3>
+      <TierTitle>
+        <h3>Уровень {tier}</h3>
+        <div>{tierIcon}</div>
+      </TierTitle>
+
       <Tier>
         {filteredData.map((pokemon) => (
           <RaidCard
