@@ -1,16 +1,14 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { pokeTypeName, pokeTypeColor } from '../lib/poke-types';
+import { pokeTypeWeather, pokeTypeWeatherImg } from '../lib/poke-weather';
 
 const Card = styled.div`
-  color: #eee;
+  color: #fff;
   font-size: 1.4rem;
   font-weight: 700;
-  display: grid;
-  grid-template-columns: 7rem auto;
-  grid-column-gap: 1rem;
-  grid-row-gap: 1rem;
-  padding: 1.5rem 1rem;
+  display: flex;
+  padding: 1rem 1rem;
   border-radius: 10px;
   max-width: 40rem;
   background-image: linear-gradient(
@@ -25,20 +23,21 @@ const Card = styled.div`
 
 const CardImg = styled.div`
   position: relative;
-  border-radius: 5px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-image: url(${(props) => props.imgUrl});
   width: 7.5rem;
   height: 7.5rem;
+  margin-right: 2rem;
 `;
 
 const Shiny = styled.div`
   position: absolute;
   right: 0.3rem;
-  width: 2.5rem;
-  height: 2.5rem;
+  top: 0.3rem;
+  width: 2.6rem;
+  height: 2.6rem;
   filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
 
   &:before {
@@ -108,12 +107,21 @@ const RaidCard = (props) => {
   const typeOneColor = pokeTypeColor(type);
   const typeTwoColor = pokeTypeColor(type2);
 
+  // Get weather
+  const typeWeather = pokeTypeWeather(type, type2);
+  const typeWeatherImg = pokeTypeWeatherImg(typeWeather);
+
   return (
     <Card typeOneColor={typeOneColor} typeTwoColor={typeTwoColor}>
       <CardImg imgUrl={`/img/pokemon/${id}.png`}>{shiny && <Shiny />}</CardImg>
 
       <div>
         <div>{name}</div>
+        <div>
+          {typeWeatherImg.map((icon) => (
+            <img src={icon} alt="weather" width="25" height="25" />
+          ))}
+        </div>
         <PokeType>{typeOne}</PokeType>
         {type2 && <PokeType>{typeTwo}</PokeType>}
       </div>
