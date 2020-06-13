@@ -18,6 +18,11 @@ export const GET_ALL_RAIDS = gql`
         pokemonId
         type
         type2
+        stats {
+          baseStamina
+          baseAttack
+          baseDefense
+        }
         pokedex {
           pokemonNum
         }

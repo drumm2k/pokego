@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { pokeTypeName, pokeTypeColor } from '../lib/poke-types';
 import { pokeTypeWeather, pokeTypeWeatherImg } from '../lib/poke-weather';
+import calcCP from '../lib/poke-cp';
 
 const Card = styled.div`
   color: #fff;
@@ -115,7 +116,7 @@ const PokeType = styled.span`
 `;
 
 const RaidCard = (props) => {
-  const { id, name, type, type2, shiny } = props;
+  const { id, name, type, type2, shiny, stats } = props;
 
   // Get type names
   const typeOne = pokeTypeName(type);
@@ -128,6 +129,45 @@ const RaidCard = (props) => {
   // Get weather icons
   const typeWeather = pokeTypeWeather(type, type2);
   const typeWeatherImg = pokeTypeWeatherImg(typeWeather);
+
+  // Calc CPs
+  const cpLow = calcCP(
+    stats.baseAttack,
+    stats.baseStamina,
+    stats.baseDefense,
+    20,
+    10,
+    10,
+    10
+  );
+  const cpMax = calcCP(
+    stats.baseAttack,
+    stats.baseStamina,
+    stats.baseDefense,
+    20,
+    15,
+    15,
+    15
+  );
+
+  const cpLowBoost = calcCP(
+    stats.baseAttack,
+    stats.baseStamina,
+    stats.baseDefense,
+    25,
+    10,
+    10,
+    10
+  );
+  const cpMaxBoost = calcCP(
+    stats.baseAttack,
+    stats.baseStamina,
+    stats.baseDefense,
+    25,
+    15,
+    15,
+    15
+  );
 
   return (
     <Card typeOneColor={typeOneColor} typeTwoColor={typeTwoColor}>
@@ -148,7 +188,7 @@ const RaidCard = (props) => {
           {type2 && <PokeType typeColor={typeTwoColor}>{typeTwo}</PokeType>}
         </div>
         <p>
-          CP: | <span>🌥</span> CP:
+          CP: {cpLow} - {cpMax} | <span>🌥</span> CP: {cpLowBoost} - {cpMaxBoost}
         </p>
       </RaidContent>
     </Card>
@@ -161,6 +201,9 @@ RaidCard.propTypes = {
   type: PropTypes.string.isRequired,
   type2: PropTypes.string,
   shiny: PropTypes.bool.isRequired,
+  stats: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ).isRequired,
 };
 
 RaidCard.defaultProps = {

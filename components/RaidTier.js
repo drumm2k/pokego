@@ -60,6 +60,7 @@ export default function RaidTier(props) {
             type={pokemon.type}
             type2={pokemon.type2}
             shiny={pokemon.shiny}
+            stats={pokemon.stats}
           />
         ))}
       </Tier>
