@@ -15,8 +15,9 @@ const ClockContainer = styled.div`
 
 const EventTimerOutput = styled.p`
   font-size: 1.4rem;
-  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier,
-    monospace;
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
   color: #fcd768;
   margin-left: 1rem;
 `;

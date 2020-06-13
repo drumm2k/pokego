@@ -121,8 +121,9 @@ const RaidCpContainer = styled.div`
 `;
 
 const RaidCpOutput = styled.span`
-  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier,
-    monospace;
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
 `;
 
 const RaidCard = (props) => {
