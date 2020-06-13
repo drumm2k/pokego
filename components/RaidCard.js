@@ -6,7 +6,6 @@ import { pokeTypeWeather, pokeTypeWeatherImg } from '../lib/poke-weather';
 const Card = styled.div`
   color: #fff;
   font-size: 1.4rem;
-  font-weight: 700;
   display: flex;
   padding: 1rem 1rem;
   border-radius: 10px;
@@ -29,6 +28,7 @@ const CardImg = styled.div`
   background-image: url(${(props) => props.imgUrl});
   width: 7.5rem;
   height: 7.5rem;
+  min-width: 7.5rem;
   margin-right: 2rem;
 `;
 
@@ -81,10 +81,26 @@ const Shiny = styled.div`
   }
 `;
 
+const RaidContent = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+const RaidTitle = styled.div`
+  font-size: 1.6rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 0.6;
+`;
+
 const PokeType = styled.span`
   display: inline-block;
   padding: 0.1rem 0.7rem;
-  margin: 0.2rem;
+  margin-bottom: 0.5rem;
+  margin-right: 0.3rem;
   color: #000;
   font-size: 1.4rem;
   font-weight: 700;
@@ -115,16 +131,22 @@ const RaidCard = (props) => {
     <Card typeOneColor={typeOneColor} typeTwoColor={typeTwoColor}>
       <CardImg imgUrl={`/img/pokemon/${id}.png`}>{shiny && <Shiny />}</CardImg>
 
-      <div>
-        <div>{name}</div>
+      <RaidContent>
+        <RaidTitle>
+          {/* Need to remove this split when FORMS library is done */}
+          <div>{name.split('_')[0]}</div>
+          <div>
+            {typeWeatherImg.map((icon) => (
+              <img src={icon} alt="weather" width="25" height="25" key={icon} />
+            ))}
+          </div>
+        </RaidTitle>
         <div>
-          {typeWeatherImg.map((icon) => (
-            <img src={icon} alt="weather" width="25" height="25" key={icon} />
-          ))}
+          <PokeType>{typeOne}</PokeType>
+          {type2 && <PokeType>{typeTwo}</PokeType>}
         </div>
-        <PokeType>{typeOne}</PokeType>
-        {type2 && <PokeType>{typeTwo}</PokeType>}
-      </div>
+        <p>CP: | 🌥 CP: </p>
+      </RaidContent>
     </Card>
   );
 };
