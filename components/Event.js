@@ -24,6 +24,7 @@ const EventTitle = styled.p`
   font-size: 1.6rem;
   font-weight: 700;
   color: #fcd768;
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
 `;
 
 const EventDesc = styled.p`
@@ -55,6 +56,7 @@ const EventStatus = styled.span`
   white-space: nowrap;
   vertical-align: baseline;
   background-color: #fcd768;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
   border-radius: 15px;
 `;
 

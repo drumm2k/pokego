@@ -94,6 +94,7 @@ const RaidTitle = styled.div`
   align-items: center;
   justify-content: space-between;
   line-height: 0.6;
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
 `;
 
 const PokeType = styled.span`
@@ -101,14 +102,15 @@ const PokeType = styled.span`
   padding: 0.1rem 0.7rem;
   margin-bottom: 0.5rem;
   margin-right: 0.3rem;
-  color: #000;
+  color: #eee;
   font-size: 1.4rem;
   font-weight: 700;
   line-height: 1.1;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  background-color: #fcd768;
+  background-color: ${(props) => props.typeColor};
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
   border-radius: 15px;
 `;
 
@@ -123,7 +125,7 @@ const RaidCard = (props) => {
   const typeOneColor = pokeTypeColor(type);
   const typeTwoColor = pokeTypeColor(type2);
 
-  // Get weather
+  // Get weather icons
   const typeWeather = pokeTypeWeather(type, type2);
   const typeWeatherImg = pokeTypeWeatherImg(typeWeather);
 
@@ -142,10 +144,12 @@ const RaidCard = (props) => {
           </div>
         </RaidTitle>
         <div>
-          <PokeType>{typeOne}</PokeType>
-          {type2 && <PokeType>{typeTwo}</PokeType>}
+          <PokeType typeColor={typeOneColor}>{typeOne}</PokeType>
+          {type2 && <PokeType typeColor={typeTwoColor}>{typeTwo}</PokeType>}
         </div>
-        <p>CP: | 🌥 CP: </p>
+        <p>
+          CP: | <span>🌥</span> CP:
+        </p>
       </RaidContent>
     </Card>
   );
