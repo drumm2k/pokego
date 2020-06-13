@@ -15,8 +15,8 @@ const Tier = styled.div`
   margin-bottom: 1rem;
 
   @media (min-width: 768px) {
-    grid-column-gap: 2%;
-    grid-template-columns: 49% 49%;
+    grid-column-gap: 1%;
+    grid-template-columns: 49.5% 49.5%;
   }
 `;
 

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { pokeTypeName, pokeTypeColor } from '../lib/poke-types';
 import { pokeTypeWeather, pokeTypeWeatherImg } from '../lib/poke-weather';
 import calcCP from '../lib/poke-cp';
+import checkName from '../lib/poke-name';
 
 const Card = styled.div`
   color: #fff;
@@ -31,7 +32,7 @@ const CardImg = styled.div`
   width: 7.5rem;
   height: 7.5rem;
   min-width: 7.5rem;
-  margin-right: 2rem;
+  margin-right: 1.5rem;
 `;
 
 const Shiny = styled.div`
@@ -95,14 +96,18 @@ const RaidTitle = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  line-height: 0.6;
   filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
+`;
+
+const WeatherIcons = styled.div`
+  line-height: 0;
 `;
 
 const RaidType = styled.span`
   display: inline-block;
   padding: 0.1rem 0.7rem;
   margin-right: 0.3rem;
+  margin-bottom: 0.3rem;
   color: #eee;
   font-size: 1.4rem;
   font-weight: 700;
@@ -122,24 +127,26 @@ const RaidCpContainer = styled.div`
 
 const RaidCpOutput = styled.span`
   letter-spacing: 1px;
-  font-weight: 700;
   font-variant-numeric: tabular-nums;
 `;
 
 const RaidCard = (props) => {
   const { id, name, type, type2, shiny, stats } = props;
 
+  // Filter name
+  const pokeName = checkName(name);
+
   // Get type names
-  const typeOne = pokeTypeName(type);
-  const typeTwo = pokeTypeName(type2);
+  const typeOneName = pokeTypeName(type);
+  const typeTwoName = pokeTypeName(type2);
 
   // Get type colors
   const typeOneColor = pokeTypeColor(type);
   const typeTwoColor = pokeTypeColor(type2);
 
   // Get weather icons
-  const typeWeather = pokeTypeWeather(type, type2);
-  const typeWeatherImg = pokeTypeWeatherImg(typeWeather);
+  const weather = pokeTypeWeather(type, type2);
+  const weatherImg = pokeTypeWeatherImg(weather);
 
   // Calc CPs
   const cpLow = calcCP(
@@ -187,16 +194,16 @@ const RaidCard = (props) => {
       <RaidContent>
         <RaidTitle>
           {/* Need to remove this split when FORMS library is done */}
-          <div>{name.split('_')[0]}</div>
-          <div>
-            {typeWeatherImg.map((icon) => (
-              <img src={icon} alt="weather" width="25" height="25" key={icon} />
+          <div>{pokeName}</div>
+          <WeatherIcons>
+            {weatherImg.map((icon) => (
+              <img src={icon} alt="weather" width="22" height="22" key={icon} />
             ))}
-          </div>
+          </WeatherIcons>
         </RaidTitle>
         <div>
-          <RaidType typeColor={typeOneColor}>{typeOne}</RaidType>
-          {type2 && <RaidType typeColor={typeTwoColor}>{typeTwo}</RaidType>}
+          <RaidType typeColor={typeOneColor}>{typeOneName}</RaidType>
+          {type2 && <RaidType typeColor={typeTwoColor}>{typeTwoName}</RaidType>}
         </div>
         <div>
           <RaidCpContainer>

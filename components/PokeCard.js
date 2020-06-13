@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import checkName from '../lib/poke-name';
 
 const Card = styled.div`
   max-width: 6.5rem;
@@ -26,13 +27,16 @@ const CardContent = styled.div`
 
 const PokeCard = (props) => {
   const { id, name } = props;
+
+  const filteredName = checkName(name)
+    .toLowerCase()
+    .replace(/^[^]/, (match) => match.toUpperCase());
+
   return (
     <Card>
       <CardImg imgUrl={`url(/img/pokemon/${id}.png)`}>#{id}</CardImg>
       <CardContent>
-        <div>
-          {name.toLowerCase().replace(/^[^]/, (match) => match.toUpperCase())}
-        </div>
+        <div>{filteredName}</div>
       </CardContent>
     </Card>
   );
