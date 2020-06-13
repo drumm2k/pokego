@@ -44,13 +44,18 @@ export default function Events() {
       </div>
     );
 
-  // Function to sort Events by Date
-  function sortEvents(arr) {
+  // Sort running events (by end Date)
+  function sortEventsByEnd(arr) {
     arr.sort((a, b) => Date.parse(a.ends) - Date.parse(b.ends));
   }
 
-  // Function to sort and reverse Events by Date
-  function sortAndReverseEvents(arr) {
+  // Sort upcoming events (by start Date)
+  function sortEventsByStart(arr) {
+    arr.sort((a, b) => Date.parse(a.starts) - Date.parse(b.starts));
+  }
+
+  // Sort finished events (by end Date and reversed)
+  function sortEventsByEndAndReverse(arr) {
     arr.sort((a, b) => Date.parse(a.ends) - Date.parse(b.ends)).reverse();
   }
 
@@ -60,19 +65,19 @@ export default function Events() {
       Date.parse(new Date()) - Date.parse(event.starts) > 0 &&
       Date.parse(event.ends) - Date.parse(new Date()) > 0
   );
-  sortAndReverseEvents(events);
+  sortEventsByEnd(events);
 
   // Filter upcoming events
   const eventsUpcoming = getEvents.filter(
     (event) => Date.parse(event.starts) - Date.parse(new Date()) > 0
   );
-  sortEvents(eventsUpcoming);
+  sortEventsByStart(eventsUpcoming);
 
   // Filter ended events
   const eventsEnded = getEvents.filter(
     (event) => Date.parse(event.ends) - Date.parse(new Date()) < 0
   );
-  sortAndReverseEvents(eventsEnded);
+  sortEventsByEndAndReverse(eventsEnded);
 
   return (
     <>
