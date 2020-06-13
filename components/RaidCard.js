@@ -8,7 +8,8 @@ const Card = styled.div`
   color: #fff;
   font-size: 1.4rem;
   display: flex;
-  padding: 1rem 1rem;
+  padding: 0.5rem 1rem;
+  align-items: center;
   border-radius: 10px;
   max-width: 40rem;
   background-image: linear-gradient(
@@ -98,10 +99,9 @@ const RaidTitle = styled.div`
   filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
 `;
 
-const PokeType = styled.span`
+const RaidType = styled.span`
   display: inline-block;
   padding: 0.1rem 0.7rem;
-  margin-bottom: 0.5rem;
   margin-right: 0.3rem;
   color: #eee;
   font-size: 1.4rem;
@@ -113,6 +113,16 @@ const PokeType = styled.span`
   background-color: ${(props) => props.typeColor};
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
   border-radius: 15px;
+`;
+
+const RaidCpContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const RaidCpOutput = styled.span`
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier,
+    monospace;
 `;
 
 const RaidCard = (props) => {
@@ -184,12 +194,23 @@ const RaidCard = (props) => {
           </div>
         </RaidTitle>
         <div>
-          <PokeType typeColor={typeOneColor}>{typeOne}</PokeType>
-          {type2 && <PokeType typeColor={typeTwoColor}>{typeTwo}</PokeType>}
+          <RaidType typeColor={typeOneColor}>{typeOne}</RaidType>
+          {type2 && <RaidType typeColor={typeTwoColor}>{typeTwo}</RaidType>}
         </div>
-        <p>
-          CP: {cpLow} - {cpMax} | <span>🌥</span> CP: {cpLowBoost} - {cpMaxBoost}
-        </p>
+        <div>
+          <RaidCpContainer>
+            CP
+            <RaidCpOutput>
+              {cpLow} - {cpMax}
+            </RaidCpOutput>
+          </RaidCpContainer>
+          <RaidCpContainer>
+            🌥
+            <RaidCpOutput>
+              {cpLowBoost} - {cpMaxBoost}
+            </RaidCpOutput>
+          </RaidCpContainer>
+        </div>
       </RaidContent>
     </Card>
   );
