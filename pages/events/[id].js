@@ -51,7 +51,7 @@ export default function EventById() {
       <p>(местное время)</p>
 
       <button type="button" onClick={() => Router.back()}>
-        Назад
+        ← Назад
       </button>
     </>
   );

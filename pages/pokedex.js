@@ -19,6 +19,7 @@ export const GET_ALL_POKEMONS = gql`
       candyToEvolve
       pokedex {
         pokemonNum
+        gen
       }
     }
   }

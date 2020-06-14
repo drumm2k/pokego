@@ -22,6 +22,7 @@ function PokedexList({ pokemons }) {
           <PokeCard
             id={parseInt(pokemon.pokedex.pokemonNum, 10)}
             name={pokemon.pokemonId}
+            gen={pokemon.pokedex.gen}
           />
         </StyledCard>
       ))}

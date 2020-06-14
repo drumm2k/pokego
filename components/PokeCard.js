@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import checkName from '../lib/poke-name';
 
 const Card = styled.div`
-  max-width: 6.5rem;
+  max-width: 7.2rem;
   overflow: hidden;
   font-size: 1.2rem;
 `;
@@ -16,9 +16,11 @@ const CardImg = styled.div.attrs((props) => ({
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  min-width: 6.5rem;
-  min-height: 6.5rem;
+  min-width: 7.2rem;
+  min-height: 7.2rem;
   overflow: hidden;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const CardContent = styled.div`
@@ -26,15 +28,20 @@ const CardContent = styled.div`
 `;
 
 const PokeCard = (props) => {
-  const { id, name } = props;
+  const { id, name, gen } = props;
 
   const filteredName = checkName(name)
     .toLowerCase()
     .replace(/^[^]/, (match) => match.toUpperCase());
 
+  const generation = gen && gen.split('_')[1].replace(/^/, 'G');
+
   return (
     <Card>
-      <CardImg imgUrl={`url(/img/pokemon/${id}.png)`}>#{id}</CardImg>
+      <CardImg imgUrl={`url(/img/pokemon/${id}.png)`}>
+        <div>#{id}</div>
+        <div>{generation}</div>
+      </CardImg>
       <CardContent>
         <div>{filteredName}</div>
       </CardContent>
@@ -45,10 +52,12 @@ const PokeCard = (props) => {
 PokeCard.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string,
+  gen: PropTypes.string,
 };
 
 PokeCard.defaultProps = {
   name: '',
+  gen: '',
 };
 
 export default PokeCard;
