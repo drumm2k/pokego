@@ -1,11 +1,28 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import checkName from '../lib/poke-name';
+import { pokeTypeColor } from '../lib/poke-types';
 
 const Card = styled.div`
-  max-width: 7.2rem;
+  max-width: 8.5rem;
   overflow: hidden;
   font-size: 1.2rem;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #edf2f4;
+  margin: 0.1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+`;
+
+const CardType = styled.div`
+  background-image: linear-gradient(
+    ${(props) =>
+      props.typeTwoColor
+        ? `${props.typeTwoColor}, ${props.typeOneColor}`
+        : `${props.typeOneColor}, ${props.typeOneColor}`}
+  );
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 `;
 
 const CardImg = styled.div.attrs((props) => ({
@@ -16,19 +33,23 @@ const CardImg = styled.div.attrs((props) => ({
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  min-width: 7.2rem;
-  min-height: 7.2rem;
+  min-width: 8.2rem;
+  min-height: 8.2rem;
   overflow: hidden;
   display: flex;
   justify-content: space-between;
+  padding: 0.1rem 0.3rem;
+
+  color: #fff;
 `;
 
 const CardContent = styled.div`
+  font-size: 1.2rem;
   text-align: center;
 `;
 
 const PokeCard = (props) => {
-  const { id, name, gen } = props;
+  const { id, name, gen, type, type2 } = props;
 
   const filteredName = checkName(name)
     .toLowerCase()
@@ -36,12 +57,17 @@ const PokeCard = (props) => {
 
   const generation = gen && gen.split('_')[1].replace(/^/, 'G');
 
+  const typeOneColor = pokeTypeColor(type);
+  const typeTwoColor = pokeTypeColor(type2);
+
   return (
     <Card>
-      <CardImg imgUrl={`url(/img/pokemon/${id}.png)`}>
-        <div>#{id}</div>
-        <div>{generation}</div>
-      </CardImg>
+      <CardType typeOneColor={typeOneColor} typeTwoColor={typeTwoColor}>
+        <CardImg imgUrl={`url(/img/pokemon/${id}.png)`}>
+          <div>#{id}</div>
+          <div>{generation}</div>
+        </CardImg>
+      </CardType>
       <CardContent>
         <div>{filteredName}</div>
       </CardContent>
@@ -51,13 +77,15 @@ const PokeCard = (props) => {
 
 PokeCard.propTypes = {
   id: PropTypes.number.isRequired,
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  type2: PropTypes.string,
   gen: PropTypes.string,
 };
 
 PokeCard.defaultProps = {
-  name: '',
   gen: '',
+  type2: null,
 };
 
 export default PokeCard;
