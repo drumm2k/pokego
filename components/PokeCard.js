@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import checkName from '../lib/poke-name';
+import pokeCheckName from '../lib/poke-name';
 import { pokeTypeColor } from '../lib/poke-types';
 import pokeGen from '../lib/poke-gen';
-import pokeName from '../lib/poke-img';
+import pokeImg from '../lib/poke-img';
 
 const Card = styled.div`
   max-width: 8.4rem;
@@ -55,12 +55,12 @@ const CardContent = styled.div`
 const PokeCard = (props) => {
   const { pokedex, name, gen, type1, type2 } = props;
 
-  const filteredName = checkName(name);
+  const filteredName = pokeCheckName(name);
 
   const typeOneColor = pokeTypeColor(type1);
   const typeTwoColor = pokeTypeColor(type2);
 
-  const imgUrl = pokeName(filteredName, pokedex);
+  const imgUrl = `url(${pokeImg(filteredName, pokedex)})`;
 
   return (
     <Card>

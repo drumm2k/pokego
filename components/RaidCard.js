@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { pokeTypeName, pokeTypeColor } from '../lib/poke-types';
 import { pokeTypeWeather, pokeTypeWeatherImg } from '../lib/poke-weather';
-import calcCP from '../lib/poke-cp';
-import checkName from '../lib/poke-name';
+import pokeCalcCp from '../lib/poke-cp';
+import pokeCheckName from '../lib/poke-name';
+import pokeImg from '../lib/poke-img';
 
 const Card = styled.div`
   color: #fff;
@@ -133,8 +134,9 @@ const RaidCpOutput = styled.span`
 const RaidCard = (props) => {
   const { id, name, type, type2, shiny, stats } = props;
 
-  // Filter name
-  const pokeName = checkName(name);
+  // Filter name & get img
+  const pokeName = pokeCheckName(name);
+  const imgUrl = pokeImg(name, id);
 
   // Get type names
   const typeOneName = pokeTypeName(type);
@@ -149,7 +151,7 @@ const RaidCard = (props) => {
   const weatherImg = pokeTypeWeatherImg(weather);
 
   // Calc CPs
-  const cpLow = calcCP(
+  const cpLow = pokeCalcCp(
     stats.baseAttack,
     stats.baseStamina,
     stats.baseDefense,
@@ -158,7 +160,7 @@ const RaidCard = (props) => {
     10,
     10
   );
-  const cpMax = calcCP(
+  const cpMax = pokeCalcCp(
     stats.baseAttack,
     stats.baseStamina,
     stats.baseDefense,
@@ -168,7 +170,7 @@ const RaidCard = (props) => {
     15
   );
 
-  const cpLowBoost = calcCP(
+  const cpLowBoost = pokeCalcCp(
     stats.baseAttack,
     stats.baseStamina,
     stats.baseDefense,
@@ -177,7 +179,7 @@ const RaidCard = (props) => {
     10,
     10
   );
-  const cpMaxBoost = calcCP(
+  const cpMaxBoost = pokeCalcCp(
     stats.baseAttack,
     stats.baseStamina,
     stats.baseDefense,
@@ -189,7 +191,7 @@ const RaidCard = (props) => {
 
   return (
     <Card typeOneColor={typeOneColor} typeTwoColor={typeTwoColor}>
-      <CardImg imgUrl={`/img/pokemon/${id}.png`}>{shiny && <Shiny />}</CardImg>
+      <CardImg imgUrl={imgUrl}>{shiny && <Shiny />}</CardImg>
 
       <RaidContent>
         <RaidTitle>
