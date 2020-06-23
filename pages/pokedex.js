@@ -7,7 +7,6 @@ import Pdex from '../components/Pokedex';
 export const GET_ALL_POKEMONS = gql`
   query {
     getPkmns {
-      id
       name
       pokedex
       gen
@@ -18,13 +17,7 @@ export const GET_ALL_POKEMONS = gql`
       baseStamina
       baseAttack
       baseDefense
-      quickMoves
-      cinematicMoves
-      parentId
-      familyId
-      kmBuddyDistance
-      thirdMoveStardust
-      thirdMoveCandy
+      pokemonClass
     }
   }
 `;
