@@ -50,10 +50,6 @@ const genFilters = [
     label: 'Gen 5',
   },
   {
-    name: 'GEN_6',
-    label: 'Gen 6',
-  },
-  {
     name: 'GEN_7',
     label: 'Gen 7',
   },
@@ -106,9 +102,10 @@ export default class Pokedex extends Component {
   render() {
     const { pokemonsData, searchTerm } = this.state;
 
+    // NEED TO FIX - When searching "2" there is Porygon2
     const filteredPokemons = pokemonsData.filter(
       (pokemon) =>
-        pokemon.pokedex === searchTerm ||
+        pokemon.pokedex.toString() === searchTerm ||
         pokemon.name.includes(searchTerm.toUpperCase())
     );
 

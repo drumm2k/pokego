@@ -49,7 +49,7 @@ const CardContent = styled.div`
 `;
 
 const PokeCard = (props) => {
-  const { id, name, gen, type1, type2 } = props;
+  const { pokedex, name, gen, type1, type2 } = props;
 
   const filteredName = checkName(name)
     .toLowerCase()
@@ -63,8 +63,8 @@ const PokeCard = (props) => {
   return (
     <Card>
       <CardType typeOneColor={typeOneColor} typeTwoColor={typeTwoColor}>
-        <CardImg imgUrl={`url(/img/pokemon/${id}.png)`}>
-          <div>#{id}</div>
+        <CardImg imgUrl={`url(/img/pokemon/${pokedex}.png)`}>
+          <div>#{pokedex}</div>
           <div>{generation}</div>
         </CardImg>
       </CardType>
@@ -76,7 +76,7 @@ const PokeCard = (props) => {
 };
 
 PokeCard.propTypes = {
-  id: PropTypes.number.isRequired,
+  pokedex: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   type1: PropTypes.string.isRequired,
   type2: PropTypes.string,

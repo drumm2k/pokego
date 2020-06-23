@@ -13,7 +13,7 @@ function PokedexList({ pokemons }) {
       {pokemons.map((pokemon) => (
         <PokeCard
           key={pokemon.name}
-          id={parseInt(pokemon.pokedex, 10)}
+          pokedex={pokemon.pokedex}
           name={pokemon.name}
           gen={pokemon.gen}
           type1={pokemon.type1}
