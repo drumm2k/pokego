@@ -3,12 +3,6 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import PokedexList from './PokedexList';
 
-const Filters = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-`;
-
 const FilterInput = styled.input`
   width: 20rem;
   margin: 1rem;
@@ -66,6 +60,7 @@ export default class Pokedex extends Component {
     this.state = {
       searchTerm: '',
       pokemonsData: pokemons,
+      gen: ['GEN_1', 'GEN_2', 'GEN_3', 'GEN_4', 'GEN_5', 'GEN_7', 'GEN_8'],
     };
   }
 
@@ -74,39 +69,29 @@ export default class Pokedex extends Component {
   };
 
   genFilter = (event) => {
-    const { pokemonsData } = this.state;
-    const { pokemons } = this.props;
+    const { gen } = this.state;
 
     if (event.target.checked) {
-      const addGen = pokemons.filter((pokemon) => pokemon.gen === event.target.name);
-
-      const result = pokemonsData.concat(addGen);
-
-      // Sorting is too slow
-      // (maybe need to create an array for each generation or just hide them)
-
-      // result.sort(
-      //   (a, b) =>
-      //     parseInt(a.pokedex.pokemonNum, 10) > parseInt(b.pokedex.pokemonNum, 10)
-      // );
-
-      this.setState({ pokemonsData: result });
+      const result = gen;
+      result.push(event.target.name);
+      this.setState({ gen: result.sort() });
     } else {
-      const result = pokemonsData.filter(
-        (pokemon) => pokemon.gen !== event.target.name
-      );
-      this.setState({ pokemonsData: result });
+      const result = gen.filter((item) => {
+        return item !== event.target.name;
+      });
+      this.setState({ gen: result });
     }
   };
 
   render() {
-    const { pokemonsData, searchTerm } = this.state;
+    const { pokemonsData, searchTerm, gen } = this.state;
 
     // NEED TO FIX - When searching "2" there is Porygon2
     const filteredPokemons = pokemonsData.filter(
       (pokemon) =>
-        pokemon.pokedex.toString() === searchTerm ||
-        pokemon.name.includes(searchTerm.toUpperCase())
+        gen.includes(pokemon.gen) &&
+        (pokemon.pokedex.toString() === searchTerm ||
+          pokemon.name.includes(searchTerm.toUpperCase()))
     );
 
     return (
