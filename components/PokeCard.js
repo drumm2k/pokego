@@ -49,7 +49,7 @@ const CardContent = styled.div`
 `;
 
 const PokeCard = (props) => {
-  const { id, name, gen, type, type2 } = props;
+  const { id, name, gen, type1, type2 } = props;
 
   const filteredName = checkName(name)
     .toLowerCase()
@@ -57,7 +57,7 @@ const PokeCard = (props) => {
 
   const generation = gen && gen.split('_')[1].replace(/^/, 'G');
 
-  const typeOneColor = pokeTypeColor(type);
+  const typeOneColor = pokeTypeColor(type1);
   const typeTwoColor = pokeTypeColor(type2);
 
   return (
@@ -78,7 +78,7 @@ const PokeCard = (props) => {
 PokeCard.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  type1: PropTypes.string.isRequired,
   type2: PropTypes.string,
   gen: PropTypes.string,
 };

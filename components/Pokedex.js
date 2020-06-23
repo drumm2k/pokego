@@ -50,6 +50,14 @@ const genFilters = [
     label: 'Gen 5',
   },
   {
+    name: 'GEN_6',
+    label: 'Gen 6',
+  },
+  {
+    name: 'GEN_7',
+    label: 'Gen 7',
+  },
+  {
     name: 'GEN_8',
     label: 'Gen 8',
   },
@@ -74,9 +82,7 @@ export default class Pokedex extends Component {
     const { pokemons } = this.props;
 
     if (event.target.checked) {
-      const addGen = pokemons.filter(
-        (pokemon) => pokemon.pokedex.gen === event.target.name
-      );
+      const addGen = pokemons.filter((pokemon) => pokemon.gen === event.target.name);
 
       const result = pokemonsData.concat(addGen);
 
@@ -91,7 +97,7 @@ export default class Pokedex extends Component {
       this.setState({ pokemonsData: result });
     } else {
       const result = pokemonsData.filter(
-        (pokemon) => pokemon.pokedex.gen !== event.target.name
+        (pokemon) => pokemon.gen !== event.target.name
       );
       this.setState({ pokemonsData: result });
     }
@@ -102,8 +108,8 @@ export default class Pokedex extends Component {
 
     const filteredPokemons = pokemonsData.filter(
       (pokemon) =>
-        pokemon.pokedex.pokemonNum === searchTerm ||
-        pokemon.pokemonId.includes(searchTerm.toUpperCase())
+        pokemon.pokedex === searchTerm ||
+        pokemon.name.includes(searchTerm.toUpperCase())
     );
 
     return (
