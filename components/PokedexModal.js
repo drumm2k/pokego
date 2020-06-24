@@ -15,7 +15,7 @@ const ModalWindow = styled.div`
   transform: translate(-50%, -50%);
   width: 50rem;
   height: 45rem;
-  max-width: 100%;
+  max-width: 95%;
   max-height: 100%;
   z-index: 20;
   background: white;
@@ -85,6 +85,8 @@ const ModalCloseButton = styled.button`
 
 const PokeTitle = styled.h3`
   filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
+  max-width: 85%;
+  margin: 0 auto;
 `;
 
 const PokeType = styled.span`
