@@ -61,6 +61,8 @@ export default class Pokedex extends Component {
       searchTerm: '',
       pokemonsData: pokemons,
       gen: ['GEN_1', 'GEN_2', 'GEN_3', 'GEN_4', 'GEN_5', 'GEN_7', 'GEN_8'],
+      modalStatus: false,
+      modalPokemonData: null,
     };
   }
 
@@ -83,8 +85,23 @@ export default class Pokedex extends Component {
     }
   };
 
+  showModal = (name) => {
+    const { pokemonsData } = this.state;
+    const pokemonData = pokemonsData.filter((pokemon) => pokemon.name === name);
+    this.setState((prevState) => ({
+      modalStatus: !prevState.modalStatus,
+      modalPokemonData: pokemonData[0],
+    }));
+  };
+
   render() {
-    const { pokemonsData, searchTerm, gen } = this.state;
+    const {
+      pokemonsData,
+      searchTerm,
+      gen,
+      modalStatus,
+      modalPokemonData,
+    } = this.state;
 
     // NEED TO FIX - When searching "2" there is Porygon2
     const filteredPokemons = pokemonsData.filter(
@@ -120,7 +137,12 @@ export default class Pokedex extends Component {
           ))}
         </FilterGen>
 
-        <PokedexList pokemons={filteredPokemons} />
+        <PokedexList
+          pokemons={filteredPokemons}
+          modalStatus={modalStatus}
+          showModal={this.showModal}
+          modalPokemonData={modalPokemonData}
+        />
       </>
     );
   }
