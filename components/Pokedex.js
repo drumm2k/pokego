@@ -2,8 +2,33 @@ import { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import PokedexList from './PokedexList';
+import PokedexModal from './PokedexModal';
 
-const FilterInput = styled.input`
+const FilterTabs = styled.ul`
+  display: flex;
+  text-align: center;
+`;
+
+const FilterTabsItem = styled.li`
+  flex: 1 1 0%;
+  display: block;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  color: #000;
+
+  &:hover {
+    background-color: #ddd;
+    cursor: pointer;
+  }
+
+  &.tab-active {
+    color: #fff;
+    background-color: #444;
+  }
+`;
+
+const FilterSearch = styled.input`
   width: 20rem;
   margin: 1rem;
 `;
@@ -13,16 +38,18 @@ const FilterGen = styled.div`
   flex-wrap: wrap;
 `;
 
-const FilterGenItem = styled.label`
+const FilterCheckboxLabel = styled.label`
   width: 7rem;
   margin-right: 1rem;
 `;
 
-const FilterGenCheckbox = styled.input`
+const FilterCheckbox = styled.input`
+  height: 1.6rem;
+  width: 1.6rem;
   margin-right: 0.5rem;
 `;
 
-const genFilters = [
+const filterGen = [
   {
     name: 'GEN_1',
     label: 'Gen 1',
@@ -61,16 +88,17 @@ export default class Pokedex extends Component {
       searchTerm: '',
       pokemonsData: pokemons,
       gen: ['GEN_1', 'GEN_2', 'GEN_3', 'GEN_4', 'GEN_5', 'GEN_7', 'GEN_8'],
+      activeTab: 'released',
       modalStatus: false,
       modalPokemonData: null,
     };
   }
 
-  searchFilter = (event) => {
+  filterSearch = (event) => {
     this.setState({ searchTerm: event.target.value });
   };
 
-  genFilter = (event) => {
+  filterGen = (event) => {
     const { gen } = this.state;
 
     if (event.target.checked) {
@@ -83,6 +111,10 @@ export default class Pokedex extends Component {
       });
       this.setState({ gen: result });
     }
+  };
+
+  filterTabs = (event) => {
+    this.setState({ activeTab: event.target.dataset.tab });
   };
 
   showModal = (name) => {
@@ -99,48 +131,92 @@ export default class Pokedex extends Component {
       pokemonsData,
       searchTerm,
       gen,
+      activeTab,
       modalStatus,
       modalPokemonData,
     } = this.state;
 
-    // NEED TO FIX - When searching "2" there is Porygon2
-    const filteredPokemons = pokemonsData.filter(
-      (pokemon) =>
+    const filteredPokemons = pokemonsData.filter((pokemon) => {
+      const filter =
         gen.includes(pokemon.gen) &&
         (pokemon.pokedex.toString() === searchTerm ||
-          pokemon.name.includes(searchTerm.toUpperCase()))
-    );
+          pokemon.name.includes(searchTerm.toUpperCase()));
+
+      switch (activeTab) {
+        case 'released':
+          return pokemon.released !== false && filter;
+        case 'unreleased':
+          return pokemon.released === false && filter;
+        case 'shiny':
+          return pokemon.shiny === true && filter;
+        case 'legendary':
+          return pokemon.pokemonClass && filter;
+        default:
+          return filter;
+      }
+    });
 
     return (
       <>
+        <FilterTabs>
+          <FilterTabsItem
+            onClick={this.filterTabs}
+            className={activeTab === 'released' && 'tab-active'}
+            data-tab="released"
+          >
+            Покемоны
+          </FilterTabsItem>
+          <FilterTabsItem
+            onClick={this.filterTabs}
+            className={activeTab === 'unreleased' && 'tab-active'}
+            data-tab="unreleased"
+          >
+            Невыпущенные
+          </FilterTabsItem>
+          <FilterTabsItem
+            onClick={this.filterTabs}
+            className={activeTab === 'shiny' && 'tab-active'}
+            data-tab="shiny"
+          >
+            Шайни
+          </FilterTabsItem>
+          <FilterTabsItem
+            onClick={this.filterTabs}
+            className={activeTab === 'legendary' && 'tab-active'}
+            data-tab="legendary"
+          >
+            Легендарные
+          </FilterTabsItem>
+        </FilterTabs>
+
         <label>
           Поиск:
-          <FilterInput
+          <FilterSearch
             type="text"
             name="search"
             value={searchTerm}
-            onChange={this.searchFilter}
+            onChange={this.filterSearch}
           />
         </label>
 
         <FilterGen>
-          {genFilters.map((item) => (
-            <FilterGenItem key={item.name}>
-              <FilterGenCheckbox
+          {filterGen.map((item) => (
+            <FilterCheckboxLabel key={item.name}>
+              <FilterCheckbox
                 type="checkbox"
                 name={item.name}
                 defaultChecked
-                onChange={this.genFilter}
+                onChange={this.filterGen}
               />
               {item.label}
-            </FilterGenItem>
+            </FilterCheckboxLabel>
           ))}
         </FilterGen>
 
-        <PokedexList
-          pokemons={filteredPokemons}
-          modalStatus={modalStatus}
+        <PokedexList pokemons={filteredPokemons} showModal={this.showModal} />
+        <PokedexModal
           showModal={this.showModal}
+          modalStatus={modalStatus}
           modalPokemonData={modalPokemonData}
         />
       </>
