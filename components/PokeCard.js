@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import pokeCheckName from '../lib/poke-name';
 import { pokeTypeColor } from '../lib/poke-types';
 import pokeGen from '../lib/poke-gen';
-import pokeImg from '../lib/poke-img';
+import { pokeImg } from '../lib/poke-img';
 
 const Card = styled.div`
   max-width: 8.4rem;

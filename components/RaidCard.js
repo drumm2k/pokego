@@ -101,6 +101,7 @@ const RaidTitle = styled.div`
 `;
 
 const WeatherIcons = styled.div`
+  font-size: 0;
   line-height: 0;
 `;
 
@@ -199,7 +200,13 @@ const RaidCard = (props) => {
           <div>{pokeName}</div>
           <WeatherIcons>
             {weatherImg.map((icon) => (
-              <img src={icon} alt="weather" width="22" height="22" key={icon} />
+              <img
+                src={icon}
+                alt="Weather boost icon"
+                width="22"
+                height="22"
+                key={icon}
+              />
             ))}
           </WeatherIcons>
         </RaidTitle>

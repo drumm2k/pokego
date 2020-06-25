@@ -5,7 +5,7 @@ import { pokeTypeWeather, pokeTypeWeatherImg } from '../lib/poke-weather';
 import pokeGen from '../lib/poke-gen';
 import pokeCalcCp from '../lib/poke-cp';
 import pokeCheckName from '../lib/poke-name';
-import pokeImg from '../lib/poke-img';
+import { pokeImg, pokeImgShiny } from '../lib/poke-img';
 
 const ModalWindow = styled.div`
   color: white;
@@ -89,6 +89,14 @@ const PokeTitle = styled.h3`
   margin: 0 auto;
 `;
 
+const PokeImg = styled.div`
+  font-size: 0;
+`;
+
+const PokeWeather = styled.div`
+  font-size: 0;
+`;
+
 const PokeType = styled.span`
   display: inline-block;
   padding: 0.1rem 0.7rem;
@@ -129,6 +137,9 @@ export default function PokedexModal({ modalStatus, showModal, modalPokemonData 
   const pokeName = pokeCheckName(name);
   const imgUrl = pokeImg(name, pokedex);
 
+  let imgUrlShiny;
+  if (shiny) imgUrlShiny = pokeImgShiny(name, pokedex);
+
   // Get type names
   const typeOneName = pokeTypeName(type1);
   const typeTwoName = pokeTypeName(type2);
@@ -151,12 +162,24 @@ export default function PokedexModal({ modalStatus, showModal, modalPokemonData 
           <PokeTitle>
             {pokeName} #{pokedex}
           </PokeTitle>
-          <img src={imgUrl} alt={pokeName} width="96" height="96" />
-          <div>
+          <PokeImg>
+            <img src={imgUrl} alt={pokeName} width="96" height="96" />
+            {imgUrlShiny && (
+              <img src={imgUrlShiny} alt={pokeName} width="96" height="96" />
+            )}
+          </PokeImg>
+
+          <PokeWeather>
             {weatherImg.map((icon) => (
-              <img src={icon} alt="weather" width="32" height="32" key={icon} />
+              <img
+                src={icon}
+                alt="Weather boost icon"
+                width="32"
+                height="32"
+                key={icon}
+              />
             ))}
-          </div>
+          </PokeWeather>
           <div>
             <PokeType typeColor={typeOneColor}>{typeOneName}</PokeType>
             {type2 && <PokeType typeColor={typeTwoColor}>{typeTwoName}</PokeType>}
