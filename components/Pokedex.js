@@ -7,13 +7,14 @@ import PokedexModal from './PokedexModal';
 const FilterTabs = styled.ul`
   display: flex;
   text-align: center;
+  flex-wrap: wrap;
 `;
 
 const FilterTabsItem = styled.li`
   flex: 1 1 0%;
   display: block;
   margin: 0.5rem;
-  padding: 0.5rem;
+  padding: 0.5rem 2rem;
   border-radius: 5px;
   color: #000;
 
