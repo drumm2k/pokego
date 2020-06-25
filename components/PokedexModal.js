@@ -14,7 +14,7 @@ const ModalWindow = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 50rem;
-  height: 45rem;
+  height: 43rem;
   max-width: 95%;
   max-height: 100%;
   z-index: 20;
@@ -172,7 +172,8 @@ export default function PokedexModal({ modalStatus, showModal, modalPokemonData 
           ) : (
             <p>Можно встретить в игре: Нет</p>
           )}
-          {pokemonClass && <p>Тип: {pokemonClass}</p>}
+          {(pokemonClass === 'POKEMON_CLASS_LEGENDARY' && <p>Тип: Легендарный</p>) ||
+            (pokemonClass === 'POKEMON_CLASS_MYTHIC' && <p>Тип: Мифический</p>)}
           <ModalCloseButton type="button" onClick={() => showModal()} />
         </ModalWindowGuts>
       </ModalWindow>

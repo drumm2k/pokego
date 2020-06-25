@@ -8,6 +8,8 @@ const FilterTabs = styled.ul`
   display: flex;
   text-align: center;
   flex-wrap: wrap;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 `;
 
 const FilterTabsItem = styled.li`
