@@ -4,7 +4,7 @@ import { pokeTypeName, pokeTypeColor } from '../lib/poke-types';
 import { pokeTypeWeather, pokeTypeWeatherImg } from '../lib/poke-weather';
 import pokeCalcCp from '../lib/poke-cp';
 import pokeCheckName from '../lib/poke-name';
-import pokeImg from '../lib/poke-img';
+import { pokeImg } from '../lib/poke-img';
 
 const Card = styled.div`
   color: #fff;
