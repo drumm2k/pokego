@@ -92,6 +92,7 @@ export default class Pokedex extends Component {
       pokemonsData: pokemons,
       gen: ['GEN_1', 'GEN_2', 'GEN_3', 'GEN_4', 'GEN_5', 'GEN_7', 'GEN_8'],
       activeTab: 'released',
+      legendaryOnly: false,
       modalStatus: false,
       modalPokemonData: null,
     };
@@ -120,6 +121,12 @@ export default class Pokedex extends Component {
     this.setState({ activeTab: event.target.dataset.tab });
   };
 
+  filterLegendary = () => {
+    this.setState((prevState) => ({
+      legendaryOnly: !prevState.legendaryOnly,
+    }));
+  };
+
   showModal = (name) => {
     const { pokemonsData } = this.state;
     const pokemonData = pokemonsData.filter((pokemon) => pokemon.name === name);
@@ -135,15 +142,18 @@ export default class Pokedex extends Component {
       searchTerm,
       gen,
       activeTab,
+      legendaryOnly,
       modalStatus,
       modalPokemonData,
     } = this.state;
 
     const filteredPokemons = pokemonsData.filter((pokemon) => {
-      const filter =
+      let filter =
         gen.includes(pokemon.gen) &&
         (pokemon.pokedex.toString() === searchTerm ||
           pokemon.name.includes(searchTerm.toUpperCase()));
+
+      if (legendaryOnly) filter = pokemon.pokemonClass && filter;
 
       switch (activeTab) {
         case 'released':
@@ -183,24 +193,19 @@ export default class Pokedex extends Component {
           >
             Шайни
           </FilterTabsItem>
-          <FilterTabsItem
-            onClick={this.filterTabs}
-            className={activeTab === 'legendary' && 'tab-active'}
-            data-tab="legendary"
-          >
-            Легендарные
-          </FilterTabsItem>
         </FilterTabs>
 
-        <label>
-          Поиск:
-          <FilterSearch
-            type="text"
-            name="search"
-            value={searchTerm}
-            onChange={this.filterSearch}
-          />
-        </label>
+        <div>
+          <label>
+            Поиск:
+            <FilterSearch
+              type="text"
+              name="search"
+              value={searchTerm}
+              onChange={this.filterSearch}
+            />
+          </label>
+        </div>
 
         <FilterGen>
           {filterGen.map((item) => (
@@ -216,6 +221,13 @@ export default class Pokedex extends Component {
           ))}
         </FilterGen>
 
+        <div>
+          <label>
+            <FilterCheckbox type="checkbox" onChange={this.filterLegendary} />
+            Показывать только легендарных/мифических
+          </label>
+        </div>
+
         <PokedexList
           pokemons={filteredPokemons}
           showModal={this.showModal}
@@ -230,7 +242,3 @@ export default class Pokedex extends Component {
     );
   }
 }
-
-Pokedex.propTypes = {
-  pokemons: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
