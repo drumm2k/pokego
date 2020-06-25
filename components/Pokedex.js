@@ -117,14 +117,14 @@ export default class Pokedex extends Component {
     }
   };
 
-  filterTabs = (event) => {
-    this.setState({ activeTab: event.target.dataset.tab });
-  };
-
   filterLegendary = () => {
     this.setState((prevState) => ({
       legendaryOnly: !prevState.legendaryOnly,
     }));
+  };
+
+  filterTabs = (event) => {
+    this.setState({ activeTab: event.target.dataset.tab });
   };
 
   showModal = (name) => {
@@ -148,20 +148,23 @@ export default class Pokedex extends Component {
     } = this.state;
 
     const filteredPokemons = pokemonsData.filter((pokemon) => {
+      // Filter by search and gen checkboxes
       let filter =
         gen.includes(pokemon.gen) &&
         (pokemon.pokedex.toString() === searchTerm ||
           pokemon.name.includes(searchTerm.toUpperCase()));
 
+      // Filter if legendary checkbox active
       if (legendaryOnly) filter = pokemon.pokemonClass && filter;
 
+      // Filter by tabs
       switch (activeTab) {
         case 'released':
-          return pokemon.released !== false && filter;
+          return pokemon.released && filter;
         case 'unreleased':
-          return pokemon.released === false && filter;
+          return !pokemon.released && filter;
         case 'shiny':
-          return pokemon.shiny === true && filter;
+          return pokemon.shiny && filter;
         case 'legendary':
           return pokemon.pokemonClass && filter;
         default:
@@ -177,14 +180,14 @@ export default class Pokedex extends Component {
             className={activeTab === 'released' && 'tab-active'}
             data-tab="released"
           >
-            Покемоны
+            В игре
           </FilterTabsItem>
           <FilterTabsItem
             onClick={this.filterTabs}
             className={activeTab === 'unreleased' && 'tab-active'}
             data-tab="unreleased"
           >
-            Невыпущенные
+            Ожидаются
           </FilterTabsItem>
           <FilterTabsItem
             onClick={this.filterTabs}
@@ -224,7 +227,7 @@ export default class Pokedex extends Component {
         <div>
           <label>
             <FilterCheckbox type="checkbox" onChange={this.filterLegendary} />
-            Показывать только легендарных/мифических
+            Только легендарные и мифические
           </label>
         </div>
 
@@ -242,3 +245,7 @@ export default class Pokedex extends Component {
     );
   }
 }
+
+Pokedex.propTypes = {
+  pokemons: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
