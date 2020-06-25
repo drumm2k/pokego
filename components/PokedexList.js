@@ -7,7 +7,7 @@ const PokeList = styled.div`
   flex-wrap: wrap;
 `;
 
-function PokedexList({ pokemons, showModal }) {
+function PokedexList({ pokemons, showModal, activeTab }) {
   return (
     <PokeList>
       {pokemons.map((pokemon) => (
@@ -19,6 +19,7 @@ function PokedexList({ pokemons, showModal }) {
           type1={pokemon.type1}
           type2={pokemon.type2}
           showModal={showModal}
+          activeTab={activeTab}
         />
       ))}
     </PokeList>
@@ -30,4 +31,5 @@ export default PokedexList;
 PokedexList.propTypes = {
   pokemons: PropTypes.arrayOf(PropTypes.object).isRequired,
   showModal: PropTypes.func.isRequired,
+  activeTab: PropTypes.string.isRequired,
 };

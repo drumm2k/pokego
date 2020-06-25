@@ -216,7 +216,11 @@ export default class Pokedex extends Component {
           ))}
         </FilterGen>
 
-        <PokedexList pokemons={filteredPokemons} showModal={this.showModal} />
+        <PokedexList
+          pokemons={filteredPokemons}
+          showModal={this.showModal}
+          activeTab={activeTab}
+        />
         <PokedexModal
           showModal={this.showModal}
           modalStatus={modalStatus}

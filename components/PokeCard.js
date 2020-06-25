@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import pokeCheckName from '../lib/poke-name';
 import { pokeTypeColor } from '../lib/poke-types';
 import pokeGen from '../lib/poke-gen';
-import { pokeImg } from '../lib/poke-img';
+import { pokeImg, pokeImgShiny } from '../lib/poke-img';
 
 const Card = styled.div`
   max-width: 8.4rem;
@@ -57,7 +57,7 @@ const CardContent = styled.div`
 `;
 
 const PokeCard = (props) => {
-  const { pokedex, name, gen, type1, type2, showModal } = props;
+  const { pokedex, name, gen, type1, type2, showModal, activeTab } = props;
 
   const filteredName = pokeCheckName(name);
 
@@ -65,11 +65,12 @@ const PokeCard = (props) => {
   const typeTwoColor = pokeTypeColor(type2);
 
   const imgUrl = `url(${pokeImg(filteredName, pokedex)})`;
+  const imgUrlShiny = `url(${pokeImgShiny(filteredName, pokedex)})`;
 
   return (
     <Card onClick={() => showModal(name)}>
       <CardType typeOneColor={typeOneColor} typeTwoColor={typeTwoColor}>
-        <CardImg imgUrl={imgUrl}>
+        <CardImg imgUrl={activeTab === 'shiny' ? imgUrlShiny : imgUrl}>
           <div>#{pokedex}</div>
           <div>{gen && pokeGen(gen)}</div>
         </CardImg>
@@ -88,6 +89,7 @@ PokeCard.propTypes = {
   type2: PropTypes.string,
   gen: PropTypes.string,
   showModal: PropTypes.func.isRequired,
+  activeTab: PropTypes.string.isRequired,
 };
 
 PokeCard.defaultProps = {
