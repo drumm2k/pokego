@@ -6,10 +6,21 @@ const Meta = () => (
     <meta charSet="utf-8" />
     <meta
       name="description"
-      content="PokeGO.ru - useful tools for Pokemon GO community"
+      content="PokéGO - полезные инструменты для сообщества игроков в Pokemon GO"
     />
+    <meta property="og:title" content="PokéGO" />
+    <meta property="og:site_name" content="PokéGO" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://pokego.now.sh/images/og.jpg" />
+    <meta
+      property="og:description"
+      content="Полезные инструменты для сообщества игроков в Pokemon GO."
+    />
+    <meta property="og:image:width" content="500" />
+    <meta property="og:image:height" content="333" />
     <link rel="shortcut icon" href="/favicon.png" />
-    <title>PokeGO.ru - useful tools for Pokemon GO community</title>
+    <title>PokéGO</title>
   </Head>
 );
 
