@@ -14,7 +14,7 @@ const ModalWindow = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 50rem;
-  height: 43rem;
+  height: 35rem;
   max-width: 95%;
   max-height: 100%;
   z-index: 20;
@@ -30,14 +30,14 @@ const ModalWindow = styled.div`
 `;
 
 const ModalWindowGuts = styled.div`
+  font-size: 1.6rem;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  padding: 2rem;
+  padding: 3rem;
   overflow: auto;
-  text-align: center;
 `;
 
 const ModalOverlay = styled.div`
@@ -52,8 +52,8 @@ const ModalOverlay = styled.div`
 
 const ModalCloseButton = styled.button`
   position: absolute;
-  top: 2rem;
-  right: 2rem;
+  top: 3rem;
+  right: 3rem;
   z-index: 1;
   width: 24px;
   height: 24px;
@@ -86,7 +86,10 @@ const ModalCloseButton = styled.button`
 const PokeTitle = styled.h3`
   filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
   max-width: 85%;
-  margin: 0 auto;
+`;
+
+const PokeTitlePokedex = styled.span`
+  color: #fcd768;
 `;
 
 const PokeImg = styled.div`
@@ -95,6 +98,35 @@ const PokeImg = styled.div`
 
 const PokeWeather = styled.div`
   font-size: 0;
+`;
+
+const PokeInfoContainer = styled.div`
+  display: flex;
+`;
+
+const PokeInfoItem = styled.div`
+  flex: 1 1 0%;
+  max-width: 50%;
+`;
+
+const PokeInfoTitles = styled.h4`
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
+  margin-bottom: 0.5rem;
+`;
+
+const PokeStatsContainer = styled.div`
+  display: grid;
+  grid-column-gap: 1rem;
+  grid-template-columns: 65% auto;
+`;
+
+const PokeStatsNumbers = styled.p`
+  letter-spacing: 1px;
+  font-variant-numeric: tabular-nums;
+`;
+
+const PokeTypeContainer = styled.div`
+  padding-bottom: 1rem;
 `;
 
 const PokeType = styled.span`
@@ -160,43 +192,65 @@ export default function PokedexModal({ modalStatus, showModal, modalPokemonData 
       <ModalWindow typeOneColor={typeOneColor} typeTwoColor={typeTwoColor}>
         <ModalWindowGuts>
           <PokeTitle>
-            {pokeName} #{pokedex}
+            {pokeName} <PokeTitlePokedex>#{pokedex}</PokeTitlePokedex>
           </PokeTitle>
+
           <PokeImg>
             <img src={imgUrl} alt={pokeName} width="96" height="96" />
             {imgUrlShiny && (
               <img src={imgUrlShiny} alt={pokeName} width="96" height="96" />
             )}
           </PokeImg>
-
-          <PokeWeather>
-            {weatherImg.map((icon) => (
-              <img
-                src={icon}
-                alt="Weather boost icon"
-                width="32"
-                height="32"
-                key={icon}
-              />
-            ))}
-          </PokeWeather>
-          <div>
-            <PokeType typeColor={typeOneColor}>{typeOneName}</PokeType>
-            {type2 && <PokeType typeColor={typeTwoColor}>{typeTwoName}</PokeType>}
-          </div>
-          {gen && <p>Поколение: {pokeGen(gen)}</p>}
-          <p>Атака: {baseAttack}</p>
-          <p>Защита: {baseDefense}</p>
-          <p>Выносливость: {baseStamina}</p>
-          <p>Макс СР: {cpMax}</p>
-          {shiny ? <p>Шайни: Да</p> : <p>Шайни: Нет</p>}
-          {released ? (
-            <p>Можно встретить в игре: Да</p>
-          ) : (
-            <p>Можно встретить в игре: Нет</p>
-          )}
-          {(pokemonClass === 'POKEMON_CLASS_LEGENDARY' && <p>Тип: Легендарный</p>) ||
-            (pokemonClass === 'POKEMON_CLASS_MYTHIC' && <p>Тип: Мифический</p>)}
+          <PokeInfoContainer>
+            <PokeInfoItem>
+              <PokeTypeContainer>
+                <PokeInfoTitles>ТИП</PokeInfoTitles>
+                <PokeType typeColor={typeOneColor}>{typeOneName}</PokeType>
+                {type2 && (
+                  <PokeType typeColor={typeTwoColor}>{typeTwoName}</PokeType>
+                )}
+              </PokeTypeContainer>
+              <PokeTypeContainer>
+                <PokeWeather>
+                  {weatherImg.map((icon) => (
+                    <img
+                      src={icon}
+                      alt="Weather boost icon"
+                      width="32"
+                      height="32"
+                      key={icon}
+                    />
+                  ))}
+                </PokeWeather>
+                {gen && <p>ПОКОЛЕНИЕ: {pokeGen(gen)}</p>}
+                {(pokemonClass === 'POKEMON_CLASS_LEGENDARY' && (
+                  <p>ТИП: ЛЕГЕНДАРНЫЙ</p>
+                )) ||
+                  (pokemonClass === 'POKEMON_CLASS_MYTHIC' && (
+                    <p>ТИП: МИФИЧЕСКИЙ</p>
+                  ))}
+              </PokeTypeContainer>
+            </PokeInfoItem>
+            <PokeInfoItem>
+              <PokeInfoTitles>СТАТЫ</PokeInfoTitles>
+              <PokeStatsContainer>
+                <p>МАКС СР</p>
+                <PokeStatsNumbers>{cpMax}</PokeStatsNumbers>
+                <p>АТАКА</p>
+                <PokeStatsNumbers>{baseAttack}</PokeStatsNumbers>
+                <p>ЗАЩИТА</p>
+                <PokeStatsNumbers>{baseDefense}</PokeStatsNumbers>
+                <p>ЗДОРОВЬЕ</p>
+                <PokeStatsNumbers>{baseStamina}</PokeStatsNumbers>
+                <p>ШАЙНИ</p>
+                <PokeStatsNumbers>{shiny ? <p>ДА</p> : <p>НЕТ</p>}</PokeStatsNumbers>
+                <p>В ИГРЕ</p>
+                <PokeStatsNumbers>
+                  {released ? <p>ДА</p> : <p>НЕТ</p>}
+                </PokeStatsNumbers>
+              </PokeStatsContainer>
+            </PokeInfoItem>
+          </PokeInfoContainer>
           <ModalCloseButton type="button" onClick={() => showModal()} />
         </ModalWindowGuts>
       </ModalWindow>
@@ -204,12 +258,6 @@ export default function PokedexModal({ modalStatus, showModal, modalPokemonData 
     </>
   );
 }
-
-PokedexModal.propTypes = {
-  modalStatus: PropTypes.bool.isRequired,
-  showModal: PropTypes.func.isRequired,
-  modalPokemonData: PropTypes.oneOfType([PropTypes.object]),
-};
 
 PokedexModal.defaultProps = {
   modalPokemonData: null,

@@ -32,7 +32,6 @@ const FilterTabsItem = styled.li`
 `;
 
 const FilterSearch = styled.input`
-  width: 20rem;
   margin: 1rem;
 `;
 
@@ -42,7 +41,6 @@ const FilterGen = styled.div`
 `;
 
 const FilterCheckboxLabel = styled.label`
-  width: 7rem;
   margin-right: 1rem;
 `;
 

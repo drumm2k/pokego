@@ -37,6 +37,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Noah';
     font-style: normal;
     font-weight: 400;
+    font-display: auto;
     src: local('Noah Regular'), local('Noah Regular'),
         url('/fonts/Noah-Regular.woff2') format('woff2'),
         url('/fonts/Noah-Regular.woff') format('woff');
@@ -46,6 +47,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Noah';
     font-style: normal;
     font-weight: 700;
+    font-display: auto;
     src: local('Noah Bold'), local('Noah Bold'),
         url('/fonts/Noah-Bold.woff2') format('woff2'),
         url('/fonts/Noah-Bold.woff') format('woff');
