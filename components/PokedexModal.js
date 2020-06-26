@@ -259,6 +259,12 @@ export default function PokedexModal({ modalStatus, showModal, modalPokemonData 
   );
 }
 
+PokedexModal.propTypes = {
+  modalStatus: PropTypes.bool.isRequired,
+  showModal: PropTypes.func.isRequired,
+  modalPokemonData: PropTypes.oneOfType([PropTypes.object]),
+};
+
 PokedexModal.defaultProps = {
   modalPokemonData: null,
 };
