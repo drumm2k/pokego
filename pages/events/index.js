@@ -19,15 +19,6 @@ export const GET_ALL_EVENTS = gql`
   }
 `;
 
-const EventList = styled.div`
-  display: grid;
-
-  @media (min-width: 768px) {
-    grid-column-gap: 2%;
-    grid-template-columns: 49% 49%;
-  }
-`;
-
 export default function Events() {
   const { data, loading, error } = useQuery(GET_ALL_EVENTS);
 
@@ -82,54 +73,56 @@ export default function Events() {
   return (
     <>
       <Title color="#ff3163">Ивенты</Title>
-      <EventList>
-        <div>
-          {events &&
-            events.map((event) => (
-              <Link key={event.id} href="/events/[id]" as={`/events/${event.id}`}>
-                <a>
-                  <Event
-                    name={event.name}
-                    description={event.description}
-                    img={event.img}
-                    starts={event.starts}
-                    ends={event.ends}
-                  />
-                </a>
-              </Link>
-            ))}
-          {eventsUpcoming &&
-            eventsUpcoming.map((event) => (
-              <Link key={event.id} href="/events/[id]" as={`/events/${event.id}`}>
-                <a>
-                  <Event
-                    name={event.name}
-                    description={event.description}
-                    img={event.img}
-                    starts={event.starts}
-                    ends={event.ends}
-                  />
-                </a>
-              </Link>
-            ))}
-        </div>
-        <div>
-          {eventsEnded &&
-            eventsEnded.map((event) => (
-              <Link key={event.id} href="/events/[id]" as={`/events/${event.id}`}>
-                <a>
-                  <Event
-                    name={event.name}
-                    description={event.description}
-                    img={event.img}
-                    starts={event.starts}
-                    ends={event.ends}
-                  />
-                </a>
-              </Link>
-            ))}
-        </div>
-      </EventList>
+
+      <div>
+        <h3>Активные</h3>
+        {events &&
+          events.map((event) => (
+            <Link key={event.id} href="/events/[id]" as={`/events/${event.id}`}>
+              <a>
+                <Event
+                  name={event.name}
+                  description={event.description}
+                  img={event.img}
+                  starts={event.starts}
+                  ends={event.ends}
+                />
+              </a>
+            </Link>
+          ))}
+        <h3>Скоро</h3>
+        {eventsUpcoming &&
+          eventsUpcoming.map((event) => (
+            <Link key={event.id} href="/events/[id]" as={`/events/${event.id}`}>
+              <a>
+                <Event
+                  name={event.name}
+                  description={event.description}
+                  img={event.img}
+                  starts={event.starts}
+                  ends={event.ends}
+                />
+              </a>
+            </Link>
+          ))}
+      </div>
+      <div>
+        <h3>Завершённые</h3>
+        {eventsEnded &&
+          eventsEnded.map((event) => (
+            <Link key={event.id} href="/events/[id]" as={`/events/${event.id}`}>
+              <a>
+                <Event
+                  name={event.name}
+                  description={event.description}
+                  img={event.img}
+                  starts={event.starts}
+                  ends={event.ends}
+                />
+              </a>
+            </Link>
+          ))}
+      </div>
     </>
   );
 }

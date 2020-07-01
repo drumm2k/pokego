@@ -4,9 +4,7 @@ import RaidCard from './RaidCard';
 
 const TierTitle = styled.div`
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  line-height: 0;
 `;
 
 const Tier = styled.div`

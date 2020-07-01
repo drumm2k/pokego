@@ -1,102 +1,82 @@
-import { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import EventTimer from './EventTimer';
-// import ArrowIcon from '../assets/arrow.svg';
 
 const EventCard = styled.div`
-  color: #eee;
-  font-size: 1.4rem;
-  display: grid;
+  display: flex;
+  width: 100%;
   margin-bottom: 1rem;
-  grid-template-columns: 10rem auto;
-  grid-column-gap: 1rem;
-  grid-row-gap: 1rem;
-  padding: 1.5rem 1rem;
   border-radius: 10px;
-  max-width: 40rem;
-  background-image: linear-gradient(to right, #cc2b5e, #753a88);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  /* background: #aa306f; */
+  border: 1px solid;
+  border-color: #cbd5e0;
 `;
 
-const EventTitle = styled.p`
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #fcd768;
-  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
+const EventData = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+`;
+
+const EventTitle = styled.h4`
+  color: #000;
 `;
 
 const EventDesc = styled.p`
-  color: #e5b8d0;
-  flex-grow: 1;
+  font-size: 1.4rem;
+  color: #4a5568;
+  padding-bottom: 0.5rem;
 `;
 
 const EventImg = styled.div`
   background: url(${(props) => props.imgUrl}) 50% 50% no-repeat;
   background-size: cover;
-  width: 9.6rem;
-  height: 9.6rem;
-`;
+  min-width: 12rem;
+  min-height: 10rem;
+  border-radius: 10px 0 0 10px;
 
-const StatusContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const EventStatus = styled.span`
-  display: inline-block;
-  padding: 0.1rem 0.7rem;
-  color: #753a88;
-  font-size: 1.4rem;
-  font-weight: 700;
-  line-height: 1.1;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
-  background-color: #fcd768;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
-  border-radius: 15px;
-`;
-
-class Event extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      status: '',
-    };
-    this.statusHandler = this.statusHandler.bind(this);
+  @media (min-width: 768px) {
+    min-width: 24rem;
+    min-height: 12rem;
   }
+`;
 
-  statusHandler(status) {
-    this.setState({ status });
-  }
+const EventArrow = styled.div`
+  align-self: center;
+  margin-left: auto;
+  margin-right: 0.5rem;
+  min-width: 2rem;
+  width: 2rem;
+`;
 
-  render() {
-    const { img, name, description, starts, ends } = this.props;
-    const { status } = this.state;
-    return (
-      <>
-        <EventCard>
-          <EventImg imgUrl={img} />
+function Event({ img, name, description, starts, ends }) {
+  return (
+    <>
+      <EventCard>
+        <EventImg imgUrl={img} alt={name} />
+        <EventData>
           <div>
             <EventTitle>{name}</EventTitle>
             <EventDesc>{description}</EventDesc>
           </div>
-          <StatusContainer>
-            <EventStatus>{status}</EventStatus>
-          </StatusContainer>
-          <EventTimer
-            start={starts}
-            end={ends}
-            status={status}
-            statusHandler={this.statusHandler}
-          />
-        </EventCard>
-      </>
-    );
-  }
+          <EventTimer start={starts} end={ends} />
+        </EventData>
+        <EventArrow>
+          <svg
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            stroke="#4a5568"
+          >
+            <path d="M9 5l7 7-7 7" />
+          </svg>
+        </EventArrow>
+      </EventCard>
+    </>
+  );
 }
 
 Event.propTypes = {

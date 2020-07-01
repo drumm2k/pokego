@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import ClockIcon from '../assets/clock.svg';
 
 const EventTimerWrapper = styled.div`
   display: flex;
@@ -18,7 +17,7 @@ const EventTimerOutput = styled.p`
   letter-spacing: 1px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-  color: #fcd768;
+  color: #4a5568;
   margin-left: 1rem;
 `;
 
@@ -55,11 +54,9 @@ class EventTimer extends Component {
     if (seconds < 10) {
       seconds = `0${seconds}`;
     }
-
     if (minutes < 10) {
       minutes = `0${minutes}`;
     }
-
     if (hours < 10) {
       hours = `0${hours}`;
     }
@@ -85,18 +82,13 @@ class EventTimer extends Component {
 
   tick() {
     const { start, end } = this.state;
-    const { statusHandler } = this.props;
     const diffStart = Date.parse(start) - Date.parse(new Date());
     const diffEnd = Date.parse(end) - Date.parse(new Date());
     if (diffStart > 0) {
-      statusHandler('Скоро');
       this.calcDuration(start);
     } else if (diffStart < 0 && diffEnd > 0) {
-      statusHandler('Активен');
       this.calcDuration(end);
     } else if (diffEnd < 0) {
-      statusHandler('Окончен');
-
       this.setState({
         output: `${new Date(this.state.end).toLocaleString()}`,
       }),
@@ -109,7 +101,16 @@ class EventTimer extends Component {
     return (
       <EventTimerWrapper>
         <ClockContainer>
-          <ClockIcon />
+          <svg
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            stroke="#4a5568"
+          >
+            <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
         </ClockContainer>
         <EventTimerOutput>{output}</EventTimerOutput>
       </EventTimerWrapper>
@@ -120,7 +121,6 @@ class EventTimer extends Component {
 EventTimer.propTypes = {
   start: PropTypes.string.isRequired,
   end: PropTypes.string.isRequired,
-  statusHandler: PropTypes.func.isRequired,
 };
 
 export default EventTimer;
