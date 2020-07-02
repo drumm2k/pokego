@@ -11,12 +11,14 @@ const Card = styled.div`
   font-size: 1.2rem;
   box-sizing: border-box;
   border-radius: 5px;
-  border: 1px solid #edf2f4;
+  border: 1px solid rgb(216, 216, 220);
   margin: 0.1rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
   &:hover {
     cursor: pointer;
+    /* border: 1px solid rgb(55, 150, 76);
+    filter: grayscale(0.7) brightness(1.2) hue-rotate(-10deg); */
   }
 `;
 
@@ -27,8 +29,6 @@ const CardType = styled.div`
         ? `${props.typeTwoColor}, ${props.typeOneColor}`
         : `${props.typeOneColor}, ${props.typeOneColor}`}
   );
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
 `;
 
 const CardImg = styled.div.attrs((props) => ({

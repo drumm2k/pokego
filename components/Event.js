@@ -8,8 +8,8 @@ const EventCard = styled.div`
   margin-bottom: 1rem;
   border-radius: 10px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  border: 1px solid;
-  border-color: #cbd5e0;
+  border: 1px solid rgb(216, 216, 220);
+  overflow: hidden;
 `;
 
 const EventData = styled.div`
@@ -34,7 +34,6 @@ const EventImg = styled.div`
   background-size: cover;
   min-width: 12rem;
   min-height: 10rem;
-  border-radius: 10px 0 0 10px;
 
   @media (min-width: 768px) {
     min-width: 24rem;

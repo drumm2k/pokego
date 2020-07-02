@@ -8,7 +8,7 @@ const FilterTabs = styled.ul`
   display: flex;
   text-align: center;
   flex-wrap: wrap;
-  border: 1px solid #ddd;
+  border: 1px solid rgb(216, 216, 220);
   border-radius: 5px;
 `;
 
@@ -21,13 +21,13 @@ const FilterTabsItem = styled.li`
   color: #000;
 
   &:hover {
-    background-color: #ddd;
+    background-color: rgb(216, 216, 220);
     cursor: pointer;
   }
 
   &.tab-active {
     color: #fff;
-    background-color: #444;
+    background-color: rgb(108, 108, 112);
   }
 `;
 
