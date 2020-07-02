@@ -12,13 +12,14 @@ const Card = styled.div`
   box-sizing: border-box;
   border-radius: 5px;
   border: 1px solid rgb(216, 216, 220);
-  margin: 0.1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  margin: 0.3rem 0.1rem;
+  cursor: pointer;
+  transition: box-shadow 0.3s;
 
   &:hover {
-    cursor: pointer;
-    /* border: 1px solid rgb(55, 150, 76);
-    filter: grayscale(0.7) brightness(1.2) hue-rotate(-10deg); */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    /* filter: saturate(140%) brightness(115%); */
+    transition: box-shadow 0.3s;
   }
 `;
 
@@ -44,7 +45,7 @@ const CardImg = styled.div.attrs((props) => ({
   overflow: hidden;
   display: flex;
   justify-content: space-between;
-  padding: 0.1rem 0.3rem;
+  padding: 0 0.3rem;
   user-select: none;
   color: #fff;
   letter-spacing: 1px;
@@ -52,8 +53,10 @@ const CardImg = styled.div.attrs((props) => ({
 `;
 
 const CardContent = styled.div`
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   text-align: center;
+  text-transform: capitalize;
+  padding: 0 0.3rem;
 `;
 
 const PokeCard = (props) => {
@@ -75,9 +78,7 @@ const PokeCard = (props) => {
           <div>{gen && pokeGen(gen)}</div>
         </CardImg>
       </CardType>
-      <CardContent>
-        <div>{filteredName}</div>
-      </CardContent>
+      <CardContent>{filteredName.toLowerCase()}</CardContent>
     </Card>
   );
 };
