@@ -3,6 +3,7 @@ import { normalize } from 'styled-normalize';
 import PropTypes from 'prop-types';
 import Meta from './Meta';
 import Header from './Header';
+import Footer from './Footer';
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -112,14 +113,15 @@ function Page(props) {
   const { children } = props;
 
   return (
-    <div>
+    <>
       <Meta />
       <GlobalStyle />
       <Wrapper>
         <Header />
         {children}
+        <Footer />
       </Wrapper>
-    </div>
+    </>
   );
 }
 
