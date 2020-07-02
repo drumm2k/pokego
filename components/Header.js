@@ -6,10 +6,21 @@ import NavMenu from './NavMenu';
 import NavList from './NavList';
 
 const StyledHeader = styled.header`
-  margin: 3rem 0 1.5rem;
+  padding: 3rem 0 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: ${(props) => (props.navOpened ? '#fff' : 'none')};
+  position: ${(props) => (props.navOpened ? 'fixed' : 'relative')};
+  width: ${(props) => (props.navOpened ? 'calc(100% - 3rem);' : '100%')};
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1002;
+
+  @media screen and (min-device-width: 768px) {
+    max-width: 690px;
+  }
 `;
 
 const Logo = styled.a`
@@ -42,7 +53,7 @@ class Header extends Component {
     const { navOpened } = this.state;
     return (
       <>
-        <StyledHeader>
+        <StyledHeader navOpened={navOpened}>
           <Link href="/">
             <Logo>PokéGO</Logo>
           </Link>
