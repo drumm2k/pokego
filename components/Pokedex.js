@@ -3,83 +3,64 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import PokedexList from './PokedexList';
 import PokedexModal from './PokedexModal';
+import Checkbox from './Checkbox';
 
 const FilterTabs = styled.ul`
   display: flex;
   text-align: center;
   flex-wrap: wrap;
-  border: 1px solid rgb(216, 216, 220);
-  border-radius: 5px;
+  color: #000;
 `;
 
 const FilterTabsItem = styled.li`
   flex: 1 1 0%;
   display: block;
-  margin: 0.5rem;
   padding: 0.5rem 2rem;
-  border-radius: 5px;
-  color: #000;
-
-  &:hover {
-    background-color: rgb(216, 216, 220);
-    cursor: pointer;
-  }
+  border: 1px solid rgb(220, 220, 220);
+  border-bottom: 1px solid rgb(220, 220, 220);
+  border-radius: 10px 10px 0 0;
+  background-color: rgb(245, 245, 245);
+  cursor: pointer;
 
   &.tab-active {
-    color: #fff;
-    background-color: rgb(108, 108, 112);
+    background-color: transparent;
+    border: 1px solid rgb(150, 150, 150);
+    border-bottom: none;
   }
 `;
 
-const FilterSearch = styled.input`
-  margin: 1rem;
-`;
-
-const FilterGen = styled.div`
+const FiltersContainer = styled.div`
+  margin: 1rem 0;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
 `;
 
-const FilterCheckboxLabel = styled.label`
-  margin-right: 1rem;
+const FilterSearchInput = styled.input`
+  width: 100%;
+  border: 1px solid rgb(220, 220, 220);
+  padding: 0.5rem 1rem;
+
+  &:focus {
+    background-color: transparent;
+    border: 1px solid rgb(150, 150, 150);
+    box-shadow: 0 0 0 0.2rem rgba(150, 150, 150, 0.5);
+    outline: none;
+  }
 `;
 
-const FilterCheckbox = styled.input`
-  height: 1.6rem;
-  width: 1.6rem;
-  margin-right: 0.5rem;
-`;
+const StyledSelect = styled.select`
+  border: 1px solid rgb(220, 220, 220);
+  width: 20rem;
+  margin: 0.5rem 0;
+  /* appearance: none; */
+  padding: 0.5rem 1rem;
 
-const filterGen = [
-  {
-    name: 'GEN_1',
-    label: 'Gen 1',
-  },
-  {
-    name: 'GEN_2',
-    label: 'Gen 2',
-  },
-  {
-    name: 'GEN_3',
-    label: 'Gen 3',
-  },
-  {
-    name: 'GEN_4',
-    label: 'Gen 4',
-  },
-  {
-    name: 'GEN_5',
-    label: 'Gen 5',
-  },
-  {
-    name: 'GEN_7',
-    label: 'Gen 7',
-  },
-  {
-    name: 'GEN_8',
-    label: 'Gen 8',
-  },
-];
+  &:focus {
+    border: 1px solid rgb(150, 150, 150);
+    box-shadow: 0 0 0 0.2rem rgba(150, 150, 150, 0.5);
+    outline: none;
+  }
+`;
 
 export default class Pokedex extends Component {
   constructor(props) {
@@ -88,7 +69,7 @@ export default class Pokedex extends Component {
     this.state = {
       searchTerm: '',
       pokemonsData: pokemons,
-      gen: ['GEN_1', 'GEN_2', 'GEN_3', 'GEN_4', 'GEN_5', 'GEN_7', 'GEN_8'],
+      gen: 'GEN_1 GEN_2 GEN_3 GEN_4 GEN_5 GEN_7 GEN_8',
       activeTab: 'released',
       legendaryOnly: false,
       modalStatus: false,
@@ -103,15 +84,12 @@ export default class Pokedex extends Component {
   filterGen = (event) => {
     const { gen } = this.state;
 
-    if (event.target.checked) {
-      const result = gen;
-      result.push(event.target.name);
-      this.setState({ gen: result.sort() });
-    } else {
-      const result = gen.filter((item) => {
-        return item !== event.target.name;
+    if (event.target.value === 'All') {
+      this.setState({
+        gen: 'GEN_1 GEN_2 GEN_3 GEN_4 GEN_5 GEN_7 GEN_8',
       });
-      this.setState({ gen: result });
+    } else {
+      this.setState({ gen: event.target.value });
     }
   };
 
@@ -195,39 +173,41 @@ export default class Pokedex extends Component {
             Шайни
           </FilterTabsItem>
         </FilterTabs>
+        <FiltersContainer>
+          <FilterSearchInput
+            type="text"
+            name="search"
+            placeholder="Введите имя или номер покемона"
+            value={searchTerm}
+            onChange={this.filterSearch}
+          />
 
-        <div>
-          <label>
-            Поиск:
-            <FilterSearch
-              type="text"
-              name="search"
-              value={searchTerm}
-              onChange={this.filterSearch}
-            />
-          </label>
-        </div>
+          <StyledSelect
+            value={gen}
+            onChange={this.filterGen}
+            aria-expanded="false"
+            aria-autocomplete="list"
+            aria-haspopup="listbox"
+            role="combobox"
+          >
+            <option defaultValue value="All">
+              Все поколения
+            </option>
+            <option value="GEN_1">1 - Kanto</option>
+            <option value="GEN_2">2 - Johto</option>
+            <option value="GEN_3">3 - Hoenn</option>
+            <option value="GEN_4">4 - Sinnoh</option>
+            <option value="GEN_5">5 - Unova</option>
+            <option value="GEN_7">7 - Aloha</option>
+            <option value="GEN_8">8 - Galar</option>
+          </StyledSelect>
 
-        <FilterGen>
-          {filterGen.map((item) => (
-            <FilterCheckboxLabel key={item.name}>
-              <FilterCheckbox
-                type="checkbox"
-                name={item.name}
-                defaultChecked
-                onChange={this.filterGen}
-              />
-              {item.label}
-            </FilterCheckboxLabel>
-          ))}
-        </FilterGen>
-
-        <div>
-          <label>
-            <FilterCheckbox type="checkbox" onChange={this.filterLegendary} />
-            Только легендарные и мифические
-          </label>
-        </div>
+          <Checkbox
+            label="Только легендарные и мифические"
+            checked={legendaryOnly}
+            onChange={this.filterLegendary}
+          />
+        </FiltersContainer>
 
         <PokedexList
           pokemons={filteredPokemons}
