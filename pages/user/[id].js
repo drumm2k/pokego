@@ -1,8 +1,8 @@
 import Router, { useRouter } from 'next/router';
-import Link from 'next/link';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { initializeApollo } from '../../lib/apolloClient';
+import Title from '../../components/Title';
 import ProfileCard from '../../components/ProfileCard';
 
 export const GET_USER = gql`
@@ -20,7 +20,16 @@ export const GET_USER = gql`
       updatedAt
       tradeLists {
         id
-        pokemons
+        pokemons {
+          name
+          pokedex
+          gen
+          shiny
+          released
+          type1
+          type2
+          pokemonClass
+        }
         description
         isPrivate
       }
@@ -63,10 +72,8 @@ export default function Profile() {
 
   return (
     <>
+      <Title color="#666">Профиль тренера</Title>
       <ProfileCard user={getUser} />
-      <Link href="/">
-        <a>Выбрать покемонов на трейд</a>
-      </Link>
 
       <div>
         <button type="button" onClick={() => Router.back()}>
