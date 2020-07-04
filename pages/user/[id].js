@@ -25,21 +25,15 @@ export const GET_USER = gql`
         isPrivate
       }
       followers {
-        id
-        user {
-          userName
-        }
         follower {
           userName
+          trainerTeam
         }
       }
       following {
-        id
         user {
           userName
-        }
-        follower {
-          userName
+          trainerTeam
         }
       }
     }
@@ -70,9 +64,10 @@ export default function Profile() {
   return (
     <>
       <ProfileCard user={getUser} />
-      <Link href="/profile/trade">
+      <Link href="/">
         <a>Выбрать покемонов на трейд</a>
       </Link>
+
       <div>
         <button type="button" onClick={() => Router.back()}>
           ← Назад

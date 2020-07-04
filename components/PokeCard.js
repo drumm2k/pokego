@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import pokeCheckName from '../lib/poke-name';
-import { pokeTypeColor } from '../lib/poke-types';
-import pokeGen from '../lib/poke-gen';
-import { pokeImg, pokeImgShiny } from '../lib/poke-img';
+import pokeCheckName from '../lib/pokeName';
+import { pokeTypeColor } from '../lib/pokeTypes';
+import pokeGen from '../lib/pokeGen';
+import { pokeImg, pokeImgShiny } from '../lib/pokeImg';
 
 const Card = styled.div`
   max-width: 8.4rem;

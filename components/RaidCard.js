@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { pokeTypeName, pokeTypeColor } from '../lib/poke-types';
-import { pokeTypeWeather, pokeTypeWeatherImg } from '../lib/poke-weather';
-import pokeCalcCp from '../lib/poke-cp';
-import pokeCheckName from '../lib/poke-name';
-import { pokeImg } from '../lib/poke-img';
+import { pokeTypeName, pokeTypeColor } from '../lib/pokeTypes';
+import { pokeTypeWeather, pokeTypeWeatherImg } from '../lib/pokeWeather';
+import pokeCalcCp from '../lib/pokeCp';
+import pokeCheckName from '../lib/pokeName';
+import { pokeImg } from '../lib/pokeImg';
 
 const Card = styled.div`
   color: #fff;

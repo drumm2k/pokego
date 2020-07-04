@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { pokeTypeName, pokeTypeColor } from '../lib/poke-types';
-import { pokeTypeWeather, pokeTypeWeatherImg } from '../lib/poke-weather';
-import pokeGen from '../lib/poke-gen';
-import pokeCalcCp from '../lib/poke-cp';
-import pokeCheckName from '../lib/poke-name';
-import { pokeImg, pokeImgShiny } from '../lib/poke-img';
+import { pokeTypeName, pokeTypeColor } from '../lib/pokeTypes';
+import { pokeTypeWeather, pokeTypeWeatherImg } from '../lib/pokeWeather';
+import pokeGen from '../lib/pokeGen';
+import pokeCalcCp from '../lib/pokeCp';
+import pokeCheckName from '../lib/pokeName';
+import { pokeImg, pokeImgShiny } from '../lib/pokeImg';
 
 const ModalWindow = styled.div`
   color: white;
@@ -243,10 +243,12 @@ export default function PokedexModal({ modalStatus, showModal, modalPokemonData 
                 <p>ЗДОРОВЬЕ</p>
                 <PokeStatsNumbers>{baseStamina}</PokeStatsNumbers>
                 <p>ШАЙНИ</p>
-                <PokeStatsNumbers>{shiny ? <p>ДА</p> : <p>НЕТ</p>}</PokeStatsNumbers>
+                <PokeStatsNumbers>
+                  {shiny ? <span>ДА</span> : <span>НЕТ</span>}
+                </PokeStatsNumbers>
                 <p>В ИГРЕ</p>
                 <PokeStatsNumbers>
-                  {released ? <p>ДА</p> : <p>НЕТ</p>}
+                  {released ? <span>ДА</span> : <span>НЕТ</span>}
                 </PokeStatsNumbers>
               </PokeStatsContainer>
             </PokeInfoItem>
