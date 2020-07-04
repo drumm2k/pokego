@@ -7,22 +7,31 @@ const PokeList = styled.div`
   flex-wrap: wrap;
 `;
 
+const PokedexNotFound = styled.div`
+  display: flex;
+  margin-top: 4rem;
+  justify-content: center;
+`;
+
 function PokedexList({ pokemons, showModal, activeTab }) {
   return (
-    <PokeList>
-      {pokemons.map((pokemon) => (
-        <PokeCard
-          key={pokemon.name}
-          pokedex={pokemon.pokedex}
-          name={pokemon.name}
-          gen={pokemon.gen}
-          type1={pokemon.type1}
-          type2={pokemon.type2}
-          showModal={showModal}
-          activeTab={activeTab}
-        />
-      ))}
-    </PokeList>
+    <>
+      {!pokemons.length && <PokedexNotFound>Покемонов не найдено</PokedexNotFound>}
+      <PokeList>
+        {pokemons.map((pokemon) => (
+          <PokeCard
+            key={pokemon.name}
+            pokedex={pokemon.pokedex}
+            name={pokemon.name}
+            gen={pokemon.gen}
+            type1={pokemon.type1}
+            type2={pokemon.type2}
+            showModal={showModal}
+            activeTab={activeTab}
+          />
+        ))}
+      </PokeList>
+    </>
   );
 }
 
