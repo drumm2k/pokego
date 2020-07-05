@@ -17,7 +17,7 @@ const ModalWindow = styled.div`
   height: 35rem;
   max-width: 95%;
   max-height: 100%;
-  z-index: 20;
+  z-index: 1200;
   background: white;
   border-radius: 10px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -46,7 +46,7 @@ const ModalOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 10;
+  z-index: 1100;
   background: rgba(0, 0, 0, 0.6);
 `;
 
@@ -163,6 +163,7 @@ export default function PokedexModal({ modalStatus, showModal, modalPokemonData 
     shiny,
     released,
     pokemonClass,
+    evolutionBranch,
   } = modalPokemonData;
 
   // Filter name & get img
@@ -253,6 +254,18 @@ export default function PokedexModal({ modalStatus, showModal, modalPokemonData 
               </PokeStatsContainer>
             </PokeInfoItem>
           </PokeInfoContainer>
+
+          {evolutionBranch.length > 0 &&
+            evolutionBranch.map((branch) => (
+              <div key={branch.evolution}>
+                <div>Эволюционирует: {branch.evolution}</div>
+                <div>Конфет: {branch.candyCost}</div>
+                {branch.evolutionItemRequirement && (
+                  <div>Предмет: {branch.evolutionItemRequirement}</div>
+                )}
+              </div>
+            ))}
+
           <ModalCloseButton type="button" onClick={() => showModal()} />
         </ModalWindowGuts>
       </ModalWindow>

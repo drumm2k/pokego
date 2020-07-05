@@ -112,10 +112,10 @@ export default class Pokedex extends Component {
 
   showModal = (name) => {
     const { pokemonsData } = this.state;
-    const pokemonData = pokemonsData.filter((pokemon) => pokemon.name === name);
+    const pokemonData = pokemonsData.find((pokemon) => pokemon.name === name);
     this.setState((prevState) => ({
       modalStatus: !prevState.modalStatus,
-      modalPokemonData: pokemonData[0],
+      modalPokemonData: pokemonData,
     }));
   };
 

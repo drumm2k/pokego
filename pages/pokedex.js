@@ -18,6 +18,11 @@ export const GET_ALL_POKEMONS = gql`
       baseAttack
       baseDefense
       pokemonClass
+      evolutionBranch {
+        evolution
+        evolutionItemRequirement
+        candyCost
+      }
     }
   }
 `;
