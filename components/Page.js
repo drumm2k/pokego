@@ -87,7 +87,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .leaflet-container {
-    height: 600px;
+    height: 450px;
     width: 100%;
   }
 

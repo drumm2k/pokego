@@ -17,7 +17,7 @@ const ModalWindow = styled.div`
   height: 35rem;
   max-width: 95%;
   max-height: 100%;
-  z-index: 1200;
+  z-index: 22;
   background: white;
   border-radius: 10px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -46,7 +46,6 @@ const ModalOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1100;
   background: rgba(0, 0, 0, 0.6);
 `;
 

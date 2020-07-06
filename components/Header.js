@@ -16,7 +16,7 @@ const StyledHeader = styled.header`
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1002;
+  z-index: ${(props) => (props.navOpened ? '20' : 'auto')};
 
   @media screen and (min-device-width: 768px) {
     max-width: 690px;

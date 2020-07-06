@@ -16,7 +16,7 @@ const StyledNavList = styled.ul`
   left: 50%;
   bottom: 0;
   transform: translateX(-50%);
-  z-index: 1003;
+  z-index: 21;
 
   @media screen and (min-device-width: 768px) {
     max-width: 720px;
