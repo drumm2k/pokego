@@ -42,6 +42,7 @@ const ModalWindowGuts = styled.div`
 
 const ModalOverlay = styled.div`
   position: fixed;
+  z-index: 21;
   top: 0;
   left: 0;
   width: 100%;
