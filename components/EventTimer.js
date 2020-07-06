@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import ClockIcon from '../assets/clock.svg';
 
 const EventTimerWrapper = styled.div`
   display: flex;
@@ -101,16 +102,7 @@ class EventTimer extends Component {
     return (
       <EventTimerWrapper>
         <ClockContainer>
-          <svg
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="#4a5568"
-          >
-            <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
+          <ClockIcon stroke="#4a5568" />
         </ClockContainer>
         <EventTimerOutput>{output}</EventTimerOutput>
       </EventTimerWrapper>

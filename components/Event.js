@@ -1,6 +1,8 @@
+import ReactComponent from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import EventTimer from './EventTimer';
+import ChevronRightIcon from '../assets/chevron_right.svg';
 
 const EventCard = styled.div`
   display: flex;
@@ -69,16 +71,7 @@ function Event({ img, name, description, starts, ends }) {
           <EventTimer start={starts} end={ends} />
         </EventData>
         <EventArrow>
-          <svg
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="#4a5568"
-          >
-            <path d="M9 5l7 7-7 7" />
-          </svg>
+          <ChevronRightIcon stroke="#4a5568" />
         </EventArrow>
       </EventCard>
     </>
