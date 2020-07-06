@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import NavProfile from './NavProfile';
+import PlusIcon from '../assets/plus.svg';
 
 const NavPanel = styled.div`
   display: flex;
@@ -63,7 +64,7 @@ function NavMenu(props) {
   const { navOpened, toggleNav } = props;
   return (
     <NavPanel>
-      <NavProfile />
+      <NavProfile icon={<PlusIcon />} />
       <Button
         aria-label="Navigation Menu"
         aria-haspopup="true"
