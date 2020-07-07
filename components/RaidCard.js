@@ -133,57 +133,50 @@ const RaidCpOutput = styled.span`
 `;
 
 const RaidCard = (props) => {
-  const { id, name, type, type2, shiny, stats } = props;
+  const {
+    id,
+    name,
+    type1,
+    type2,
+    shiny,
+    baseStamina,
+    baseAttack,
+    baseDefense,
+  } = props;
 
   // Filter name & get img
   const pokeName = pokeCheckName(name);
   const imgUrl = pokeImg(name, id);
 
   // Get type names
-  const typeOneName = pokeTypeName(type);
+  const typeOneName = pokeTypeName(type1);
   const typeTwoName = pokeTypeName(type2);
 
   // Get type colors
-  const typeOneColor = pokeTypeColor(type);
+  const typeOneColor = pokeTypeColor(type1);
   const typeTwoColor = pokeTypeColor(type2);
 
   // Get weather icons
-  const weather = pokeTypeWeather(type, type2);
+  const weather = pokeTypeWeather(type1, type2);
   const weatherImg = pokeTypeWeatherImg(weather);
 
   // Calc CPs
-  const cpLow = pokeCalcCp(
-    stats.baseAttack,
-    stats.baseStamina,
-    stats.baseDefense,
-    20,
-    10,
-    10,
-    10
-  );
-  const cpMax = pokeCalcCp(
-    stats.baseAttack,
-    stats.baseStamina,
-    stats.baseDefense,
-    20,
-    15,
-    15,
-    15
-  );
+  const cpLow = pokeCalcCp(baseAttack, baseStamina, baseDefense, 20, 10, 10, 10);
+  const cpMax = pokeCalcCp(baseAttack, baseStamina, baseDefense, 20, 15, 15, 15);
 
   const cpLowBoost = pokeCalcCp(
-    stats.baseAttack,
-    stats.baseStamina,
-    stats.baseDefense,
+    baseAttack,
+    baseStamina,
+    baseDefense,
     25,
     10,
     10,
     10
   );
   const cpMaxBoost = pokeCalcCp(
-    stats.baseAttack,
-    stats.baseStamina,
-    stats.baseDefense,
+    baseAttack,
+    baseStamina,
+    baseDefense,
     25,
     15,
     15,
@@ -234,14 +227,14 @@ const RaidCard = (props) => {
 };
 
 RaidCard.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  type1: PropTypes.string.isRequired,
   type2: PropTypes.string,
   shiny: PropTypes.bool.isRequired,
-  stats: PropTypes.objectOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-  ).isRequired,
+  baseStamina: PropTypes.number.isRequired,
+  baseAttack: PropTypes.number.isRequired,
+  baseDefense: PropTypes.number.isRequired,
 };
 
 RaidCard.defaultProps = {

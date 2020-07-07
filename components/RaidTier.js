@@ -19,20 +19,7 @@ const Tier = styled.div`
 `;
 
 export default function RaidTier(props) {
-  const { id, tiersData, pokemonsData } = props;
-
-  // Filter pokemons data by name shaped as tiers data
-  const filteredData = tiersData.map((tier) =>
-    pokemonsData.find((pokemon) => {
-      if (pokemon.pokemonId === tier.pokemon) {
-        // Add shiny field from tiers data
-        const pokemonData = pokemon;
-        pokemonData.shiny = tier.shiny;
-        return pokemonData;
-      }
-      return null;
-    })
-  );
+  const { id, tiersData } = props;
 
   const tier = id.replace(/[^0-9]/g, '');
   const tierIcon = [...Array(parseInt(tier, 10))].map((e, index) => {
@@ -50,15 +37,17 @@ export default function RaidTier(props) {
       </TierTitle>
 
       <Tier>
-        {filteredData.map((pokemon) => (
+        {tiersData.raids.map((raid) => (
           <RaidCard
-            key={pokemon.pokemonId}
-            id={pokemon.pokedex.pokemonNum}
-            name={pokemon.pokemonId}
-            type={pokemon.type}
-            type2={pokemon.type2}
-            shiny={pokemon.shiny}
-            stats={pokemon.stats}
+            key={raid.pokemon.name}
+            id={raid.pokemon.pokedex}
+            name={raid.pokemon.name}
+            type1={raid.pokemon.type1}
+            type2={raid.pokemon.type2}
+            shiny={raid.shiny}
+            baseStamina={raid.pokemon.baseStamina}
+            baseAttack={raid.pokemon.baseAttack}
+            baseDefense={raid.pokemon.baseDefense}
           />
         ))}
       </Tier>
@@ -68,6 +57,5 @@ export default function RaidTier(props) {
 
 RaidTier.propTypes = {
   id: PropTypes.string.isRequired,
-  tiersData: PropTypes.arrayOf(object).isRequired,
-  pokemonsData: PropTypes.arrayOf(object).isRequired,
+  tiersData: PropTypes.oneOfType([PropTypes.object]).isRequired,
 };

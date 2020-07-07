@@ -6,25 +6,21 @@ import Title from '../components/Title';
 
 export const GET_ALL_RAIDS = gql`
   query {
-    getRaidsFull {
+    getRds {
+      tier
+      id
       raids {
-        tier
-        raids {
-          pokemon
-          shiny
-        }
-      }
-      pokemons {
-        pokemonId
-        type
-        type2
-        stats {
+        shiny
+        verified
+        cp
+        pokemon {
+          name
+          pokedex
+          type1
+          type2
           baseStamina
           baseAttack
           baseDefense
-        }
-        pokedex {
-          pokemonNum
         }
       }
     }
@@ -37,18 +33,13 @@ export default function Raids() {
   if (error) return <div>Error</div>;
   if (loading) return <div>Loading</div>;
 
-  const { getRaidsFull } = data;
+  const { getRds } = data;
 
   return (
     <>
       <Title color="#009dc8">Рейды</Title>
-      {getRaidsFull.raids.map((tier) => (
-        <RaidTier
-          key={tier.tier}
-          id={tier.tier}
-          tiersData={tier.raids}
-          pokemonsData={getRaidsFull.pokemons}
-        />
+      {getRds.map((tier) => (
+        <RaidTier key={tier.id} id={tier.tier} tiersData={tier} />
       ))}
     </>
   );
