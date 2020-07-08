@@ -89,6 +89,8 @@ const GlobalStyle = createGlobalStyle`
   .leaflet-container {
     height: 450px;
     width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
   }
 
   #nprogress .bar {
