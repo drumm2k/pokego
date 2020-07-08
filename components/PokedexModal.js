@@ -1,32 +1,57 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
 import { pokeTypeName, pokeTypeColor } from '../lib/pokeTypes';
 import { pokeTypeWeather, pokeTypeWeatherImg } from '../lib/pokeWeather';
-import pokeGen from '../lib/pokeGen';
+import { pokeGenFull } from '../lib/pokeGen';
 import pokeCalcCp from '../lib/pokeCp';
 import pokeCheckName from '../lib/pokeName';
 import { pokeImg, pokeImgShiny } from '../lib/pokeImg';
 
-const ModalWindow = styled.div`
-  color: white;
+const ModalFullscreen = styled.div`
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50rem;
-  height: 35rem;
-  max-width: 95%;
-  max-height: 100%;
-  z-index: 22;
-  background: white;
-  border-radius: 10px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 30;
+`;
+
+const modalOnEnterKeyframes = keyframes`
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+`;
+
+const ModalWindowInner = styled.div`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 50;
+  width: calc(100% - 1rem);
+  height: 80%;
+  margin: 0 0.5rem;
+  border-radius: 10px 10px 0 0;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  background-image: linear-gradient(
-    ${(props) =>
-      props.typeTwoColor
-        ? `${props.typeTwoColor}, ${props.typeOneColor}`
-        : `${props.typeOneColor}, ${props.typeOneColor}`}
-  );
+  background-color: #fff;
+  animation-name: ${modalOnEnterKeyframes};
+  animation-duration: 300ms;
+  animation-timing-function: ease-in;
+
+  @media screen and (min-device-width: 768px) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60rem;
+    height: 50rem;
+    max-width: 80%;
+    max-height: 100%;
+    border-radius: 10px;
+    animation-name: none;
+  }
 `;
 
 const ModalWindowGuts = styled.div`
@@ -36,13 +61,13 @@ const ModalWindowGuts = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  padding: 3rem;
+  padding: 0.5rem;
   overflow: auto;
 `;
 
 const ModalOverlay = styled.div`
   position: fixed;
-  z-index: 21;
+  z-index: 25;
   top: 0;
   left: 0;
   width: 100%;
@@ -52,8 +77,8 @@ const ModalOverlay = styled.div`
 
 const ModalCloseButton = styled.button`
   position: absolute;
-  top: 3rem;
-  right: 3rem;
+  top: 2rem;
+  right: 2rem;
   z-index: 1;
   width: 24px;
   height: 24px;
@@ -83,6 +108,19 @@ const ModalCloseButton = styled.button`
   }
 `;
 
+const PokeCard = styled.div`
+  color: #fff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  background-image: linear-gradient(
+    ${(props) =>
+      props.typeTwoColor
+        ? `${props.typeTwoColor}, ${props.typeOneColor}`
+        : `${props.typeOneColor}, ${props.typeOneColor}`}
+  );
+`;
+
 const PokeTitle = styled.h3`
   filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
   max-width: 85%;
@@ -101,7 +139,7 @@ const PokeWeather = styled.div`
 `;
 
 const PokeInfoContainer = styled.div`
-  display: flex;
+  padding: 1.5rem;
 `;
 
 const PokeInfoItem = styled.div`
@@ -110,14 +148,17 @@ const PokeInfoItem = styled.div`
 `;
 
 const PokeInfoTitles = styled.h4`
-  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
   margin-bottom: 0.5rem;
 `;
 
 const PokeStatsContainer = styled.div`
   display: grid;
   grid-column-gap: 1rem;
-  grid-template-columns: 65% auto;
+  grid-template-columns: 100% 100%;
+
+  @media screen and (min-device-width: 768px) {
+    grid-template-columns: 70% 100%;
+  }
 `;
 
 const PokeStatsNumbers = styled.p`
@@ -190,86 +231,108 @@ export default function PokedexModal({ modalStatus, showModal, modalPokemonData 
 
   return (
     <>
-      <ModalWindow typeOneColor={typeOneColor} typeTwoColor={typeTwoColor}>
-        <ModalWindowGuts>
-          <PokeTitle>
-            {pokeName} <PokeTitlePokedex>#{pokedex}</PokeTitlePokedex>
-          </PokeTitle>
+      <ModalFullscreen>
+        <ModalWindowInner modalStatus={modalStatus}>
+          <ModalWindowGuts>
+            <PokeCard typeOneColor={typeOneColor} typeTwoColor={typeTwoColor}>
+              <PokeTitle>
+                {pokeName} <PokeTitlePokedex>#{pokedex}</PokeTitlePokedex>
+              </PokeTitle>
 
-          <PokeImg>
-            <img src={imgUrl} alt={pokeName} width="96" height="96" />
-            {imgUrlShiny && (
-              <img src={imgUrlShiny} alt={pokeName} width="96" height="96" />
-            )}
-          </PokeImg>
-          <PokeInfoContainer>
-            <PokeInfoItem>
-              <PokeTypeContainer>
-                <PokeInfoTitles>ТИП</PokeInfoTitles>
-                <PokeType typeColor={typeOneColor}>{typeOneName}</PokeType>
-                {type2 && (
-                  <PokeType typeColor={typeTwoColor}>{typeTwoName}</PokeType>
+              <PokeImg>
+                <img src={imgUrl} alt={pokeName} width="96" height="96" />
+                {imgUrlShiny && (
+                  <img src={imgUrlShiny} alt={pokeName} width="96" height="96" />
                 )}
-              </PokeTypeContainer>
-              <PokeTypeContainer>
-                <PokeWeather>
-                  {weatherImg.map((icon) => (
-                    <img
-                      src={icon}
-                      alt="Weather boost icon"
-                      width="32"
-                      height="32"
-                      key={icon}
-                    />
-                  ))}
-                </PokeWeather>
-                {gen && <p>ПОКОЛЕНИЕ: {pokeGen(gen)}</p>}
-                {(pokemonClass === 'POKEMON_CLASS_LEGENDARY' && (
-                  <p>ТИП: ЛЕГЕНДАРНЫЙ</p>
-                )) ||
-                  (pokemonClass === 'POKEMON_CLASS_MYTHIC' && (
-                    <p>ТИП: МИФИЧЕСКИЙ</p>
-                  ))}
-              </PokeTypeContainer>
-            </PokeInfoItem>
-            <PokeInfoItem>
-              <PokeInfoTitles>СТАТЫ</PokeInfoTitles>
-              <PokeStatsContainer>
-                <p>МАКС СР</p>
-                <PokeStatsNumbers>{cpMax}</PokeStatsNumbers>
-                <p>АТАКА</p>
-                <PokeStatsNumbers>{baseAttack}</PokeStatsNumbers>
-                <p>ЗАЩИТА</p>
-                <PokeStatsNumbers>{baseDefense}</PokeStatsNumbers>
-                <p>ЗДОРОВЬЕ</p>
-                <PokeStatsNumbers>{baseStamina}</PokeStatsNumbers>
-                <p>ШАЙНИ</p>
-                <PokeStatsNumbers>
-                  {shiny ? <span>ДА</span> : <span>НЕТ</span>}
-                </PokeStatsNumbers>
-                <p>В ИГРЕ</p>
-                <PokeStatsNumbers>
-                  {released ? <span>ДА</span> : <span>НЕТ</span>}
-                </PokeStatsNumbers>
-              </PokeStatsContainer>
-            </PokeInfoItem>
-          </PokeInfoContainer>
+              </PokeImg>
 
-          {evolutionBranch.length > 0 &&
-            evolutionBranch.map((branch) => (
-              <div key={branch.evolution}>
-                <div>Эволюционирует: {branch.evolution}</div>
-                <div>Конфет: {branch.candyCost}</div>
-                {branch.evolutionItemRequirement && (
-                  <div>Предмет: {branch.evolutionItemRequirement}</div>
-                )}
-              </div>
-            ))}
+              <PokeType typeColor={typeOneColor}>{typeOneName}</PokeType>
+              {type2 && <PokeType typeColor={typeTwoColor}>{typeTwoName}</PokeType>}
 
-          <ModalCloseButton type="button" onClick={() => showModal()} />
-        </ModalWindowGuts>
-      </ModalWindow>
-      <ModalOverlay onClick={() => showModal()} />
+              {/* <PokeWeather>
+                {weatherImg.map((icon) => (
+                  <img
+                    src={icon}
+                    alt="Weather boost icon"
+                    width="32"
+                    height="32"
+                    key={icon}
+                  />
+                ))}
+              </PokeWeather> */}
+            </PokeCard>
+            <PokeInfoContainer>
+              <PokeInfoItem>
+                <PokeTypeContainer>
+                  <PokeStatsContainer>
+                    {gen && (
+                      <>
+                        <p>ПОКОЛЕНИЕ</p>
+                        <PokeStatsNumbers>
+                          {pokeGenFull(gen).toUpperCase()}
+                        </PokeStatsNumbers>
+                      </>
+                    )}
+                    <p>ДОСТУПЕН В ИГРЕ</p>
+                    <PokeStatsNumbers>
+                      {released ? <span>ДА</span> : <span>НЕТ</span>}
+                    </PokeStatsNumbers>
+                    <p>БЫВАЕТ ШАЙНИ</p>
+                    <PokeStatsNumbers>
+                      {shiny ? <span>ДА</span> : <span>НЕТ</span>}
+                    </PokeStatsNumbers>
+                    {(pokemonClass === 'POKEMON_CLASS_LEGENDARY' && (
+                      <>
+                        <p>ТИП</p>
+                        <PokeStatsNumbers>ЛЕГЕНДАРНЫЙ</PokeStatsNumbers>
+                      </>
+                    )) ||
+                      (pokemonClass === 'POKEMON_CLASS_MYTHIC' && (
+                        <>
+                          <p>ТИП</p>
+                          <PokeStatsNumbers>МИФИЧЕСКИЙ</PokeStatsNumbers>
+                        </>
+                      ))}
+                  </PokeStatsContainer>
+                </PokeTypeContainer>
+              </PokeInfoItem>
+              <PokeInfoItem>
+                <PokeInfoTitles>СТАТЫ</PokeInfoTitles>
+                <PokeStatsContainer>
+                  <p>MAX СР</p>
+                  <PokeStatsNumbers>{cpMax}</PokeStatsNumbers>
+                  <p>АТАКА</p>
+                  <PokeStatsNumbers>{baseAttack}</PokeStatsNumbers>
+                  <p>ЗАЩИТА</p>
+                  <PokeStatsNumbers>{baseDefense}</PokeStatsNumbers>
+                  <p>ВЫНОСЛИВОСТЬ</p>
+                  <PokeStatsNumbers>{baseStamina}</PokeStatsNumbers>
+                </PokeStatsContainer>
+                {evolutionBranch.length > 0 &&
+                  evolutionBranch.map((branch) => (
+                    <PokeStatsContainer key={branch.evolution}>
+                      <p>ЭВОЛЮЦИИ</p>
+                      <PokeStatsNumbers>{branch.evolution}</PokeStatsNumbers>
+                      <p>КОНФЕТ</p>
+                      <PokeStatsNumbers>{branch.candyCost}</PokeStatsNumbers>
+                      {branch.evolutionItemRequirement && (
+                        <>
+                          <p>ПРЕДМЕТ</p>
+                          <PokeStatsNumbers>
+                            {branch.evolutionItemRequirement}
+                          </PokeStatsNumbers>
+                        </>
+                      )}
+                    </PokeStatsContainer>
+                  ))}
+              </PokeInfoItem>
+            </PokeInfoContainer>
+
+            <ModalCloseButton type="button" onClick={() => showModal()} />
+          </ModalWindowGuts>
+        </ModalWindowInner>
+        <ModalOverlay onClick={() => showModal()} />
+      </ModalFullscreen>
     </>
   );
 }

@@ -111,12 +111,21 @@ export default class Pokedex extends Component {
   };
 
   showModal = (name) => {
-    const { pokemonsData } = this.state;
-    const pokemonData = pokemonsData.find((pokemon) => pokemon.name === name);
-    this.setState((prevState) => ({
-      modalStatus: !prevState.modalStatus,
-      modalPokemonData: pokemonData,
-    }));
+    const { modalStatus, pokemonsData } = this.state;
+
+    if (modalStatus) {
+      document.body.style.overflow = 'unset';
+      this.setState((prevState) => ({
+        modalStatus: !prevState.modalStatus,
+      }));
+    } else {
+      document.body.style.overflow = 'hidden';
+      const pokemonData = pokemonsData.find((pokemon) => pokemon.name === name);
+      this.setState((prevState) => ({
+        modalStatus: !prevState.modalStatus,
+        modalPokemonData: pokemonData,
+      }));
+    }
   };
 
   render() {
@@ -217,6 +226,7 @@ export default class Pokedex extends Component {
           pokemons={filteredPokemons}
           showModal={this.showModal}
           activeTab={activeTab}
+          modalPokemonData={modalPokemonData}
         />
         <PokedexModal
           showModal={this.showModal}
