@@ -21,6 +21,7 @@ export const GET_ALL_POKEMONS = gql`
       evolutionBranch {
         evolution
         evolutionItemRequirement
+        lureItemRequirement
         candyCost
       }
     }

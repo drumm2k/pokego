@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import pokeCheckName from '../lib/pokeName';
 import { pokeTypeColor } from '../lib/pokeTypes';
-import pokeGen from '../lib/pokeGen';
+import { pokeGen } from '../lib/pokeGen';
 import { pokeImg, pokeImgShiny } from '../lib/pokeImg';
 
 const Card = styled.div`

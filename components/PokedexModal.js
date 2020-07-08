@@ -6,6 +6,7 @@ import { pokeGenFull } from '../lib/pokeGen';
 import pokeCalcCp from '../lib/pokeCp';
 import pokeCheckName from '../lib/pokeName';
 import { pokeImg, pokeImgShiny } from '../lib/pokeImg';
+import { pokeEvoItems, pokeEvoItemImages } from '../lib/pokeEvoItems';
 
 const ModalFullscreen = styled.div`
   position: fixed;
@@ -187,6 +188,11 @@ const PokeType = styled.span`
   border-radius: 15px;
 `;
 
+const EvoItemContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 export default function PokedexModal({ modalStatus, showModal, modalPokemonData }) {
   if (!modalStatus || !modalPokemonData) {
     return null;
@@ -318,9 +324,39 @@ export default function PokedexModal({ modalStatus, showModal, modalPokemonData 
                       {branch.evolutionItemRequirement && (
                         <>
                           <p>ПРЕДМЕТ</p>
-                          <PokeStatsNumbers>
-                            {branch.evolutionItemRequirement}
-                          </PokeStatsNumbers>
+                          <EvoItemContainer>
+                            <img
+                              src={pokeEvoItemImages(
+                                branch.evolutionItemRequirement
+                              )}
+                              alt="Evolution Item"
+                              width="24"
+                              height="24"
+                            />
+                            <PokeStatsNumbers>
+                              {pokeEvoItems(
+                                branch.evolutionItemRequirement
+                              ).toUpperCase()}
+                            </PokeStatsNumbers>
+                          </EvoItemContainer>
+                        </>
+                      )}
+                      {branch.lureItemRequirement && (
+                        <>
+                          <p>ПРЕДМЕТ</p>
+                          <EvoItemContainer>
+                            <img
+                              src={pokeEvoItemImages(branch.lureItemRequirement)}
+                              alt="Evolution Item"
+                              width="24"
+                              height="24"
+                            />
+                            <PokeStatsNumbers>
+                              {pokeEvoItems(
+                                branch.lureItemRequirement
+                              ).toUpperCase()}
+                            </PokeStatsNumbers>
+                          </EvoItemContainer>
                         </>
                       )}
                     </PokeStatsContainer>
