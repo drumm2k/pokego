@@ -272,9 +272,9 @@ export const leafletStyles = css`
   .leaflet-bar a:hover {
     background-color: #fff;
     border-bottom: 1px solid #ccc;
-    width: 26px;
-    height: 26px;
-    line-height: 26px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
     display: block;
     text-align: center;
     text-decoration: none;
@@ -309,12 +309,12 @@ export const leafletStyles = css`
     line-height: 30px;
   }
   .leaflet-touch .leaflet-bar a:first-child {
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
   }
   .leaflet-touch .leaflet-bar a:last-child {
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
   }
   /* zoom control */
   .leaflet-control-zoom-in,
@@ -339,7 +339,7 @@ export const leafletStyles = css`
   }
   .leaflet-retina .leaflet-control-layers-toggle {
     background-image: url(images/layers-2x.png);
-    background-size: 26px 26px;
+    background-size: 30px 30px;
   }
   .leaflet-touch .leaflet-control-layers-toggle {
     width: 44px;
@@ -431,11 +431,9 @@ export const leafletStyles = css`
   .leaflet-touch .leaflet-control-attribution,
   .leaflet-touch .leaflet-control-layers,
   .leaflet-touch .leaflet-bar {
-    box-shadow: none;
   }
   .leaflet-touch .leaflet-control-layers,
   .leaflet-touch .leaflet-bar {
-    border: 2px solid rgba(0, 0, 0, 0.2);
     background-clip: padding-box;
   }
   /* popup */

@@ -9,10 +9,10 @@ import LocationMarker from '../assets/location_marker.svg';
 const DetectMyLocation = styled.a`
   display: block;
   background: #fff;
-  width: 26px;
-  height: 26px;
-  line-height: 26px;
-  padding: 2px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  padding: 3px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
   border-radius: 4px;
   background-position: 50% 50%;
@@ -57,7 +57,7 @@ class MyMap extends Component {
     super(props);
     this.state = {
       position: [59.93863, 30.31413],
-      zoom: 13,
+      zoom: 15,
     };
   }
 
