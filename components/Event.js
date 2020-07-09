@@ -1,13 +1,12 @@
-import ReactComponent from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import EventTimer from './EventTimer';
 import ChevronRightIcon from '../assets/chevron_right.svg';
+import Stack from './Stack';
 
 const EventCard = styled.div`
   display: flex;
-  width: 100%;
-  margin-bottom: 1rem;
+  max-width: 100%;
   border-radius: 10px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   border: 1px solid rgb(216, 216, 220);
@@ -60,7 +59,7 @@ const EventArrow = styled.div`
 
 function Event({ img, name, description, starts, ends }) {
   return (
-    <>
+    <Stack gap="1">
       <EventCard>
         <EventImg imgUrl={img} alt={name} />
         <EventData>
@@ -74,7 +73,7 @@ function Event({ img, name, description, starts, ends }) {
           <ChevronRightIcon stroke="#4a5568" />
         </EventArrow>
       </EventCard>
-    </>
+    </Stack>
   );
 }
 

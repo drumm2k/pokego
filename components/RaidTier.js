@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import PropTypes, { object } from 'prop-types';
 import RaidCard from './RaidCard';
+import Stack from './Stack';
 
 const TierTitle = styled.div`
   display: flex;
@@ -10,7 +11,6 @@ const TierTitle = styled.div`
 const Tier = styled.div`
   display: grid;
   grid-row-gap: 1rem;
-  margin-bottom: 1rem;
 
   @media (min-width: 768px) {
     grid-column-gap: 1%;
@@ -30,7 +30,7 @@ export default function RaidTier(props) {
   });
 
   return (
-    <>
+    <Stack gap="2" onlyBottom>
       <TierTitle>
         <h3>Уровень {tier}</h3>
         <div>{tierIcon}</div>
@@ -51,7 +51,7 @@ export default function RaidTier(props) {
           />
         ))}
       </Tier>
-    </>
+    </Stack>
   );
 }
 

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import PokedexList from './PokedexList';
 import PokedexModal from './PokedexModal';
 import Checkbox from './Checkbox';
+import Stack from './Stack';
 
 const FilterTabs = styled.ul`
   display: flex;
@@ -28,13 +29,6 @@ const FilterTabsItem = styled.li`
     border: 1px solid rgb(150, 150, 150);
     border-bottom: none;
   }
-`;
-
-const FiltersContainer = styled.div`
-  margin: 1rem 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
 `;
 
 const FilterLabel = styled.label`
@@ -169,7 +163,7 @@ export default class Pokedex extends Component {
 
     return (
       <>
-        <FiltersContainer>
+        <Stack gap="1">
           <FilterLabel>
             Поиск:
             <FilterSearchInput
@@ -201,7 +195,8 @@ export default class Pokedex extends Component {
             checked={legendaryOnly}
             onChange={this.filterLegendary}
           />
-        </FiltersContainer>
+        </Stack>
+
         <FilterTabs>
           <FilterTabsItem
             onClick={this.filterTabs}

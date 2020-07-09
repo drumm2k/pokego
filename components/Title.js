@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 const StyledTitle = styled.h2`
   color: ${(props) => props.color};
-  margin-bottom: 1.5rem;
 `;
 
 const Title = (props) => {
