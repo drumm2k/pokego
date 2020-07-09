@@ -48,7 +48,7 @@ function generateCoords(id) {
 }
 
 // Generate X random coordinates
-for (let x = 0; x < 500; x += 1) {
+for (let x = 0; x < 50; x += 1) {
   generateCoords(x);
 }
 
@@ -57,25 +57,38 @@ class MyMap extends Component {
     super(props);
     this.state = {
       position: [59.93863, 30.31413],
-      zoom: 15,
-      player: null,
+      zoom: 13,
+      trainer: null,
     };
   }
 
-  setPosition = () => {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        // Not an ideal way to center current location
-        this.setState({
-          position: [59.93863, 30.31413],
-        });
-        this.setState({
-          position: [position.coords.latitude, position.coords.longitude],
-          player: [position.coords.latitude, position.coords.longitude],
-        });
+  componentDidMount() {
+    const { trainer } = this.state;
+
+    if (trainer) {
+      this.setState({
+        position: trainer,
       });
-    } else {
-      console.log('Geolocation is not available');
+    }
+  }
+
+  setPosition = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.setState({
+            position: '',
+          });
+          this.setState({
+            position: [position.coords.latitude, position.coords.longitude],
+            trainer: [position.coords.latitude, position.coords.longitude],
+            zoom: 15,
+          });
+        },
+        (error) => {
+          console.error(`Error: ${error.code} - ${error.message}`);
+        }
+      );
     }
   };
 
@@ -111,7 +124,7 @@ class MyMap extends Component {
       </Marker>
     ));
 
-    const { zoom, position, player } = this.state;
+    const { zoom, position, trainer } = this.state;
 
     return (
       <>
@@ -123,20 +136,12 @@ class MyMap extends Component {
             attribution=""
           />
           <Control position="topleft">
-            <DetectMyLocation
-              // className="leaflet-bar"
-              href="#"
-              onClick={this.setPosition}
-            >
+            <DetectMyLocation onClick={this.setPosition}>
               <LocationMarker stroke="#000" />
             </DetectMyLocation>
           </Control>
           {/* {MarkersOnCanvas} */}
-          {player && (
-            <>
-              <Circle center={player} color="green" radius={200} />
-            </>
-          )}
+          {trainer && <Circle center={trainer} color="green" radius={200} />}
           <MarkerClusterGroup>
             <LayerGroup>{Markers}</LayerGroup>
           </MarkerClusterGroup>
