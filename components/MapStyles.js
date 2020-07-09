@@ -445,10 +445,10 @@ export const leafletStyles = css`
   .leaflet-popup-content-wrapper {
     padding: 1px;
     text-align: left;
-    border-radius: 12px;
+    border-radius: 5px;
   }
   .leaflet-popup-content {
-    margin: 13px 19px;
+    margin: 10px 15px;
     line-height: 1.4;
   }
   .leaflet-popup-content p {
@@ -477,7 +477,7 @@ export const leafletStyles = css`
   .leaflet-popup-tip {
     background: white;
     color: #333;
-    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
   .leaflet-container a.leaflet-popup-close-button {
     position: absolute;
