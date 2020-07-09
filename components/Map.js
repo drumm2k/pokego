@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import styled from 'styled-components';
-import { Map, TileLayer, Marker, Popup, LayerGroup } from 'react-leaflet';
+import { Map, TileLayer, Marker, Popup, LayerGroup, Circle } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import Control from 'react-leaflet-control';
 import { LeafletStyles, MarkerClusterStyles } from './MapStyles';
@@ -58,6 +58,7 @@ class MyMap extends Component {
     this.state = {
       position: [59.93863, 30.31413],
       zoom: 15,
+      player: null,
     };
   }
 
@@ -70,6 +71,7 @@ class MyMap extends Component {
         });
         this.setState({
           position: [position.coords.latitude, position.coords.longitude],
+          player: [position.coords.latitude, position.coords.longitude],
         });
       });
     } else {
@@ -109,7 +111,7 @@ class MyMap extends Component {
       </Marker>
     ));
 
-    const { zoom, position } = this.state;
+    const { zoom, position, player } = this.state;
 
     return (
       <>
@@ -130,6 +132,11 @@ class MyMap extends Component {
             </DetectMyLocation>
           </Control>
           {/* {MarkersOnCanvas} */}
+          {player && (
+            <>
+              <Circle center={player} color="green" radius={200} />
+            </>
+          )}
           <MarkerClusterGroup>
             <LayerGroup>{Markers}</LayerGroup>
           </MarkerClusterGroup>
