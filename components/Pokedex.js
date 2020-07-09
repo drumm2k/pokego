@@ -114,12 +114,15 @@ export default class Pokedex extends Component {
     const { modalStatus, pokemonsData } = this.state;
 
     if (modalStatus) {
-      document.body.style.overflow = 'unset';
+      // Only need to lock scrolling on Mobile devices
+      // document.body.style.overflow = 'unset';
       this.setState((prevState) => ({
         modalStatus: !prevState.modalStatus,
       }));
     } else {
-      document.body.style.overflow = 'hidden';
+      // document.body.style.overflow = 'hidden';
+
+      // Change this find by ID (need to change query)
       const pokemonData = pokemonsData.find((pokemon) => pokemon.name === name);
       this.setState((prevState) => ({
         modalStatus: !prevState.modalStatus,

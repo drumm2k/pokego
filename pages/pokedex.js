@@ -6,7 +6,7 @@ import Pdex from '../components/Pokedex';
 
 export const GET_ALL_POKEMONS = gql`
   query {
-    getPkmns {
+    getPokemons {
       name
       pokedex
       gen
@@ -34,12 +34,12 @@ export default function Pokedex() {
   if (error) return <div>Error</div>;
   if (loading) return <div>Loading</div>;
 
-  const { getPkmns } = data;
+  const { getPokemons } = data;
 
   return (
     <>
       <Title color="#bb00c8">Покедекс</Title>
-      <Pdex pokemons={getPkmns} />
+      <Pdex pokemons={getPokemons} />
     </>
   );
 }

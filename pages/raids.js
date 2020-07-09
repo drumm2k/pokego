@@ -6,7 +6,7 @@ import Title from '../components/Title';
 
 export const GET_ALL_RAIDS = gql`
   query {
-    getRds {
+    getRaids {
       tier
       id
       raids {
@@ -33,12 +33,12 @@ export default function Raids() {
   if (error) return <div>Error</div>;
   if (loading) return <div>Loading</div>;
 
-  const { getRds } = data;
+  const { getRaids } = data;
 
   return (
     <>
       <Title color="#009dc8">Рейды</Title>
-      {getRds.map((tier) => (
+      {getRaids.map((tier) => (
         <RaidTier key={tier.id} id={tier.tier} tiersData={tier} />
       ))}
     </>
