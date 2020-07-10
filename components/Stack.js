@@ -12,7 +12,7 @@ const Stack = (props) => {
   const { children, gap, onlyBottom, onlyTop } = props;
 
   return (
-    <Container gap={gap} onlyBottom={onlyBottom}>
+    <Container gap={gap} onlyBottom={onlyBottom} onlyTop={onlyTop}>
       {children}
     </Container>
   );
@@ -22,7 +22,10 @@ Stack.propTypes = {
   gap: PropTypes.number,
   onlyBottom: PropTypes.bool,
   onlyTop: PropTypes.bool,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]).isRequired,
 };
 
 Stack.defaultProps = {

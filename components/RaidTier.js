@@ -31,7 +31,7 @@ export default function RaidTier(props) {
   });
 
   return (
-    <Stack gap="2" onlyBottom>
+    <Stack gap={2} onlyBottom>
       <TierTitle>
         <h3>Уровень {tier}</h3>
         <div>{tierIcon}</div>

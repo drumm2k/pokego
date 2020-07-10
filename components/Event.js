@@ -43,7 +43,7 @@ const EventImg = styled.div`
   min-width: 12rem;
   min-height: 10rem;
 
-  @media (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     min-width: 24rem;
     min-height: 12rem;
   }
@@ -59,7 +59,7 @@ const EventArrow = styled.div`
 
 function Event({ img, name, description, starts, ends }) {
   return (
-    <Stack gap="1">
+    <Stack gap={1}>
       <EventCard>
         <EventImg imgUrl={img} alt={name} />
         <EventData>

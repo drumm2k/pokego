@@ -163,7 +163,7 @@ export default class Pokedex extends Component {
 
     return (
       <>
-        <Stack gap="1">
+        <Stack gap={1}>
           <FilterLabel>
             Поиск:
             <FilterSearchInput
