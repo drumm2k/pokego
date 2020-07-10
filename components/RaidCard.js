@@ -13,7 +13,7 @@ const Card = styled.div`
   padding: 0.5rem 1rem;
   align-items: center;
   border-radius: 10px;
-  max-width: 40rem;
+  width: 100%;
   background-image: linear-gradient(
     to right,
     ${(props) =>

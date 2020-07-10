@@ -12,7 +12,8 @@ const Tier = styled.div`
   display: grid;
   grid-row-gap: 1rem;
 
-  @media (min-width: 768px) {
+  /* Iphone 6,7,8 and up landscape mode */
+  @media screen and (min-width: 667px) {
     grid-column-gap: 1%;
     grid-template-columns: 49.5% 49.5%;
   }
