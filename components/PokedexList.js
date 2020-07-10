@@ -28,6 +28,7 @@ function PokedexList({ pokemons, showModal, activeTab }) {
             type2={pokemon.type2}
             showModal={showModal}
             activeTab={activeTab}
+            enableModal
           />
         ))}
       </PokeList>

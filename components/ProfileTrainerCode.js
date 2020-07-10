@@ -20,7 +20,7 @@ const ProfileTrainerCode = ({ trainerCode }) => {
     <TrainerCodeContainer>
       <p>Код тренера: {trainerCode}</p>
       <IconContainer>
-        <ClipboardCoryIcon stroke="#4a5568" />
+        <ClipboardCoryIcon stroke="#000" />
       </IconContainer>
     </TrainerCodeContainer>
   );

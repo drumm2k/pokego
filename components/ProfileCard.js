@@ -7,6 +7,19 @@ import ProfileFollowers from './ProfileFollowers';
 import ProfileFollowing from './ProfileFollowing';
 import PokeCard from './PokeCard';
 
+const Profile = styled.div`
+  display: grid;
+  grid-gap: 1rem;
+`;
+
+const ProfileItemContainer = styled.div`
+  padding: 2rem;
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgb(216, 216, 220);
+`;
+
 const PokeList = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -14,33 +27,51 @@ const PokeList = styled.div`
 
 const ProfileCard = ({ user }) => {
   return (
-    <>
-      <h3>
-        {user.userName} (id: {user.id})
-      </h3>
-      {user.trainerTeam && (
-        <img
-          src={trainerTeam(user.trainerTeam)}
-          alt="team"
-          width="128"
-          heigth="128"
-        />
-      )}
-      <p>{user.trainerLevel} уровень</p>
-      <TrainerCode trainerCode={user.trainerCode} />
-      <p>
-        Координаты: {user.locLatitude} {user.locLongtitude}
-      </p>
-      <ProfileSocial telegram={user.telegram} />
-      <br />
+    <Profile>
+      <ProfileItemContainer>
+        {user.trainer.team && (
+          <img
+            src={trainerTeam(user.trainer.team)}
+            alt="team"
+            width="128"
+            heigth="128"
+          />
+        )}
+        <h3>{user.userName}</h3>
+        <p>id: {user.id}</p>
+        {user.trainer.level && <p>{user.trainer.level} уровень</p>}
+        {user.trainer.code && <TrainerCode trainerCode={user.trainer.code} />}
+        {user.location.latitude && user.location.longtitude && (
+          <p>
+            Координаты: {user.location.latitude} {user.location.longtitude}
+          </p>
+        )}
+        <p>Создан: {new Date(user.createdAt).toLocaleString()}</p>
+      </ProfileItemContainer>
 
-      <div>
-        trade lists:
+      <ProfileItemContainer>
+        <div>
+          <span>{user.following.length}</span> Following
+          <ProfileFollowing following={user.following} />
+        </div>
+        <br />
+
+        <div>
+          <span>{user.followers.length}</span> Followers
+          <ProfileFollowers followers={user.followers} />
+        </div>
+      </ProfileItemContainer>
+
+      <ProfileItemContainer>
+        <ProfileSocial telegram={user.telegram} />
+      </ProfileItemContainer>
+
+      <ProfileItemContainer>
         {user.tradeLists.map((list) => (
           <div key={list.id}>
             <div>id: {list.id}</div>
             <div>
-              {list.pokemons.length} видов покемонов на трейд
+              Trade List: {list.pokemons.length} покемона
               <PokeList>
                 {list.pokemons.map((pokemon) => (
                   <PokeCard
@@ -58,22 +89,8 @@ const ProfileCard = ({ user }) => {
             <div>private: {list.isPrivate}</div>
           </div>
         ))}
-      </div>
-      <br />
-      <div>
-        <span>{user.following.length}</span> Following
-        <ProfileFollowing following={user.following} />
-      </div>
-      <br />
-
-      <div>
-        <span>{user.followers.length}</span> Followers
-        <ProfileFollowers followers={user.followers} />
-      </div>
-      <br />
-      <p>Создан: {new Date(user.createdAt).toLocaleString()}</p>
-      <br />
-    </>
+      </ProfileItemContainer>
+    </Profile>
   );
 };
 

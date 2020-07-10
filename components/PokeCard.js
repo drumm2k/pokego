@@ -13,11 +13,14 @@ const Card = styled.div`
   border-radius: 5px;
   border: 1px solid rgb(216, 216, 220);
   margin: 0.3rem 0.1rem;
-  cursor: pointer;
+  cursor: ${(props) => props.enableModal && 'pointer'};
   transition: box-shadow 0.3s;
 
   &:hover {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: ${(props) =>
+      props.enableModal
+        ? '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+        : 'none'};
     /* filter: saturate(140%) brightness(115%); */
     transition: box-shadow 0.3s;
   }
@@ -60,7 +63,16 @@ const CardContent = styled.div`
 `;
 
 const PokeCard = (props) => {
-  const { pokedex, name, gen, type1, type2, showModal, activeTab } = props;
+  const {
+    pokedex,
+    name,
+    gen,
+    type1,
+    type2,
+    enableModal,
+    showModal,
+    activeTab,
+  } = props;
 
   const filteredName = pokeCheckName(name);
 
@@ -71,7 +83,7 @@ const PokeCard = (props) => {
   const imgUrlShiny = `url(${pokeImgShiny(filteredName, pokedex)})`;
 
   return (
-    <Card onClick={() => showModal(name)}>
+    <Card onClick={() => enableModal && showModal(name)} enableModal={enableModal}>
       <CardType typeOneColor={typeOneColor} typeTwoColor={typeTwoColor}>
         <CardImg imgUrl={activeTab === 'shiny' ? imgUrlShiny : imgUrl}>
           <div>#{pokedex}</div>
@@ -89,13 +101,17 @@ PokeCard.propTypes = {
   type1: PropTypes.string.isRequired,
   type2: PropTypes.string,
   gen: PropTypes.string,
-  showModal: PropTypes.func.isRequired,
-  activeTab: PropTypes.string.isRequired,
+  enableModal: PropTypes.bool,
+  showModal: PropTypes.func,
+  activeTab: PropTypes.string,
 };
 
 PokeCard.defaultProps = {
   gen: '',
   type2: null,
+  enableModal: false,
+  showModal: null,
+  activeTab: null,
 };
 
 export default PokeCard;

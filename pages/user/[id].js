@@ -1,4 +1,4 @@
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { initializeApollo } from '../../lib/apolloClient';
@@ -10,14 +10,17 @@ export const GET_USER = gql`
     getUser(userName: $userName) {
       userName
       id
-      trainerCode
-      trainerTeam
-      trainerLevel
-      locLatitude
-      locLongtitude
+      trainer {
+        team
+        level
+        code
+      }
+      location {
+        latitude
+        longtitude
+      }
       telegram
       createdAt
-      updatedAt
       tradeLists {
         id
         pokemons {
@@ -36,13 +39,17 @@ export const GET_USER = gql`
       followers {
         follower {
           userName
-          trainerTeam
+          trainer {
+            team
+          }
         }
       }
       following {
         user {
           userName
-          trainerTeam
+          trainer {
+            team
+          }
         }
       }
     }
@@ -74,12 +81,6 @@ export default function Profile() {
     <>
       <Title color="#666">Профиль тренера</Title>
       <ProfileCard user={getUser} />
-
-      <div>
-        <button type="button" onClick={() => Router.back()}>
-          ← Назад
-        </button>
-      </div>
     </>
   );
 }
