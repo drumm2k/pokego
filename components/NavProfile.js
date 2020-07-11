@@ -64,6 +64,7 @@ export default function NavProfile({ icon }) {
     <>
       <ProfileButton
         onClick={() => setOpen(!open)}
+        aria-label="Profile Menu"
         aria-haspopup="true"
         aria-expanded={open}
       >
