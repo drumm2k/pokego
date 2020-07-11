@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const StyledTitle = styled.h2`
+const StyledTitle = styled.h1`
   color: ${(props) => props.color};
 `;
 

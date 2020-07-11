@@ -6,17 +6,24 @@ import Stack from './Stack';
 const TierTitle = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
 `;
 
 const Tier = styled.div`
   display: grid;
   grid-row-gap: 1rem;
+  margin-bottom: 2.5rem;
 
   /* Iphone 6,7,8 and up landscape mode */
   @media screen and (min-width: 667px) {
     grid-column-gap: 1%;
     grid-template-columns: 49.5% 49.5%;
   }
+`;
+
+const TierIconContainer = styled.div`
+  height: 2.8rem;
 `;
 
 export default function RaidTier(props) {
@@ -26,15 +33,21 @@ export default function RaidTier(props) {
   const tierIcon = [...Array(parseInt(tier, 10))].map((e, index) => {
     const key = tier + index;
     return (
-      <img src="/img/raid.png" height="30" width="30" alt="raid tier" key={key} />
+      <img
+        src="/img/raid.png"
+        height="28"
+        width="28"
+        alt="Raid difficulty"
+        key={key}
+      />
     );
   });
 
   return (
-    <Stack gap={2} onlyBottom>
+    <>
       <TierTitle>
-        <h3>Уровень {tier}</h3>
-        <div>{tierIcon}</div>
+        <h4>Уровень {tier}</h4>
+        <TierIconContainer>{tierIcon}</TierIconContainer>
       </TierTitle>
 
       <Tier>
@@ -52,7 +65,7 @@ export default function RaidTier(props) {
           />
         ))}
       </Tier>
-    </Stack>
+    </>
   );
 }
 

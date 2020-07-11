@@ -63,34 +63,33 @@ const GlobalStyle = createGlobalStyle`
 
   h1, h2, h3, h4 {
     font-weight: 700;
-    line-height: 1.2;
   }
 
   h1 {
-    font-size: 3.4rem;
+    font-size: 3.2rem;
+    line-height: 4rem;
     margin-bottom: 1.5rem;
   }
 
   h2 {
     font-size: 2.8rem;
-    margin-bottom: 1.5rem;
+    line-height: 3.6rem;
   }
 
   h3 {
-    font-size: 2.2rem;
-    margin-bottom: 1rem;
+    font-size: 2.4rem;
+    line-height: 3.2rem;
   }
 
   h4 {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    line-height: 2.8rem;
   }
 
   .leaflet-container {
     height: 450px;
     width: 100%;
-    border-radius: 10px;
-    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
   }
 
   #nprogress .bar {
