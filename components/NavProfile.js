@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
 import PropTypes from 'prop-types';
+
+import NavProfileItem from './NavProfileItem';
+
 import UserIcon from '../assets/user.svg';
 import SettingsIcon from '../assets/cog.svg';
 import LogoutIcon from '../assets/logout.svg';
@@ -10,12 +12,12 @@ const ProfileButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 2rem;
+  margin-right: 1.5rem;
   overflow: hidden;
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 0.2rem rgba(150, 150, 150, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(50, 50, 50, 0.5);
     border-radius: 50%;
   }
 `;
@@ -28,7 +30,6 @@ const ProfileAvatar = styled.div`
   height: 3.2rem;
   border-radius: 50%;
   background-color: rgb(245, 245, 245);
-  border: 1px solid rgb(220, 220, 220);
   transition: filter 0.3s;
 
   &:hover {
@@ -43,39 +44,17 @@ const ProfileAvatarIcon = styled.div`
 
 const Dropdown = styled.div`
   position: absolute;
-  top: 72px;
+  top: 7.5rem;
   width: 17.5rem;
-  transform: translateX(-65%);
-  background-color: rgb(245, 245, 245);
-  border: 1px solid rgb(220, 220, 220);
+  right: 5rem;
+  background-color: #fff;
+  border: 1px solid rgb(245, 245, 245);
+  box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
+    0 18px 36px -18px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   padding: 1rem;
   overflow: hidden;
-`;
-
-const DropdownLink = styled.a`
-  display: flex;
-  align-items: center;
-  height: 5rem;
-  border-radius: 5px;
-  padding: 1rem;
-  transition: background 0.3s;
-
-  &:hover {
-    background-color: rgb(220, 220, 220);
-  }
-`;
-
-const DropdownLinkLeftIcon = styled.span`
-  margin-right: 1rem;
-  width: 2.4rem;
-  height: 2.4rem;
-`;
-
-const DropdownLinkRightIcon = styled.span`
-  margin-left: auto;
-  width: 2.4rem;
-  height: 2.4rem;
+  z-index: 50;
 `;
 
 export default function NavProfile({ icon }) {
@@ -83,7 +62,11 @@ export default function NavProfile({ icon }) {
 
   return (
     <>
-      <ProfileButton onClick={() => setOpen(!open)}>
+      <ProfileButton
+        onClick={() => setOpen(!open)}
+        aria-haspopup="true"
+        aria-expanded={open}
+      >
         <ProfileAvatar>
           <ProfileAvatarIcon>{icon}</ProfileAvatarIcon>
         </ProfileAvatar>
@@ -116,40 +99,31 @@ function DropdownMenu({ open, setOpen }) {
 
   return (
     <Dropdown ref={containerRef}>
-      <DropdownItem
+      <NavProfileItem
         leftIcon={<UserIcon />}
         url="/login"
         open={open}
         setOpen={setOpen}
       >
         Войти
-      </DropdownItem>
-      <DropdownItem
+      </NavProfileItem>
+      <NavProfileItem
         leftIcon={<SettingsIcon />}
         url="/"
         open={open}
         setOpen={setOpen}
       >
         Настройки
-      </DropdownItem>
-      <DropdownItem leftIcon={<LogoutIcon />} url="/" open={open} setOpen={setOpen}>
+      </NavProfileItem>
+      <NavProfileItem
+        leftIcon={<LogoutIcon />}
+        url="/"
+        open={open}
+        setOpen={setOpen}
+      >
         Выйти
-      </DropdownItem>
+      </NavProfileItem>
     </Dropdown>
-  );
-}
-
-function DropdownItem(props) {
-  const { children, url, leftIcon, rightIcon, open, setOpen } = props;
-
-  return (
-    <Link href={url} passHref>
-      <DropdownLink onClick={() => setOpen(!open)}>
-        {leftIcon && <DropdownLinkLeftIcon>{leftIcon}</DropdownLinkLeftIcon>}
-        {children}
-        {rightIcon && <DropdownLinkRightIcon>{rightIcon}</DropdownLinkRightIcon>}
-      </DropdownLink>
-    </Link>
   );
 }
 
@@ -164,18 +138,4 @@ NavProfile.defaultProps = {
 DropdownMenu.propTypes = {
   open: PropTypes.bool.isRequired,
   setOpen: PropTypes.func.isRequired,
-};
-
-DropdownItem.propTypes = {
-  children: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
-  leftIcon: PropTypes.oneOfType([PropTypes.object]),
-  rightIcon: PropTypes.oneOfType([PropTypes.object]),
-  open: PropTypes.bool.isRequired,
-  setOpen: PropTypes.func.isRequired,
-};
-
-DropdownItem.defaultProps = {
-  leftIcon: null,
-  rightIcon: null,
 };

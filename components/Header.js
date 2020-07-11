@@ -1,26 +1,16 @@
-import { Component } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
-import Router from 'next/router';
+import NavProfile from './NavProfile';
 import NavMenu from './NavMenu';
-import NavList from './NavList';
+import PlusIcon from '../assets/plus.svg';
 
 const StyledHeader = styled.header`
+  position: relative;
   padding: 3rem 0 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: ${(props) => (props.navOpened ? '#fff' : 'none')};
-  position: ${(props) => (props.navOpened ? 'fixed' : 'relative')};
-  width: ${(props) => (props.navOpened ? 'calc(100% - 3rem);' : '100%')};
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 21;
-
-  @media screen and (min-device-width: 768px) {
-    max-width: 690px;
-  }
+  width: 100%;
 `;
 
 const Logo = styled.a`
@@ -30,39 +20,23 @@ const Logo = styled.a`
   font-weight: 700;
 `;
 
-class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.toggleNav = this.toggleNav.bind(this);
-    this.state = {
-      navOpened: false,
-    };
+const NavPanel = styled.nav`
+  display: flex;
+  align-items: center;
+`;
 
-    Router.events.on('routeChangeComplete', (url) => {
-      this.setState({ navOpened: false });
-    });
-  }
-
-  toggleNav() {
-    const { navOpened } = this.state;
-    const currentState = navOpened;
-    this.setState({ navOpened: !currentState });
-  }
-
-  render() {
-    const { navOpened } = this.state;
-    return (
-      <>
-        <StyledHeader navOpened={navOpened}>
-          <Link href="/">
-            <Logo>PokéGO</Logo>
-          </Link>
-          <NavMenu toggleNav={this.toggleNav} navOpened={navOpened} />
-        </StyledHeader>
-        <NavList navOpened={navOpened} />
-      </>
-    );
-  }
+export default function Header() {
+  return (
+    <>
+      <StyledHeader>
+        <Link href="/">
+          <Logo>PokéGO</Logo>
+        </Link>
+        <NavPanel>
+          <NavProfile icon={<PlusIcon />} />
+          <NavMenu />
+        </NavPanel>
+      </StyledHeader>
+    </>
+  );
 }
-
-export default Header;

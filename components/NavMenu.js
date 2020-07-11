@@ -1,88 +1,42 @@
+import { useState } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import NavProfile from './NavProfile';
-import PlusIcon from '../assets/plus.svg';
-
-const NavPanel = styled.div`
-  display: flex;
-  align-items: center;
-`;
+import NavList from './NavList';
+import MenuIcon from '../assets/menu.svg';
 
 const Button = styled.button`
-  width: 30px;
-  height: 30px;
-  transform: rotate(0deg);
-  transition: 0.5s ease-in-out;
-`;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.8rem;
+  height: 3.2rem;
+  background-color: rgb(245, 245, 245);
+  border-radius: 16px;
 
-const ButtonElem = styled.div`
-  display: block;
-  position: absolute;
-  height: 3px;
-  width: 100%;
-  background: #000;
-  opacity: 1;
-  left: 0;
-  transform: rotate(0deg);
-  transition: 0.15s ease-in-out;
-
-  &:nth-child(1) {
-    top: 4px;
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(50, 50, 50, 0.5);
+    border-radius: 16px;
   }
 
-  &:nth-child(2),
-  :nth-child(3) {
-    top: 14px;
-  }
-
-  &:nth-child(4) {
-    top: 24px;
-  }
-
-  &.opened :nth-child(1) {
-    top: 14px;
-    width: 0%;
-    left: 50%;
-  }
-
-  &.opened :nth-child(2) {
-    transform: rotate(45deg);
-  }
-
-  &.opened :nth-child(3) {
-    transform: rotate(-45deg);
-  }
-
-  &.opened :nth-child(4) {
-    top: 14px;
-    width: 0%;
-    left: 50%;
+  &:hover {
+    filter: brightness(0.9);
   }
 `;
 
-function NavMenu(props) {
-  const { navOpened, toggleNav } = props;
+export default function NavMenu() {
+  const [open, setOpen] = useState();
+
   return (
-    <NavPanel>
-      <NavProfile icon={<PlusIcon />} />
+    <>
       <Button
         aria-label="Navigation Menu"
         aria-haspopup="true"
-        aria-expanded={toggleNav}
-        onClick={toggleNav}
+        aria-expanded={open}
+        onClick={() => setOpen(!open)}
       >
-        <ButtonElem className={navOpened ? 'opened' : null} />
-        <ButtonElem className={navOpened ? 'opened' : null} />
-        <ButtonElem className={navOpened ? 'opened' : null} />
-        <ButtonElem className={navOpened ? 'opened' : null} />
+        <MenuIcon />
       </Button>
-    </NavPanel>
+      {open && <NavList open={open} setOpen={setOpen} />}
+    </>
   );
 }
-
-NavMenu.propTypes = {
-  navOpened: PropTypes.bool.isRequired,
-  toggleNav: PropTypes.func.isRequired,
-};
-
-export default NavMenu;

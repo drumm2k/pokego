@@ -2,12 +2,19 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Link from 'next/link';
 
-const StyledNavItem = styled.li`
+const NavItemLink = styled.a`
   display: inline-block;
-  border-bottom: 1px solid #eaeaea;
-  height: 4.8rem;
-  line-height: 4.8rem;
-  margin: 0 1.6rem;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 5px;
+  height: 5rem;
+  line-height: 5rem;
+  transition: background 0.3s;
+
+  &:hover {
+    background-color: rgb(240, 240, 240);
+  }
 
   &:last-child {
     border-bottom: none;
@@ -15,25 +22,26 @@ const StyledNavItem = styled.li`
 `;
 
 const NavItem = (props) => {
-  const { url, name } = props;
+  const { url, children, open, setOpen } = props;
 
   return (
-    <StyledNavItem role="menuitem">
-      <Link href={url}>
-        <a>{name}</a>
-      </Link>
-    </StyledNavItem>
+    <Link href={url} passHref>
+      <NavItemLink role="menuitem" onClick={() => setOpen(!open)}>
+        {children}
+      </NavItemLink>
+    </Link>
   );
 };
 
 NavItem.propTypes = {
   url: PropTypes.string,
-  name: PropTypes.string,
+  children: PropTypes.string.isRequired,
+  open: PropTypes.bool.isRequired,
+  setOpen: PropTypes.func.isRequired,
 };
 
 NavItem.defaultProps = {
   url: '/',
-  name: '',
 };
 
 export default NavItem;
