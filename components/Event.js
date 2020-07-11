@@ -70,7 +70,7 @@ function Event({ img, name, description, starts, ends }) {
           <EventTimer start={starts} end={ends} />
         </EventData>
         <EventArrow>
-          <ChevronRightIcon stroke="#4a5568" />
+          <ChevronRightIcon stroke="rgb(90, 90, 90)" />
         </EventArrow>
       </EventCard>
     </Stack>

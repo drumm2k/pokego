@@ -101,7 +101,7 @@ function DropdownMenu({ open, setOpen }) {
   return (
     <Dropdown ref={containerRef}>
       <NavProfileItem
-        leftIcon={<UserIcon />}
+        leftIcon={<UserIcon stroke="rgb(90, 90, 90)" />}
         url="/login"
         open={open}
         setOpen={setOpen}
@@ -109,7 +109,7 @@ function DropdownMenu({ open, setOpen }) {
         Войти
       </NavProfileItem>
       <NavProfileItem
-        leftIcon={<SettingsIcon />}
+        leftIcon={<SettingsIcon stroke="rgb(90, 90, 90)" />}
         url="/"
         open={open}
         setOpen={setOpen}
@@ -117,7 +117,7 @@ function DropdownMenu({ open, setOpen }) {
         Настройки
       </NavProfileItem>
       <NavProfileItem
-        leftIcon={<LogoutIcon />}
+        leftIcon={<LogoutIcon stroke="rgb(90, 90, 90)" />}
         url="/"
         open={open}
         setOpen={setOpen}

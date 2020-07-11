@@ -20,7 +20,7 @@ const ProfileSocial = ({ telegram }) => {
   return (
     <SocialContainer>
       <IconContainer>
-        <TelegramIcon />
+        <TelegramIcon fill="rgb(90, 90, 90)" />
       </IconContainer>
       <a href={telegramLink} target="_blank" rel="noopener noreferrer">
         {telegram}

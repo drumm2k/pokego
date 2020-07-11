@@ -18,7 +18,7 @@ const EventTimerOutput = styled.p`
   letter-spacing: 1px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-  color: #4a5568;
+  color: rgb(90, 90, 90);
   margin-left: 1rem;
 `;
 
@@ -102,7 +102,7 @@ class EventTimer extends Component {
     return (
       <EventTimerWrapper>
         <ClockContainer>
-          <ClockIcon stroke="#4a5568" />
+          <ClockIcon stroke="rgb(90, 90, 90)" />
         </ClockContainer>
         <EventTimerOutput>{output}</EventTimerOutput>
       </EventTimerWrapper>

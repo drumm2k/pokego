@@ -5,7 +5,7 @@ const Form = styled.form`
   grid-gap: 2rem;
   max-width: 300px;
   margin: 0 auto;
-  border: 1px solid #edf2f4;
+  border: 1px solid rgb(245, 245, 245);
   border-radius: 10px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   padding: 3rem;
@@ -52,15 +52,26 @@ const FormInput = styled.input`
 `;
 
 const FormLabel = styled.label`
-  color: #5e5e5e;
+  color: #000;
   font-weight: 700;
   display: flex;
 `;
 
 const SignInButton = styled.button`
   padding: 1rem;
-  border: 1px solid #a3a9a9;
+  background-color: rgb(245, 245, 245);
+  border: 1px solid rgb(216, 216, 220);
   border-radius: 5px;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(50, 50, 50, 0.5);
+    border-radius: 5px;
+  }
+
+  &:hover {
+    filter: brightness(0.9);
+  }
 `;
 
 const Icon = styled.span`
@@ -90,7 +101,7 @@ function Login() {
           <span className="toggle-password" />
         </FormField>
 
-        <SignInButton disabled>Войти</SignInButton>
+        <SignInButton>Войти</SignInButton>
         <div>Не зарегистрированы?</div>
       </Form>
     </>
