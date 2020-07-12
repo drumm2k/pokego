@@ -53,8 +53,8 @@ const EventArrow = styled.div`
   align-self: center;
   margin-left: auto;
   margin-right: 0.5rem;
-  min-width: 2rem;
-  width: 2rem;
+  height: 2.4rem;
+  width: 2.4rem;
 `;
 
 function Event({ img, name, description, starts, ends }) {
@@ -70,7 +70,7 @@ function Event({ img, name, description, starts, ends }) {
           <EventTimer start={starts} end={ends} />
         </EventData>
         <EventArrow>
-          <ChevronRightIcon stroke="rgb(90, 90, 90)" />
+          <ChevronRightIcon />
         </EventArrow>
       </EventCard>
     </Stack>

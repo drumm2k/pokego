@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import QRCode from 'qrcode.react';
 
-import ClipboardCopyIcon from '../assets/clipboard_copy.svg';
+import ClipboardIcon from '../assets/clipboard.svg';
 
 const TrainerCodeContainer = styled.div`
   display: flex;
@@ -10,8 +10,8 @@ const TrainerCodeContainer = styled.div`
 `;
 
 const CopyButton = styled.button`
-  width: 2.3rem;
-  height: 2.3rem;
+  width: 2.4rem;
+  height: 2.4rem;
   margin-left: 0.5rem;
 `;
 
@@ -34,8 +34,8 @@ function ProfileTrainerCode({ trainerCode }) {
         <p>
           Код тренера: <span>{trainerCode}</span>
         </p>
-        <CopyButton onClick={copyTrainerCode}>
-          <ClipboardCopyIcon stroke="rgb(90, 90, 90)" />
+        <CopyButton>
+          <ClipboardIcon onClick={copyTrainerCode} />
         </CopyButton>
       </TrainerCodeContainer>
     </>

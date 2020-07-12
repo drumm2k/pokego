@@ -9,6 +9,8 @@ const EventTimerWrapper = styled.div`
 `;
 
 const ClockContainer = styled.div`
+  display: flex;
+  align-items: center;
   height: 20px;
   width: 20px;
 `;
@@ -18,7 +20,6 @@ const EventTimerOutput = styled.p`
   letter-spacing: 1px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-  color: rgb(90, 90, 90);
   margin-left: 1rem;
 `;
 
@@ -102,7 +103,7 @@ class EventTimer extends Component {
     return (
       <EventTimerWrapper>
         <ClockContainer>
-          <ClockIcon stroke="rgb(90, 90, 90)" />
+          <ClockIcon />
         </ClockContainer>
         <EventTimerOutput>{output}</EventTimerOutput>
       </EventTimerWrapper>
