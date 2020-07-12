@@ -1,6 +1,6 @@
-import { useState, useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import QRCode from 'qrcode.react';
 
 import ClipboardCopyIcon from '../assets/clipboard_copy.svg';
 
@@ -28,14 +28,17 @@ function ProfileTrainerCode({ trainerCode }) {
   }
 
   return (
-    <TrainerCodeContainer>
-      <p>
-        Код тренера: <span>{trainerCode}</span>
-      </p>
-      <CopyButton onClick={copyTrainerCode}>
-        <ClipboardCopyIcon stroke="rgb(90, 90, 90)" />
-      </CopyButton>
-    </TrainerCodeContainer>
+    <>
+      <QRCode value={trainerCode} renderAs="svg" size={128} />
+      <TrainerCodeContainer>
+        <p>
+          Код тренера: <span>{trainerCode}</span>
+        </p>
+        <CopyButton onClick={copyTrainerCode}>
+          <ClipboardCopyIcon stroke="rgb(90, 90, 90)" />
+        </CopyButton>
+      </TrainerCodeContainer>
+    </>
   );
 }
 
