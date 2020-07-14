@@ -1,5 +1,4 @@
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { gql, useQuery } from '@apollo/client';
 import { initializeApollo } from '../lib/apolloClient';
 import RaidTier from '../components/RaidTier';
 import Title from '../components/Title';

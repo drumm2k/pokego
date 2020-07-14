@@ -1,7 +1,6 @@
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
-import gql from 'graphql-tag';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { gql, useQuery, useMutation } from '@apollo/client';
 import styled from 'styled-components';
 
 import Title from '../../components/Title';

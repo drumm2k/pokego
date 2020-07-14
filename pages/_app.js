@@ -1,5 +1,5 @@
 import Router from 'next/router';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/client';
 import NProgress from 'nprogress'; // nprogress module
 import PropTypes from 'prop-types';
 import { useApollo } from '../lib/apolloClient';
