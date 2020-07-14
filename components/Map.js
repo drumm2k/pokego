@@ -7,7 +7,9 @@ import { LeafletStyles, MarkerClusterStyles } from './MapStyles';
 import LocationMarker from '../assets/location_marker.svg';
 
 const DetectMyLocation = styled.a`
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: #fff;
   width: 30px;
   height: 30px;
