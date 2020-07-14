@@ -62,6 +62,7 @@ const SignInButton = styled.button`
   background-color: rgb(245, 245, 245);
   border: 1px solid rgb(216, 216, 220);
   border-radius: 5px;
+  transition: filter 0.3s;
 
   &:focus {
     outline: none;

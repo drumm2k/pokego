@@ -11,6 +11,7 @@ const Button = styled.button`
   height: 3.2rem;
   background-color: rgb(245, 245, 245);
   border-radius: 16px;
+  transition: filter 0.3s;
 
   &:focus {
     outline: none;
