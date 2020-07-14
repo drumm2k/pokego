@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
-// import { initializeApollo } from '../../lib/apolloClient';
+import { initializeApollo } from '../../lib/apolloClient';
 import Title from '../../components/Title';
 import ProfileCard from '../../components/ProfileCard';
 
@@ -84,31 +84,31 @@ export default function Profile() {
   );
 }
 
-// export async function getStaticProps({ params }) {
-//   const apolloClient = initializeApollo();
+export async function getStaticProps({ params }) {
+  const apolloClient = initializeApollo();
 
-//   await apolloClient.query({ query: GET_USER, variables: { userName: params.id } });
+  await apolloClient.query({ query: GET_USER, variables: { userName: params.id } });
 
-//   return {
-//     props: {
-//       initialApolloState: apolloClient.cache.extract(),
-//     },
-//     unstable_revalidate: 1,
-//   };
-// }
+  return {
+    props: {
+      initialApolloState: apolloClient.cache.extract(),
+    },
+    unstable_revalidate: 1,
+  };
+}
 
-// export async function getStaticPaths() {
-//   const apolloClient = initializeApollo();
+export async function getStaticPaths() {
+  const apolloClient = initializeApollo();
 
-//   const res = await apolloClient.query({ query: GET_USERS });
-//   const { getUsers } = res.data;
+  const res = await apolloClient.query({ query: GET_USERS });
+  const { getUsers } = res.data;
 
-//   const paths = getUsers.map((user) => ({
-//     params: { id: user.userName },
-//   }));
+  const paths = getUsers.map((user) => ({
+    params: { id: user.userName },
+  }));
 
-//   return {
-//     paths,
-//     fallback: true,
-//   };
-// }
+  return {
+    paths,
+    fallback: true,
+  };
+}

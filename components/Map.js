@@ -14,7 +14,6 @@ const DetectMyLocation = styled.a`
   width: 30px;
   height: 30px;
   line-height: 30px;
-  padding: 3px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
   border-radius: 4px;
   background-position: 50% 50%;
