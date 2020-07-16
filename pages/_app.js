@@ -1,7 +1,9 @@
 import Router from 'next/router';
-import { ApolloProvider } from '@apollo/client';
-import NProgress from 'nprogress'; // nprogress module
+import { ThemeProvider } from 'styled-components';
 import PropTypes from 'prop-types';
+import { ApolloProvider } from '@apollo/client';
+import NProgress from 'nprogress';
+import theme from '../config/theme';
 import { useApollo } from '../lib/apolloClient';
 import 'nprogress/nprogress.css'; // styles of nprogress
 import Page from '../components/Page';
@@ -17,9 +19,11 @@ export default function App({ Component, pageProps }) {
 
   return (
     <ApolloProvider client={apolloClient}>
-      <Page>
-        <Component {...pageProps} />
-      </Page>
+      <ThemeProvider theme={theme}>
+        <Page>
+          <Component {...pageProps} />
+        </Page>
+      </ThemeProvider>
     </ApolloProvider>
   );
 }
