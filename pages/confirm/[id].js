@@ -26,14 +26,14 @@ export const CONFIRM_RESEND = gql`
 const Message = styled.div`
   display: flex;
   align-items: center;
-  color: #fff;
-  padding: 2rem;
-  margin-bottom: 1.5rem;
-  background: ${(props) => props.bgColor};
-  border-radius: 10px;
+  color: ${(p) => p.theme.color.white};
+  padding: ${(p) => p.theme.spacing.s8};
+  margin-bottom: ${(p) => p.theme.spacing.s6};
+  background: ${(p) => p.bgColor};
+  border-radius: ${(p) => p.theme.border.radius300};
 
   p {
-    margin-left: 0.5rem;
+    margin-left: ${(p) => p.theme.spacing.s2};
   }
 `;
 

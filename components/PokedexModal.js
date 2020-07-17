@@ -34,12 +34,12 @@ const ModalWindowInner = styled.div`
   z-index: 50;
   width: calc(100% - 1rem);
   height: 80%;
-  margin: 0 0.5rem;
-  border-radius: 10px 10px 0 0;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  background-color: #fff;
+  margin: 0 ${(p) => p.theme.spacing.s2};
+  border-radius: ${(p) => p.theme.border.radius300}
+    ${(p) => p.theme.border.radius300} 0 0;
+  background-color: ${(p) => p.theme.color.white};
   animation-name: ${modalOnEnterKeyframes};
-  animation-duration: 300ms;
+  animation-duration: 0.25s;
   animation-timing-function: ease-in;
 
   @media screen and (min-device-width: 768px) {
@@ -50,19 +50,19 @@ const ModalWindowInner = styled.div`
     height: 50rem;
     max-width: 80%;
     max-height: 100%;
-    border-radius: 10px;
+    border-radius: ${(p) => p.theme.border.radius300};
     animation-name: none;
   }
 `;
 
 const ModalWindowGuts = styled.div`
-  font-size: 1.6rem;
+  font-size: ${(p) => p.theme.font.size.sm};
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  padding: 0.5rem;
+  padding: ${(p) => p.theme.spacing.s2};
   overflow: auto;
 `;
 
@@ -73,18 +73,18 @@ const ModalOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: ${(p) => p.theme.modal.overlay};
 `;
 
 const ModalCloseButton = styled.button`
   position: absolute;
-  top: 2rem;
-  right: 2rem;
+  top: ${(p) => p.theme.spacing.s8};
+  right: ${(p) => p.theme.spacing.s8};
   z-index: 1;
-  width: 24px;
-  height: 24px;
+  width: 2.4rem;
+  height: 2.4rem;
   opacity: 0.7;
-  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(${(p) => p.theme.lighting.hard});
 
   &:hover {
     cursor: pointer;
@@ -97,9 +97,9 @@ const ModalCloseButton = styled.button`
     content: '';
     top: 0;
     left: 50%;
-    height: 24px;
+    height: 2.4rem;
     width: 3px;
-    background-color: #fff;
+    background-color: ${(p) => p.theme.color.white};
   }
   &:before {
     transform: rotate(45deg);
@@ -110,10 +110,10 @@ const ModalCloseButton = styled.button`
 `;
 
 const PokeCard = styled.div`
-  color: #fff;
-  border-radius: 10px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  color: ${(p) => p.theme.color.white};
+  border-radius: ${(p) => p.theme.border.radius300};
+  padding: ${(p) => p.theme.spacing.s6};
+  box-shadow: ${(p) => p.theme.lighting.shadow200};
   background-image: linear-gradient(
     ${(props) =>
       props.typeTwoColor
@@ -123,7 +123,7 @@ const PokeCard = styled.div`
 `;
 
 const PokeTitle = styled.h3`
-  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(${(p) => p.theme.lighting.hard});
   max-width: 85%;
 `;
 
@@ -140,7 +140,7 @@ const PokeWeather = styled.div`
 `;
 
 const PokeInfoContainer = styled.div`
-  padding: 1.5rem;
+  padding: ${(p) => p.theme.spacing.s6};
 `;
 
 const PokeInfoItem = styled.div`
@@ -149,12 +149,12 @@ const PokeInfoItem = styled.div`
 `;
 
 const PokeInfoTitles = styled.h4`
-  margin-bottom: 0.5rem;
+  margin-bottom: ${(p) => p.theme.spacing.s2};
 `;
 
 const PokeStatsContainer = styled.div`
   display: grid;
-  grid-column-gap: 1rem;
+  grid-column-gap: ${(p) => p.theme.spacing.s4};
   grid-template-columns: 100% 100%;
 
   @media screen and (min-device-width: 768px) {
@@ -168,24 +168,24 @@ const PokeStatsNumbers = styled.p`
 `;
 
 const PokeTypeContainer = styled.div`
-  padding-bottom: 1rem;
+  padding-bottom: ${(p) => p.theme.spacing.s4};
 `;
 
 const PokeType = styled.span`
   display: inline-block;
-  padding: 0.1rem 0.7rem;
-  margin-right: 0.3rem;
-  margin-bottom: 0.3rem;
-  color: #eee;
-  font-size: 1.4rem;
-  font-weight: 700;
+  padding: 0.1rem ${(p) => p.theme.spacing.s3};
+  margin-right: ${(p) => p.theme.spacing.s1};
+  margin-bottom: ${(p) => p.theme.spacing.s1};
+  color: ${(p) => p.theme.color.gray50};
+  font-size: ${(p) => p.theme.font.size.xs};
+  font-weight: ${(p) => p.theme.font.weight.bold};
   line-height: 1.1;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  background-color: ${(props) => props.typeColor};
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
-  border-radius: 15px;
+  background-color: ${(p) => p.typeColor};
+  box-shadow: ${(p) => p.theme.lighting.light};
+  border-radius: ${(p) => p.theme.border.radius400};
 `;
 
 const EvoItemContainer = styled.div`

@@ -7,16 +7,16 @@ const NavProfileLink = styled.a`
   align-items: center;
   height: 5rem;
   border-radius: 5px;
-  padding: 1rem;
-  transition: background 0.3s;
+  padding: ${(p) => p.theme.spacing.s4};
+  transition: background 0.25s;
 
   &:hover {
-    background-color: rgb(240, 240, 240);
+    background-color: ${(p) => p.theme.color.gray100};
   }
 `;
 
 const NavItemLeftIcon = styled.span`
-  margin-right: 1rem;
+  margin-right: ${(p) => p.theme.spacing.s4};
   width: 2.4rem;
   height: 2.4rem;
 `;

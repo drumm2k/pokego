@@ -6,7 +6,7 @@ import PlusIcon from '../assets/plus.svg';
 
 const StyledHeader = styled.header`
   position: relative;
-  padding: 3rem 0 1.5rem;
+  padding: ${(p) => p.theme.spacing.s12} 0 ${(p) => p.theme.spacing.s6};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,10 +14,10 @@ const StyledHeader = styled.header`
 `;
 
 const Logo = styled.a`
-  color: #000;
+  color: ${(p) => p.theme.color.black};
   font-size: 3.6rem;
   line-height: 1.125;
-  font-weight: 700;
+  font-weight: ${(p) => p.theme.font.weight.bold};
 `;
 
 const NavPanel = styled.nav`

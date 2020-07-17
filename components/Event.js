@@ -7,16 +7,20 @@ import Stack from './Stack';
 const EventCard = styled.div`
   display: flex;
   max-width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  border: 1px solid rgb(216, 216, 220);
+  border-radius: ${(p) => p.theme.border.radius300};
+  box-shadow: ${(p) => p.theme.lighting.shadow100};
+  border: ${(p) => p.theme.border.border300};
   overflow: hidden;
   cursor: pointer;
-  transition: box-shadow 0.3s;
+  outline: none;
+  transition: box-shadow 0.25s;
 
   &:hover {
-    box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.2);
-    transition: box-shadow 0.3s;
+    box-shadow: ${(p) => p.theme.lighting.shadow300};
+  }
+
+  &:focus {
+    box-shadow: ${(p) => p.theme.input.focus};
   }
 `;
 
@@ -24,21 +28,21 @@ const EventData = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1rem;
+  padding: ${(p) => p.theme.spacing.s4};
 `;
 
 const EventTitle = styled.h4`
-  color: #000;
+  color: ${(p) => p.theme.color.black};
 `;
 
 const EventDesc = styled.p`
-  font-size: 1.4rem;
-  color: #4a5568;
-  padding-bottom: 0.5rem;
+  font-size: ${(p) => p.theme.font.size.xs};
+  color: ${(p) => p.theme.color.gray600};
+  padding-bottom: ${(p) => p.theme.spacing.s2};
 `;
 
 const EventImg = styled.div`
-  background: url(${(props) => props.imgUrl}) 50% 50% no-repeat;
+  background: url(${(p) => p.imgUrl}) 50% 50% no-repeat;
   background-size: cover;
   min-width: 12rem;
   min-height: 10rem;
@@ -52,7 +56,7 @@ const EventImg = styled.div`
 const EventArrow = styled.div`
   align-self: center;
   margin-left: auto;
-  margin-right: 0.5rem;
+  margin-right: ${(p) => p.theme.spacing.s2};
   height: 2.4rem;
   width: 2.4rem;
 `;
@@ -60,7 +64,7 @@ const EventArrow = styled.div`
 function Event({ img, name, description, starts, ends }) {
   return (
     <Stack gap={1}>
-      <EventCard>
+      <EventCard tabIndex="0">
         <EventImg imgUrl={img} alt={name} />
         <EventData>
           <div>

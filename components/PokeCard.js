@@ -10,8 +10,8 @@ const Card = styled.div`
   overflow: hidden;
   font-size: ${(p) => p.theme.font.size.xss};
   box-sizing: border-box;
-  border-radius: ${(p) => p.theme.borders.radius200};
-  border: ${(p) => p.theme.borders.border300};
+  border-radius: ${(p) => p.theme.border.radius200};
+  border: ${(p) => p.theme.border.border300};
   margin: 0.3rem 0.1rem;
   cursor: ${(p) => p.enableModal && 'pointer'};
   transition: box-shadow 0.25s;

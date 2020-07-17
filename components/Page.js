@@ -53,8 +53,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   ::selection {
-    background-color: #222;
-    color: #fff;
+    background-color: ${(p) => p.theme.color.gray700};
+    color: ${(p) => p.theme.color.white};
   }
 
   h1, h2, h3, h4 {
@@ -85,7 +85,7 @@ const GlobalStyle = createGlobalStyle`
   .leaflet-container {
     height: 450px;
     width: 100%;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    box-shadow: ${(p) => p.theme.lighting.shadow200};
   }
 
   #nprogress .bar {
@@ -98,7 +98,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Wrapper = styled.div`
-  padding: 0 1.5rem;
+  padding: 0 ${(p) => p.theme.spacing.s6};
   margin: 0 auto;
 
   @media screen and (min-device-width: 768px) {

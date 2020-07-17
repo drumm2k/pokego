@@ -7,12 +7,12 @@ import pokeCheckName from '../lib/pokeName';
 import { pokeImg } from '../lib/pokeImg';
 
 const Card = styled.div`
-  color: #fff;
-  font-size: 1.4rem;
+  color: ${(p) => p.theme.color.white};
+  font-size: ${(p) => p.theme.font.size.xs};
   display: flex;
-  padding: 0.5rem 1rem;
+  padding: ${(p) => p.theme.spacing.s2} ${(p) => p.theme.spacing.s4};
   align-items: center;
-  border-radius: 10px;
+  border-radius: ${(p) => p.theme.border.radius300};
   width: 100%;
   background-image: linear-gradient(
     to right,
@@ -33,16 +33,16 @@ const CardImg = styled.div`
   width: 7.5rem;
   height: 7.5rem;
   min-width: 7.5rem;
-  margin-right: 1.5rem;
+  margin-right: ${(p) => p.theme.spacing.s6};
 `;
 
 const Shiny = styled.div`
   position: absolute;
-  right: 0.2rem;
-  top: 0.2rem;
+  right: ${(p) => p.theme.spacing.s1};
+  top: ${(p) => p.theme.spacing.s1};
   width: 2.6rem;
   height: 2.6rem;
-  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(${(p) => p.theme.lighting.hard});
 
   &:before {
     content: '';
@@ -92,12 +92,12 @@ const RaidContent = styled.div`
 `;
 
 const RaidTitle = styled.div`
-  font-size: 1.6rem;
-  font-weight: 700;
+  font-size: ${(p) => p.theme.font.size.sm};
+  font-weight: ${(p) => p.theme.font.weight.bold};
   display: flex;
   align-items: center;
   justify-content: space-between;
-  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(${(p) => p.theme.lighting.hard});
 `;
 
 const WeatherIcons = styled.div`
@@ -107,19 +107,19 @@ const WeatherIcons = styled.div`
 
 const RaidType = styled.span`
   display: inline-block;
-  padding: 0.1rem 0.7rem;
-  margin-right: 0.3rem;
-  margin-bottom: 0.3rem;
-  color: #eee;
-  font-size: 1.4rem;
-  font-weight: 700;
+  padding: 0.1rem ${(p) => p.theme.spacing.s3};
+  margin-right: ${(p) => p.theme.spacing.s1};
+  margin-bottom: ${(p) => p.theme.spacing.s1};
+  color: ${(p) => p.theme.color.gray50};
+  font-size: ${(p) => p.theme.font.size.xs};
+  font-weight: ${(p) => p.theme.font.weight.bold};
   line-height: 1.1;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  background-color: ${(props) => props.typeColor};
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
-  border-radius: 15px;
+  background-color: ${(p) => p.typeColor};
+  box-shadow: ${(p) => p.theme.lighting.light};
+  border-radius: ${(p) => p.theme.border.radius400};
 `;
 
 const RaidCpContainer = styled.div`

@@ -14,7 +14,7 @@ export default {
     },
   },
 
-  colors: {
+  color: {
     black: '#000000',
     white: '#ffffff',
     accent: '#aa306f',
@@ -31,7 +31,7 @@ export default {
     gray900: '#141414',
   },
 
-  borders: {
+  border: {
     border100: 'solid 1px hsla(0, 0%, 0%, 0.04)',
     border200: 'solid 1px hsla(0, 0%, 0%, 0.08)',
     border300: 'solid 1px hsla(0, 0%, 0%, 0.12)',
@@ -47,7 +47,7 @@ export default {
     radius500: '16px',
   },
 
-  breakpoints: {
+  breakpoint: {
     small: '320px',
     medium: '600px',
     large: '1136px',
@@ -58,6 +58,8 @@ export default {
     shadow200: '0 2px 8px hsla(0, 0%, 0%, 0.16)',
     shadow300: '0 4px 16px hsla(0, 0%, 0%, 0.16)',
     shadow400: '0 8px 24px hsla(0, 0%, 0%, 0.16)',
+    light: '0 0 0 1px rgba(0, 0, 0, 0.05)',
+    hard: '0 0 3px rgba(0, 0, 0, 0.3)',
   },
 
   input: {
@@ -66,7 +68,7 @@ export default {
     invalid: '0 0 0 3px rgba(219, 26, 26, 0.36)',
   },
 
-  sizing: {
+  spacing: {
     s0: '0',
     s1: '0.25rem',
     s2: '0.5rem',
@@ -79,5 +81,9 @@ export default {
     s12: '3rem',
     s16: '4rem',
     s20: '5rem',
+  },
+
+  modal: {
+    overlay: 'rgba(0, 0, 0, 0.6)',
   },
 };

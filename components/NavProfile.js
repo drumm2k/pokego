@@ -12,13 +12,13 @@ const ProfileButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 1.5rem;
+  margin-right: ${(p) => p.theme.spacing.s6};
   overflow: hidden;
+  border-radius: 50%;
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 0.2rem rgba(50, 50, 50, 0.5);
-    border-radius: 50%;
+    box-shadow: ${(p) => p.theme.input.focus};
   }
 `;
 
@@ -29,8 +29,8 @@ const ProfileAvatar = styled.div`
   width: 3.2rem;
   height: 3.2rem;
   border-radius: 50%;
-  background-color: rgb(245, 245, 245);
-  transition: filter 0.3s;
+  background-color: ${(p) => p.theme.color.gray100};
+  transition: filter 0.25s;
 
   &:hover {
     filter: brightness(0.9);
@@ -47,12 +47,11 @@ const Dropdown = styled.div`
   top: 7.5rem;
   width: 17.5rem;
   right: 5rem;
-  background-color: #fff;
-  border: 1px solid rgb(245, 245, 245);
-  box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
-    0 18px 36px -18px rgba(0, 0, 0, 0.3);
-  border-radius: 5px;
-  padding: 1rem;
+  background-color: ${(p) => p.theme.color.white};
+  border: ${(p) => p.theme.border.border100};
+  box-shadow: ${(p) => p.theme.lighting.shadow400};
+  border-radius: ${(p) => p.theme.border.radius200};
+  padding: ${(p) => p.theme.spacing.s4};
   overflow: hidden;
   z-index: 50;
 `;

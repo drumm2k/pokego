@@ -11,39 +11,25 @@ const FilterTabs = styled.ul`
   display: flex;
   text-align: center;
   flex-wrap: wrap;
-  color: ${(p) => p.theme.colors.black};
-  margin-bottom: ${(p) => p.theme.sizing.s3};
+  color: ${(p) => p.theme.color.black};
+  margin-bottom: ${(p) => p.theme.spacing.s3};
 `;
 
 const FilterTabsItem = styled.li`
   flex: 1 1 0%;
   display: block;
-  padding: ${(p) => p.theme.sizing.s2} ${(p) => p.theme.sizing.s8};
-  border: ${(p) => p.theme.borders.border300};
-  border-bottom: ${(p) => p.theme.borders.border300};
-  border-radius: ${(p) => p.theme.borders.radius400}
-    ${(p) => p.theme.borders.radius400} 0 0;
-  background-color: ${(p) => p.theme.colors.gray50};
+  padding: ${(p) => p.theme.spacing.s2} ${(p) => p.theme.spacing.s8};
+  border: ${(p) => p.theme.border.border300};
+  border-bottom: ${(p) => p.theme.border.border300};
+  border-radius: ${(p) => p.theme.border.radius400}
+    ${(p) => p.theme.border.radius400} 0 0;
+  background-color: ${(p) => p.theme.color.gray50};
   cursor: pointer;
 
   &.tab-active {
     background-color: transparent;
-    border: ${(p) => p.theme.borders.border800};
+    border: ${(p) => p.theme.border.border800};
     border-bottom: none;
-  }
-`;
-
-const StyledSelect = styled.select`
-  border: 1px solid rgb(220, 220, 220);
-  width: 20rem;
-  /* appearance: none; */
-  padding: 0.5rem 1rem;
-  margin-left: 1rem;
-
-  &:focus {
-    border: 1px solid rgb(150, 150, 150);
-    box-shadow: 0 0 0 0.2rem rgba(150, 150, 150, 0.5);
-    outline: none;
   }
 `;
 
@@ -160,7 +146,7 @@ export default class Pokedex extends Component {
           </Label>
           <Label>
             Поколения:
-            <StyledSelect value={gen} onChange={this.filterGen}>
+            <select value={gen} onChange={this.filterGen}>
               <option defaultValue value="All">
                 Все
               </option>
@@ -171,7 +157,7 @@ export default class Pokedex extends Component {
               <option value="GEN_5">5 - Unova</option>
               <option value="GEN_7">7 - Alola</option>
               <option value="GEN_8">8 - Galar</option>
-            </StyledSelect>
+            </select>
           </Label>
           <Label>
             <Checkbox checked={legendaryOnly} onChange={this.filterLegendary} />

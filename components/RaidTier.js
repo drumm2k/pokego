@@ -7,13 +7,13 @@ const TierTitle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: ${(p) => p.theme.spacing.s2};
 `;
 
 const Tier = styled.div`
   display: grid;
-  grid-row-gap: 1rem;
-  margin-bottom: 2.5rem;
+  grid-row-gap: ${(p) => p.theme.spacing.s4};
+  margin-bottom: ${(p) => p.theme.spacing.s10};
 
   /* Iphone 6,7,8 and up landscape mode */
   @media screen and (min-width: 667px) {

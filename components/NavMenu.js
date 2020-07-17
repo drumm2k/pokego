@@ -9,14 +9,13 @@ const Button = styled.button`
   justify-content: center;
   width: 4.8rem;
   height: 3.2rem;
-  background-color: rgb(245, 245, 245);
-  border-radius: 16px;
-  transition: filter 0.3s;
+  background-color: ${(p) => p.theme.color.gray100};
+  border-radius: ${(p) => p.theme.border.radius500};
+  transition: filter 0.25s;
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 0.2rem rgba(50, 50, 50, 0.5);
-    border-radius: 16px;
+    box-shadow: ${(p) => p.theme.input.focus};
   }
 
   &:hover {

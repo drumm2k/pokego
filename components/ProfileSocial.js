@@ -11,7 +11,7 @@ const SocialContainer = styled.div`
 const IconContainer = styled.div`
   width: 2.4rem;
   height: 2.4rem;
-  margin-right: 0.5rem;
+  margin-right: ${(p) => p.theme.spacing.s2};
 `;
 
 const ProfileSocial = ({ telegram }) => {

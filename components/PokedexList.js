@@ -9,7 +9,7 @@ const PokeList = styled.div`
 
 const PokedexNotFound = styled.div`
   display: flex;
-  margin-top: 4rem;
+  margin-top: ${(p) => p.theme.spacing.s16};
   justify-content: center;
 `;
 

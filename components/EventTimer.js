@@ -11,16 +11,16 @@ const EventTimerWrapper = styled.div`
 const ClockContainer = styled.div`
   display: flex;
   align-items: center;
-  height: 20px;
-  width: 20px;
+  height: 2rem;
+  width: 2rem;
 `;
 
 const EventTimerOutput = styled.p`
-  font-size: 1.4rem;
+  font-size: ${(p) => p.theme.font.size.xs};
   letter-spacing: 1px;
-  font-weight: 700;
+  font-weight: ${(p) => p.theme.font.weight.bold};
   font-variant-numeric: tabular-nums;
-  margin-left: 1rem;
+  margin-left: ${(p) => p.theme.spacing.s3};
 `;
 
 class EventTimer extends Component {

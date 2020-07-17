@@ -12,9 +12,9 @@ const NavListContainer = styled.div`
   width: 100%;
   right: 0;
   z-index: 100;
-  background: #fff;
-  border: ${(p) => p.theme.borders.border100};
-  border-radius: ${(p) => p.theme.borders.radius200};
+  background: ${(p) => p.theme.color.white};
+  border: ${(p) => p.theme.border.border100};
+  border-radius: ${(p) => p.theme.border.radius200};
   box-shadow: ${(p) => p.theme.lighting.shadow400};
   overflow: hidden;
 `;
@@ -23,8 +23,8 @@ const StyledNavList = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  padding: ${(p) => p.theme.sizing.s4};
-  color: ${(p) => p.theme.colors.black};
+  padding: ${(p) => p.theme.spacing.s4};
+  color: ${(p) => p.theme.color.black};
   width: 100%;
 `;
 

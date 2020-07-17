@@ -9,15 +9,15 @@ import PokeCard from './PokeCard';
 
 const Profile = styled.div`
   display: grid;
-  grid-gap: 1rem;
+  grid-gap: ${(p) => p.theme.spacing.s4};
 `;
 
 const ProfileItemContainer = styled.div`
-  padding: 2rem;
+  padding: ${(p) => p.theme.spacing.s8};
   max-width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  border: 1px solid rgb(216, 216, 220);
+  border-radius: ${(p) => p.theme.border.radius300};
+  box-shadow: ${(p) => p.theme.lighting.shadow100};
+  border: ${(p) => p.theme.border.border300};
 `;
 
 const PokeList = styled.div`

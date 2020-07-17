@@ -12,7 +12,7 @@ const TrainerCodeContainer = styled.div`
 const CopyButton = styled.button`
   width: 2.4rem;
   height: 2.4rem;
-  margin-left: 0.5rem;
+  margin-left: ${(p) => p.theme.spacing.s2};
 `;
 
 function ProfileTrainerCode({ trainerCode }) {

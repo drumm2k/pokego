@@ -4,16 +4,16 @@ import Link from 'next/link';
 
 const NavItemLink = styled.a`
   display: inline-block;
-  font-size: 2.2rem;
-  font-weight: 700;
+  font-size: ${(p) => p.theme.font.size.lg};
+  font-weight: ${(p) => p.theme.font.weight.bold};
   text-align: center;
-  border-radius: 5px;
+  border-radius: ${(p) => p.theme.border.radius200};
   height: 5rem;
   line-height: 5rem;
-  transition: background 0.3s;
+  transition: background 0.25s;
 
   &:hover {
-    background-color: rgb(240, 240, 240);
+    background-color: ${(p) => p.theme.color.gray100};
   }
 
   &:last-child {

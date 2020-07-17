@@ -1,14 +1,18 @@
+import { useState, useRef } from 'react';
+import { gql, useMutation } from '@apollo/client';
 import styled from 'styled-components';
+
+import { Button, InputText, Checkbox, Label } from '../components/UI';
 
 const Form = styled.form`
   display: grid;
-  grid-gap: 2rem;
+  grid-gap: ${(p) => p.theme.spacing.s8};
   max-width: 300px;
   margin: 0 auto;
-  border: 1px solid rgb(245, 245, 245);
-  border-radius: 10px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  padding: 3rem;
+  border: ${(p) => p.theme.border.border300};
+  border-radius: ${(p) => p.theme.border.radius300};
+  box-shadow: ${(p) => p.theme.lighting.shadow300};
+  padding: ${(p) => p.theme.spacing.s12};
 `;
 
 const FormField = styled.div`
@@ -22,7 +26,7 @@ const FormField = styled.div`
     display: block;
     height: 3px;
     width: 100%;
-    background: #000;
+    background: ${(p) => p.theme.color.black};
     transform: scaleX(0);
     transform-origin: 0%;
     transition: transform 400ms ease;
@@ -44,7 +48,7 @@ const FormInput = styled.input`
   overflow: hidden;
   margin: 0;
   width: 100%;
-  padding: 0.25rem 0;
+  padding: ${(p) => p.theme.spacing.s1} 0;
 
   &:invalid {
     color: red;
@@ -52,57 +56,76 @@ const FormInput = styled.input`
 `;
 
 const FormLabel = styled.label`
-  color: #000;
-  font-weight: 700;
+  color: ${(p) => p.theme.color.black};
+  font-weight: ${(p) => p.theme.font.weight.bold};
   display: flex;
 `;
 
-const SignInButton = styled.button`
-  padding: 1rem;
-  background-color: rgb(245, 245, 245);
-  border: 1px solid rgb(216, 216, 220);
-  border-radius: 5px;
-  transition: filter 0.3s;
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 0.2rem rgba(50, 50, 50, 0.5);
-    border-radius: 5px;
+export const LOGIN = gql`
+  mutation login($email: String!, $password: String!) {
+    login(input: { email: $email, password: $password }) {
+      id
+      token
+      tokenExpiration
+    }
   }
-
-  &:hover {
-    filter: brightness(0.9);
-  }
-`;
-
-const Icon = styled.span`
-  display: block;
-  width: 23px;
-  height: 23px;
-  margin-right: 5px;
 `;
 
 function Login() {
+  const emailInput = useRef();
+  const passwordInput = useRef();
+
+  function completed() {
+    console.log('completed');
+  }
+
+  const [login, { data, loading, error: apiError }] = useMutation(LOGIN, {
+    onCompleted: completed,
+  });
+
+  function loginHandler(event) {
+    event.preventDefault();
+
+    const email = emailInput.current.value;
+    const password = passwordInput.current.value;
+
+    if (!email || !password) {
+      return;
+    }
+    // Add validation later ============================
+    login({
+      variables: {
+        email,
+        password,
+      },
+    });
+  }
+
   return (
     <>
-      <Form>
+      {data && <div>{JSON.stringify(data.login)}</div>}
+      <Form onSubmit={loginHandler}>
         <FormField>
           <FormLabel htmlFor="email" className="label">
             Почта
           </FormLabel>
-          <FormInput type="email" name="email" placeholder="" />
+          <FormInput type="email" name="email" placeholder="" ref={emailInput} />
         </FormField>
 
         <FormField>
           <FormLabel htmlFor="password" className="label">
             Пароль
           </FormLabel>
-          <FormInput type="password" name="password" placeholder="" />
+          <FormInput
+            type="password"
+            name="password"
+            placeholder=""
+            ref={passwordInput}
+          />
 
           <span className="toggle-password" />
         </FormField>
-
-        <SignInButton>Войти</SignInButton>
+        <Button bg="accent">Войти</Button>
         <div>Не зарегистрированы?</div>
       </Form>
     </>
