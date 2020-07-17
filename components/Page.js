@@ -81,6 +81,14 @@ const GlobalStyle = createGlobalStyle`
     line-height: 2.8rem;
   }
 
+  a {
+    color: ${(p) => p.theme.color.accent};
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
   .leaflet-container {
     height: 450px;
     width: 100%;

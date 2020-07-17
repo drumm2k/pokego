@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 const NavProfileLink = styled.a`
   display: flex;
   align-items: center;
+  color: ${(p) => p.theme.color.black};
   height: 5rem;
   border-radius: 5px;
   padding: ${(p) => p.theme.spacing.s4};

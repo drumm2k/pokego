@@ -6,6 +6,7 @@ import ClockIcon from '../assets/clock.svg';
 const EventTimerWrapper = styled.div`
   display: flex;
   align-items: center;
+  color: ${(p) => p.theme.color.black};
 `;
 
 const ClockContainer = styled.div`

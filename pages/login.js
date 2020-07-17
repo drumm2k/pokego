@@ -1,64 +1,38 @@
 import { useState, useRef } from 'react';
 import { gql, useMutation } from '@apollo/client';
+import Link from 'next/link';
 import styled from 'styled-components';
 
-import { Button, InputText, Checkbox, Label } from '../components/UI';
+import Title from '../components/Title';
+import { Button, InputText, Label } from '../components/UI';
 
 const Form = styled.form`
   display: grid;
   grid-gap: ${(p) => p.theme.spacing.s8};
-  max-width: 300px;
-  margin: 0 auto;
+  max-width: 380px;
+  margin: ${(p) => p.theme.spacing.s12} auto;
   border: ${(p) => p.theme.border.border300};
   border-radius: ${(p) => p.theme.border.radius300};
   box-shadow: ${(p) => p.theme.lighting.shadow300};
-  padding: ${(p) => p.theme.spacing.s12};
+  padding: ${(p) => p.theme.spacing.s16} ${(p) => p.theme.spacing.s20};
 `;
 
 const FormField = styled.div`
+  display: grid;
+  grid-gap: ${(p) => p.theme.spacing.s2};
   width: 100%;
-  position: relative;
-  border-bottom: 2px solid #a3a9a9;
-
-  &::after {
-    content: '';
-    position: relative;
-    display: block;
-    height: 3px;
-    width: 100%;
-    background: ${(p) => p.theme.color.black};
-    transform: scaleX(0);
-    transform-origin: 0%;
-    transition: transform 400ms ease;
-    top: 2px;
-  }
-
-  &:focus-within {
-    border-color: transparent;
-  }
-
-  &:focus-within:after {
-    transform: scaleX(1);
-  }
 `;
 
-const FormInput = styled.input`
-  outline: none;
-  border: none;
-  overflow: hidden;
-  margin: 0;
-  width: 100%;
-  padding: ${(p) => p.theme.spacing.s1} 0;
-
-  &:invalid {
-    color: red;
-  }
-`;
-
-const FormLabel = styled.label`
-  color: ${(p) => p.theme.color.black};
-  font-weight: ${(p) => p.theme.font.weight.bold};
+const PasswordLabel = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: ${(p) => p.theme.font.size.sm};
+`;
+
+const Register = styled.div`
+  font-size: ${(p) => p.theme.font.size.sm};
+  text-align: center;
 `;
 
 export const LOGIN = gql`
@@ -103,31 +77,41 @@ function Login() {
 
   return (
     <>
+      <Title color="#666">Войти</Title>
+
       {data && <div>{JSON.stringify(data.login)}</div>}
       <Form onSubmit={loginHandler}>
         <FormField>
-          <FormLabel htmlFor="email" className="label">
+          <Label htmlFor="email" size="md" bold>
             Почта
-          </FormLabel>
-          <FormInput type="email" name="email" placeholder="" ref={emailInput} />
+          </Label>
+          <InputText type="email" name="email" placeholder="" ref={emailInput} />
         </FormField>
 
         <FormField>
-          <FormLabel htmlFor="password" className="label">
-            Пароль
-          </FormLabel>
-          <FormInput
+          <PasswordLabel>
+            <Label htmlFor="password" size="md" bold>
+              Пароль
+            </Label>
+            <Link href="/reset">
+              <a>Забыли пароль?</a>
+            </Link>
+          </PasswordLabel>
+          <InputText
             type="password"
             name="password"
             placeholder=""
             ref={passwordInput}
           />
-
-          <span className="toggle-password" />
         </FormField>
         <Button bg="accent">Войти</Button>
-        <div>Не зарегистрированы?</div>
       </Form>
+      <Register>
+        Не зарегистрированы?{' '}
+        <Link href="/register">
+          <a>Зарегистрироваться</a>
+        </Link>
+      </Register>
     </>
   );
 }

@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 const NavItemLink = styled.a`
   display: inline-block;
+  color: ${(p) => p.theme.color.black};
   font-size: ${(p) => p.theme.font.size.lg};
   font-weight: ${(p) => p.theme.font.weight.bold};
   text-align: center;

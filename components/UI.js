@@ -49,6 +49,9 @@ export const Label = styled.label`
   display: flex;
   flex-direction: row;
   align-items: center;
+  font-size: ${(p) => (p.size ? p.theme.font.size[p.size] : p.theme.font.size.md)};
+  font-weight: ${(p) =>
+    p.bold ? p.theme.font.weight.bold : p.theme.font.weight.normal};
 
   input[type='checkbox'] {
     margin-right: ${(p) => p.theme.spacing.s3};
