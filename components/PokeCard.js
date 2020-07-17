@@ -8,30 +8,27 @@ import { pokeImg, pokeImgShiny } from '../lib/pokeImg';
 const Card = styled.div`
   max-width: 8.4rem;
   overflow: hidden;
-  font-size: 1.2rem;
+  font-size: ${(p) => p.theme.font.size.xss};
   box-sizing: border-box;
-  border-radius: 5px;
-  border: 1px solid rgb(216, 216, 220);
+  border-radius: ${(p) => p.theme.borders.radius200};
+  border: ${(p) => p.theme.borders.border300};
   margin: 0.3rem 0.1rem;
-  cursor: ${(props) => props.enableModal && 'pointer'};
-  transition: box-shadow 0.3s;
+  cursor: ${(p) => p.enableModal && 'pointer'};
+  transition: box-shadow 0.25s;
 
   &:hover {
-    box-shadow: ${(props) =>
-      props.enableModal
-        ? '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
-        : 'none'};
+    box-shadow: ${(p) => (p.enableModal ? p.theme.lighting.shadow100 : 'none')};
     /* filter: saturate(140%) brightness(115%); */
-    transition: box-shadow 0.3s;
+    transition: box-shadow 0.25s;
   }
 `;
 
 const CardType = styled.div`
   background-image: linear-gradient(
-    ${(props) =>
-      props.typeTwoColor
-        ? `${props.typeTwoColor}, ${props.typeOneColor}`
-        : `${props.typeOneColor}, ${props.typeOneColor}`}
+    ${(p) =>
+      p.typeTwoColor
+        ? `${p.typeTwoColor}, ${p.typeOneColor}`
+        : `${p.typeOneColor}, ${p.typeOneColor}`}
   );
 `;
 
@@ -56,7 +53,7 @@ const CardImg = styled.div.attrs((props) => ({
 `;
 
 const CardContent = styled.div`
-  font-size: 1.4rem;
+  font-size: ${(p) => p.theme.font.size.xs};
   text-align: center;
   text-transform: capitalize;
   padding: 0 0.3rem;

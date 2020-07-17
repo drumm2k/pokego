@@ -57,10 +57,6 @@ const GlobalStyle = createGlobalStyle`
     color: #fff;
   }
 
-  :focus {
-    outline-color: #222;
-  }
-
   h1, h2, h3, h4 {
     font-weight: 700;
   }

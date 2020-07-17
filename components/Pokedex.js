@@ -1,51 +1,35 @@
 import { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+
+import { InputText, Checkbox, Label } from './UI';
 import PokedexList from './PokedexList';
 import PokedexModal from './PokedexModal';
-import Checkbox from './Checkbox';
 import Stack from './Stack';
 
 const FilterTabs = styled.ul`
   display: flex;
   text-align: center;
   flex-wrap: wrap;
-  color: #000;
-  margin-bottom: 1rem;
+  color: ${(p) => p.theme.colors.black};
+  margin-bottom: ${(p) => p.theme.sizing.s3};
 `;
 
 const FilterTabsItem = styled.li`
   flex: 1 1 0%;
   display: block;
-  padding: 0.5rem 2rem;
-  border: 1px solid rgb(220, 220, 220);
-  border-bottom: 1px solid rgb(220, 220, 220);
-  border-radius: 10px 10px 0 0;
-  background-color: rgb(245, 245, 245);
+  padding: ${(p) => p.theme.sizing.s2} ${(p) => p.theme.sizing.s8};
+  border: ${(p) => p.theme.borders.border300};
+  border-bottom: ${(p) => p.theme.borders.border300};
+  border-radius: ${(p) => p.theme.borders.radius400}
+    ${(p) => p.theme.borders.radius400} 0 0;
+  background-color: ${(p) => p.theme.colors.gray50};
   cursor: pointer;
 
   &.tab-active {
     background-color: transparent;
-    border: 1px solid rgb(150, 150, 150);
+    border: ${(p) => p.theme.borders.border800};
     border-bottom: none;
-  }
-`;
-
-const FilterLabel = styled.label`
-  margin: 0.5rem 0;
-`;
-
-const FilterSearchInput = styled.input`
-  width: 25rem;
-  border: 1px solid rgb(220, 220, 220);
-  padding: 0.5rem 1rem;
-  margin-left: 1rem;
-
-  &:focus {
-    background-color: transparent;
-    border: 1px solid rgb(150, 150, 150);
-    box-shadow: 0 0 0 0.2rem rgba(150, 150, 150, 0.5);
-    outline: none;
   }
 `;
 
@@ -164,17 +148,17 @@ export default class Pokedex extends Component {
     return (
       <>
         <Stack gap={1}>
-          <FilterLabel>
+          <Label>
             Поиск:
-            <FilterSearchInput
+            <InputText
               type="text"
               name="search"
               placeholder="Имя или номер покемона"
               value={searchTerm}
               onChange={this.filterSearch}
             />
-          </FilterLabel>
-          <FilterLabel>
+          </Label>
+          <Label>
             Поколения:
             <StyledSelect value={gen} onChange={this.filterGen}>
               <option defaultValue value="All">
@@ -188,13 +172,11 @@ export default class Pokedex extends Component {
               <option value="GEN_7">7 - Alola</option>
               <option value="GEN_8">8 - Galar</option>
             </StyledSelect>
-          </FilterLabel>
-
-          <Checkbox
-            label="Только легендарные и мифические"
-            checked={legendaryOnly}
-            onChange={this.filterLegendary}
-          />
+          </Label>
+          <Label>
+            <Checkbox checked={legendaryOnly} onChange={this.filterLegendary} />
+            Только легендарные и мифические
+          </Label>
         </Stack>
 
         <FilterTabs>

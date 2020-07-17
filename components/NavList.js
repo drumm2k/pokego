@@ -3,20 +3,19 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import NavItem from './NavItem';
-import nav from '../data/nav.json';
+import nav from '../config/nav.json';
 
 const NavListContainer = styled.div`
   position: absolute;
-  display: ${(props) => (props.open ? 'flex' : 'none')};
+  display: ${(p) => (p.open ? 'flex' : 'none')};
   top: 7.5rem;
   width: 100%;
   right: 0;
   z-index: 100;
   background: #fff;
-  border: 1px solid rgb(245, 245, 245);
-  border-radius: 5px;
-  box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
-    0 18px 36px -18px rgba(0, 0, 0, 0.3);
+  border: ${(p) => p.theme.borders.border100};
+  border-radius: ${(p) => p.theme.borders.radius200};
+  box-shadow: ${(p) => p.theme.lighting.shadow400};
   overflow: hidden;
 `;
 
@@ -24,8 +23,8 @@ const StyledNavList = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  padding: 1rem;
-  color: #000;
+  padding: ${(p) => p.theme.sizing.s4};
+  color: ${(p) => p.theme.colors.black};
   width: 100%;
 `;
 

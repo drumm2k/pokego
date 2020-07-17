@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/drumm2k/pokego#readme",
   "dependencies": {
-    "@apollo/client": "^3.0.0",
+    "@apollo/client": "^3.0.2",
     "@svgr/webpack": "^4.3.3",
     "apollo-server-micro": "^2.15.1",
     "graphql": "^15.3.0",

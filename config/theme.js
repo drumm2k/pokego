@@ -5,12 +5,30 @@ export default {
       bold: '700',
     },
     size: {
+      xss: '1.2rem',
       xs: '1.4rem',
       sm: '1.6rem',
       md: '1.8rem',
       lg: '2rem',
       xl: '2.4rem',
     },
+  },
+
+  colors: {
+    black: '#000000',
+    white: '#ffffff',
+    accent: '#aa306f',
+
+    gray50: '#F6F6F6',
+    gray100: '#EEEEEE',
+    gray200: '#E2E2E2',
+    gray300: '#CBCBCB',
+    gray400: '#AFAFAF',
+    gray500: '#757575',
+    gray600: '#545454',
+    gray700: '#333333',
+    gray800: '#1F1F1F',
+    gray900: '#141414',
   },
 
   borders: {
@@ -20,6 +38,8 @@ export default {
     border400: 'solid 1px hsla(0, 0%, 0%, 0.16)',
     border500: 'solid 1px hsla(0, 0%, 0%, 0.2)',
     border600: 'solid 1px hsla(0, 0%, 0%, 0.24)',
+    border700: 'solid 1px hsla(0, 0%, 0%, 0.3)',
+    border800: 'solid 1px hsla(0, 0%, 0%, 0.4)',
     radius100: '2px',
     radius200: '4px',
     radius300: '8px',
@@ -38,24 +58,12 @@ export default {
     shadow200: '0 2px 8px hsla(0, 0%, 0%, 0.16)',
     shadow300: '0 4px 16px hsla(0, 0%, 0%, 0.16)',
     shadow400: '0 8px 24px hsla(0, 0%, 0%, 0.16)',
-    focus: '0 0 0 3px rgba(58, 151, 212, 0.36)',
   },
 
-  colors: {
-    black: '#000000',
-    white: '#ffffff',
-    accent: '#aa306f',
-
-    gray50: '#F6F6F6',
-    gray100: '#EEEEEE',
-    gray200: '#E2E2E2',
-    gray300: '#CBCBCB',
-    gray400: '#AFAFAF',
-    gray500: '#757575',
-    gray600: '#545454',
-    gray700: '#333333',
-    gray800: '#1F1F1F',
-    gray900: '#141414',
+  input: {
+    border: '0px 0px 0px 1px rgba(60, 66, 87, 0.16)',
+    focus: '0 0 0 3px rgba(58, 151, 212, 0.36)',
+    invalid: '0 0 0 3px rgba(219, 26, 26, 0.36)',
   },
 
   sizing: {
