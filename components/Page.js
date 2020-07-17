@@ -31,7 +31,6 @@ const GlobalStyle = createGlobalStyle`
    font-size: 1.8rem;
    font-weight: 400;
    line-height: 1.4;
-   color: #222;
   }
 
   @font-face {

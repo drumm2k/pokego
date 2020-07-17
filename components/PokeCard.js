@@ -45,9 +45,9 @@ const CardImg = styled.div.attrs((props) => ({
   overflow: hidden;
   display: flex;
   justify-content: space-between;
-  padding: 0 0.3rem;
+  padding: 0 ${(p) => p.theme.spacing.s1};
   user-select: none;
-  color: #fff;
+  color: ${(p) => p.theme.color.white};
   letter-spacing: 1px;
   font-variant-numeric: tabular-nums;
 `;
@@ -56,7 +56,7 @@ const CardContent = styled.div`
   font-size: ${(p) => p.theme.font.size.xs};
   text-align: center;
   text-transform: capitalize;
-  padding: 0 0.3rem;
+  padding: 0 ${(p) => p.theme.spacing.s1};
 `;
 
 const PokeCard = (props) => {
