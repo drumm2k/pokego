@@ -22,7 +22,7 @@ const Tier = styled.div`
 `;
 
 const TierIconContainer = styled.div`
-  height: 2.8rem;
+  line-height: 0;
 `;
 
 export default function RaidTier(props) {
@@ -34,8 +34,8 @@ export default function RaidTier(props) {
     return (
       <img
         src="/img/raid.png"
-        height="28"
-        width="28"
+        height="32"
+        width="32"
         alt="Raid difficulty"
         key={key}
       />
@@ -45,7 +45,7 @@ export default function RaidTier(props) {
   return (
     <>
       <TierTitle>
-        <h4>Уровень {tier}</h4>
+        <h2>Уровень {tier}</h2>
         <TierIconContainer>{tierIcon}</TierIconContainer>
       </TierTitle>
 

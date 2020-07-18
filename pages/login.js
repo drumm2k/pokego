@@ -86,7 +86,7 @@ function Login() {
           <Label htmlFor="email" size="md" bold>
             Почта
           </Label>
-          <Input type="email" name="email" ref={emailInput} />
+          <Input type="email" id="email" name="email" ref={emailInput} />
         </FormField>
         <FormField>
           <PasswordLabel>
@@ -97,7 +97,7 @@ function Login() {
               <a>Забыли пароль?</a>
             </Link>
           </PasswordLabel>
-          <Input type="password" name="password" ref={passwordInput} />
+          <Input type="password" id="password" name="password" ref={passwordInput} />
         </FormField>
         <Button bg="accent">Войти</Button>
       </Form>

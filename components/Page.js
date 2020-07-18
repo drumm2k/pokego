@@ -61,24 +61,24 @@ const GlobalStyle = createGlobalStyle`
   }
 
   h1 {
-    font-size: 3.2rem;
-    line-height: 4rem;
+    font-size: 2.8rem;
+    line-height: 3.6rem;
     margin-bottom: 1.5rem;
   }
 
   h2 {
-    font-size: 2.8rem;
-    line-height: 3.6rem;
-  }
-
-  h3 {
     font-size: 2.4rem;
     line-height: 3.2rem;
   }
 
-  h4 {
-    font-size: 2rem;
+  h3 {
+    font-size: 2.0rem;
     line-height: 2.8rem;
+  }
+
+  h4 {
+    font-size: 1.8rem;
+    line-height: 2.6rem;
   }
 
   a {

@@ -6,7 +6,7 @@ import ChevronRightIcon from '../assets/chevron_right.svg';
 const EventCard = styled.div`
   display: flex;
   max-width: 100%;
-  margin: 1rem 0;
+  margin-bottom: ${(p) => p.theme.spacing.s4};
   border-radius: ${(p) => p.theme.border.radius300};
   box-shadow: ${(p) => p.theme.lighting.shadow100};
   border: ${(p) => p.theme.border.border300};
@@ -31,7 +31,7 @@ const EventData = styled.div`
   padding: ${(p) => p.theme.spacing.s4};
 `;
 
-const EventTitle = styled.h4`
+const EventTitle = styled.h3`
   color: ${(p) => p.theme.color.black};
 `;
 

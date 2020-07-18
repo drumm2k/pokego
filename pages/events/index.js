@@ -11,6 +11,10 @@ const StyledLink = styled.a`
   }
 `;
 
+const EventsStatus = styled.h2`
+  margin-bottom: ${(p) => p.theme.spacing.s2};
+`;
+
 export const GET_ALL_EVENTS = gql`
   query {
     getEvents {
@@ -80,7 +84,7 @@ export default function Events() {
       <Title color="#ff3163">Ивенты</Title>
 
       <div>
-        <h3>Активные</h3>
+        <EventsStatus>Активные</EventsStatus>
         {events &&
           events.map((event) => (
             <Link
@@ -100,7 +104,7 @@ export default function Events() {
               </StyledLink>
             </Link>
           ))}
-        <h3>Скоро</h3>
+        <EventsStatus>Скоро</EventsStatus>
         {eventsUpcoming &&
           eventsUpcoming.map((event) => (
             <Link
@@ -122,7 +126,7 @@ export default function Events() {
           ))}
       </div>
       <div>
-        <h3>Завершённые</h3>
+        <EventsStatus>Завершённые</EventsStatus>
         {eventsEnded &&
           eventsEnded.map((event) => (
             <Link
