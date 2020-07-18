@@ -1,10 +1,10 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import Link from 'next/link';
 import styled from 'styled-components';
 
 import Title from '../components/Title';
-import { Button, InputText, Label } from '../components/UI';
+import { Button, Input, Label } from '../components/UI';
 
 const Form = styled.form`
   display: grid;
@@ -17,7 +17,7 @@ const Form = styled.form`
   padding: ${(p) => p.theme.spacing.s16} ${(p) => p.theme.spacing.s20};
 `;
 
-const FormField = styled.div`
+const FormField = styled.section`
   display: grid;
   grid-gap: ${(p) => p.theme.spacing.s2};
   width: 100%;
@@ -85,7 +85,7 @@ function Login() {
           <Label htmlFor="email" size="md" bold>
             Почта
           </Label>
-          <InputText type="email" name="email" placeholder="" ref={emailInput} />
+          <Input type="email" name="email" ref={emailInput} />
         </FormField>
 
         <FormField>
@@ -97,12 +97,7 @@ function Login() {
               <a>Забыли пароль?</a>
             </Link>
           </PasswordLabel>
-          <InputText
-            type="password"
-            name="password"
-            placeholder=""
-            ref={passwordInput}
-          />
+          <Input type="password" name="password" ref={passwordInput} />
         </FormField>
         <Button bg="accent">Войти</Button>
       </Form>

@@ -2,12 +2,23 @@ import { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { InputText, Checkbox, Label } from './UI';
+import { Input, Checkbox, Label, Select } from './UI';
 import PokedexList from './PokedexList';
 import PokedexModal from './PokedexModal';
-import Stack from './Stack';
 
-const FilterTabs = styled.ul`
+const FiltersContainer = styled.section`
+  display: grid;
+  grid-gap: ${(p) => p.theme.spacing.s4};
+  width: 100%;
+  padding: ${(p) => p.theme.spacing.s4};
+  margin: ${(p) => p.theme.spacing.s4} 0;
+  border: ${(p) => p.theme.border.border300};
+  border-radius: ${(p) => p.theme.border.radius200};
+  box-shadow: ${(p) => p.theme.lighting.shadow100};
+  /* background-color: ${(p) => p.theme.color.gray50}; */
+`;
+
+const Tabs = styled.ul`
   display: flex;
   text-align: center;
   flex-wrap: wrap;
@@ -15,11 +26,11 @@ const FilterTabs = styled.ul`
   margin-bottom: ${(p) => p.theme.spacing.s3};
 `;
 
-const FilterTabsItem = styled.li`
+const TabsItem = styled.li`
   flex: 1 1 0%;
   display: block;
   padding: ${(p) => p.theme.spacing.s2} ${(p) => p.theme.spacing.s8};
-  border: ${(p) => p.theme.border.border300};
+  border: ${(p) => p.theme.border.border100};
   border-bottom: ${(p) => p.theme.border.border300};
   border-radius: ${(p) => p.theme.border.radius400}
     ${(p) => p.theme.border.radius400} 0 0;
@@ -28,7 +39,7 @@ const FilterTabsItem = styled.li`
 
   &.tab-active {
     background-color: transparent;
-    border: ${(p) => p.theme.border.border800};
+    border: ${(p) => p.theme.border.border300};
     border-bottom: none;
   }
 `;
@@ -40,7 +51,7 @@ export default class Pokedex extends Component {
     this.state = {
       searchTerm: '',
       pokemonsData: pokemons,
-      gen: 'GEN_1 GEN_2 GEN_3 GEN_4 GEN_5 GEN_7 GEN_8',
+      gen: 'GEN_5',
       activeTab: 'released',
       legendaryOnly: false,
       modalStatus: false,
@@ -133,20 +144,10 @@ export default class Pokedex extends Component {
 
     return (
       <>
-        <Stack gap={1}>
+        <FiltersContainer>
           <Label>
-            Поиск:
-            <InputText
-              type="text"
-              name="search"
-              placeholder="Имя или номер покемона"
-              value={searchTerm}
-              onChange={this.filterSearch}
-            />
-          </Label>
-          <Label>
-            Поколения:
-            <select value={gen} onChange={this.filterGen}>
+            Поколение
+            <Select value={gen} onChange={this.filterGen}>
               <option defaultValue value="All">
                 Все
               </option>
@@ -157,37 +158,47 @@ export default class Pokedex extends Component {
               <option value="GEN_5">5 - Unova</option>
               <option value="GEN_7">7 - Alola</option>
               <option value="GEN_8">8 - Galar</option>
-            </select>
+            </Select>
           </Label>
           <Label>
             <Checkbox checked={legendaryOnly} onChange={this.filterLegendary} />
             Только легендарные и мифические
           </Label>
-        </Stack>
+          <Label>
+            Поиск
+            <Input
+              type="text"
+              name="search"
+              placeholder="Имя или номер покемона"
+              value={searchTerm}
+              onChange={this.filterSearch}
+            />
+          </Label>
+        </FiltersContainer>
 
-        <FilterTabs>
-          <FilterTabsItem
+        <Tabs>
+          <TabsItem
             onClick={this.filterTabs}
             className={activeTab === 'released' && 'tab-active'}
             data-tab="released"
           >
             В игре
-          </FilterTabsItem>
-          <FilterTabsItem
+          </TabsItem>
+          <TabsItem
             onClick={this.filterTabs}
             className={activeTab === 'unreleased' && 'tab-active'}
             data-tab="unreleased"
           >
             Ожидаются
-          </FilterTabsItem>
-          <FilterTabsItem
+          </TabsItem>
+          <TabsItem
             onClick={this.filterTabs}
             className={activeTab === 'shiny' && 'tab-active'}
             data-tab="shiny"
           >
             Шайни
-          </FilterTabsItem>
-        </FilterTabs>
+          </TabsItem>
+        </Tabs>
         <PokedexList
           pokemons={filteredPokemons}
           showModal={this.showModal}
