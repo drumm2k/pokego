@@ -60,13 +60,18 @@ export const Label = styled.label`
   input[type='text'] {
     margin-left: ${(p) => p.theme.spacing.s3};
   }
+
+  select {
+    margin-left: ${(p) => p.theme.spacing.s3};
+  }
 `;
 
-export const InputText = styled.input`
+export const Input = styled.input`
   appearance: none;
   color: ${(p) => p.theme.color.gray800};
+  font-size: ${(p) => (p.size ? p.theme.font.size[p.size] : p.theme.font.size.md)};
   width: ${(p) => (p.width ? p.width : '100%')};
-  min-height: 3.6rem;
+  min-height: 4rem;
   padding: ${(p) => p.theme.spacing.s3} ${(p) => p.theme.spacing.s5};
   border: none;
   border-radius: ${(p) => p.theme.border.radius200};
@@ -82,6 +87,10 @@ export const InputText = styled.input`
   :invalid {
     box-shadow: ${(p) => p.theme.input.border}, ${(p) => p.theme.input.invalid};
   }
+
+  ::placeholder {
+    line-height: normal;
+  }
 `;
 
 export const Checkbox = styled.input.attrs({ type: 'checkbox' })`
@@ -94,6 +103,7 @@ export const Checkbox = styled.input.attrs({ type: 'checkbox' })`
   height: 2rem;
   border: ${(p) => p.theme.border.border500};
   border-radius: ${(p) => p.theme.border.radius200};
+  background-color: ${(p) => p.theme.color.white};
   background-repeat: no-repeat;
   background-position: center center;
   outline: none;
@@ -110,5 +120,24 @@ export const Checkbox = styled.input.attrs({ type: 'checkbox' })`
   &:checked {
     border: ${(p) => p.theme.border.border800};
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' stroke='rgb(50, 50, 50)'%3E%3Cpath d='M5 13l4 4L19 7'%3E%3C/path%3E%3C/svg%3E");
+  }
+`;
+
+export const Select = styled.select`
+  appearance: none;
+  color: ${(p) => p.theme.color.gray800};
+  font-size: ${(p) => (p.size ? p.theme.font.size[p.size] : p.theme.font.size.md)};
+  line-height: 4rem;
+  padding: 0 ${(p) => p.theme.spacing.s5};
+  border: none;
+  border-radius: ${(p) => p.theme.border.radius200};
+  box-shadow: ${(p) => p.theme.input.border};
+  background-color: ${(p) => p.theme.color.white};
+  outline: none;
+  white-space: nowrap;
+  transition: box-shadow 0.25s;
+
+  &:focus {
+    box-shadow: ${(p) => p.theme.input.border}, ${(p) => p.theme.input.focus};
   }
 `;
