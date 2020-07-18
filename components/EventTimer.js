@@ -10,8 +10,6 @@ const EventTimerWrapper = styled.div`
 `;
 
 const ClockContainer = styled.div`
-  display: flex;
-  align-items: center;
   height: 2rem;
   width: 2rem;
 `;
@@ -93,9 +91,9 @@ class EventTimer extends Component {
       this.calcDuration(end);
     } else if (diffEnd < 0) {
       this.setState({
-        output: `${new Date(this.state.end).toLocaleString()}`,
-      }),
-        clearInterval(this.intervalID);
+        output: `${new Date(end).toLocaleString()}`,
+      });
+      clearInterval(this.intervalID);
     }
   }
 

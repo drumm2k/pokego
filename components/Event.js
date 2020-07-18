@@ -2,20 +2,20 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import EventTimer from './EventTimer';
 import ChevronRightIcon from '../assets/chevron_right.svg';
-import Stack from './Stack';
 
 const EventCard = styled.div`
   display: flex;
   max-width: 100%;
+  margin: 1rem 0;
   border-radius: ${(p) => p.theme.border.radius300};
   box-shadow: ${(p) => p.theme.lighting.shadow100};
   border: ${(p) => p.theme.border.border300};
   overflow: hidden;
-  cursor: pointer;
   outline: none;
   transition: box-shadow 0.25s;
 
   &:hover {
+    cursor: pointer;
     box-shadow: ${(p) => p.theme.lighting.shadow300};
   }
 
@@ -63,21 +63,19 @@ const EventArrow = styled.div`
 
 function Event({ img, name, description, starts, ends }) {
   return (
-    <Stack gap={1}>
-      <EventCard tabIndex="0">
-        <EventImg imgUrl={img} alt={name} />
-        <EventData>
-          <div>
-            <EventTitle>{name}</EventTitle>
-            <EventDesc>{description}</EventDesc>
-          </div>
-          <EventTimer start={starts} end={ends} />
-        </EventData>
-        <EventArrow>
-          <ChevronRightIcon />
-        </EventArrow>
-      </EventCard>
-    </Stack>
+    <EventCard>
+      <EventImg imgUrl={img} alt={name} />
+      <EventData>
+        <div>
+          <EventTitle>{name}</EventTitle>
+          <EventDesc>{description}</EventDesc>
+        </div>
+        <EventTimer start={starts} end={ends} />
+      </EventData>
+      <EventArrow>
+        <ChevronRightIcon />
+      </EventArrow>
+    </EventCard>
   );
 }
 

@@ -1,8 +1,15 @@
 import Link from 'next/link';
+import styled from 'styled-components';
 import { gql, useQuery } from '@apollo/client';
 import { initializeApollo } from '../../lib/apolloClient';
 import Event from '../../components/Event';
 import Title from '../../components/Title';
+
+const StyledLink = styled.a`
+  &:hover {
+    opacity: 1;
+  }
+`;
 
 export const GET_ALL_EVENTS = gql`
   query {
@@ -76,8 +83,13 @@ export default function Events() {
         <h3>Активные</h3>
         {events &&
           events.map((event) => (
-            <Link key={event.id} href="/events/[id]" as={`/events/${event.id}`}>
-              <a>
+            <Link
+              key={event.id}
+              href="/events/[id]"
+              as={`/events/${event.id}`}
+              passHref
+            >
+              <StyledLink>
                 <Event
                   name={event.name}
                   description={event.description}
@@ -85,14 +97,19 @@ export default function Events() {
                   starts={event.starts}
                   ends={event.ends}
                 />
-              </a>
+              </StyledLink>
             </Link>
           ))}
         <h3>Скоро</h3>
         {eventsUpcoming &&
           eventsUpcoming.map((event) => (
-            <Link key={event.id} href="/events/[id]" as={`/events/${event.id}`}>
-              <a>
+            <Link
+              key={event.id}
+              href="/events/[id]"
+              as={`/events/${event.id}`}
+              passHref
+            >
+              <StyledLink>
                 <Event
                   name={event.name}
                   description={event.description}
@@ -100,7 +117,7 @@ export default function Events() {
                   starts={event.starts}
                   ends={event.ends}
                 />
-              </a>
+              </StyledLink>
             </Link>
           ))}
       </div>
@@ -108,8 +125,13 @@ export default function Events() {
         <h3>Завершённые</h3>
         {eventsEnded &&
           eventsEnded.map((event) => (
-            <Link key={event.id} href="/events/[id]" as={`/events/${event.id}`}>
-              <a>
+            <Link
+              key={event.id}
+              href="/events/[id]"
+              as={`/events/${event.id}`}
+              passHref
+            >
+              <StyledLink>
                 <Event
                   name={event.name}
                   description={event.description}
@@ -117,7 +139,7 @@ export default function Events() {
                   starts={event.starts}
                   ends={event.ends}
                 />
-              </a>
+              </StyledLink>
             </Link>
           ))}
       </div>

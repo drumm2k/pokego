@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import PropTypes, { object } from 'prop-types';
 import RaidCard from './RaidCard';
-import Stack from './Stack';
 
 const TierTitle = styled.div`
   display: flex;
