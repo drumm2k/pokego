@@ -12,7 +12,7 @@ const TierTitle = styled.div`
 const Tier = styled.div`
   display: grid;
   grid-row-gap: ${(p) => p.theme.spacing.s4};
-  margin-bottom: ${(p) => p.theme.spacing.s10};
+  margin-bottom: ${(p) => p.theme.spacing.s8};
 
   /* Iphone 6,7,8 and up landscape mode */
   @media screen and (min-width: 667px) {

@@ -11,6 +11,10 @@ const StyledLink = styled.a`
   }
 `;
 
+const EventsContainer = styled.div`
+  margin-bottom: ${(p) => p.theme.spacing.s8};
+`;
+
 const EventsStatus = styled.h2`
   margin-bottom: ${(p) => p.theme.spacing.s2};
 `;
@@ -83,7 +87,7 @@ export default function Events() {
     <>
       <Title color="#ff3163">Ивенты</Title>
 
-      <div>
+      <EventsContainer>
         <EventsStatus>Активные</EventsStatus>
         {events &&
           events.map((event) => (
@@ -104,6 +108,9 @@ export default function Events() {
               </StyledLink>
             </Link>
           ))}
+      </EventsContainer>
+
+      <EventsContainer>
         <EventsStatus>Скоро</EventsStatus>
         {eventsUpcoming &&
           eventsUpcoming.map((event) => (
@@ -124,8 +131,9 @@ export default function Events() {
               </StyledLink>
             </Link>
           ))}
-      </div>
-      <div>
+      </EventsContainer>
+
+      <EventsContainer>
         <EventsStatus>Завершённые</EventsStatus>
         {eventsEnded &&
           eventsEnded.map((event) => (
@@ -146,7 +154,7 @@ export default function Events() {
               </StyledLink>
             </Link>
           ))}
-      </div>
+      </EventsContainer>
     </>
   );
 }
