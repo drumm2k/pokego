@@ -15,7 +15,6 @@ const FiltersContainer = styled.section`
   border: ${(p) => p.theme.border.border300};
   border-radius: ${(p) => p.theme.border.radius200};
   box-shadow: ${(p) => p.theme.lighting.shadow100};
-  /* background-color: ${(p) => p.theme.color.gray50}; */
 `;
 
 const Tabs = styled.ul`

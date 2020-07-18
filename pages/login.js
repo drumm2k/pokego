@@ -80,6 +80,7 @@ function Login() {
       <Title color="#666">Войти</Title>
 
       {data && <div>{JSON.stringify(data.login)}</div>}
+
       <Form onSubmit={loginHandler}>
         <FormField>
           <Label htmlFor="email" size="md" bold>
@@ -87,7 +88,6 @@ function Login() {
           </Label>
           <Input type="email" name="email" ref={emailInput} />
         </FormField>
-
         <FormField>
           <PasswordLabel>
             <Label htmlFor="password" size="md" bold>
