@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import Link from 'next/link';
 import styled from 'styled-components';
@@ -46,8 +46,8 @@ export const LOGIN = gql`
 `;
 
 function Login() {
-  const emailInput = useRef();
-  const passwordInput = useRef();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   function completed() {
     console.log('completed');
@@ -57,11 +57,23 @@ function Login() {
     onCompleted: completed,
   });
 
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+
+    switch (name) {
+      case 'email':
+        setEmail(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
+      default:
+        break;
+    }
+  };
+
   function loginHandler(event) {
     event.preventDefault();
-
-    const email = emailInput.current.value;
-    const password = passwordInput.current.value;
 
     if (!email || !password) {
       return;
@@ -83,27 +95,41 @@ function Login() {
 
       <Form onSubmit={loginHandler}>
         <FormField>
-          <Label htmlFor="email" size="md" bold>
+          <Label htmlFor="email" bold>
             Почта
           </Label>
-          <Input type="email" id="email" name="email" ref={emailInput} />
+          <Input
+            type="email"
+            id="email"
+            name="email"
+            autocomplete="email"
+            onChange={handleInputChange}
+            value={email}
+          />
         </FormField>
         <FormField>
           <PasswordLabel>
-            <Label htmlFor="password" size="md" bold>
+            <Label htmlFor="password" bold>
               Пароль
             </Label>
             <Link href="/reset">
               <a>Забыли пароль?</a>
             </Link>
           </PasswordLabel>
-          <Input type="password" id="password" name="password" ref={passwordInput} />
+          <Input
+            type="password"
+            id="password"
+            name="password"
+            autocomplete="current-password"
+            onChange={handleInputChange}
+            value={password}
+          />
         </FormField>
         <Button bg="accent">Войти</Button>
       </Form>
       <Register>
         Не зарегистрированы?{' '}
-        <Link href="/register">
+        <Link href="/signup">
           <a>Зарегистрироваться</a>
         </Link>
       </Register>

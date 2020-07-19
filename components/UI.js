@@ -57,6 +57,10 @@ export const Label = styled.label`
     margin-right: ${(p) => p.theme.spacing.s3};
   }
 
+  input[type='radio'] {
+    margin-right: ${(p) => p.theme.spacing.s3};
+  }
+
   input[type='text'] {
     margin-left: ${(p) => p.theme.spacing.s3};
   }
