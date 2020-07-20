@@ -89,7 +89,7 @@ export const Input = styled.input`
     box-shadow: ${(p) => p.theme.input.border}, ${(p) => p.theme.input.focus};
   }
 
-  :invalid {
+  :not(:focus):invalid {
     box-shadow: ${(p) => p.theme.input.border}, ${(p) => p.theme.input.invalid};
   }
 
@@ -207,10 +207,6 @@ export const TextArea = styled.textarea`
 
   &:focus {
     box-shadow: ${(p) => p.theme.input.border}, ${(p) => p.theme.input.focus};
-  }
-
-  :invalid {
-    box-shadow: ${(p) => p.theme.input.border}, ${(p) => p.theme.input.invalid};
   }
 
   ${(p) =>
