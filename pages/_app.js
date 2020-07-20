@@ -1,15 +1,16 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import Router from 'next/router';
 import { ThemeProvider } from 'styled-components';
-import PropTypes from 'prop-types';
-import { ApolloProvider } from '@apollo/client';
 import NProgress from 'nprogress';
-import theme from '../config/theme';
-import AuthContext from '../context/auth';
+import { ApolloProvider } from '@apollo/client';
 import { useApollo } from '../lib/apolloClient';
 
 import Page from '../components/Page';
-import 'nprogress/nprogress.css'; // styles of nprogress
+import AuthContext from '../context/auth';
+
+import theme from '../config/theme';
+import 'nprogress/nprogress.css';
 
 NProgress.configure({ showSpinner: false });
 
