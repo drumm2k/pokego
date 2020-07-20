@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { useRouter } from 'next/router';
 import { gql, useMutation } from '@apollo/client';
 import Link from 'next/link';
 import styled from 'styled-components';
+import AuthContext from '../context/auth';
 
 import Title from '../components/Title';
 import { Button, Input, Label } from '../components/UI';
+import SpinnerButton from '../assets/spinner_button.svg';
 
 const Form = styled.form`
   display: grid;
@@ -38,7 +41,8 @@ const Register = styled.div`
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
     login(input: { email: $email, password: $password }) {
-      id
+      userId
+      userName
       token
       tokenExpiration
     }
@@ -46,15 +50,18 @@ export const LOGIN = gql`
 `;
 
 function Login() {
+  const auth = useContext(AuthContext);
+  // const router = useRouter();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  function completed() {
-    console.log('completed');
-  }
-
-  const [login, { data, loading, error: apiError }] = useMutation(LOGIN, {
-    onCompleted: completed,
+  const [login, { loading, error }] = useMutation(LOGIN, {
+    onCompleted(data) {
+      const { token, userId, userName, tokenExpiration } = data.login;
+      auth.login(token, userId, userName, tokenExpiration);
+      // router.push(`/user/${userName}`);
+    },
   });
 
   const handleInputChange = (event) => {
@@ -74,6 +81,7 @@ function Login() {
 
   function loginHandler(event) {
     event.preventDefault();
+    if (loading) return;
 
     if (!email || !password) {
       return;
@@ -90,9 +98,6 @@ function Login() {
   return (
     <>
       <Title color="#666">Войти</Title>
-
-      {data && <div>{JSON.stringify(data.login)}</div>}
-
       <Form onSubmit={loginHandler}>
         <FormField>
           <Label htmlFor="email" bold>
@@ -125,7 +130,13 @@ function Login() {
             value={password}
           />
         </FormField>
-        <Button bg="accent">Войти</Button>
+
+        {error &&
+          error.graphQLErrors.map(({ message }) => (
+            <span key={message}>{message}</span>
+          ))}
+
+        <Button bg="accent">{loading ? <SpinnerButton /> : <>Войти</>}</Button>
       </Form>
       <Register>
         Не зарегистрированы?{' '}

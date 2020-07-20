@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 
+import AuthContext from '../context/auth';
 import NavProfileItem from './NavProfileItem';
+import { Button } from './UI';
 
 import UserIcon from '../assets/user.svg';
 import SettingsIcon from '../assets/cog.svg';
@@ -59,18 +62,33 @@ const Dropdown = styled.div`
 export default function NavProfile({ icon }) {
   const [open, setOpen] = useState(false);
 
+  const auth = useContext(AuthContext);
+
   return (
     <>
-      <ProfileButton
-        onClick={() => setOpen(!open)}
-        aria-label="Profile Menu"
-        aria-haspopup="true"
-        aria-expanded={open}
-      >
-        <ProfileAvatar>
-          <ProfileAvatarIcon>{icon}</ProfileAvatarIcon>
-        </ProfileAvatar>
-      </ProfileButton>
+      {auth.token && (
+        <Link href={`/user/${auth.userName}`}>
+          <a>{auth.userName}</a>
+        </Link>
+      )}
+      {!auth.token && (
+        <Link href="/login">
+          <a>Войти</a>
+        </Link>
+      )}
+      {auth.token && <Button onClick={auth.logout}>Выйти</Button>}
+      {auth.token && (
+        <ProfileButton
+          onClick={() => setOpen(!open)}
+          aria-label="Profile Menu"
+          aria-haspopup="true"
+          aria-expanded={open}
+        >
+          <ProfileAvatar>
+            <ProfileAvatarIcon>{icon}</ProfileAvatarIcon>
+          </ProfileAvatar>
+        </ProfileButton>
+      )}
       {open && <DropdownMenu open={open} setOpen={setOpen} />}
     </>
   );

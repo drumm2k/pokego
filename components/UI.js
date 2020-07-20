@@ -4,6 +4,7 @@ export const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 4rem;
   color: ${(p) => (p.color ? p.theme.color[p.color] : p.theme.color.white)};
   font-size: ${(p) => (p.size ? p.theme.font.size[p.size] : p.theme.font.size.md)};
   font-weight: ${(p) =>
