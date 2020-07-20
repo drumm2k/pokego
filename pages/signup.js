@@ -47,8 +47,7 @@ export const SIGNUP = gql`
 function SignUp() {
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [password, setPassword] = useState('');
   const [team, setTeam] = useState('');
   const [level, setLevel] = useState('');
   const [code, setCode] = useState('');
@@ -71,11 +70,8 @@ function SignUp() {
       case 'email':
         setEmail(value);
         break;
-      case 'newPassword':
-        setNewPassword(value);
-        break;
-      case 'confirmPassword':
-        setConfirmPassword(value);
+      case 'password':
+        setPassword(value);
         break;
       case 'team':
         setTeam(value);
@@ -94,11 +90,7 @@ function SignUp() {
   function signUpHandler(event) {
     event.preventDefault();
 
-    console.log(
-      `${userName} ${email} ${newPassword} ${confirmPassword} ${team} ${level} ${code}`
-    );
-
-    const password = newPassword;
+    console.log(`${userName} ${email} ${password} ${team} ${level} ${code}`);
 
     // Add validation later ============================
     signUp({
@@ -146,29 +138,16 @@ function SignUp() {
           />
         </FormField>
         <FormField>
-          <Label htmlFor="newPassword" bold>
+          <Label htmlFor="password" bold>
             Пароль
           </Label>
           <Input
             type="password"
-            id="newPassword"
-            name="newPassword"
+            id="password"
+            name="password"
             autocomplete="new-password"
             onChange={handleInputChange}
-            value={newPassword}
-          />
-        </FormField>
-        <FormField>
-          <Label htmlFor="confirmPassword" bold>
-            Подтвердите пароль
-          </Label>
-          <Input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            autocomplete="new-password"
-            onChange={handleInputChange}
-            value={confirmPassword}
+            value={password}
           />
         </FormField>
 
