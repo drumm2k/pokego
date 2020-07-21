@@ -18,6 +18,11 @@ const Form = styled.form`
   border-radius: ${(p) => p.theme.border.radius300};
   box-shadow: ${(p) => p.theme.lighting.shadow300};
   padding: ${(p) => p.theme.spacing.s16} ${(p) => p.theme.spacing.s20};
+
+  p {
+    font-size: ${(p) => p.theme.font.size.sm};
+    color: ${(p) => p.theme.color.warning};
+  }
 `;
 
 const FormField = styled.section`
@@ -95,6 +100,22 @@ function Login() {
     });
   }
 
+  const renderErrors = (err) => {
+    let errorMessage;
+
+    // if (error) {
+    //   errorMessage = 'state error';
+    // } else
+    if (err) {
+      errorMessage = err.message;
+    }
+
+    if (errorMessage) {
+      return <p>{errorMessage}</p>;
+    }
+    return null;
+  };
+
   return (
     <>
       <Title color="#666">Войти</Title>
@@ -130,12 +151,7 @@ function Login() {
             value={password}
           />
         </FormField>
-
-        {error &&
-          error.graphQLErrors.map(({ message }) => (
-            <span key={message}>{message}</span>
-          ))}
-
+        {renderErrors(error)}
         <Button bg="accent">{loading ? <SpinnerButton /> : <>Войти</>}</Button>
       </Form>
       <Register>

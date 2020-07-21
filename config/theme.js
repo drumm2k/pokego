@@ -18,6 +18,8 @@ export default {
     black: '#000000',
     white: '#ffffff',
     accent: '#aa306f',
+    warning: '#e04141',
+    success: '#37a36a',
 
     gray50: '#F6F6F6',
     gray100: '#EEEEEE',
