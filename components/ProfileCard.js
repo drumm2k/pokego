@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import trainerTeam from '../lib/trainerTeam';
 import TrainerCode from './ProfileTrainerCode';
 import ProfileSocial from './ProfileSocial';
-import ProfileFollowers from './ProfileFollowers';
-import ProfileFollowing from './ProfileFollowing';
 import PokeCard from './PokeCard';
 
 const Profile = styled.div`
@@ -47,19 +45,6 @@ const ProfileCard = ({ user }) => {
           </p>
         )}
         <p>Создан: {new Date(user.createdAt).toLocaleString()}</p>
-      </ProfileItemContainer>
-
-      <ProfileItemContainer>
-        <div>
-          <span>{user.following.length}</span> Following
-          <ProfileFollowing following={user.following} />
-        </div>
-        <br />
-
-        <div>
-          <span>{user.followers.length}</span> Followers
-          <ProfileFollowers followers={user.followers} />
-        </div>
       </ProfileItemContainer>
 
       <ProfileItemContainer>

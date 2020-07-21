@@ -35,22 +35,6 @@ export const GET_USER = gql`
         description
         isPrivate
       }
-      followers {
-        follower {
-          userName
-          trainer {
-            team
-          }
-        }
-      }
-      following {
-        user {
-          userName
-          trainer {
-            team
-          }
-        }
-      }
     }
   }
 `;
