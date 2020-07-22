@@ -1,6 +1,14 @@
 import { Component } from 'react';
 import styled from 'styled-components';
-import { Map, TileLayer, Marker, Popup, LayerGroup, Circle } from 'react-leaflet';
+import {
+  Map,
+  TileLayer,
+  Marker,
+  Popup,
+  LayerGroup,
+  Circle,
+  CircleMarker,
+} from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import Control from 'react-leaflet-control';
 import { LeafletStyles, MarkerClusterStyles } from './MapStyles';
@@ -142,7 +150,24 @@ class MyMap extends Component {
             </DetectMyLocation>
           </Control>
           {/* {MarkersOnCanvas} */}
-          {trainer && <Circle center={trainer} color="green" radius={200} />}
+          {trainer && (
+            <>
+              <Circle
+                center={trainer}
+                color="#136acc"
+                fillOpacity={0.15}
+                stroke={false}
+                radius={200}
+              />
+              <CircleMarker
+                center={trainer}
+                color="#479ce6"
+                fillColor="#1a7fd6"
+                fillOpacity={0.9}
+                radius={10}
+              />
+            </>
+          )}
           <MarkerClusterGroup>
             <LayerGroup>{Markers}</LayerGroup>
           </MarkerClusterGroup>
