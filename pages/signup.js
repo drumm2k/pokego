@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import styled from 'styled-components';
 
@@ -89,8 +89,11 @@ function SignUp() {
 
   function signUpHandler(event) {
     event.preventDefault();
+    if (loading) return;
 
-    console.log(`${userName} ${email} ${password} ${team} ${level} ${code}`);
+    if (!userName || !email || !password || !team || !level) {
+      return;
+    }
 
     // Add validation later ============================
     signUp({
@@ -214,7 +217,9 @@ function SignUp() {
           />
         </FormField>
 
-        <Button bg="accent">Зарегистрироваться</Button>
+        <Button bg="accent" color="white">
+          {loading ? <>Загрузка</> : <>Зарегистрироваться</>}
+        </Button>
       </Form>
     </>
   );

@@ -15,7 +15,7 @@ const ProfileButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: ${(p) => p.theme.spacing.s6};
+  margin: 0 ${(p) => p.theme.spacing.s6};
   overflow: hidden;
   border-radius: 50%;
 

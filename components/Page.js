@@ -82,10 +82,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   a {
-    color: ${(p) => p.theme.color.accent};
+    color: ${(p) => p.theme.color.link};
+    transition: color 0.25s;
 
     &:hover {
-      opacity: 0.9;
+      color: ${(p) => p.theme.color.black};
     }
   }
 
@@ -96,7 +97,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #nprogress .bar {
-  background: #555;
+  background: ${(p) => p.theme.color.gray600};
+  height: 3px;
 }
 
   #nprogress .peg {

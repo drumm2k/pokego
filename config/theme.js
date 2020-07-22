@@ -20,6 +20,7 @@ export default {
     accent: '#aa306f',
     warning: '#e04141',
     success: '#37a36a',
+    link: '#aa306f',
 
     gray50: '#F6F6F6',
     gray100: '#EEEEEE',
@@ -66,7 +67,7 @@ export default {
 
   input: {
     border: '0px 0px 0px 1px rgba(60, 66, 87, 0.16)',
-    focus: '0 0 0 3px rgba(58, 151, 212, 0.36)',
+    focus: '0 0 0 3px rgba(51, 51, 51, 0.36)',
     invalid: '0 0 0 3px rgba(219, 26, 26, 0.36)',
   },
 

@@ -5,18 +5,18 @@ export const Button = styled.button`
   justify-content: center;
   align-items: center;
   min-height: 4rem;
-  color: ${(p) => (p.color ? p.theme.color[p.color] : p.theme.color.white)};
+  color: ${(p) => (p.color ? p.theme.color[p.color] : p.theme.color.gray600)};
   font-size: ${(p) => (p.size ? p.theme.font.size[p.size] : p.theme.font.size.md)};
   font-weight: ${(p) =>
     p.weight ? p.theme.font.weight[p.weight] : p.theme.font.weight.normal};
   letter-spacing: 0.1rem;
   white-space: nowrap;
   padding: ${(p) => p.theme.spacing.s3} ${(p) => p.theme.spacing.s5};
-  border: ${(p) => p.theme.border.border400};
+  border: ${(p) => p.theme.border.border300};
   border-radius: ${(p) =>
     p.radius ? p.theme.border[p.radius] : p.theme.border.radius200};
-  background-color: ${(p) => (p.bg ? p.theme.color[p.bg] : p.theme.color.black)};
-  transition: box-shadow 0.25s, opacity 0.25s;
+  background-color: ${(p) => (p.bg ? p.theme.color[p.bg] : p.theme.color.white)};
+  transition: all 0.25s ease 0s;
 
   &:focus {
     outline: none;
@@ -34,7 +34,9 @@ export const Button = styled.button`
     !p.disabled &&
     `
     &:hover {
-      opacity: 0.9;
+      border-color: ${p.theme.color.black};
+      background-color: transparent;
+      color: ${p.theme.color.black};
       cursor: pointer;
     }
   `};

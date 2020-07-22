@@ -1,5 +1,4 @@
 import { useState, useContext } from 'react';
-import { useRouter } from 'next/router';
 import { gql, useMutation } from '@apollo/client';
 import Link from 'next/link';
 import styled from 'styled-components';
@@ -7,7 +6,6 @@ import AuthContext from '../context/auth';
 
 import Title from '../components/Title';
 import { Button, Input, Label } from '../components/UI';
-import SpinnerButton from '../assets/spinner_button.svg';
 
 const Form = styled.form`
   display: grid;
@@ -65,7 +63,6 @@ function Login() {
     onCompleted(data) {
       const { token, userId, userName, tokenExpiration } = data.login;
       auth.login(token, userId, userName, tokenExpiration);
-      // router.push(`/user/${userName}`);
     },
   });
 
@@ -152,7 +149,9 @@ function Login() {
           />
         </FormField>
         {renderErrors(error)}
-        <Button bg="accent">{loading ? <SpinnerButton /> : <>Войти</>}</Button>
+        <Button bg="accent" color="white">
+          {loading ? <>Загрузка</> : <>Войти</>}
+        </Button>
       </Form>
       <Register>
         Не зарегистрированы?{' '}
