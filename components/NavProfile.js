@@ -4,7 +4,7 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 
 import AuthContext from '../context/auth';
-import NavProfileItem from './NavProfileItem';
+import NavProfileItem, { NavProfileItemButton } from './NavProfileItem';
 import { Button } from './UI';
 
 import UserIcon from '../assets/user.svg';
@@ -59,6 +59,22 @@ const Dropdown = styled.div`
   z-index: 50;
 `;
 
+const Login = styled.a`
+  color: ${(p) => p.theme.color.gray600};
+  letter-spacing: 0.1rem;
+  padding: ${(p) => p.theme.spacing.s2} ${(p) => p.theme.spacing.s4};
+  margin: 0 ${(p) => p.theme.spacing.s4};
+  border: ${(p) => p.theme.border.border300};
+  border-radius: ${(p) => p.theme.border.radius200};
+
+  &:hover {
+    border-color: ${(p) => p.theme.color.black};
+    background-color: transparent;
+    color: ${(p) => p.theme.color.black};
+    cursor: pointer;
+  }
+`;
+
 export default function NavProfile({ icon }) {
   const [open, setOpen] = useState(false);
 
@@ -66,17 +82,11 @@ export default function NavProfile({ icon }) {
 
   return (
     <>
-      {auth.token && (
-        <Link href={`/user/${auth.userName}`}>
-          <a>{auth.userName}</a>
-        </Link>
-      )}
       {!auth.token && (
-        <Link href="/login">
-          <a>Войти</a>
+        <Link href="/login" passHref>
+          <Login>Войти</Login>
         </Link>
       )}
-      {auth.token && <Button onClick={auth.logout}>Выйти</Button>}
       {auth.token && (
         <ProfileButton
           onClick={() => setOpen(!open)}
@@ -96,6 +106,8 @@ export default function NavProfile({ icon }) {
 
 function DropdownMenu({ open, setOpen }) {
   const containerRef = React.createRef();
+
+  const auth = useContext(AuthContext);
 
   // useEffect to close Dropdown when something clicked outside
   useEffect(() => {
@@ -119,11 +131,12 @@ function DropdownMenu({ open, setOpen }) {
     <Dropdown ref={containerRef}>
       <NavProfileItem
         leftIcon={<UserIcon />}
-        url="/login"
+        url="/user/[id]"
+        as={`/user/${auth.userName}`}
         open={open}
         setOpen={setOpen}
       >
-        Войти
+        Профиль
       </NavProfileItem>
       <NavProfileItem
         leftIcon={<SettingsIcon />}
@@ -133,14 +146,14 @@ function DropdownMenu({ open, setOpen }) {
       >
         Настройки
       </NavProfileItem>
-      <NavProfileItem
+      <NavProfileItemButton
         leftIcon={<LogoutIcon />}
-        url="/"
+        func={auth.logout}
         open={open}
         setOpen={setOpen}
       >
         Выйти
-      </NavProfileItem>
+      </NavProfileItemButton>
     </Dropdown>
   );
 }

@@ -23,17 +23,13 @@ const Logo = styled.a`
 const NavPanel = styled.nav`
   display: flex;
   align-items: center;
-
-  a {
-    margin-right: ${(p) => p.theme.spacing.s4};
-  }
 `;
 
 export default function Header() {
   return (
     <>
       <StyledHeader>
-        <Link href="/">
+        <Link href="/" passHref>
           <Logo>PokéGO</Logo>
         </Link>
         <NavPanel>

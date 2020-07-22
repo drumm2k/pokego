@@ -10,6 +10,7 @@ const NavListContainer = styled.div`
   display: ${(p) => (p.open ? 'flex' : 'none')};
   top: 7.5rem;
   width: 100%;
+  max-width: 450px;
   right: 0;
   z-index: 100;
   background: ${(p) => p.theme.color.white};
