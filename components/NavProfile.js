@@ -66,12 +66,23 @@ const Login = styled.a`
   margin: 0 ${(p) => p.theme.spacing.s4};
   border: ${(p) => p.theme.border.border300};
   border-radius: ${(p) => p.theme.border.radius200};
+  transition: all 0.25s ease 0s;
 
   &:hover {
     border-color: ${(p) => p.theme.color.black};
     background-color: transparent;
     color: ${(p) => p.theme.color.black};
     cursor: pointer;
+  }
+`;
+
+const UserName = styled.a`
+  color: ${(p) => p.theme.color.gray600};
+
+  &:hover {
+    border-color: ${(p) => p.theme.color.black};
+    background-color: transparent;
+    color: ${(p) => p.theme.color.black};
   }
 `;
 
@@ -88,16 +99,21 @@ export default function NavProfile({ icon }) {
         </Link>
       )}
       {auth.token && (
-        <ProfileButton
-          onClick={() => setOpen(!open)}
-          aria-label="Profile Menu"
-          aria-haspopup="true"
-          aria-expanded={open}
-        >
-          <ProfileAvatar>
-            <ProfileAvatarIcon>{icon}</ProfileAvatarIcon>
-          </ProfileAvatar>
-        </ProfileButton>
+        <>
+          <Link href="/user/[id]" as={`/user/${auth.userName}`} passHref>
+            <UserName>{auth.userName}</UserName>
+          </Link>
+          <ProfileButton
+            onClick={() => setOpen(!open)}
+            aria-label="Profile Menu"
+            aria-haspopup="true"
+            aria-expanded={open}
+          >
+            <ProfileAvatar>
+              <ProfileAvatarIcon>{icon}</ProfileAvatarIcon>
+            </ProfileAvatar>
+          </ProfileButton>
+        </>
       )}
       {open && <DropdownMenu open={open} setOpen={setOpen} />}
     </>
