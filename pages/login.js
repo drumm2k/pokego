@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import { useRouter } from 'next/router';
 import { gql, useMutation } from '@apollo/client';
 import Link from 'next/link';
 import styled from 'styled-components';
@@ -54,7 +55,7 @@ export const LOGIN = gql`
 
 function Login() {
   const auth = useContext(AuthContext);
-  // const router = useRouter();
+  const router = useRouter();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -63,6 +64,7 @@ function Login() {
     onCompleted(data) {
       const { token, userId, userName, tokenExpiration } = data.login;
       auth.login(token, userId, userName, tokenExpiration);
+      router.push('/user/[id]', `/user/${userName}`);
     },
   });
 
