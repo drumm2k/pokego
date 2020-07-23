@@ -5,7 +5,7 @@ import TrainerCode from './ProfileTrainerCode';
 import ProfileSocial from './ProfileSocial';
 import PokeCard from './PokeCard';
 
-const Profile = styled.div`
+const ProfileContainer = styled.div`
   display: grid;
   grid-gap: ${(p) => p.theme.spacing.s4};
 `;
@@ -23,9 +23,9 @@ const PokeList = styled.div`
   flex-wrap: wrap;
 `;
 
-const ProfileCard = ({ user }) => {
+const Profile = ({ user }) => {
   return (
-    <Profile>
+    <ProfileContainer>
       <ProfileItemContainer>
         {user.trainer.team && (
           <img
@@ -36,7 +36,6 @@ const ProfileCard = ({ user }) => {
           />
         )}
         <h3>{user.userName}</h3>
-        <p>id: {user.id}</p>
         {user.trainer.level && <p>{user.trainer.level} уровень</p>}
         {user.trainer.code && <TrainerCode trainerCode={user.trainer.code} />}
         {user.location.latitude && user.location.longtitude && (
@@ -54,7 +53,6 @@ const ProfileCard = ({ user }) => {
       <ProfileItemContainer>
         {user.tradeLists.map((list) => (
           <div key={list.id}>
-            <div>id: {list.id}</div>
             <div>
               Trade List: {list.pokemons.length} покемона
               <PokeList>
@@ -70,17 +68,15 @@ const ProfileCard = ({ user }) => {
                 ))}
               </PokeList>
             </div>
-            <div>description: {list.description}</div>
-            <div>private: {list.isPrivate}</div>
           </div>
         ))}
       </ProfileItemContainer>
-    </Profile>
+    </ProfileContainer>
   );
 };
 
-ProfileCard.propTypes = {
+Profile.propTypes = {
   user: PropTypes.oneOfType([PropTypes.object]).isRequired,
 };
 
-export default ProfileCard;
+export default Profile;

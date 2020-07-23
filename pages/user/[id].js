@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
 import { initializeApollo } from '../../lib/apolloClient';
 import Title from '../../components/Title';
-import ProfileCard from '../../components/ProfileCard';
+import Profile from '../../components/Profile';
 
 export const GET_USER = gql`
   query getUser($userName: String!) {
@@ -47,7 +47,7 @@ export const GET_USERS = gql`
   }
 `;
 
-export default function Profile() {
+export default function MyProfile() {
   const router = useRouter();
   const { id } = router.query;
 
@@ -63,7 +63,7 @@ export default function Profile() {
   return (
     <>
       <Title color="#666">Профиль тренера</Title>
-      <ProfileCard user={getUser} />
+      <Profile user={getUser} />
     </>
   );
 }
