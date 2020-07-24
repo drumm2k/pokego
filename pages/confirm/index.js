@@ -27,9 +27,9 @@ const FormField = styled.section`
   width: 100%;
 `;
 
-export const RESET_PASSWORD_REQUEST = gql`
-  mutation resetPasswordRequest($email: String!) {
-    resetPasswordRequest(email: $email)
+export const CONFIRM_RESEND = gql`
+  mutation confirmResend($email: String!) {
+    confirmResend(email: $email)
   }
 `;
 
@@ -37,14 +37,11 @@ export default function Reset() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
-  const [resetPasswordRequest, { loading, error }] = useMutation(
-    RESET_PASSWORD_REQUEST,
-    {
-      onCompleted() {
-        setMessage(`Письмо отправлено на ваш адрес: ${email}`);
-      },
-    }
-  );
+  const [resetPasswordRequest, { loading, error }] = useMutation(CONFIRM_RESEND, {
+    onCompleted() {
+      setMessage(`Письмо отправлено на ваш адрес: ${email}`);
+    },
+  });
 
   const handleInputChange = (event) => {
     const { value } = event.target;
@@ -81,7 +78,7 @@ export default function Reset() {
 
   return (
     <>
-      <Title color="#666">Восстановление пароля</Title>
+      <Title color="#666">Подтверждение аккаунта</Title>
       {!message && (
         <>
           <Form onSubmit={resetHandler}>
