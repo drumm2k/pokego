@@ -47,6 +47,7 @@ export const LOGIN = gql`
     login(input: { email: $email, password: $password }) {
       userId
       userName
+      roles
       token
       tokenExpiration
     }
@@ -62,8 +63,9 @@ function Login() {
 
   const [login, { loading, error }] = useMutation(LOGIN, {
     onCompleted(data) {
-      const { token, userId, userName, tokenExpiration } = data.login;
-      auth.login(token, userId, userName, tokenExpiration);
+      const { token, userId, userName, roles, tokenExpiration } = data.login;
+      auth.login(token, userId, userName, roles, tokenExpiration);
+      localStorage.setItem('token', token);
       router.push('/user/[id]', `/user/${userName}`);
     },
   });

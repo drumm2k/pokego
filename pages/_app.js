@@ -21,19 +21,29 @@ Router.events.on('routeChangeError', () => NProgress.done());
 export default function App({ Component, pageProps }) {
   const [userId, setUserId] = useState(null);
   const [userName, setUserName] = useState(null);
+  const [roles, setRoles] = useState(null);
 
   const [token, setToken] = useState(null);
 
-  const login = (tokenData, userIdData, userNameData, tokenExpirationData) => {
+  const login = (
+    tokenData,
+    userIdData,
+    userNameData,
+    rolesData,
+    tokenExpirationData
+  ) => {
     setUserId(userIdData);
     setUserName(userNameData);
+    setRoles(rolesData);
     setToken(tokenData);
   };
 
   const logout = () => {
     setUserId(null);
     setUserName(null);
+    setRoles(null);
     setToken(null);
+    localStorage.removeItem('token');
   };
 
   const apolloClient = useApollo(pageProps.initialApolloState);
@@ -45,6 +55,7 @@ export default function App({ Component, pageProps }) {
           value={{
             userId,
             userName,
+            roles,
             token,
             login,
             logout,
