@@ -46,9 +46,11 @@ const Profile = ({ user }) => {
         <p>Создан: {new Date(user.createdAt).toLocaleString()}</p>
       </ProfileItemContainer>
 
-      <ProfileItemContainer>
-        <ProfileSocial telegram={user.telegram} />
-      </ProfileItemContainer>
+      {user.social && (
+        <ProfileItemContainer>
+          <ProfileSocial social={user.social} />
+        </ProfileItemContainer>
+      )}
 
       <ProfileItemContainer>
         {user.tradeLists.map((list) => (

@@ -14,27 +14,27 @@ const IconContainer = styled.div`
   margin-right: ${(p) => p.theme.spacing.s2};
 `;
 
-const ProfileSocial = ({ telegram }) => {
-  if (!telegram) return null;
-  const telegramLink = `https://t.me/${telegram}`;
+const ProfileSocial = ({ social }) => {
+  if (!social.telegram) return null;
+  const telegramLink = `https://t.me/${social.telegram}`;
   return (
     <SocialContainer>
       <IconContainer>
         <TelegramIcon />
       </IconContainer>
       <a href={telegramLink} target="_blank" rel="noopener noreferrer">
-        {telegram}
+        {social.telegram}
       </a>
     </SocialContainer>
   );
 };
 
 ProfileSocial.propTypes = {
-  telegram: PropTypes.string,
+  social: PropTypes.objectOf(PropTypes.string),
 };
 
 ProfileSocial.defaultProps = {
-  telegram: null,
+  social: null,
 };
 
 export default ProfileSocial;

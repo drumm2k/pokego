@@ -9,6 +9,7 @@ export const GET_USER = gql`
     getUser(userName: $userName) {
       userName
       id
+      subscription
       trainer {
         team
         level
@@ -18,8 +19,10 @@ export const GET_USER = gql`
         latitude
         longtitude
       }
-      telegram
-      createdAt
+      social {
+        telegram
+        discord
+      }
       tradeLists {
         id
         pokemons {
@@ -35,6 +38,7 @@ export const GET_USER = gql`
         description
         isPrivate
       }
+      createdAt
     }
   }
 `;
