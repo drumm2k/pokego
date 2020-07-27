@@ -6,12 +6,17 @@ import TelegramIcon from '../assets/telegram.svg';
 const SocialContainer = styled.div`
   display: flex;
   align-items: center;
+
+  a {
+    color: ${(p) => p.theme.color.white};
+  }
 `;
 
 const IconContainer = styled.div`
   width: 2.4rem;
   height: 2.4rem;
   margin-right: ${(p) => p.theme.spacing.s2};
+  filter: none;
 `;
 
 const ProfileSocial = ({ social }) => {
@@ -20,7 +25,7 @@ const ProfileSocial = ({ social }) => {
   return (
     <SocialContainer>
       <IconContainer>
-        <TelegramIcon />
+        <TelegramIcon stroke="#fff" />
       </IconContainer>
       <a href={telegramLink} target="_blank" rel="noopener noreferrer">
         {social.telegram}

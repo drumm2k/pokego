@@ -5,14 +5,26 @@ import QRCode from 'qrcode.react';
 import ClipboardIcon from '../assets/clipboard.svg';
 
 const TrainerCodeContainer = styled.div`
+  color: ${(p) => p.theme.color.black};
+  text-align: center;
+  background: white;
+  padding: ${(p) => p.theme.spacing.s4};
+  border-radius: ${(p) => p.theme.border.radius300};
+`;
+
+const TrainerCode = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
+  font-size: ${(p) => p.theme.font.size.xs};
+  line-height: 2.4rem;
+  letter-spacing: 1px;
+  font-variant-numeric: tabular-nums;
 `;
 
 const CopyButton = styled.button`
   width: 2.4rem;
   height: 2.4rem;
-  margin-left: ${(p) => p.theme.spacing.s2};
 `;
 
 function ProfileTrainerCode({ trainerCode }) {
@@ -28,17 +40,15 @@ function ProfileTrainerCode({ trainerCode }) {
   }
 
   return (
-    <>
+    <TrainerCodeContainer>
       <QRCode value={trainerCode} renderAs="svg" size={128} />
-      <TrainerCodeContainer>
-        <p>
-          Код тренера: <span>{trainerCode}</span>
-        </p>
-        <CopyButton>
-          <ClipboardIcon onClick={copyTrainerCode} />
+      <TrainerCode>
+        <span>{trainerCode}</span>
+        <CopyButton onClick={copyTrainerCode} aria-label="Copy trainer code">
+          <ClipboardIcon />
         </CopyButton>
-      </TrainerCodeContainer>
-    </>
+      </TrainerCode>
+    </TrainerCodeContainer>
   );
 }
 
