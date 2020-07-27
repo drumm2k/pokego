@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import QRCode from 'qrcode.react';
@@ -15,11 +16,12 @@ const TrainerCodeContainer = styled.div`
 const TrainerCode = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   font-size: ${(p) => p.theme.font.size.xs};
   line-height: 2.4rem;
   letter-spacing: 1px;
   font-variant-numeric: tabular-nums;
+  min-width: 13rem;
 `;
 
 const CopyButton = styled.button`
@@ -29,21 +31,26 @@ const CopyButton = styled.button`
 
 function ProfileTrainerCode({ trainerCode }) {
   if (!trainerCode) return null;
+  const [code, setCode] = useState(trainerCode);
 
   function copyTrainerCode() {
     const textField = document.createElement('textarea');
-    textField.innerText = trainerCode;
+    textField.innerText = code;
     document.body.appendChild(textField);
     textField.select();
     document.execCommand('copy');
     textField.remove();
+    setCode('Скопировано');
+    setTimeout(() => {
+      setCode(trainerCode);
+    }, 2000);
   }
 
   return (
     <TrainerCodeContainer>
       <QRCode value={trainerCode} renderAs="svg" size={128} />
       <TrainerCode>
-        <span>{trainerCode}</span>
+        {code}
         <CopyButton onClick={copyTrainerCode} aria-label="Copy trainer code">
           <ClipboardIcon />
         </CopyButton>
