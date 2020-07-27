@@ -36,6 +36,7 @@ export const SIGNUP = gql`
     $team: String!
     $level: Int!
     $code: String!
+    $telegram: String!
   ) {
     signUp(
       input: {
@@ -44,6 +45,7 @@ export const SIGNUP = gql`
         password: $password
         subscription: $subscription
         trainer: { team: $team, level: $level, code: $code }
+        social: { telegram: $telegram }
       }
     ) {
       userName
@@ -58,8 +60,10 @@ function SignUp() {
   const [team, setTeam] = useState('');
   const [level, setLevel] = useState('');
   const [code, setCode] = useState('');
+  const [telegram, setTelegram] = useState('');
   const [subscription, setSubscription] = useState(true);
 
+  const [inputError, setInputError] = useState('');
   const [message, setMessage] = useState('');
 
   const [signUp, { loading, error }] = useMutation(SIGNUP, {
@@ -92,6 +96,9 @@ function SignUp() {
       case 'code':
         setCode(value);
         break;
+      case 'telegram':
+        setTelegram(value);
+        break;
       case 'subscription':
         setSubscription(!subscription);
         break;
@@ -104,7 +111,28 @@ function SignUp() {
     event.preventDefault();
     if (loading) return;
 
-    if (!userName || !email || !password || !team || !level) {
+    if (!userName) {
+      setInputError('Введите имя');
+      return;
+    }
+
+    if (!email) {
+      setInputError('Введите email');
+      return;
+    }
+
+    if (!password) {
+      setInputError('Введите пароль');
+      return;
+    }
+
+    if (!team) {
+      setInputError('Выберите команду');
+      return;
+    }
+
+    if (!level) {
+      setInputError('Укажите ваш уровень');
       return;
     }
 
@@ -118,6 +146,7 @@ function SignUp() {
         team,
         level,
         code,
+        telegram,
       },
     });
   }
@@ -125,7 +154,9 @@ function SignUp() {
   const renderErrors = (err) => {
     let errorMessage;
 
-    if (err) {
+    if (inputError) {
+      errorMessage = inputError;
+    } else if (err) {
       errorMessage = err.message;
     }
 
@@ -239,6 +270,18 @@ function SignUp() {
               name="code"
               onChange={handleInputChange}
               value={code}
+            />
+          </FormField>
+          <FormField>
+            <Label htmlFor="telegram" bold>
+              Telegram
+            </Label>
+            <Input
+              type="text"
+              id="telegram"
+              name="telegram"
+              onChange={handleInputChange}
+              value={telegram}
             />
           </FormField>
           <FormField>
