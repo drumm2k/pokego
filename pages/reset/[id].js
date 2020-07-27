@@ -99,7 +99,7 @@ export default function ConfirmReset() {
 
   return (
     <>
-      <Title color="#666">Введите новый пароль</Title>
+      <Title>Введите новый пароль</Title>
 
       <Form onSubmit={resetHandler}>
         <FormField>

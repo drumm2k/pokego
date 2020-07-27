@@ -78,7 +78,7 @@ export default function Reset() {
 
   return (
     <>
-      <Title color="#666">Подтверждение аккаунта</Title>
+      <Title>Подтверждение аккаунта</Title>
       {!message && (
         <>
           <Form onSubmit={resetHandler}>

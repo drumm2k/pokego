@@ -119,7 +119,7 @@ function Login() {
 
   return (
     <>
-      <Title color="#666">Войти</Title>
+      <Title>Войти</Title>
       <Form onSubmit={loginHandler}>
         <FormField>
           <Label htmlFor="email" bold>

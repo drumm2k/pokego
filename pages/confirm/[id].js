@@ -55,7 +55,7 @@ export default function Confirm() {
   if (error)
     return (
       <>
-        <Title color="#666">Подтверждение учётной записи</Title>
+        <Title>Подтверждение учётной записи</Title>
         {error.message && (
           <Message>
             <XIcon stroke="#fff" />
@@ -67,7 +67,7 @@ export default function Confirm() {
   if (mutationError)
     return (
       <>
-        <Title color="#666">Подтверждение учётной записи</Title>
+        <Title>Подтверждение учётной записи</Title>
         {mutationError.message && (
           <Message>
             <XIcon stroke="#fff" />
@@ -79,7 +79,7 @@ export default function Confirm() {
 
   return (
     <>
-      <Title color="#666">Подтверждение учётной записи</Title>
+      <Title>Подтверждение учётной записи</Title>
       {!data.confirm && !request && (
         <>
           <Message>

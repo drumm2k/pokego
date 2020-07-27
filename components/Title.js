@@ -4,12 +4,10 @@ import PropTypes from 'prop-types';
 const StyledTitle = styled.h1`
   font-size: 3.2rem;
   line-height: 4rem;
-  color: ${(props) => props.color};
+  color: ${(p) => (p.color ? p.color : p.theme.color.gray600)};
 `;
 
-const Title = (props) => {
-  const { color, children } = props;
-
+const Title = ({ color, children }) => {
   return <StyledTitle color={color}>{children}</StyledTitle>;
 };
 
@@ -19,7 +17,7 @@ Title.propTypes = {
 };
 
 Title.defaultProps = {
-  color: '#000',
+  color: '',
   children: '',
 };
 

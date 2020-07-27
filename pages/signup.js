@@ -137,7 +137,7 @@ function SignUp() {
 
   return (
     <>
-      <Title color="#666">Регистрация</Title>
+      <Title>Регистрация</Title>
       {!message && (
         <Form onSubmit={signUpHandler}>
           <FormField>

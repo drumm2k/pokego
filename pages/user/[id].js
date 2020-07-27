@@ -66,7 +66,7 @@ export default function MyProfile() {
 
   return (
     <>
-      <Title color="#666">Профиль тренера</Title>
+      <Title>Профиль тренера</Title>
       <Profile user={getUser} />
     </>
   );

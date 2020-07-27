@@ -81,7 +81,7 @@ export default function Reset() {
 
   return (
     <>
-      <Title color="#666">Восстановление пароля</Title>
+      <Title>Восстановление пароля</Title>
       {!message && (
         <>
           <Form onSubmit={resetHandler}>

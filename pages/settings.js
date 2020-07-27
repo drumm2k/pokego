@@ -3,7 +3,7 @@ import Title from '../components/Title';
 export default function Settings() {
   return (
     <>
-      <Title color="#666">Настройки</Title>
+      <Title>Настройки</Title>
       <div>
         <ul>
           <li>Отображать мой профиль: для всех, для друзей, скрыть</li>
