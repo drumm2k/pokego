@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 import AuthContext from '../context/auth';
 import NavProfileItem, { NavProfileItemButton } from './NavProfileItem';
-import { Button } from './UI';
 
 import UserIcon from '../assets/user.svg';
 import SettingsIcon from '../assets/cog.svg';
@@ -156,7 +155,7 @@ function DropdownMenu({ open, setOpen }) {
       </NavProfileItem>
       <NavProfileItem
         leftIcon={<SettingsIcon />}
-        url="/"
+        url="/settings"
         open={open}
         setOpen={setOpen}
       >

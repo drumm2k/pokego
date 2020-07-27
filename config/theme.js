@@ -17,10 +17,11 @@ export default {
   color: {
     black: '#000000',
     white: '#ffffff',
-    accent: '#aa306f',
+    accent: '#5e60ce',
     warning: '#e04141',
     success: '#37a36a',
-    link: '#aa306f',
+    link: '#5e60ce',
+    orange: '#fcd768',
 
     gray50: '#F6F6F6',
     gray100: '#EEEEEE',

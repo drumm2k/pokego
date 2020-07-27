@@ -128,7 +128,7 @@ const PokeTitle = styled.h3`
 `;
 
 const PokeTitlePokedex = styled.span`
-  color: #fcd768;
+  color: ${(p) => p.theme.color.orange};
 `;
 
 const PokeImg = styled.div`
