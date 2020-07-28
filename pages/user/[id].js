@@ -71,32 +71,3 @@ export default function MyProfile() {
     </>
   );
 }
-
-// export async function getStaticProps({ params }) {
-//   const apolloClient = initializeApollo();
-
-//   await apolloClient.query({ query: GET_USER, variables: { userName: params.id } });
-
-//   return {
-//     props: {
-//       initialApolloState: apolloClient.cache.extract(),
-//     },
-//     unstable_revalidate: 1,
-//   };
-// }
-
-// export async function getStaticPaths() {
-//   const apolloClient = initializeApollo();
-
-//   const res = await apolloClient.query({ query: GET_USERS });
-//   const { getUsers } = res.data;
-
-//   const paths = getUsers.map((user) => ({
-//     params: { id: user.userName },
-//   }));
-
-//   return {
-//     paths,
-//     fallback: true,
-//   };
-// }
