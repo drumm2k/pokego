@@ -87,33 +87,11 @@ export default function Events() {
     <>
       <Title color="#ff3163">Ивенты</Title>
 
-      <EventsContainer>
-        <EventsStatus>Активные</EventsStatus>
-        {events &&
-          events.map((event) => (
-            <Link
-              key={event.id}
-              href="/events/[id]"
-              as={`/events/${event.id}`}
-              passHref
-            >
-              <StyledLink>
-                <Event
-                  name={event.name}
-                  description={event.description}
-                  img={event.img}
-                  starts={event.starts}
-                  ends={event.ends}
-                />
-              </StyledLink>
-            </Link>
-          ))}
-      </EventsContainer>
+      {events && events.length > 0 && (
+        <EventsContainer>
+          <EventsStatus>Активные</EventsStatus>
 
-      <EventsContainer>
-        <EventsStatus>Скоро</EventsStatus>
-        {eventsUpcoming &&
-          eventsUpcoming.map((event) => (
+          {events.map((event) => (
             <Link
               key={event.id}
               href="/events/[id]"
@@ -131,12 +109,14 @@ export default function Events() {
               </StyledLink>
             </Link>
           ))}
-      </EventsContainer>
+        </EventsContainer>
+      )}
 
-      <EventsContainer>
-        <EventsStatus>Завершённые</EventsStatus>
-        {eventsEnded &&
-          eventsEnded.map((event) => (
+      {eventsUpcoming && eventsUpcoming.length > 0 && (
+        <EventsContainer>
+          <EventsStatus>Скоро</EventsStatus>
+
+          {eventsUpcoming.map((event) => (
             <Link
               key={event.id}
               href="/events/[id]"
@@ -154,7 +134,32 @@ export default function Events() {
               </StyledLink>
             </Link>
           ))}
-      </EventsContainer>
+        </EventsContainer>
+      )}
+
+      {eventsEnded && eventsEnded.length > 0 && (
+        <EventsContainer>
+          <EventsStatus>Завершённые</EventsStatus>
+          {eventsEnded.map((event) => (
+            <Link
+              key={event.id}
+              href="/events/[id]"
+              as={`/events/${event.id}`}
+              passHref
+            >
+              <StyledLink>
+                <Event
+                  name={event.name}
+                  description={event.description}
+                  img={event.img}
+                  starts={event.starts}
+                  ends={event.ends}
+                />
+              </StyledLink>
+            </Link>
+          ))}
+        </EventsContainer>
+      )}
     </>
   );
 }
