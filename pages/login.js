@@ -1,12 +1,14 @@
-import { useState, useContext } from 'react';
-import { useRouter } from 'next/router';
 import { gql, useMutation } from '@apollo/client';
+import { yupResolver } from '@hookform/resolvers';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useContext } from 'react';
+import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import AuthContext from '../context/auth';
-
+import * as yup from 'yup';
 import Title from '../components/Title';
 import { Button, Input, Label } from '../components/UI';
+import AuthContext from '../context/auth';
 
 const Form = styled.form`
   display: grid;
@@ -54,12 +56,14 @@ export const LOGIN = gql`
   }
 `;
 
+const schema = yup.object().shape({
+  email: yup.string().required('Заполните почту').email('Заполните почту').trim(),
+  password: yup.string().required('Заполните пароль'),
+});
+
 function Login() {
   const auth = useContext(AuthContext);
   const router = useRouter();
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
   const [login, { loading, error }] = useMutation(LOGIN, {
     onCompleted(data) {
@@ -70,57 +74,22 @@ function Login() {
     },
   });
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-
-    switch (name) {
-      case 'email':
-        setEmail(value);
-        break;
-      case 'password':
-        setPassword(value);
-        break;
-      default:
-        break;
-    }
-  };
-
-  function loginHandler(event) {
-    event.preventDefault();
-    if (loading) return;
-
-    if (!email || !password) {
-      return;
-    }
-    // Add validation later ============================
+  const { register, handleSubmit, errors } = useForm({
+    resolver: yupResolver(schema),
+  });
+  const onSubmit = (form) => {
     login({
       variables: {
-        email,
-        password,
+        email: form.email,
+        password: form.password,
       },
     });
-  }
-
-  const renderErrors = (err) => {
-    let errorMessage;
-
-    // if (error) {
-    //   errorMessage = 'state error';
-    // } else
-    if (err) {
-      errorMessage = err.message;
-    }
-
-    if (errorMessage) {
-      return <p>{errorMessage}</p>;
-    }
-    return null;
   };
 
   return (
     <>
       <Title>Войти</Title>
-      <Form onSubmit={loginHandler}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <FormField>
           <Label htmlFor="email" bold>
             Почта
@@ -130,9 +99,9 @@ function Login() {
             id="email"
             name="email"
             autocomplete="email"
-            onChange={handleInputChange}
-            value={email}
+            ref={register({ required: true })}
           />
+          <p>{errors.email?.message}</p>
         </FormField>
         <FormField>
           <PasswordLabel>
@@ -148,11 +117,11 @@ function Login() {
             id="password"
             name="password"
             autocomplete="current-password"
-            onChange={handleInputChange}
-            value={password}
+            ref={register({ required: true })}
           />
+          <p>{errors.password?.message}</p>
         </FormField>
-        {renderErrors(error)}
+        {error && <p>{error.message}</p>}
         <Button bg="accent" color="white">
           {loading ? <>Загрузка</> : <>Войти</>}
         </Button>

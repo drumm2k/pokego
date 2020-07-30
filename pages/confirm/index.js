@@ -1,7 +1,9 @@
-import { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
+import { yupResolver } from '@hookform/resolvers';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-
+import * as yup from 'yup';
 import Title from '../../components/Title';
 import { Button, Input, Label } from '../../components/UI';
 
@@ -33,47 +35,28 @@ export const CONFIRM_RESEND = gql`
   }
 `;
 
-export default function Reset() {
-  const [email, setEmail] = useState('');
+const schema = yup.object().shape({
+  email: yup.string().required('Заполните почту').email('Заполните почту').trim(),
+});
+
+export default function Confirm() {
   const [message, setMessage] = useState('');
 
-  const [resetPasswordRequest, { loading, error }] = useMutation(CONFIRM_RESEND, {
+  const [confirmResend, { loading, error }] = useMutation(CONFIRM_RESEND, {
     onCompleted() {
-      setMessage(`Письмо отправлено на ваш адрес: ${email}`);
+      setMessage(`Письмо отправлено на ваш адрес`);
     },
   });
 
-  const handleInputChange = (event) => {
-    const { value } = event.target;
-    setEmail(value);
-  };
-
-  function resetHandler(event) {
-    event.preventDefault();
-    if (loading) return;
-
-    if (!email) {
-      return;
-    }
-
-    resetPasswordRequest({
+  const { register, handleSubmit, errors } = useForm({
+    resolver: yupResolver(schema),
+  });
+  const onSubmit = (form) => {
+    confirmResend({
       variables: {
-        email,
+        email: form.email,
       },
     });
-  }
-
-  const renderErrors = (err) => {
-    let errorMessage;
-
-    if (err) {
-      errorMessage = err.message;
-    }
-
-    if (errorMessage) {
-      return <p>{errorMessage}</p>;
-    }
-    return null;
   };
 
   return (
@@ -81,7 +64,7 @@ export default function Reset() {
       <Title>Подтверждение аккаунта</Title>
       {!message && (
         <>
-          <Form onSubmit={resetHandler}>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <FormField>
               <Label htmlFor="email" bold>
                 Почта
@@ -91,11 +74,12 @@ export default function Reset() {
                 id="email"
                 name="email"
                 autocomplete="email"
-                onChange={handleInputChange}
-                value={email}
+                ref={register({ required: true })}
               />
+              <p>{errors.email?.message}</p>
             </FormField>
-            {renderErrors(error)}
+
+            {error && <p>{error.message}</p>}
 
             <Button bg="accent" color="white">
               {loading ? <>Загрузка</> : <>Отправить</>}

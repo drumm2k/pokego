@@ -1,8 +1,7 @@
-import { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
-import { initializeApollo } from '../../lib/apolloClient';
-import Title from '../../components/Title';
+import { useRouter } from 'next/router';
 import Profile from '../../components/Profile';
+import Title from '../../components/Title';
 
 export const GET_USER = gql`
   query getUser($userName: String!) {

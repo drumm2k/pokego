@@ -25,6 +25,7 @@
   "homepage": "https://github.com/drumm2k/pokego#readme",
   "dependencies": {
     "@apollo/client": "^3.0.2",
+    "@hookform/resolvers": "^0.1.0",
     "@svgr/webpack": "^4.3.3",
     "apollo-server-micro": "^2.16.1",
     "graphql": "^15.3.0",
@@ -36,11 +37,13 @@
     "qrcode.react": "^1.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-hook-form": "^6.1.2",
     "react-leaflet": "^2.7.0",
     "react-leaflet-control": "^2.1.2",
     "react-leaflet-markercluster": "^2.0.0",
     "styled-components": "^4.4.1",
-    "styled-normalize": "^8.0.7"
+    "styled-normalize": "^8.0.7",
+    "yup": "^0.29.2"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

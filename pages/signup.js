@@ -1,9 +1,11 @@
-import { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
+import { yupResolver } from '@hookform/resolvers';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-
+import * as yup from 'yup';
 import Title from '../components/Title';
-import { Button, Input, Label, Radio, Checkbox } from '../components/UI';
+import { Button, Checkbox, Input, Label, Radio } from '../components/UI';
 
 const Form = styled.form`
   display: grid;
@@ -47,130 +49,88 @@ export const SIGNUP = gql`
         trainer: { team: $team, level: $level, code: $code }
         social: { telegram: $telegram }
       }
-    ) {
-      userName
-    }
+    )
   }
 `;
 
-function SignUp() {
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [team, setTeam] = useState('');
-  const [level, setLevel] = useState('');
-  const [code, setCode] = useState('');
-  const [telegram, setTelegram] = useState('');
-  const [subscription, setSubscription] = useState(true);
+const schema = yup.object().shape({
+  userName: yup
+    .string()
+    .required('Заполните имя')
+    .min(2, 'Минимум 2 символа')
+    .max(30, 'Максимальная длина имени 30 символов')
+    .trim()
+    .matches(/^\S+$/, 'Имя не должно содержать пробелов')
+    .matches(/^[a-zA-Z0-9]*$/, 'Только буквы и цифры'),
+  email: yup.string().required('Заполните почту').email('Заполните почту').trim(),
+  password: yup
+    .string()
+    .required('Заполните пароль')
+    .min(8, 'Пароль должен содержать минимум 8 символов')
+    .matches(/[a-z]/, 'Минимум один символ в нижнем регистре (a-z)')
+    .matches(/[A-Z]/, 'Минимум один символ в верхнем регистре (A-Z)')
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9!@#$%^&*])/,
+      'Минимум одна цифра или спец символ (0-9, !@#$%^&*)'
+    ),
+  team: yup
+    .string()
+    .required('Выберите вашу команду')
+    .matches(/(valor|mystic|instinct)/),
+  level: yup
+    .number()
+    .typeError('Укажите свой уровень')
+    .required('Укажите свой уровень')
+    .positive('Уровень должен быть положительным числом')
+    .integer('Уровень - целое число')
+    .min(1, 'Минимальный уровень 1')
+    .max(40, 'Максимальный уровень 40'),
+  code: yup.string().matches(/[\d*]{12}/, {
+    message: 'Код тренера должен состоять из 12 цифр',
+    excludeEmptyString: true,
+  }),
+  telegram: yup
+    .string()
+    .trim()
+    .matches(/^[a-zA-Z0-9]*$/, {
+      message: 'Только буквы и цифры',
+      excludeEmptyString: true,
+    }),
+  subscription: yup.boolean(),
+});
 
-  const [inputError, setInputError] = useState('');
+function SignUp() {
   const [message, setMessage] = useState('');
 
   const [signUp, { loading, error }] = useMutation(SIGNUP, {
     onCompleted() {
-      setMessage(
-        `Письмо для подтверждения аккаунта отправлено на ваш адрес: ${email}`
-      );
+      setMessage(`Письмо для подтверждения аккаунта отправлено на ваш адрес.`);
     },
   });
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-
-    switch (name) {
-      case 'userName':
-        setUserName(value);
-        break;
-      case 'email':
-        setEmail(value);
-        break;
-      case 'password':
-        setPassword(value);
-        break;
-      case 'team':
-        setTeam(value);
-        break;
-      case 'level':
-        setLevel(parseInt(value, 10));
-        break;
-      case 'code':
-        setCode(value);
-        break;
-      case 'telegram':
-        setTelegram(value);
-        break;
-      case 'subscription':
-        setSubscription(!subscription);
-        break;
-      default:
-        break;
-    }
-  };
-
-  function signUpHandler(event) {
-    event.preventDefault();
-    if (loading) return;
-
-    if (!userName) {
-      setInputError('Введите имя');
-      return;
-    }
-
-    if (!email) {
-      setInputError('Введите email');
-      return;
-    }
-
-    if (!password) {
-      setInputError('Введите пароль');
-      return;
-    }
-
-    if (!team) {
-      setInputError('Выберите команду');
-      return;
-    }
-
-    if (!level) {
-      setInputError('Укажите ваш уровень');
-      return;
-    }
-
-    // Add validation later ============================
+  const { register, handleSubmit, errors } = useForm({
+    resolver: yupResolver(schema),
+  });
+  const onSubmit = (form) => {
     signUp({
       variables: {
-        userName,
-        email,
-        password,
-        subscription,
-        team,
-        level,
-        code,
-        telegram,
+        userName: form.userName,
+        email: form.email,
+        password: form.password,
+        team: form.team,
+        level: form.level,
+        code: form.code,
+        telegram: form.telegram,
+        subscription: form.subscription,
       },
     });
-  }
-
-  const renderErrors = (err) => {
-    let errorMessage;
-
-    if (inputError) {
-      errorMessage = inputError;
-    } else if (err) {
-      errorMessage = err.message;
-    }
-
-    if (errorMessage) {
-      return <p>{errorMessage}</p>;
-    }
-    return null;
   };
 
   return (
     <>
       <Title>Регистрация</Title>
       {!message && (
-        <Form onSubmit={signUpHandler}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <FormField>
             <Label htmlFor="userName" bold>
               Имя (как в игре)
@@ -179,9 +139,9 @@ function SignUp() {
               type="text"
               id="userName"
               name="userName"
-              onChange={handleInputChange}
-              value={userName}
+              ref={register({ required: true })}
             />
+            <p>{errors.userName?.message}</p>
           </FormField>
           <FormField>
             <Label htmlFor="email" bold>
@@ -192,9 +152,9 @@ function SignUp() {
               id="email"
               name="email"
               autocomplete="email"
-              onChange={handleInputChange}
-              value={email}
+              ref={register({ required: true })}
             />
+            <p>{errors.email?.message}</p>
           </FormField>
           <FormField>
             <Label htmlFor="password" bold>
@@ -205,9 +165,9 @@ function SignUp() {
               id="password"
               name="password"
               autocomplete="new-password"
-              onChange={handleInputChange}
-              value={password}
+              ref={register({ required: true })}
             />
+            <p>{errors.password?.message}</p>
           </FormField>
 
           <FormField>
@@ -219,7 +179,7 @@ function SignUp() {
                 id="teamValor"
                 name="team"
                 value="valor"
-                onChange={handleInputChange}
+                ref={register({ required: true })}
               />
               Valor
             </Label>
@@ -228,7 +188,7 @@ function SignUp() {
                 id="teamMystic"
                 name="team"
                 value="mystic"
-                onChange={handleInputChange}
+                ref={register({ required: true })}
               />
               Mystic
             </Label>
@@ -237,10 +197,11 @@ function SignUp() {
                 id="teamInstinct"
                 name="team"
                 value="instinct"
-                onChange={handleInputChange}
+                ref={register({ required: true })}
               />
               Instinct
             </Label>
+            <p>{errors.team?.message}</p>
           </FormField>
           <FormField>
             <Label htmlFor="level" bold>
@@ -252,11 +213,10 @@ function SignUp() {
               pattern="\d*"
               id="level"
               name="level"
-              min="1"
-              max="40"
-              onChange={handleInputChange}
-              value={level}
+              step="1"
+              ref={register({ required: true, min: 1, max: 40 })}
             />
+            <p>{errors.level?.message}</p>
           </FormField>
           <FormField>
             <Label htmlFor="code" bold>
@@ -268,35 +228,30 @@ function SignUp() {
               placeholder="xxxx xxxx xxxx"
               id="code"
               name="code"
-              onChange={handleInputChange}
-              value={code}
+              ref={register}
             />
+            <p>{errors.code?.message}</p>
           </FormField>
           <FormField>
             <Label htmlFor="telegram" bold>
               Telegram
             </Label>
-            <Input
-              type="text"
-              id="telegram"
-              name="telegram"
-              onChange={handleInputChange}
-              value={telegram}
-            />
+            <Input type="text" id="telegram" name="telegram" ref={register} />
+            <p>{errors.telegram?.message}</p>
           </FormField>
           <FormField>
             <Label>
               <Checkbox
-                checked={subscription}
+                defaultChecked
                 id="subscription"
                 name="subscription"
-                onChange={handleInputChange}
+                ref={register}
               />
               Подписаться на новости
             </Label>
           </FormField>
 
-          {renderErrors(error)}
+          {error && <p>{error.message}</p>}
 
           <Button bg="accent" color="white">
             {loading ? <>Загрузка</> : <>Зарегистрироваться</>}
