@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
-import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
 import Profile from '../../components/Profile';
 import Title from '../../components/Title';
 
@@ -42,17 +42,8 @@ export const GET_USER = gql`
   }
 `;
 
-export const GET_USERS = gql`
-  query {
-    getUsers {
-      userName
-    }
-  }
-`;
-
-export default function MyProfile() {
-  const router = useRouter();
-  const { id } = router.query;
+export default function MyProfile({ params }) {
+  const { id } = params;
 
   const { data, loading, error } = useQuery(GET_USER, {
     variables: { userName: id },
@@ -70,3 +61,13 @@ export default function MyProfile() {
     </>
   );
 }
+
+export function getServerSideProps(context) {
+  return {
+    props: { params: context.params },
+  };
+}
+
+MyProfile.propTypes = {
+  params: PropTypes.objectOf(PropTypes.string).isRequired,
+};

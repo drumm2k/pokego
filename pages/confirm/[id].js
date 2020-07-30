@@ -1,6 +1,6 @@
 import { gql, useQuery } from '@apollo/client';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
 import Title from '../../components/Title';
 
 export const CONFIRM_ACCOUNT = gql`
@@ -9,9 +9,8 @@ export const CONFIRM_ACCOUNT = gql`
   }
 `;
 
-export default function Confirm() {
-  const router = useRouter();
-  const { id } = router.query;
+export default function Confirm({ params }) {
+  const { id } = params;
 
   const { data, loading, error } = useQuery(CONFIRM_ACCOUNT, {
     variables: { id },
@@ -55,3 +54,13 @@ export default function Confirm() {
     </>
   );
 }
+
+export function getServerSideProps(context) {
+  return {
+    props: { params: context.params },
+  };
+}
+
+Confirm.propTypes = {
+  params: PropTypes.objectOf(PropTypes.string).isRequired,
+};
