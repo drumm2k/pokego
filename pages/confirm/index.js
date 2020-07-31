@@ -36,7 +36,12 @@ export const CONFIRM_RESEND = gql`
 `;
 
 const schema = yup.object().shape({
-  email: yup.string().required('Заполните почту').email('Заполните почту').trim(),
+  email: yup
+    .string()
+    .required('Заполните почту')
+    .email('Заполните почту')
+    .trim()
+    .lowercase(),
 });
 
 export default function Confirm() {

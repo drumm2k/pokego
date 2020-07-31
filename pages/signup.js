@@ -62,7 +62,12 @@ const schema = yup.object().shape({
     .trim()
     .matches(/^\S+$/, 'Имя не должно содержать пробелов')
     .matches(/^[a-zA-Z0-9]*$/, 'Только буквы и цифры'),
-  email: yup.string().required('Заполните почту').email('Заполните почту').trim(),
+  email: yup
+    .string()
+    .required('Заполните почту')
+    .email('Заполните почту')
+    .trim()
+    .lowercase(),
   password: yup
     .string()
     .required('Заполните пароль')
@@ -91,11 +96,12 @@ const schema = yup.object().shape({
   }),
   telegram: yup
     .string()
-    .trim()
     .matches(/^[a-zA-Z0-9]*$/, {
       message: 'Только буквы и цифры',
       excludeEmptyString: true,
-    }),
+    })
+    .trim()
+    .lowercase(),
   subscription: yup.boolean(),
 });
 

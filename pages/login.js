@@ -57,7 +57,12 @@ export const LOGIN = gql`
 `;
 
 const schema = yup.object().shape({
-  email: yup.string().required('Заполните почту').email('Заполните почту').trim(),
+  email: yup
+    .string()
+    .required('Заполните почту')
+    .email('Заполните почту')
+    .trim()
+    .lowercase(),
   password: yup.string().required('Заполните пароль'),
 });
 
