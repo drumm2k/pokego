@@ -1,16 +1,15 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
-import Router from 'next/router';
-import { ThemeProvider } from 'styled-components';
-import NProgress from 'nprogress';
 import { ApolloProvider } from '@apollo/client';
-import { useApollo } from '../lib/apolloClient';
-
-import Page from '../components/Page';
-import AuthContext from '../context/auth';
-
-import theme from '../config/theme';
+import Router from 'next/router';
+import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import { ThemeProvider } from 'styled-components';
+import Page from '../components/Page';
+import theme from '../config/theme';
+import AuthContext from '../context/auth';
+import { setAccessToken } from '../lib/accessToken';
+import { useApollo } from '../lib/apolloClient';
 
 NProgress.configure({ showSpinner: false });
 
@@ -19,32 +18,28 @@ Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
 export default function App({ Component, pageProps }) {
-  const [userId, setUserId] = useState(null);
-  const [userName, setUserName] = useState(null);
-  const [roles, setRoles] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
 
-  const [token, setToken] = useState(null);
-
-  const login = (
-    tokenData,
-    userIdData,
-    userNameData,
-    rolesData,
-    tokenExpirationData
-  ) => {
-    setUserId(userIdData);
-    setUserName(userNameData);
-    setRoles(rolesData);
-    setToken(tokenData);
+  const login = (userData) => {
+    setUser(userData);
   };
 
   const logout = () => {
-    setUserId(null);
-    setUserName(null);
-    setRoles(null);
-    setToken(null);
-    localStorage.removeItem('token');
+    setUser(null);
   };
+
+  useEffect(() => {
+    fetch(process.env.NEXT_PUBLIC_REFRESH_TOKEN, {
+      method: 'POST',
+      credentials: 'include',
+    }).then(async (res) => {
+      const { accessToken } = await res.json();
+
+      setAccessToken(accessToken);
+      setLoading(false);
+    });
+  }, []);
 
   const apolloClient = useApollo(pageProps.initialApolloState);
 
@@ -53,17 +48,16 @@ export default function App({ Component, pageProps }) {
       <ThemeProvider theme={theme}>
         <AuthContext.Provider
           value={{
-            userId,
-            userName,
-            roles,
-            token,
+            user,
             login,
             logout,
           }}
         >
-          <Page>
-            <Component {...pageProps} />
-          </Page>
+          {!loading && (
+            <Page>
+              <Component {...pageProps} />
+            </Page>
+          )}
         </AuthContext.Provider>
       </ThemeProvider>
     </ApolloProvider>

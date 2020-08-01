@@ -9,6 +9,7 @@ import * as yup from 'yup';
 import Title from '../components/Title';
 import { Button, Input, Label } from '../components/UI';
 import AuthContext from '../context/auth';
+import { setAccessToken } from '../lib/accessToken';
 
 const Form = styled.form`
   display: grid;
@@ -47,11 +48,18 @@ const Register = styled.div`
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
     login(input: { email: $email, password: $password }) {
-      userId
-      userName
-      roles
-      token
-      tokenExpiration
+      accessToken
+      user {
+        id
+        userName
+        email
+        confirmed
+        roles
+        banned
+        trainer {
+          team
+        }
+      }
     }
   }
 `;
@@ -72,10 +80,10 @@ function Login() {
 
   const [login, { loading, error }] = useMutation(LOGIN, {
     onCompleted(data) {
-      const { token, userId, userName, roles, tokenExpiration } = data.login;
-      auth.login(token, userId, userName, roles, tokenExpiration);
-      localStorage.setItem('token', token);
-      router.push('/user/[id]', `/user/${userName}`);
+      const { accessToken, user } = data.login;
+      auth.login(user);
+      setAccessToken(accessToken);
+      router.push('/user/[id]', `/user/${user.userName}`);
     },
   });
 
