@@ -1,9 +1,8 @@
+import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-
-import NavItem from './NavItem';
 import nav from '../config/nav.json';
+import NavItem from './NavItem';
 
 const NavListContainer = styled.div`
   position: absolute;
@@ -31,14 +30,14 @@ const StyledNavList = styled.div`
 
 function NavList(props) {
   const { open, setOpen } = props;
-  const containerRef = React.createRef();
+  const navListRef = React.createRef();
 
   // useEffect to close Dropdown when something clicked outside
   useEffect(() => {
     const handleClick = (event) => {
       let current = event.target;
       while (current !== null) {
-        if (current === containerRef.current) {
+        if (current === navListRef.current) {
           return;
         }
         current = current.parentNode;
@@ -46,13 +45,15 @@ function NavList(props) {
       setOpen(!open);
     };
 
-    window.addEventListener('click', handleClick);
+    setTimeout(() => {
+      window.addEventListener('click', handleClick, false);
+    }, 1);
 
     return () => window.removeEventListener('click', handleClick);
   }, []);
 
   return (
-    <NavListContainer open={open} ref={containerRef}>
+    <NavListContainer open={open} ref={navListRef}>
       <StyledNavList role="menu">
         {nav.menu.map((item) => (
           <NavItem key={item.url} url={item.url} open={open} setOpen={setOpen}>

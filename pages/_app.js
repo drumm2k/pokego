@@ -25,8 +25,9 @@ export default function App({ Component, pageProps }) {
     setUser(userData);
   };
 
-  const logout = () => {
+  const logout = async () => {
     setUser(null);
+    setAccessToken('');
   };
 
   useEffect(() => {

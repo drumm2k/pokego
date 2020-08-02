@@ -53,11 +53,11 @@ export const LOGIN = gql`
         id
         userName
         email
-        confirmed
         roles
-        banned
         trainer {
           team
+          level
+          code
         }
       }
     }

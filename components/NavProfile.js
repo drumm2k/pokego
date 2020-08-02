@@ -1,14 +1,31 @@
-import React, { useState, useEffect, useContext } from 'react';
-import styled from 'styled-components';
+import { gql, useQuery } from '@apollo/client';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-
-import AuthContext from '../context/auth';
-import NavProfileItem, { NavProfileItemButton } from './NavProfileItem';
-
-import UserIcon from '../assets/user.svg';
+import React, { useContext, useEffect, useState } from 'react';
+import styled from 'styled-components';
 import SettingsIcon from '../assets/cog.svg';
 import LogoutIcon from '../assets/logout.svg';
+import UserIcon from '../assets/user.svg';
+import AuthContext from '../context/auth';
+import { getAccessToken } from '../lib/accessToken';
+import NavProfileItem from './NavProfileItem';
+import NavProfileLogout from './NavProfileLogout';
+
+export const ME = gql`
+  query {
+    me {
+      id
+      userName
+      email
+      roles
+      trainer {
+        team
+        level
+        code
+      }
+    }
+  }
+`;
 
 const ProfileButton = styled.button`
   display: flex;
@@ -87,20 +104,21 @@ const UserName = styled.a`
 
 export default function NavProfile({ icon }) {
   const [open, setOpen] = useState(false);
-
   const auth = useContext(AuthContext);
+  const { data, loading } = useQuery(ME, { skip: !getAccessToken() });
+
+  useEffect(() => {
+    if (!loading && data) {
+      auth.login(data.me); // Add auth data to the context
+    }
+  }, [data, loading]);
 
   return (
     <>
-      {!auth.token && (
-        <Link href="/login" passHref>
-          <Login>Войти</Login>
-        </Link>
-      )}
-      {auth.token && (
+      {!loading && auth.user && (
         <>
-          <Link href="/user/[id]" as={`/user/${auth.userName}`} passHref>
-            <UserName>{auth.userName}</UserName>
+          <Link href="/user/[id]" as={`/user/${auth.user.userName}`} passHref>
+            <UserName>{auth.user.userName}</UserName>
           </Link>
           <ProfileButton
             onClick={() => setOpen(!open)}
@@ -114,14 +132,18 @@ export default function NavProfile({ icon }) {
           </ProfileButton>
         </>
       )}
+      {!loading && !auth.user && (
+        <Link href="/login" passHref>
+          <Login>Войти</Login>
+        </Link>
+      )}
       {open && <DropdownMenu open={open} setOpen={setOpen} />}
     </>
   );
 }
 
 function DropdownMenu({ open, setOpen }) {
-  const containerRef = React.createRef();
-
+  const dropdownRef = React.createRef();
   const auth = useContext(AuthContext);
 
   // useEffect to close Dropdown when something clicked outside
@@ -129,7 +151,7 @@ function DropdownMenu({ open, setOpen }) {
     const handleClick = (event) => {
       let current = event.target;
       while (current !== null) {
-        if (current === containerRef.current) {
+        if (current === dropdownRef.current) {
           return;
         }
         current = current.parentNode;
@@ -137,17 +159,19 @@ function DropdownMenu({ open, setOpen }) {
       setOpen(!open);
     };
 
-    window.addEventListener('click', handleClick);
+    setTimeout(() => {
+      window.addEventListener('click', handleClick);
+    }, 1);
 
     return () => window.removeEventListener('click', handleClick);
   }, []);
 
   return (
-    <Dropdown ref={containerRef}>
+    <Dropdown ref={dropdownRef}>
       <NavProfileItem
         leftIcon={<UserIcon />}
         url="/user/[id]"
-        as={`/user/${auth.userName}`}
+        as={`/user/${auth.user.userName}`}
         open={open}
         setOpen={setOpen}
       >
@@ -161,14 +185,14 @@ function DropdownMenu({ open, setOpen }) {
       >
         Настройки
       </NavProfileItem>
-      <NavProfileItemButton
+      <NavProfileLogout
         leftIcon={<LogoutIcon />}
         func={auth.logout}
         open={open}
         setOpen={setOpen}
       >
         Выйти
-      </NavProfileItemButton>
+      </NavProfileLogout>
     </Dropdown>
   );
 }
