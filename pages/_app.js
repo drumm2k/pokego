@@ -54,11 +54,9 @@ export default function App({ Component, pageProps }) {
             logout,
           }}
         >
-          {!loading && (
-            <Page>
-              <Component {...pageProps} />
-            </Page>
-          )}
+          <Page>
+            <Component {...pageProps} />
+          </Page>
         </AuthContext.Provider>
       </ThemeProvider>
     </ApolloProvider>
