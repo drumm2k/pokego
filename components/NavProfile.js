@@ -1,4 +1,4 @@
-import { gql, useQuery } from '@apollo/client';
+import jwtDecode from 'jwt-decode';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
@@ -10,22 +10,6 @@ import AuthContext from '../context/auth';
 import { getAccessToken } from '../lib/accessToken';
 import NavProfileItem from './NavProfileItem';
 import NavProfileLogout from './NavProfileLogout';
-
-export const ME = gql`
-  query {
-    me {
-      id
-      userName
-      email
-      roles
-      trainer {
-        team
-        level
-        code
-      }
-    }
-  }
-`;
 
 const ProfileButton = styled.button`
   display: flex;
@@ -105,17 +89,19 @@ const UserName = styled.a`
 export default function NavProfile({ icon }) {
   const [open, setOpen] = useState(false);
   const auth = useContext(AuthContext);
-  const { data, loading } = useQuery(ME, { skip: !getAccessToken() });
 
   useEffect(() => {
-    if (!loading && data) {
-      auth.login(data.me); // Add auth data to the context
+    if (!getAccessToken()) {
+      return;
     }
-  }, [data, loading]);
+
+    const payload = jwtDecode(getAccessToken());
+    auth.login(payload);
+  }, [getAccessToken()]);
 
   return (
     <>
-      {!loading && auth.user && (
+      {auth.user && (
         <>
           <Link href="/user/[id]" as={`/user/${auth.user.userName}`} passHref>
             <UserName>{auth.user.userName}</UserName>
@@ -132,7 +118,7 @@ export default function NavProfile({ icon }) {
           </ProfileButton>
         </>
       )}
-      {!loading && !auth.user && (
+      {!auth.user && (
         <Link href="/login" passHref>
           <Login>Войти</Login>
         </Link>
