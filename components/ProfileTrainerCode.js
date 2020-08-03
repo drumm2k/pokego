@@ -1,8 +1,7 @@
-import { useState } from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import QRCode from 'qrcode.react';
-
+import { useState } from 'react';
+import styled from 'styled-components';
 import ClipboardIcon from '../assets/clipboard.svg';
 
 const TrainerCodeContainer = styled.div`
@@ -13,7 +12,7 @@ const TrainerCodeContainer = styled.div`
   border-radius: ${(p) => p.theme.border.radius300};
 `;
 
-const TrainerCode = styled.div`
+const TrainerCode = styled.button`
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -24,7 +23,7 @@ const TrainerCode = styled.div`
   min-width: 13rem;
 `;
 
-const CopyButton = styled.button`
+const CopyIcon = styled.div`
   width: 2.4rem;
   height: 2.4rem;
 `;
@@ -49,11 +48,11 @@ function ProfileTrainerCode({ trainerCode }) {
   return (
     <TrainerCodeContainer>
       <QRCode value={trainerCode} renderAs="svg" size={128} />
-      <TrainerCode>
+      <TrainerCode onClick={copyTrainerCode} aria-label="Copy trainer code">
         {code}
-        <CopyButton onClick={copyTrainerCode} aria-label="Copy trainer code">
+        <CopyIcon>
           <ClipboardIcon />
-        </CopyButton>
+        </CopyIcon>
       </TrainerCode>
     </TrainerCodeContainer>
   );
