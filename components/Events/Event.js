@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import ChevronRightIcon from '../../assets/chevron_right.svg';
 import EventTimer from './EventTimer';
-import ChevronRightIcon from '../assets/chevron_right.svg';
 
 const EventCard = styled.div`
   display: flex;

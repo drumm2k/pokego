@@ -2,7 +2,7 @@ import { gql, useMutation } from '@apollo/client';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const NavProfileButton = styled.button`
+const ProfileLogoutButton = styled.button`
   display: flex;
   align-items: center;
   color: ${(p) => p.theme.color.black};
@@ -17,13 +17,13 @@ const NavProfileButton = styled.button`
   }
 `;
 
-const NavItemLeftIcon = styled.span`
+const ProfileItemLeftIcon = styled.span`
   margin-right: ${(p) => p.theme.spacing.s4};
   width: 2.4rem;
   height: 2.4rem;
 `;
 
-const NavItemLinkRightIcon = styled.span`
+const ProfileItemLinkRightIcon = styled.span`
   margin-left: auto;
   width: 2.4rem;
   height: 2.4rem;
@@ -35,13 +35,13 @@ export const LOGOUT = gql`
   }
 `;
 
-export default function NavProfileLogout(props) {
+export default function ProfileLogout(props) {
   const { children, leftIcon, rightIcon, open, setOpen, func } = props;
 
   const [logout, { client }] = useMutation(LOGOUT);
 
   return (
-    <NavProfileButton
+    <ProfileLogoutButton
       onClick={async () => {
         setOpen(!open);
         await logout(); // Empty Refresh cookie
@@ -50,14 +50,14 @@ export default function NavProfileLogout(props) {
       }}
       role="menuitem"
     >
-      {leftIcon && <NavItemLeftIcon>{leftIcon}</NavItemLeftIcon>}
+      {leftIcon && <ProfileItemLeftIcon>{leftIcon}</ProfileItemLeftIcon>}
       {children}
-      {rightIcon && <NavItemLinkRightIcon>{rightIcon}</NavItemLinkRightIcon>}
-    </NavProfileButton>
+      {rightIcon && <ProfileItemLinkRightIcon>{rightIcon}</ProfileItemLinkRightIcon>}
+    </ProfileLogoutButton>
   );
 }
 
-NavProfileLogout.propTypes = {
+ProfileLogout.propTypes = {
   children: PropTypes.string,
   leftIcon: PropTypes.oneOfType([PropTypes.object]),
   rightIcon: PropTypes.oneOfType([PropTypes.object]),
@@ -66,7 +66,7 @@ NavProfileLogout.propTypes = {
   func: PropTypes.func.isRequired,
 };
 
-NavProfileLogout.defaultProps = {
+ProfileLogout.defaultProps = {
   children: null,
   leftIcon: null,
   rightIcon: null,

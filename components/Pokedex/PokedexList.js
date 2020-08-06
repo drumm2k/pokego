@@ -1,6 +1,6 @@
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import PokeCard from './PokeCard';
+import styled from 'styled-components';
+import PokeCard from '../PokeCard';
 
 const PokeList = styled.div`
   display: flex;

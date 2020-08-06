@@ -1,18 +1,18 @@
 import { Component } from 'react';
-import styled from 'styled-components';
 import {
-  Map,
-  TileLayer,
-  Marker,
-  Popup,
-  LayerGroup,
   Circle,
   CircleMarker,
+  LayerGroup,
+  Map,
+  Marker,
+  Popup,
+  TileLayer,
 } from 'react-leaflet';
-import MarkerClusterGroup from 'react-leaflet-markercluster';
 import Control from 'react-leaflet-control';
+import MarkerClusterGroup from 'react-leaflet-markercluster';
+import styled from 'styled-components';
+import LocationMarker from '../../assets/location_marker.svg';
 import { LeafletStyles, MarkerClusterStyles } from './MapStyles';
-import LocationMarker from '../assets/location_marker.svg';
 
 const DetectMyLocation = styled.a`
   display: flex;

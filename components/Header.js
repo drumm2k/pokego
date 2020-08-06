@@ -1,8 +1,8 @@
-import styled from 'styled-components';
 import Link from 'next/link';
-import NavProfile from './NavProfile';
-import NavMenu from './NavMenu';
+import styled from 'styled-components';
 import PlusIcon from '../assets/plus.svg';
+import NavMenu from './Nav/NavMenu';
+import ProfileMenu from './ProfileMenu/ProfileMenu';
 
 const StyledHeader = styled.header`
   position: relative;
@@ -33,7 +33,7 @@ export default function Header() {
           <Logo>PokéGO</Logo>
         </Link>
         <NavPanel>
-          <NavProfile icon={<PlusIcon />} />
+          <ProfileMenu icon={<PlusIcon />} />
           <NavMenu />
         </NavPanel>
       </StyledHeader>

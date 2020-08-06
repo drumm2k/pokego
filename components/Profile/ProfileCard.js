@@ -1,7 +1,6 @@
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
-
-import trainerTeam, { trainerColor } from '../lib/trainerTeam';
+import styled from 'styled-components';
+import trainerTeam, { trainerColor } from '../../lib/trainerTeam';
 import ProfileSocial from './ProfileSocial';
 import TrainerCode from './ProfileTrainerCode';
 

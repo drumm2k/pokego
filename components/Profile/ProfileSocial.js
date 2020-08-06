@@ -1,7 +1,6 @@
-import Link from 'next/link';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import TelegramIcon from '../assets/telegram.svg';
+import styled from 'styled-components';
+import TelegramIcon from '../../assets/telegram.svg';
 
 const SocialContainer = styled.div`
   display: flex;

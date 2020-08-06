@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import nav from '../config/nav.json';
+import nav from '../../config/nav.json';
 import NavItem from './NavItem';
 
 const NavListContainer = styled.div`

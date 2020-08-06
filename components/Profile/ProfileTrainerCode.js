@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import QRCode from 'qrcode.react';
 import { useState } from 'react';
 import styled from 'styled-components';
-import ClipboardIcon from '../assets/clipboard.svg';
+import ClipboardIcon from '../../assets/clipboard.svg';
 
 const TrainerCodeContainer = styled.div`
   color: ${(p) => p.theme.color.black};

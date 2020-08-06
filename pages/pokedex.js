@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
-import Pdex from '../components/Pokedex';
+import Pdex from '../components/Pokedex/Pokedex';
 import Title from '../components/Title';
 import { initializeApollo } from '../lib/apolloClient';
 

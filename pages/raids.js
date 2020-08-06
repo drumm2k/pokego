@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
-import { initializeApollo } from '../lib/apolloClient';
-import RaidTier from '../components/RaidTier';
+import RaidTier from '../components/Raids/RaidTier';
 import Title from '../components/Title';
+import { initializeApollo } from '../lib/apolloClient';
 
 export const GET_ALL_RAIDS = gql`
   query {

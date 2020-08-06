@@ -1,8 +1,7 @@
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
-
+import styled from 'styled-components';
+import PokeCard from '../PokeCard';
 import ProfileCard from './ProfileCard';
-import PokeCard from './PokeCard';
 
 const ProfileContainer = styled.div`
   display: grid;

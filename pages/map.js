@@ -1,10 +1,10 @@
-import { useContext } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
+import { useContext } from 'react';
 import Title from '../components/Title';
 import AuthContext from '../context/auth';
 
-const MapWithNoSSR = dynamic(() => import('../components/Map'), {
+const MapWithNoSSR = dynamic(() => import('../components/Map/Map'), {
   ssr: false,
 });
 

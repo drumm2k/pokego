@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import MenuIcon from '../../assets/menu.svg';
 import NavList from './NavList';
-import MenuIcon from '../assets/menu.svg';
 
 const Button = styled.button`
   display: flex;

@@ -1,7 +1,7 @@
-import { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Component } from 'react';
 import styled from 'styled-components';
-import ClockIcon from '../assets/clock.svg';
+import ClockIcon from '../../assets/clock.svg';
 
 const EventTimerWrapper = styled.div`
   display: flex;

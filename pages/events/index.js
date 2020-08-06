@@ -1,9 +1,9 @@
+import { gql, useQuery } from '@apollo/client';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { gql, useQuery } from '@apollo/client';
-import { initializeApollo } from '../../lib/apolloClient';
-import Event from '../../components/Event';
+import Event from '../../components/Events/Event';
 import Title from '../../components/Title';
+import { initializeApollo } from '../../lib/apolloClient';
 
 const StyledLink = styled.a`
   &:hover {

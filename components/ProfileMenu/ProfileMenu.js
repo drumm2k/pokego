@@ -3,13 +3,13 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import SettingsIcon from '../assets/cog.svg';
-import LogoutIcon from '../assets/logout.svg';
-import UserIcon from '../assets/user.svg';
-import AuthContext from '../context/auth';
-import { getAccessToken } from '../lib/accessToken';
-import NavProfileItem from './NavProfileItem';
-import NavProfileLogout from './NavProfileLogout';
+import SettingsIcon from '../../assets/cog.svg';
+import LogoutIcon from '../../assets/logout.svg';
+import UserIcon from '../../assets/user.svg';
+import AuthContext from '../../context/auth';
+import { getAccessToken } from '../../lib/accessToken';
+import ProfileItem from './ProfileItem';
+import ProfileLogout from './ProfileLogout';
 
 const ProfileButton = styled.button`
   display: flex;
@@ -154,7 +154,7 @@ function DropdownMenu({ open, setOpen }) {
 
   return (
     <Dropdown ref={dropdownRef}>
-      <NavProfileItem
+      <ProfileItem
         leftIcon={<UserIcon />}
         url="/user/[id]"
         as={`/user/${auth.user.userName}`}
@@ -162,23 +162,23 @@ function DropdownMenu({ open, setOpen }) {
         setOpen={setOpen}
       >
         Профиль
-      </NavProfileItem>
-      <NavProfileItem
+      </ProfileItem>
+      <ProfileItem
         leftIcon={<SettingsIcon />}
         url="/settings"
         open={open}
         setOpen={setOpen}
       >
         Настройки
-      </NavProfileItem>
-      <NavProfileLogout
+      </ProfileItem>
+      <ProfileLogout
         leftIcon={<LogoutIcon />}
         func={auth.logout}
         open={open}
         setOpen={setOpen}
       >
         Выйти
-      </NavProfileLogout>
+      </ProfileLogout>
     </Dropdown>
   );
 }

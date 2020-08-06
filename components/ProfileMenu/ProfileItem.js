@@ -2,7 +2,7 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const NavProfileLink = styled.a`
+const ProfileLink = styled.a`
   display: flex;
   align-items: center;
   color: ${(p) => p.theme.color.black};
@@ -16,48 +16,35 @@ const NavProfileLink = styled.a`
   }
 `;
 
-const NavProfileButton = styled.button`
-  display: flex;
-  align-items: center;
-  color: ${(p) => p.theme.color.black};
-  height: 5rem;
-  border-radius: 5px;
-  padding: ${(p) => p.theme.spacing.s4};
-  transition: background 0.25s;
-  width: 100%;
-
-  &:hover {
-    background-color: ${(p) => p.theme.color.gray100};
-  }
-`;
-
-const NavItemLeftIcon = styled.span`
+const ProfileItemLeftIcon = styled.span`
   margin-right: ${(p) => p.theme.spacing.s4};
   width: 2.4rem;
   height: 2.4rem;
 `;
 
-const NavItemLinkRightIcon = styled.span`
+const ProfileItemLinkRightIcon = styled.span`
   margin-left: auto;
   width: 2.4rem;
   height: 2.4rem;
 `;
 
-export default function NavProfileItem(props) {
+export default function ProfileItem(props) {
   const { children, url, as, leftIcon, rightIcon, open, setOpen } = props;
 
   return (
     <Link href={url} as={as} passHref>
-      <NavProfileLink onClick={() => setOpen(!open)} role="menuitem">
-        {leftIcon && <NavItemLeftIcon>{leftIcon}</NavItemLeftIcon>}
+      <ProfileLink onClick={() => setOpen(!open)} role="menuitem">
+        {leftIcon && <ProfileItemLeftIcon>{leftIcon}</ProfileItemLeftIcon>}
         {children}
-        {rightIcon && <NavItemLinkRightIcon>{rightIcon}</NavItemLinkRightIcon>}
-      </NavProfileLink>
+        {rightIcon && (
+          <ProfileItemLinkRightIcon>{rightIcon}</ProfileItemLinkRightIcon>
+        )}
+      </ProfileLink>
     </Link>
   );
 }
 
-NavProfileItem.propTypes = {
+ProfileItem.propTypes = {
   children: PropTypes.string,
   url: PropTypes.string.isRequired,
   as: PropTypes.string,
@@ -67,7 +54,7 @@ NavProfileItem.propTypes = {
   setOpen: PropTypes.func.isRequired,
 };
 
-NavProfileItem.defaultProps = {
+ProfileItem.defaultProps = {
   as: null,
   children: null,
   leftIcon: null,

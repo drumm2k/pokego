@@ -1,8 +1,7 @@
+import PropTypes from 'prop-types';
 import { Component } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-
-import { Input, Checkbox, Label, Select } from './UI';
+import { Checkbox, Input, Label, Select } from '../UI';
 import PokedexList from './PokedexList';
 import PokedexModal from './PokedexModal';
 

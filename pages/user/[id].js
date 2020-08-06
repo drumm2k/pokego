@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 // import cookie from 'cookie';
 import PropTypes from 'prop-types';
-import Profile from '../../components/Profile';
+import Profile from '../../components/Profile/Profile';
 import Title from '../../components/Title';
 
 export const GET_USER = gql`
