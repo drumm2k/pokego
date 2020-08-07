@@ -4,16 +4,14 @@ import PropTypes from 'prop-types';
 import Title from '../../components/Title';
 
 export const CONFIRM_ACCOUNT = gql`
-  query confirm($id: String!) {
-    confirm(token: $id)
+  query confirm($token: String!) {
+    confirm(token: $token)
   }
 `;
 
-export default function Confirm({ params }) {
-  const { id } = params;
-
+export default function Confirm({ token }) {
   const { data, loading, error } = useQuery(CONFIRM_ACCOUNT, {
-    variables: { id },
+    variables: { token },
   });
 
   if (loading) return <div>Загрузка</div>;
@@ -55,12 +53,12 @@ export default function Confirm({ params }) {
   );
 }
 
-export function getServerSideProps(context) {
+export function getServerSideProps({ params }) {
   return {
-    props: { params: context.params },
+    props: { token: params.id },
   };
 }
 
 Confirm.propTypes = {
-  params: PropTypes.objectOf(PropTypes.string).isRequired,
+  token: PropTypes.string.isRequired,
 };
