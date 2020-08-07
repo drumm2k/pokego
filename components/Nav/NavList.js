@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import nav from '../../config/nav.json';
+import useOnClickOutside from '../../hooks/useOnClickOutside';
 import NavItem from './NavItem';
 
 const NavListContainer = styled.div`
@@ -32,25 +33,7 @@ function NavList(props) {
   const { open, setOpen } = props;
   const navListRef = React.createRef();
 
-  // useEffect to close Dropdown when something clicked outside
-  useEffect(() => {
-    const handleClick = (event) => {
-      let current = event.target;
-      while (current !== null) {
-        if (current === navListRef.current) {
-          return;
-        }
-        current = current.parentNode;
-      }
-      setOpen(!open);
-    };
-
-    setTimeout(() => {
-      window.addEventListener('click', handleClick, false);
-    }, 1);
-
-    return () => window.removeEventListener('click', handleClick);
-  }, []);
+  useOnClickOutside(navListRef, () => setOpen(false));
 
   return (
     <NavListContainer open={open} ref={navListRef}>

@@ -7,6 +7,7 @@ import SettingsIcon from '../../assets/cog.svg';
 import LogoutIcon from '../../assets/logout.svg';
 import UserIcon from '../../assets/user.svg';
 import AuthContext from '../../context/auth';
+import useOnClickOutside from '../../hooks/useOnClickOutside';
 import { getAccessToken } from '../../lib/accessToken';
 import ProfileItem from './ProfileItem';
 import ProfileLogout from './ProfileLogout';
@@ -131,26 +132,7 @@ export default function NavProfile({ icon }) {
 function DropdownMenu({ open, setOpen }) {
   const dropdownRef = React.createRef();
   const auth = useContext(AuthContext);
-
-  // useEffect to close Dropdown when something clicked outside
-  useEffect(() => {
-    const handleClick = (event) => {
-      let current = event.target;
-      while (current !== null) {
-        if (current === dropdownRef.current) {
-          return;
-        }
-        current = current.parentNode;
-      }
-      setOpen(!open);
-    };
-
-    setTimeout(() => {
-      window.addEventListener('click', handleClick);
-    }, 1);
-
-    return () => window.removeEventListener('click', handleClick);
-  }, []);
+  useOnClickOutside(dropdownRef, () => setOpen(false));
 
   return (
     <Dropdown ref={dropdownRef}>
