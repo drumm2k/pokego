@@ -19,7 +19,7 @@ const Meta = () => (
     />
     <meta property="og:image:width" content="500" />
     <meta property="og:image:height" content="333" />
-    <link rel="shortcut icon" href="/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
     <title>PokéGO</title>
   </Head>
 );
