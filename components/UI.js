@@ -221,3 +221,9 @@ export const TextArea = styled.textarea`
     line-height: normal;
   }
 `;
+
+export const FormField = styled.section`
+  display: grid;
+  grid-gap: ${(p) => p.theme.spacing.s2};
+  width: 100%;
+`;

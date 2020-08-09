@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import * as yup from 'yup';
 import Title from '../../components/Title';
-import { Button, Input, Label } from '../../components/UI';
+import { Button, FormField, Input, Label } from '../../components/UI';
 
 const Form = styled.form`
   display: grid;
@@ -21,12 +21,6 @@ const Form = styled.form`
     font-size: ${(p) => p.theme.font.size.sm};
     color: ${(p) => p.theme.color.warning};
   }
-`;
-
-const FormField = styled.section`
-  display: grid;
-  grid-gap: ${(p) => p.theme.spacing.s2};
-  width: 100%;
 `;
 
 export const RESET_PASSWORD_REQUEST = gql`
