@@ -2,7 +2,7 @@
 
 Web app with useful tools for Pokemon GO community
 
-Development build: [Link](https://pokego.now.sh/)<br>
+Development build: [Link](https://pokego.ru/)<br>
 Might take couple seconds to load first data, because backend server is sleeping after 30 minutes of inactivity
 
 #### Important info
