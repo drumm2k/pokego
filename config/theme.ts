@@ -1,4 +1,4 @@
-export default {
+const theme = {
   font: {
     weight: {
       normal: '400',
@@ -91,3 +91,5 @@ export default {
     overlay: 'rgba(0, 0, 0, 0.6)',
   },
 };
+
+export default theme;
