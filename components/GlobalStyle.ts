@@ -1,9 +1,5 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'styled-normalize';
-import PropTypes from 'prop-types';
-import Meta from './Meta';
-import Header from './Header';
-import Footer from './Footer';
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -23,14 +19,14 @@ const GlobalStyle = createGlobalStyle`
   img{max-width:100%;}
 
   html {
-   font-size: 10px;
+    font-size: 10px;
   }
 
   body {
-   font-family: 'Noah', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-   font-size: 1.8rem;
-   font-weight: 400;
-   line-height: 1.4;
+    font-family: 'Noah', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.4;
   }
 
   @font-face {
@@ -106,33 +102,4 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const Wrapper = styled.div`
-  padding: 0 ${(p) => p.theme.spacing.s6};
-  margin: 0 auto;
-
-  @media screen and (min-device-width: 768px) {
-    max-width: 720px;
-  }
-`;
-
-function Page(props) {
-  const { children } = props;
-
-  return (
-    <>
-      <Meta />
-      <GlobalStyle />
-      <Wrapper>
-        <Header />
-        {children}
-        <Footer />
-      </Wrapper>
-    </>
-  );
-}
-
-Page.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.object]).isRequired,
-};
-
-export default Page;
+export default GlobalStyle;
