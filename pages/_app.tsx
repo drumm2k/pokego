@@ -1,15 +1,15 @@
 import { ApolloProvider } from '@apollo/client';
+import Page from 'components/Page';
+import theme from 'config/theme';
+import AuthContext from 'context/auth';
+import { setAccessToken } from 'lib/accessToken';
+import { useApollo } from 'lib/apolloClient';
+import type { AppProps } from 'next/app';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
-import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
-import Page from '../components/Page';
-import theme from '../config/theme';
-import AuthContext from '../context/auth';
-import { setAccessToken } from '../lib/accessToken';
-import { useApollo } from '../lib/apolloClient';
 
 NProgress.configure({ showSpinner: false });
 
@@ -17,11 +17,11 @@ Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps }: AppProps): JSX.Element {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
 
-  const login = (userData) => {
+  const login = (userData: any) => {
     setUser(userData);
   };
 
@@ -62,8 +62,3 @@ export default function App({ Component, pageProps }) {
     </ApolloProvider>
   );
 }
-
-App.propTypes = {
-  Component: PropTypes.func.isRequired,
-  pageProps: PropTypes.oneOfType([PropTypes.object]).isRequired,
-};
