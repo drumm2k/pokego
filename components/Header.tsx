@@ -4,6 +4,20 @@ import PlusIcon from '../assets/plus.svg';
 import NavMenu from './Nav/NavMenu';
 import ProfileMenu from './ProfileMenu/ProfileMenu';
 
+export default function Header() {
+  return (
+    <StyledHeader>
+      <Link href="/" passHref>
+        <Logo>PokéGO</Logo>
+      </Link>
+      <NavPanel>
+        <ProfileMenu icon={<PlusIcon />} />
+        <NavMenu />
+      </NavPanel>
+    </StyledHeader>
+  );
+}
+
 const StyledHeader = styled.header`
   position: relative;
   padding: ${(p) => p.theme.spacing.s12} 0 ${(p) => p.theme.spacing.s6};
@@ -24,19 +38,3 @@ const NavPanel = styled.nav`
   display: flex;
   align-items: center;
 `;
-
-export default function Header() {
-  return (
-    <>
-      <StyledHeader>
-        <Link href="/" passHref>
-          <Logo>PokéGO</Logo>
-        </Link>
-        <NavPanel>
-          <ProfileMenu icon={<PlusIcon />} />
-          <NavMenu />
-        </NavPanel>
-      </StyledHeader>
-    </>
-  );
-}

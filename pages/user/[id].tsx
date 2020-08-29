@@ -1,8 +1,8 @@
 import { gql, useQuery } from '@apollo/client';
+import Profile from 'components/Profile/Profile';
+import { Title } from 'components/Title';
+import { GetServerSideProps } from 'next';
 // import cookie from 'cookie';
-import PropTypes from 'prop-types';
-import Profile from '../../components/Profile/Profile';
-import Title from '../../components/Title';
 
 export const GET_USER = gql`
   query getUser($userName: String!) {
@@ -43,9 +43,8 @@ export const GET_USER = gql`
   }
 `;
 
-export default function MyProfile({ params }) {
+export default function MyProfile({ params }: any) {
   const { id } = params;
-
   const { data, loading, error } = useQuery(GET_USER, {
     variables: { userName: id },
   });
@@ -63,13 +62,14 @@ export default function MyProfile({ params }) {
   );
 }
 
-export function getServerSideProps({ params }) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { params } = context;
   return {
     props: {
       params,
     },
   };
-}
+};
 
 // Parse cookies from req headers, init apollo client and fetch data
 // DON'T NEED THIS FOR NOW
@@ -104,7 +104,3 @@ export function getServerSideProps({ params }) {
 //     },
 //   };
 // }
-
-MyProfile.propTypes = {
-  params: PropTypes.objectOf(PropTypes.string).isRequired,
-};

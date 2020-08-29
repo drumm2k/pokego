@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
-import Pdex from '../components/Pokedex/Pokedex';
-import Title from '../components/Title';
-import { initializeApollo } from '../lib/apolloClient';
+import Pdex from 'components/Pokedex/Pokedex';
+import { Title } from 'components/Title';
+import { initializeApollo } from 'lib/apolloClient';
 
 export const GET_ALL_POKEMONS = gql`
   query {

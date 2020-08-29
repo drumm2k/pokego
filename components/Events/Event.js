@@ -61,7 +61,7 @@ const EventArrow = styled.div`
   width: 2.4rem;
 `;
 
-function Event({ img, name, description, starts, ends }) {
+export function Event({ img, name, description, starts, ends }) {
   return (
     <EventCard>
       <EventImg imgUrl={img} alt={name} />
@@ -86,5 +86,3 @@ Event.propTypes = {
   starts: PropTypes.string.isRequired,
   ends: PropTypes.string.isRequired,
 };
-
-export default Event;

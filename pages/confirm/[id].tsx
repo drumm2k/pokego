@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
+import { Title } from 'components/Title';
+import { GetServerSideProps } from 'next';
 import Link from 'next/link';
-import PropTypes from 'prop-types';
-import Title from '../../components/Title';
 
 export const CONFIRM_ACCOUNT = gql`
   query confirm($token: String!) {
@@ -9,9 +9,10 @@ export const CONFIRM_ACCOUNT = gql`
   }
 `;
 
-export default function Confirm({ token }) {
+export default function Confirm({ params }: any) {
+  const { id } = params;
   const { data, loading, error } = useQuery(CONFIRM_ACCOUNT, {
-    variables: { token },
+    variables: { token: id },
   });
 
   if (loading) return <div>Загрузка</div>;
@@ -53,12 +54,12 @@ export default function Confirm({ token }) {
   );
 }
 
-export function getServerSideProps({ params }) {
-  return {
-    props: { token: params.id },
-  };
-}
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { params } = context;
 
-Confirm.propTypes = {
-  token: PropTypes.string.isRequired,
+  return {
+    props: {
+      params,
+    },
+  };
 };

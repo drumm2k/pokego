@@ -1,27 +1,11 @@
 import { gql, useMutation } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers';
+import { Title } from 'components/Title';
+import { Button, FormField, Input, Label } from 'components/UI';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import * as yup from 'yup';
-import Title from '../../components/Title';
-import { Button, FormField, Input, Label } from '../../components/UI';
-
-const Form = styled.form`
-  display: grid;
-  grid-gap: ${(p) => p.theme.spacing.s8};
-  max-width: 380px;
-  margin: ${(p) => p.theme.spacing.s12} auto;
-  border: ${(p) => p.theme.border.border300};
-  border-radius: ${(p) => p.theme.border.radius300};
-  box-shadow: ${(p) => p.theme.lighting.shadow300};
-  padding: ${(p) => p.theme.spacing.s16} ${(p) => p.theme.spacing.s20};
-
-  p {
-    font-size: ${(p) => p.theme.font.size.sm};
-    color: ${(p) => p.theme.color.warning};
-  }
-`;
 
 export const RESET_PASSWORD_REQUEST = gql`
   mutation resetPasswordRequest($email: String!) {
@@ -38,6 +22,10 @@ const schema = yup.object().shape({
     .lowercase(),
 });
 
+type FormData = {
+  email: string;
+};
+
 export default function Reset() {
   const [message, setMessage] = useState('');
 
@@ -50,23 +38,23 @@ export default function Reset() {
     }
   );
 
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (form) => {
+  const onSubmit = handleSubmit((form) => {
     resetPasswordRequest({
       variables: {
         email: form.email,
       },
     });
-  };
+  });
 
   return (
     <>
       <Title>Восстановление пароля</Title>
       {!message && (
         <>
-          <Form onSubmit={handleSubmit(onSubmit)}>
+          <Form onSubmit={onSubmit}>
             <FormField>
               <Label htmlFor="email" bold>
                 Почта
@@ -93,3 +81,19 @@ export default function Reset() {
     </>
   );
 }
+
+const Form = styled.form`
+  display: grid;
+  grid-gap: ${(p) => p.theme.spacing.s8};
+  max-width: 380px;
+  margin: ${(p) => p.theme.spacing.s12} auto;
+  border: ${(p) => p.theme.border.border300};
+  border-radius: ${(p) => p.theme.border.radius300};
+  box-shadow: ${(p) => p.theme.lighting.shadow300};
+  padding: ${(p) => p.theme.spacing.s16} ${(p) => p.theme.spacing.s20};
+
+  p {
+    font-size: ${(p) => p.theme.font.size.sm};
+    color: ${(p) => p.theme.color.warning};
+  }
+`;

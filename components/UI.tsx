@@ -1,6 +1,18 @@
 import styled from 'styled-components';
 
-export const Button = styled.button`
+interface ButtonProps {
+  color?: string;
+  size?: string;
+  weight?: string;
+  radius?: string;
+  bg?: string;
+  disabled?: boolean;
+  fullWidth?: boolean;
+  theme?: any;
+  onClick?: any;
+}
+
+export const Button = styled.button<ButtonProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,7 +60,13 @@ export const Button = styled.button`
   `}
 `;
 
-export const Label = styled.label`
+interface LabelProps {
+  size?: string;
+  bold?: boolean;
+  theme?: any;
+}
+
+export const Label = styled.label<LabelProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -73,7 +91,14 @@ export const Label = styled.label`
   }
 `;
 
-export const Input = styled.input`
+interface InputProps {
+  disabled?: boolean;
+  autocomplete?: string;
+  inputmode?: string;
+  theme?: any;
+}
+
+export const Input = styled.input<InputProps>`
   appearance: none;
   color: ${(p) => p.theme.color.gray800};
   font-size: ${(p) => (p.size ? p.theme.font.size[p.size] : p.theme.font.size.md)};
@@ -167,7 +192,12 @@ export const Radio = styled.input.attrs({ type: 'radio' })`
   }
 `;
 
-export const Select = styled.select`
+interface SelectProps {
+  disabled?: boolean;
+  theme?: any;
+}
+
+export const Select = styled.select<SelectProps>`
   appearance: none;
   color: ${(p) => p.theme.color.gray800};
   font-size: ${(p) => (p.size ? p.theme.font.size[p.size] : p.theme.font.size.md)};
@@ -193,7 +223,14 @@ export const Select = styled.select`
   `};
 `;
 
-export const TextArea = styled.textarea`
+interface TextAreaProps {
+  size?: string;
+  width?: string;
+  disabled?: boolean;
+  theme?: any;
+}
+
+export const TextArea = styled.textarea<TextAreaProps>`
   appearance: none;
   color: ${(p) => p.theme.color.gray800};
   font-size: ${(p) => (p.size ? p.theme.font.size[p.size] : p.theme.font.size.md)};

@@ -46,10 +46,10 @@
     "react-leaflet-markercluster": "^2.0.0",
     "styled-components": "^5.1.1",
     "styled-normalize": "^8.0.7",
-    "webpack": "^5.0.0-beta.22",
     "yup": "^0.29.2"
   },
   "devDependencies": {
+    "@types/jwt-decode": "^2.2.1",
     "@types/node": "^14.6.0",
     "@types/nprogress": "^0.2.0",
     "@types/react": "^16.9.46",
@@ -69,8 +69,5 @@
     "eslint-plugin-react-hooks": "^4.0.8",
     "prettier": "^2.0.5",
     "typescript": "^4.0.2"
-  },
-  "resolutions": {
-    "webpack": "^5.0.0-beta.22"
   }
 }

@@ -1,23 +1,9 @@
 import { gql, useQuery } from '@apollo/client';
+import { Event } from 'components/Events/Event';
+import { Title } from 'components/Title';
+import { initializeApollo } from 'lib/apolloClient';
 import Link from 'next/link';
 import styled from 'styled-components';
-import Event from '../../components/Events/Event';
-import Title from '../../components/Title';
-import { initializeApollo } from '../../lib/apolloClient';
-
-const StyledLink = styled.a`
-  &:hover {
-    opacity: 1;
-  }
-`;
-
-const EventsContainer = styled.div`
-  margin-bottom: ${(p) => p.theme.spacing.s8};
-`;
-
-const EventsStatus = styled.h2`
-  margin-bottom: ${(p) => p.theme.spacing.s2};
-`;
 
 export const GET_ALL_EVENTS = gql`
   query {
@@ -49,37 +35,37 @@ export default function Events() {
     );
 
   // Sort running events (by end Date)
-  function sortEventsByEnd(arr) {
-    arr.sort((a, b) => Date.parse(a.ends) - Date.parse(b.ends));
+  function sortEventsByEnd(arr: any) {
+    arr.sort((a: any, b: any) => Date.parse(a.ends) - Date.parse(b.ends));
   }
 
   // Sort upcoming events (by start Date)
-  function sortEventsByStart(arr) {
-    arr.sort((a, b) => Date.parse(a.starts) - Date.parse(b.starts));
+  function sortEventsByStart(arr: any) {
+    arr.sort((a: any, b: any) => Date.parse(a.starts) - Date.parse(b.starts));
   }
 
   // Sort finished events (by end Date and reversed)
-  function sortEventsByEndAndReverse(arr) {
-    arr.sort((a, b) => Date.parse(a.ends) - Date.parse(b.ends)).reverse();
+  function sortEventsByEndAndReverse(arr: any) {
+    arr.sort((a: any, b: any) => Date.parse(a.ends) - Date.parse(b.ends)).reverse();
   }
 
   // Filter running events
   const events = getEvents.filter(
-    (event) =>
-      Date.parse(new Date()) - Date.parse(event.starts) > 0 &&
-      Date.parse(event.ends) - Date.parse(new Date()) > 0
+    (event: any) =>
+      Date.parse(new Date() as any) - Date.parse(event.starts) > 0 &&
+      Date.parse(event.ends) - Date.parse(new Date() as any) > 0
   );
   sortEventsByEnd(events);
 
   // Filter upcoming events
   const eventsUpcoming = getEvents.filter(
-    (event) => Date.parse(event.starts) - Date.parse(new Date()) > 0
+    (event: any) => Date.parse(event.starts) - Date.parse(new Date() as any) > 0
   );
   sortEventsByStart(eventsUpcoming);
 
   // Filter ended events
   const eventsEnded = getEvents.filter(
-    (event) => Date.parse(event.ends) - Date.parse(new Date()) < 0
+    (event: any) => Date.parse(event.ends) - Date.parse(new Date() as any) < 0
   );
   sortEventsByEndAndReverse(eventsEnded);
 
@@ -91,7 +77,7 @@ export default function Events() {
         <EventsContainer>
           <EventsStatus>Активные</EventsStatus>
 
-          {events.map((event) => (
+          {events.map((event: any) => (
             <Link
               key={event.id}
               href="/events/[id]"
@@ -116,7 +102,7 @@ export default function Events() {
         <EventsContainer>
           <EventsStatus>Скоро</EventsStatus>
 
-          {eventsUpcoming.map((event) => (
+          {eventsUpcoming.map((event: any) => (
             <Link
               key={event.id}
               href="/events/[id]"
@@ -140,7 +126,7 @@ export default function Events() {
       {eventsEnded && eventsEnded.length > 0 && (
         <EventsContainer>
           <EventsStatus>Завершённые</EventsStatus>
-          {eventsEnded.map((event) => (
+          {eventsEnded.map((event: any) => (
             <Link
               key={event.id}
               href="/events/[id]"
@@ -178,3 +164,17 @@ export async function getStaticProps() {
     revalidate: 1,
   };
 }
+
+const StyledLink = styled.a`
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+const EventsContainer = styled.div`
+  margin-bottom: ${(p) => p.theme.spacing.s8};
+`;
+
+const EventsStatus = styled.h2`
+  margin-bottom: ${(p) => p.theme.spacing.s2};
+`;

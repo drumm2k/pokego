@@ -1,7 +1,8 @@
-import Router, { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
-import { initializeApollo } from '../../lib/apolloClient';
-import Title from '../../components/Title';
+import { Title } from 'components/Title';
+import { initializeApollo } from 'lib/apolloClient';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import Router, { useRouter } from 'next/router';
 
 export const GET_EVENT = gql`
   query getEvent($id: ID!) {
@@ -56,10 +57,14 @@ export default function EventById() {
   );
 }
 
-export async function getStaticProps({ params }) {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  let id;
+  if (params) {
+    id = params.id;
+  }
   const apolloClient = initializeApollo();
 
-  await apolloClient.query({ query: GET_EVENT, variables: { id: params.id } });
+  await apolloClient.query({ query: GET_EVENT, variables: { id } });
 
   return {
     props: {
@@ -67,15 +72,15 @@ export async function getStaticProps({ params }) {
     },
     revalidate: 1,
   };
-}
+};
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const apolloClient = initializeApollo();
 
   const res = await apolloClient.query({ query: GET_EVENTS_IDS });
   const { getEvents } = res.data;
 
-  const paths = getEvents.map((event) => ({
+  const paths = getEvents.map((event: any) => ({
     params: { id: event.id },
   }));
 
@@ -83,4 +88,4 @@ export async function getStaticPaths() {
     paths,
     fallback: true,
   };
-}
+};

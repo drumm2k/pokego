@@ -1,14 +1,14 @@
+import SettingsIcon from 'assets/cog.svg';
+import LogoutIcon from 'assets/logout.svg';
+import UserIcon from 'assets/user.svg';
+import AuthContext, { UserDataType } from 'context/auth';
+import useOnClickOutside from 'hooks/useOnClickOutside';
 import jwtDecode from 'jwt-decode';
+import { getAccessToken } from 'lib/accessToken';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import SettingsIcon from '../../assets/cog.svg';
-import LogoutIcon from '../../assets/logout.svg';
-import UserIcon from '../../assets/user.svg';
-import AuthContext from '../../context/auth';
-import useOnClickOutside from '../../hooks/useOnClickOutside';
-import { getAccessToken } from '../../lib/accessToken';
 import ProfileItem from './ProfileItem';
 import ProfileLogout from './ProfileLogout';
 
@@ -87,7 +87,7 @@ const UserName = styled.a`
   }
 `;
 
-export default function NavProfile({ icon }) {
+export default function NavProfile({ icon }: { icon: JSX.Element }) {
   const [open, setOpen] = useState(false);
   const auth = useContext(AuthContext);
 
@@ -97,7 +97,7 @@ export default function NavProfile({ icon }) {
     }
 
     const payload = jwtDecode(getAccessToken());
-    auth.login(payload);
+    auth.login(payload as UserDataType);
   }, [getAccessToken()]);
 
   return (
@@ -129,9 +129,14 @@ export default function NavProfile({ icon }) {
   );
 }
 
-function DropdownMenu({ open, setOpen }) {
-  const dropdownRef = React.createRef();
-  const auth = useContext(AuthContext);
+type DropdownMenuProps = {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+function DropdownMenu({ open, setOpen }: DropdownMenuProps) {
+  const dropdownRef = React.createRef<any>();
+  const auth = useContext<any>(AuthContext);
   useOnClickOutside(dropdownRef, () => setOpen(false));
 
   return (

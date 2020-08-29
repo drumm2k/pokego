@@ -1,43 +1,18 @@
 import { gql, useMutation } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers';
+import { Title } from 'components/Title';
+import { Button, FormField, Input, Label } from 'components/UI';
+import AuthContext from 'context/auth';
+import { setAccessToken } from 'lib/accessToken';
+import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import * as yup from 'yup';
-import Title from '../components/Title';
-import { Button, FormField, Input, Label } from '../components/UI';
-import AuthContext from '../context/auth';
-import { setAccessToken } from '../lib/accessToken';
 
-const Form = styled.form`
-  display: grid;
-  grid-gap: ${(p) => p.theme.spacing.s8};
-  max-width: 380px;
-  margin: ${(p) => p.theme.spacing.s12} auto;
-  border: ${(p) => p.theme.border.border300};
-  border-radius: ${(p) => p.theme.border.radius300};
-  box-shadow: ${(p) => p.theme.lighting.shadow300};
-  padding: ${(p) => p.theme.spacing.s16} ${(p) => p.theme.spacing.s20};
-
-  p {
-    font-size: ${(p) => p.theme.font.size.sm};
-    color: ${(p) => p.theme.color.warning};
-  }
-`;
-
-const PasswordLabel = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: ${(p) => p.theme.font.size.sm};
-`;
-
-const Register = styled.div`
-  font-size: ${(p) => p.theme.font.size.sm};
-  text-align: center;
-`;
+const siteTitle = 'PokéGo - Авторизация';
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
@@ -68,35 +43,44 @@ const schema = yup.object().shape({
   password: yup.string().required('Заполните пароль'),
 });
 
-function Login() {
+type FormData = {
+  email: string;
+  password: string;
+};
+
+export default function Login() {
   const auth = useContext(AuthContext);
   const router = useRouter();
 
   const [login, { loading, error }] = useMutation(LOGIN, {
     onCompleted(data) {
       const { accessToken, user } = data.login;
+      console.log(user);
       auth.login(user);
       setAccessToken(accessToken);
       router.push('/user/[id]', `/user/${user.userName}`);
     },
   });
 
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (form) => {
+  const onSubmit = handleSubmit((form) => {
     login({
       variables: {
         email: form.email,
         password: form.password,
       },
     });
-  };
+  });
 
   return (
     <>
+      <Head>
+        <title>{siteTitle}</title>
+      </Head>
       <Title>Войти</Title>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={onSubmit}>
         <FormField>
           <Label htmlFor="email" bold>
             Почта
@@ -143,4 +127,30 @@ function Login() {
   );
 }
 
-export default Login;
+const Form = styled.form`
+  display: grid;
+  grid-gap: ${(p) => p.theme.spacing.s8};
+  max-width: 380px;
+  margin: ${(p) => p.theme.spacing.s12} auto;
+  border: ${(p) => p.theme.border.border300};
+  border-radius: ${(p) => p.theme.border.radius300};
+  box-shadow: ${(p) => p.theme.lighting.shadow300};
+  padding: ${(p) => p.theme.spacing.s16} ${(p) => p.theme.spacing.s20};
+
+  p {
+    font-size: ${(p) => p.theme.font.size.sm};
+    color: ${(p) => p.theme.color.warning};
+  }
+`;
+
+const PasswordLabel = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: ${(p) => p.theme.font.size.sm};
+`;
+
+const Register = styled.div`
+  font-size: ${(p) => p.theme.font.size.sm};
+  text-align: center;
+`;

@@ -1,29 +1,13 @@
 import { gql, useMutation } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers';
+import { Title } from 'components/Title';
+import { Button, FormField, Input, Label } from 'components/UI';
+import AuthContext from 'context/auth';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import * as yup from 'yup';
-import Title from '../../components/Title';
-import { Button, FormField, Input, Label } from '../../components/UI';
-import AuthContext from '../../context/auth';
-
-const Form = styled.form`
-  display: grid;
-  grid-gap: ${(p) => p.theme.spacing.s8};
-  max-width: 380px;
-  margin: ${(p) => p.theme.spacing.s12} auto;
-  border: ${(p) => p.theme.border.border300};
-  border-radius: ${(p) => p.theme.border.radius300};
-  box-shadow: ${(p) => p.theme.lighting.shadow300};
-  padding: ${(p) => p.theme.spacing.s16} ${(p) => p.theme.spacing.s20};
-
-  p {
-    font-size: ${(p) => p.theme.font.size.sm};
-    color: ${(p) => p.theme.color.warning};
-  }
-`;
 
 export const VERIFY_RESET_PASSWORD_REQUEST = gql`
   mutation verifyResetPasswordRequest($token: String!, $password: String!) {
@@ -73,20 +57,20 @@ export default function ConfirmReset() {
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (form) => {
+  const onSubmit = handleSubmit((form) => {
     resetPasswordRequest({
       variables: {
         token: id,
         password: form.password,
       },
     });
-  };
+  });
 
   return (
     <>
       <Title>Введите новый пароль</Title>
 
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={onSubmit}>
         <FormField>
           <Label htmlFor="password" bold>
             Пароль
@@ -109,3 +93,19 @@ export default function ConfirmReset() {
     </>
   );
 }
+
+const Form = styled.form`
+  display: grid;
+  grid-gap: ${(p) => p.theme.spacing.s8};
+  max-width: 380px;
+  margin: ${(p) => p.theme.spacing.s12} auto;
+  border: ${(p) => p.theme.border.border300};
+  border-radius: ${(p) => p.theme.border.radius300};
+  box-shadow: ${(p) => p.theme.lighting.shadow300};
+  padding: ${(p) => p.theme.spacing.s16} ${(p) => p.theme.spacing.s20};
+
+  p {
+    font-size: ${(p) => p.theme.font.size.sm};
+    color: ${(p) => p.theme.color.warning};
+  }
+`;

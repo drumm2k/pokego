@@ -1,7 +1,7 @@
+import AuthContext from 'context/auth';
 import { useContext } from 'react';
-import AuthContext from '../context/auth';
 
-function Index() {
+export default function Index() {
   const auth = useContext(AuthContext);
 
   return (
@@ -11,5 +11,3 @@ function Index() {
     </>
   );
 }
-
-export default Index;

@@ -1,27 +1,11 @@
 import { gql, useMutation } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers';
+import { Title } from 'components/Title';
+import { Button, Checkbox, FormField, Input, Label, Radio } from 'components/UI';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import * as yup from 'yup';
-import Title from '../components/Title';
-import { Button, Checkbox, FormField, Input, Label, Radio } from '../components/UI';
-
-const Form = styled.form`
-  display: grid;
-  grid-gap: ${(p) => p.theme.spacing.s8};
-  max-width: 500px;
-  margin: ${(p) => p.theme.spacing.s12} auto;
-  border: ${(p) => p.theme.border.border300};
-  border-radius: ${(p) => p.theme.border.radius300};
-  box-shadow: ${(p) => p.theme.lighting.shadow300};
-  padding: ${(p) => p.theme.spacing.s16} ${(p) => p.theme.spacing.s20};
-
-  p {
-    font-size: ${(p) => p.theme.font.size.sm};
-    color: ${(p) => p.theme.color.warning};
-  }
-`;
 
 export const SIGNUP = gql`
   mutation signUp(
@@ -99,8 +83,19 @@ const schema = yup.object().shape({
   subscription: yup.boolean(),
 });
 
-function SignUp() {
-  const [message, setMessage] = useState('');
+type FormData = {
+  userName: string;
+  email: string;
+  password: string;
+  team: string;
+  level: number;
+  code: string;
+  telegram?: string;
+  subscription?: boolean;
+};
+
+export default function SignUp() {
+  const [message, setMessage] = useState<string>('');
 
   const [signUp, { loading, error }] = useMutation(SIGNUP, {
     onCompleted() {
@@ -108,10 +103,10 @@ function SignUp() {
     },
   });
 
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (form) => {
+  const onSubmit = handleSubmit((form) => {
     signUp({
       variables: {
         userName: form.userName,
@@ -124,13 +119,13 @@ function SignUp() {
         subscription: form.subscription,
       },
     });
-  };
+  });
 
   return (
     <>
       <Title>Регистрация</Title>
       {!message && (
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={onSubmit}>
           <FormField>
             <Label htmlFor="userName" bold>
               Имя (как в игре)
@@ -263,4 +258,18 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+const Form = styled.form`
+  display: grid;
+  grid-gap: ${(p) => p.theme.spacing.s8};
+  max-width: 500px;
+  margin: ${(p) => p.theme.spacing.s12} auto;
+  border: ${(p) => p.theme.border.border300};
+  border-radius: ${(p) => p.theme.border.radius300};
+  box-shadow: ${(p) => p.theme.lighting.shadow300};
+  padding: ${(p) => p.theme.spacing.s16} ${(p) => p.theme.spacing.s20};
+
+  p {
+    font-size: ${(p) => p.theme.font.size.sm};
+    color: ${(p) => p.theme.color.warning};
+  }
+`;

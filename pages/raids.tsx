@@ -1,10 +1,10 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
+import RaidTier from 'components/Raids/RaidTier';
+import { Title } from 'components/Title';
+import { Button } from 'components/UI';
+import AuthContext from 'context/auth';
+import { initializeApollo } from 'lib/apolloClient';
 import { useContext } from 'react';
-import RaidTier from '../components/Raids/RaidTier';
-import Title from '../components/Title';
-import { Button } from '../components/UI';
-import AuthContext from '../context/auth';
-import { initializeApollo } from '../lib/apolloClient';
 
 export const GET_ALL_RAIDS = gql`
   query {
@@ -54,7 +54,7 @@ export default function Raids() {
   return (
     <>
       <Title color="#009dc8">Рейды</Title>
-      {getRaids.map((tier) => (
+      {getRaids.map((tier: any) => (
         <RaidTier key={tier.id} id={tier.tier} tiersData={tier} />
       ))}
       {auth.user && auth.user.roles.includes('admin') && (
