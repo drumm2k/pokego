@@ -1,8 +1,8 @@
+import PlusIcon from 'assets/plus.svg';
+import NavMenu from 'components/Nav/NavMenu';
+import { ProfileMenu } from 'components/ProfileMenu/ProfileMenu';
 import Link from 'next/link';
 import styled from 'styled-components';
-import PlusIcon from '../assets/plus.svg';
-import NavMenu from './Nav/NavMenu';
-import ProfileMenu from './ProfileMenu/ProfileMenu';
 
 export default function Header() {
   return (

@@ -48,8 +48,8 @@ export default function ConfirmReset() {
           userName,
           tokenExpiration,
         } = data.verifyResetPasswordRequest;
-        auth.login(token, userId, userName, tokenExpiration);
-        router.push('/user/[id]', `/user/${userName}`);
+        // auth.login(token, userId, userName, tokenExpiration);
+        // router.push('/user/[id]', `/user/${userName}`);
       },
     }
   );

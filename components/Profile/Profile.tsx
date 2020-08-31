@@ -1,19 +1,8 @@
-import PropTypes from 'prop-types';
+import { PokeCard } from 'components/PokeCard';
 import styled from 'styled-components';
-import PokeCard from '../PokeCard';
-import ProfileCard from './ProfileCard';
+import { ProfileCard } from './ProfileCard';
 
-const ProfileContainer = styled.div`
-  display: grid;
-  grid-gap: ${(p) => p.theme.spacing.s12};
-`;
-
-const PokeList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const Profile = ({ user }) => {
+export function Profile({ user }: any) {
   return (
     <ProfileContainer>
       <ProfileCard
@@ -23,14 +12,12 @@ const Profile = ({ user }) => {
         social={user.social}
       />
 
-      {/* {user.social && <ProfileSocial social={user.social} />} */}
-
-      {user.tradeLists.map((list) => (
+      {user.tradeLists.map((list: any) => (
         <div key={list.id}>
           <div>
             Trade List: {list.pokemons.length} покемона
             <PokeList>
-              {list.pokemons.map((pokemon) => (
+              {list.pokemons.map((pokemon: any) => (
                 <PokeCard
                   key={pokemon.name}
                   pokedex={pokemon.pokedex}
@@ -46,10 +33,14 @@ const Profile = ({ user }) => {
       ))}
     </ProfileContainer>
   );
-};
+}
 
-Profile.propTypes = {
-  user: PropTypes.oneOfType([PropTypes.object]).isRequired,
-};
+const ProfileContainer = styled.div`
+  display: grid;
+  grid-gap: ${(p) => p.theme.spacing.s12};
+`;
 
-export default Profile;
+const PokeList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;

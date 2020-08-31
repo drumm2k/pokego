@@ -12,6 +12,89 @@ import styled from 'styled-components';
 import ProfileItem from './ProfileItem';
 import ProfileLogout from './ProfileLogout';
 
+export function ProfileMenu({ icon }: { icon: JSX.Element }) {
+  const [open, setOpen] = useState(false);
+  const auth = useContext(AuthContext);
+
+  useEffect(() => {
+    if (!getAccessToken()) {
+      return;
+    }
+
+    const payload = jwtDecode(getAccessToken());
+    auth.login(payload as UserDataType);
+  }, [getAccessToken()]);
+
+  return (
+    <>
+      {auth.user && (
+        <>
+          <Link href="/user/[id]" as={`/user/${auth.user.userName}`} passHref>
+            <UserName>{auth.user.userName}</UserName>
+          </Link>
+          <ProfileButton
+            onClick={() => setOpen(!open)}
+            aria-label="Profile Menu"
+            aria-haspopup="true"
+            aria-expanded={open}
+          >
+            <ProfileAvatar>
+              <ProfileAvatarIcon>{icon}</ProfileAvatarIcon>
+            </ProfileAvatar>
+          </ProfileButton>
+        </>
+      )}
+      {!auth.user && (
+        <Link href="/login" passHref>
+          <Login>Войти</Login>
+        </Link>
+      )}
+      {open && <DropdownMenu open={open} setOpen={setOpen} />}
+    </>
+  );
+}
+
+type DropdownMenuProps = {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export function DropdownMenu({ open, setOpen }: DropdownMenuProps) {
+  const dropdownRef = React.createRef<any>();
+  const auth = useContext<any>(AuthContext);
+  useOnClickOutside(dropdownRef, () => setOpen(false));
+
+  return (
+    <Dropdown ref={dropdownRef}>
+      <ProfileItem
+        leftIcon={<UserIcon />}
+        url="/user/[id]"
+        as={`/user/${auth.user.userName}`}
+        open={open}
+        setOpen={setOpen}
+      >
+        Профиль
+      </ProfileItem>
+      <ProfileItem
+        leftIcon={<SettingsIcon />}
+        url="/settings"
+        open={open}
+        setOpen={setOpen}
+      >
+        Настройки
+      </ProfileItem>
+      <ProfileLogout
+        leftIcon={<LogoutIcon />}
+        func={auth.logout}
+        open={open}
+        setOpen={setOpen}
+      >
+        Выйти
+      </ProfileLogout>
+    </Dropdown>
+  );
+}
+
 const ProfileButton = styled.button`
   display: flex;
   justify-content: center;
@@ -87,94 +170,11 @@ const UserName = styled.a`
   }
 `;
 
-export default function NavProfile({ icon }: { icon: JSX.Element }) {
-  const [open, setOpen] = useState(false);
-  const auth = useContext(AuthContext);
-
-  useEffect(() => {
-    if (!getAccessToken()) {
-      return;
-    }
-
-    const payload = jwtDecode(getAccessToken());
-    auth.login(payload as UserDataType);
-  }, [getAccessToken()]);
-
-  return (
-    <>
-      {auth.user && (
-        <>
-          <Link href="/user/[id]" as={`/user/${auth.user.userName}`} passHref>
-            <UserName>{auth.user.userName}</UserName>
-          </Link>
-          <ProfileButton
-            onClick={() => setOpen(!open)}
-            aria-label="Profile Menu"
-            aria-haspopup="true"
-            aria-expanded={open}
-          >
-            <ProfileAvatar>
-              <ProfileAvatarIcon>{icon}</ProfileAvatarIcon>
-            </ProfileAvatar>
-          </ProfileButton>
-        </>
-      )}
-      {!auth.user && (
-        <Link href="/login" passHref>
-          <Login>Войти</Login>
-        </Link>
-      )}
-      {open && <DropdownMenu open={open} setOpen={setOpen} />}
-    </>
-  );
-}
-
-type DropdownMenuProps = {
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-function DropdownMenu({ open, setOpen }: DropdownMenuProps) {
-  const dropdownRef = React.createRef<any>();
-  const auth = useContext<any>(AuthContext);
-  useOnClickOutside(dropdownRef, () => setOpen(false));
-
-  return (
-    <Dropdown ref={dropdownRef}>
-      <ProfileItem
-        leftIcon={<UserIcon />}
-        url="/user/[id]"
-        as={`/user/${auth.user.userName}`}
-        open={open}
-        setOpen={setOpen}
-      >
-        Профиль
-      </ProfileItem>
-      <ProfileItem
-        leftIcon={<SettingsIcon />}
-        url="/settings"
-        open={open}
-        setOpen={setOpen}
-      >
-        Настройки
-      </ProfileItem>
-      <ProfileLogout
-        leftIcon={<LogoutIcon />}
-        func={auth.logout}
-        open={open}
-        setOpen={setOpen}
-      >
-        Выйти
-      </ProfileLogout>
-    </Dropdown>
-  );
-}
-
-NavProfile.propTypes = {
+ProfileMenu.propTypes = {
   icon: PropTypes.oneOfType([PropTypes.object]),
 };
 
-NavProfile.defaultProps = {
+ProfileMenu.defaultProps = {
   icon: null,
 };
 

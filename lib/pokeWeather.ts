@@ -1,3 +1,7 @@
+type AllWeatherType = {
+  [key: string]: string | string[];
+};
+
 const ALL_TYPE_WEATHER = {
   POKEMON_TYPE_NORMAL: 'Party Cloudy',
   POKEMON_TYPE_FIGHTING: 'Cloudy',
@@ -17,6 +21,10 @@ const ALL_TYPE_WEATHER = {
   POKEMON_TYPE_DRAGON: 'Windy',
   POKEMON_TYPE_DARK: 'Fog',
   POKEMON_TYPE_FAIRY: 'Cloudy',
+} as AllWeatherType;
+
+type AllWeatherImg = {
+  [key: string]: string;
 };
 
 const ALL_TYPE_WEARTHER_IMG = {
@@ -28,14 +36,16 @@ const ALL_TYPE_WEARTHER_IMG = {
   Sunny: '/img/weather/sunny.png',
   Clear: '/img/weather/clear.png',
   Windy: '/img/weather/windy.png',
-};
+} as AllWeatherImg;
 
-export function pokeTypeWeather(type, type2) {
+export function pokeTypeWeather(type: string, type2: string) {
   if (type === '') return null;
 
   const first = ALL_TYPE_WEATHER[type];
-  let second;
-  if (type2) second = ALL_TYPE_WEATHER[type2];
+  let second: null | string | string[] = null;
+  if (type2) {
+    second = ALL_TYPE_WEATHER[type2];
+  }
 
   const res = [];
 
@@ -56,7 +66,7 @@ export function pokeTypeWeather(type, type2) {
   return res;
 }
 
-export function pokeTypeWeatherImg(weather) {
+export function pokeTypeWeatherImg(weather: string) {
   if (weather === '') return null;
 
   const res = [];

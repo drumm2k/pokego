@@ -11,7 +11,8 @@
     "lint": "eslint ./components/** ./pages/** --fix --ext js,jsx",
     "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
     "pre-commit": "npm run lint && npm run format",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gen": "graphql-codegen --config codegen.yml"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "apollo-server-micro": "^2.16.1",
     "cookie": "^0.4.1",
     "graphql": "^15.3.0",
+    "graphql-tag": "^2.11.0",
     "jwt-decode": "^2.2.0",
     "leaflet": "^1.6.0",
     "leaflet.markercluster": "^1.4.1",
@@ -49,9 +51,15 @@
     "yup": "^0.29.2"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.17.8",
+    "@graphql-codegen/import-types-preset": "^1.17.9",
+    "@graphql-codegen/typescript": "1.17.8",
+    "@graphql-codegen/typescript-operations": "^1.17.8",
+    "@graphql-codegen/typescript-react-apollo": "2.0.6",
     "@types/jwt-decode": "^2.2.1",
     "@types/node": "^14.6.0",
     "@types/nprogress": "^0.2.0",
+    "@types/qrcode.react": "^1.0.1",
     "@types/react": "^16.9.46",
     "@types/react-leaflet": "^2.5.2",
     "@types/react-leaflet-markercluster": "^2.0.0",

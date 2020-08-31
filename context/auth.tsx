@@ -11,8 +11,8 @@ export type UserDataType = {
 
 interface AuthContextType {
   user: UserDataType | null;
-  login: any;
-  logout: any;
+  login: (user: UserDataType) => void;
+  logout: () => void;
 }
 
 const AuthContext = React.createContext<AuthContextType>({

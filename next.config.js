@@ -5,6 +5,11 @@ module.exports = {
       use: ['@svgr/webpack'],
     });
 
+    config.module.rules.push({
+      test: /\.(graphql|gql)$/,
+      use: ['graphql-tag/loader'],
+    });
+
     return config;
   },
 };

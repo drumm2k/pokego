@@ -1,13 +1,5 @@
 import styled from 'styled-components';
 
-const StyledFooter = styled.footer`
-  font-size: ${(p) => p.theme.font.size.xs};
-  color: ${(p) => p.theme.color.gray600};
-  margin-top: ${(p) => p.theme.spacing.s16};
-  padding: ${(p) => p.theme.spacing.s6};
-  border-top: ${(p) => p.theme.border.border300};
-`;
-
 export default function Footer() {
   return (
     <StyledFooter>
@@ -21,3 +13,11 @@ export default function Footer() {
     </StyledFooter>
   );
 }
+
+const StyledFooter = styled.footer`
+  font-size: ${(p) => p.theme.font.size.xs};
+  color: ${(p) => p.theme.color.gray600};
+  margin-top: ${(p) => p.theme.spacing.s16};
+  padding: ${(p) => p.theme.spacing.s6};
+  border-top: ${(p) => p.theme.border.border300};
+`;

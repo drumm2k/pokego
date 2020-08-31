@@ -1,44 +1,19 @@
-import { gql, useQuery } from '@apollo/client';
-import Pdex from 'components/Pokedex/Pokedex';
+import { Pdex } from 'components/Pokedex/Pokedex';
 import { Title } from 'components/Title';
 import { initializeApollo } from 'lib/apolloClient';
-
-export const GET_ALL_POKEMONS = gql`
-  query {
-    getPokemons {
-      name
-      pokedex
-      gen
-      shiny
-      released
-      type1
-      type2
-      baseStamina
-      baseAttack
-      baseDefense
-      pokemonClass
-      evolutionBranch {
-        evolution
-        evolutionItemRequirement
-        lureItemRequirement
-        candyCost
-      }
-    }
-  }
-`;
+import { useGetPokemonsQuery } from '../graphql/graphql';
+import getPokemons from '../graphql/queries/pokemons.graphql';
 
 export default function Pokedex() {
-  const { data, loading, error } = useQuery(GET_ALL_POKEMONS);
+  const { data, loading, error } = useGetPokemonsQuery();
 
   if (error) return <div>Error</div>;
   if (loading) return <div>Loading</div>;
 
-  const { getPokemons } = data;
-
   return (
     <>
       <Title color="#bb00c8">Покедекс</Title>
-      <Pdex pokemons={getPokemons} />
+      <Pdex pokemons={data?.getPokemons} />
     </>
   );
 }
@@ -47,7 +22,7 @@ export async function getStaticProps() {
   const apolloClient = initializeApollo();
 
   await apolloClient.query({
-    query: GET_ALL_POKEMONS,
+    query: getPokemons,
   });
 
   return {

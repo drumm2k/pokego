@@ -1,5 +1,5 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
-import RaidTier from 'components/Raids/RaidTier';
+import { RaidTier } from 'components/Raids/RaidTier';
 import { Title } from 'components/Title';
 import { Button } from 'components/UI';
 import AuthContext from 'context/auth';

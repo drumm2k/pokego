@@ -193,7 +193,7 @@ const EvoItemContainer = styled.div`
   align-items: center;
 `;
 
-export default function PokedexModal({ modalStatus, showModal, modalPokemonData }) {
+export function PokedexModal({ modalStatus, showModal, modalPokemonData }) {
   if (!modalStatus || !modalPokemonData) {
     return null;
   }

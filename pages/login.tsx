@@ -55,7 +55,6 @@ export default function Login() {
   const [login, { loading, error }] = useMutation(LOGIN, {
     onCompleted(data) {
       const { accessToken, user } = data.login;
-      console.log(user);
       auth.login(user);
       setAccessToken(accessToken);
       router.push('/user/[id]', `/user/${user.userName}`);

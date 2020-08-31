@@ -4,7 +4,101 @@ import pokeCalcCp from '../../lib/pokeCp';
 import { pokeImg } from '../../lib/pokeImg';
 import pokeCheckName from '../../lib/pokeName';
 import { pokeTypeColor, pokeTypeName } from '../../lib/pokeTypes';
-import { pokeTypeWeather, pokeTypeWeatherImg } from '../../lib/pokeWeather';
+import { pokeTypeWeather, pokeTypeWeatherImg } from '../../lib/pokeWeather.ts';
+
+export function RaidCard(props) {
+  const {
+    id,
+    name,
+    type1,
+    type2,
+    shiny,
+    baseStamina,
+    baseAttack,
+    baseDefense,
+  } = props;
+
+  // Filter name & get img
+  const pokeName = pokeCheckName(name);
+  const imgUrl = pokeImg(name, id);
+
+  // Get type names
+  const typeOneName = pokeTypeName(type1);
+  const typeTwoName = pokeTypeName(type2);
+
+  // Get type colors
+  const typeOneColor = pokeTypeColor(type1);
+  const typeTwoColor = pokeTypeColor(type2);
+
+  // Get weather icons
+  const weather = pokeTypeWeather(type1, type2);
+  const weatherImg = pokeTypeWeatherImg(weather);
+
+  // Calc CPs
+  const cpLow = pokeCalcCp(baseAttack, baseStamina, baseDefense, 20, 10, 10, 10);
+  const cpMax = pokeCalcCp(baseAttack, baseStamina, baseDefense, 20, 15, 15, 15);
+
+  const cpLowBoost = pokeCalcCp(
+    baseAttack,
+    baseStamina,
+    baseDefense,
+    25,
+    10,
+    10,
+    10
+  );
+  const cpMaxBoost = pokeCalcCp(
+    baseAttack,
+    baseStamina,
+    baseDefense,
+    25,
+    15,
+    15,
+    15
+  );
+
+  return (
+    <Card typeOneColor={typeOneColor} typeTwoColor={typeTwoColor}>
+      <CardImg imgUrl={imgUrl}>{shiny && <Shiny />}</CardImg>
+
+      <RaidContent>
+        <RaidTitle>
+          {/* Need to remove this split when FORMS library is done */}
+          <div>{pokeName}</div>
+          <WeatherIcons>
+            {weatherImg.map((icon) => (
+              <img
+                src={icon}
+                alt="Weather boost icon"
+                width="22"
+                height="22"
+                key={icon}
+              />
+            ))}
+          </WeatherIcons>
+        </RaidTitle>
+        <div>
+          <RaidType typeColor={typeOneColor}>{typeOneName}</RaidType>
+          {type2 && <RaidType typeColor={typeTwoColor}>{typeTwoName}</RaidType>}
+        </div>
+        <div>
+          <RaidCpContainer>
+            CP
+            <RaidCpOutput>
+              {cpLow} - {cpMax}
+            </RaidCpOutput>
+          </RaidCpContainer>
+          <RaidCpContainer>
+            🌥
+            <RaidCpOutput>
+              {cpLowBoost} - {cpMaxBoost}
+            </RaidCpOutput>
+          </RaidCpContainer>
+        </div>
+      </RaidContent>
+    </Card>
+  );
+}
 
 const Card = styled.div`
   color: ${(p) => p.theme.color.white};
@@ -132,100 +226,6 @@ const RaidCpOutput = styled.span`
   font-variant-numeric: tabular-nums;
 `;
 
-const RaidCard = (props) => {
-  const {
-    id,
-    name,
-    type1,
-    type2,
-    shiny,
-    baseStamina,
-    baseAttack,
-    baseDefense,
-  } = props;
-
-  // Filter name & get img
-  const pokeName = pokeCheckName(name);
-  const imgUrl = pokeImg(name, id);
-
-  // Get type names
-  const typeOneName = pokeTypeName(type1);
-  const typeTwoName = pokeTypeName(type2);
-
-  // Get type colors
-  const typeOneColor = pokeTypeColor(type1);
-  const typeTwoColor = pokeTypeColor(type2);
-
-  // Get weather icons
-  const weather = pokeTypeWeather(type1, type2);
-  const weatherImg = pokeTypeWeatherImg(weather);
-
-  // Calc CPs
-  const cpLow = pokeCalcCp(baseAttack, baseStamina, baseDefense, 20, 10, 10, 10);
-  const cpMax = pokeCalcCp(baseAttack, baseStamina, baseDefense, 20, 15, 15, 15);
-
-  const cpLowBoost = pokeCalcCp(
-    baseAttack,
-    baseStamina,
-    baseDefense,
-    25,
-    10,
-    10,
-    10
-  );
-  const cpMaxBoost = pokeCalcCp(
-    baseAttack,
-    baseStamina,
-    baseDefense,
-    25,
-    15,
-    15,
-    15
-  );
-
-  return (
-    <Card typeOneColor={typeOneColor} typeTwoColor={typeTwoColor}>
-      <CardImg imgUrl={imgUrl}>{shiny && <Shiny />}</CardImg>
-
-      <RaidContent>
-        <RaidTitle>
-          {/* Need to remove this split when FORMS library is done */}
-          <div>{pokeName}</div>
-          <WeatherIcons>
-            {weatherImg.map((icon) => (
-              <img
-                src={icon}
-                alt="Weather boost icon"
-                width="22"
-                height="22"
-                key={icon}
-              />
-            ))}
-          </WeatherIcons>
-        </RaidTitle>
-        <div>
-          <RaidType typeColor={typeOneColor}>{typeOneName}</RaidType>
-          {type2 && <RaidType typeColor={typeTwoColor}>{typeTwoName}</RaidType>}
-        </div>
-        <div>
-          <RaidCpContainer>
-            CP
-            <RaidCpOutput>
-              {cpLow} - {cpMax}
-            </RaidCpOutput>
-          </RaidCpContainer>
-          <RaidCpContainer>
-            🌥
-            <RaidCpOutput>
-              {cpLowBoost} - {cpMaxBoost}
-            </RaidCpOutput>
-          </RaidCpContainer>
-        </div>
-      </RaidContent>
-    </Card>
-  );
-};
-
 RaidCard.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
@@ -240,5 +240,3 @@ RaidCard.propTypes = {
 RaidCard.defaultProps = {
   type2: null,
 };
-
-export default RaidCard;

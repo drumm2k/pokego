@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import { Component } from 'react';
 import styled from 'styled-components';
-import { Checkbox, Input, Label, Select } from '../UI';
+import { Checkbox, Input, Label, Select } from '../UI.tsx';
 import PokedexList from './PokedexList';
-import PokedexModal from './PokedexModal';
+import { PokedexModal } from './PokedexModal';
 
 const FiltersContainer = styled.section`
   display: grid;
@@ -42,7 +42,7 @@ const TabsItem = styled.li`
   }
 `;
 
-export default class Pokedex extends Component {
+export class Pdex extends Component {
   constructor(props) {
     super(props);
     const { pokemons } = this.props;
@@ -213,6 +213,6 @@ export default class Pokedex extends Component {
   }
 }
 
-Pokedex.propTypes = {
+Pdex.propTypes = {
   pokemons: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

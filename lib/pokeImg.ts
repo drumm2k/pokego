@@ -1,4 +1,4 @@
-export function pokeImg(name, pokedex) {
+export function pokeImg(name: string, pokedex: number) {
   if (name.includes('ALOLA')) {
     return `/img/pokemon/${pokedex}a.png`;
   }
@@ -8,7 +8,7 @@ export function pokeImg(name, pokedex) {
   return `/img/pokemon/${pokedex}.png`;
 }
 
-export function pokeImgShiny(name, pokedex) {
+export function pokeImgShiny(name: string, pokedex: number) {
   if (name.includes('ALOLA')) {
     return `/img/pokemon/shiny/${pokedex}a.png`;
   }
