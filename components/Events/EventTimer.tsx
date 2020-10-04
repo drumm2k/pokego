@@ -11,7 +11,7 @@ export function EventTimer({ starts, ends }: EventTimerProps) {
   const [output, setOutput] = useState('');
 
   const calcDuration = (date: string) => {
-    const milliseconds = Date.parse(date) - Date.parse(new Date());
+    const milliseconds = Date.parse(date) - Date.parse(new Date().toString());
     let seconds = Math.floor(milliseconds / 1000);
     let minutes = Math.floor(seconds / 60);
     seconds %= 60;
@@ -20,30 +20,32 @@ export function EventTimer({ starts, ends }: EventTimerProps) {
     const days = Math.floor(hours / 24);
     hours %= 24;
 
-    if (seconds < 10) {
-      seconds = `0${seconds}`;
-    }
-    if (minutes < 10) {
-      minutes = `0${minutes}`;
-    }
-    if (hours < 10) {
-      hours = `0${hours}`;
-    }
+    const secondsOutput = seconds < 10 ? `0${seconds}` : `${seconds}`;
+    const minutesOutput = minutes < 10 ? `0${minutes}` : `${minutes}`;
+    const hoursOutput = hours < 10 ? `0${hours}` : `${hours}`;
 
     if (days === 0 && hours === 0 && minutes === 0) {
-      setOutput(`${seconds}с`);
+      setOutput(`${secondsOutput || seconds}с`);
     } else if (days === 0 && hours === 0) {
-      setOutput(`${minutes}м ${seconds}с`);
+      setOutput(`${minutesOutput || minutes}м ${secondsOutput || seconds}с`);
     } else if (days === 0) {
-      setOutput(`${hours}ч ${minutes}м ${seconds}с`);
+      setOutput(
+        `${hoursOutput || hours}ч ${minutesOutput || minutes}м ${
+          secondsOutput || seconds
+        }с`
+      );
     } else {
-      setOutput(`${days}д ${hours}ч ${minutes}м ${seconds}с`);
+      setOutput(
+        `${days}д ${hoursOutput || hours}ч ${minutesOutput || minutes}м ${
+          secondsOutput || seconds
+        }с`
+      );
     }
   };
 
   const tick = (interval: any) => {
-    const diffStart = Date.parse(starts) - Date.parse(new Date());
-    const diffEnd = Date.parse(ends) - Date.parse(new Date());
+    const diffStart = Date.parse(starts) - Date.parse(new Date().toString());
+    const diffEnd = Date.parse(ends) - Date.parse(new Date().toString());
     if (diffStart > 0) {
       calcDuration(starts);
     } else if (diffStart < 0 && diffEnd > 0) {
