@@ -32,8 +32,12 @@ export function PokeCard(props: PokeCard) {
   const typeOneColor = pokeTypeColor(type1);
   const typeTwoColor = pokeTypeColor(type2);
 
-  const imgUrl = `url(${pokeImg(filteredName, pokedex)})`;
-  const imgUrlShiny = `url(${pokeImgShiny(filteredName, pokedex)})`;
+  function getImgUrl() {
+    if (activeTab === 'shiny') return `url(${pokeImgShiny(filteredName, pokedex)})`;
+    return `url(${pokeImg(filteredName, pokedex)})`;
+  }
+
+  const imgUrl = getImgUrl();
 
   return (
     <Card
@@ -41,9 +45,9 @@ export function PokeCard(props: PokeCard) {
       enableModal={enableModal}
     >
       <CardType typeOneColor={typeOneColor} typeTwoColor={typeTwoColor}>
-        <CardImg imgUrl={activeTab === 'shiny' ? imgUrlShiny : imgUrl}>
+        <CardImg imgUrl={imgUrl}>
           <div>#{pokedex}</div>
-          <div>{gen && pokeGen(gen)}</div>
+          {gen && <div>{pokeGen(gen)}</div>}
         </CardImg>
       </CardType>
       <CardContent>{filteredName.toLowerCase()}</CardContent>
@@ -83,11 +87,14 @@ const CardType = styled.div<{
   );
 `;
 
-const CardImg = styled.div.attrs(({ imgUrl }: { imgUrl: string }) => ({
-  style: {
-    backgroundImage: imgUrl,
-  },
-}))`
+const CardImg = styled.div.attrs(
+  ({ imgUrl }: { imgUrl: string }) =>
+    ({
+      style: {
+        backgroundImage: imgUrl as string,
+      },
+    } as any)
+)`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;

@@ -1,7 +1,25 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import MenuIcon from '../../assets/menu.svg';
-import NavList from './NavList';
+import { NavList } from './NavList';
+
+export function NavMenu() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button
+        aria-label="Navigation Menu"
+        aria-haspopup="true"
+        aria-expanded={open}
+        onClick={() => setOpen(!open)}
+      >
+        <MenuIcon />
+      </Button>
+      {open && <NavList open={open} setOpen={setOpen} />}
+    </>
+  );
+}
 
 const Button = styled.button`
   display: flex;
@@ -22,21 +40,3 @@ const Button = styled.button`
     filter: brightness(0.9);
   }
 `;
-
-export default function NavMenu() {
-  const [open, setOpen] = useState();
-
-  return (
-    <>
-      <Button
-        aria-label="Navigation Menu"
-        aria-haspopup="true"
-        aria-expanded={open}
-        onClick={() => setOpen(!open)}
-      >
-        <MenuIcon />
-      </Button>
-      {open && <NavList open={open} setOpen={setOpen} />}
-    </>
-  );
-}

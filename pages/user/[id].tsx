@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
-import Profile from 'components/Profile/Profile';
+import { Profile } from 'components/Profile/Profile';
 import { Title } from 'components/Title';
 import { GetServerSideProps } from 'next';
 // import cookie from 'cookie';

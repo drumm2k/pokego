@@ -55,7 +55,7 @@ export default function Raids() {
     <>
       <Title color="#009dc8">Рейды</Title>
       {getRaids.map((tier: any) => (
-        <RaidTier key={tier.id} id={tier.tier} tiersData={tier} />
+        <RaidTier key={tier.id} tiersData={tier} />
       ))}
       {auth.user && auth.user.roles.includes('admin') && (
         <Button onClick={refresh}>Refresh Raids</Button>

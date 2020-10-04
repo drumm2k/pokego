@@ -1,23 +1,31 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import pokeCalcCp from '../../lib/pokeCp';
+import { pokeCalcCp } from 'lib/pokeCp';
 import { pokeImg } from '../../lib/pokeImg';
 import pokeCheckName from '../../lib/pokeName';
 import { pokeTypeColor, pokeTypeName } from '../../lib/pokeTypes';
-import { pokeTypeWeather, pokeTypeWeatherImg } from '../../lib/pokeWeather.ts';
+import { pokeTypeWeather, pokeTypeWeatherImg } from 'lib/pokeWeather';
 
-export function RaidCard(props) {
-  const {
-    id,
-    name,
-    type1,
-    type2,
-    shiny,
-    baseStamina,
-    baseAttack,
-    baseDefense,
-  } = props;
+interface RaidCardProps {
+  id: number;
+  name: string;
+  type1: string;
+  type2?: string | null;
+  shiny: boolean;
+  baseStamina: number;
+  baseAttack: number;
+  baseDefense: number;
+}
 
+export function RaidCard({
+  id,
+  name,
+  type1,
+  type2,
+  shiny,
+  baseStamina,
+  baseAttack,
+  baseDefense,
+}: RaidCardProps) {
   // Filter name & get img
   const pokeName = pokeCheckName(name);
   const imgUrl = pokeImg(name, id);
@@ -66,15 +74,16 @@ export function RaidCard(props) {
           {/* Need to remove this split when FORMS library is done */}
           <div>{pokeName}</div>
           <WeatherIcons>
-            {weatherImg.map((icon) => (
-              <img
-                src={icon}
-                alt="Weather boost icon"
-                width="22"
-                height="22"
-                key={icon}
-              />
-            ))}
+            {weatherImg &&
+              weatherImg.map((icon) => (
+                <img
+                  src={icon}
+                  alt="Weather boost icon"
+                  width="22"
+                  height="22"
+                  key={icon}
+                />
+              ))}
           </WeatherIcons>
         </RaidTitle>
         <div>
@@ -100,7 +109,10 @@ export function RaidCard(props) {
   );
 }
 
-const Card = styled.div`
+const Card = styled.div<{
+  typeOneColor: string | null;
+  typeTwoColor?: string | null;
+}>`
   color: ${(p) => p.theme.color.white};
   font-size: ${(p) => p.theme.font.size.xs};
   display: flex;
@@ -118,7 +130,7 @@ const Card = styled.div`
   box-shadow: ${(p) => p.theme.lighting.shadow200};
 `;
 
-const CardImg = styled.div`
+const CardImg = styled.div<{ imgUrl: string }>`
   position: relative;
   background-size: cover;
   background-repeat: no-repeat;
@@ -199,7 +211,7 @@ const WeatherIcons = styled.div`
   line-height: 0;
 `;
 
-const RaidType = styled.span`
+const RaidType = styled.span<{ typeColor: string | null }>`
   display: inline-block;
   padding: 0.1rem ${(p) => p.theme.spacing.s3};
   margin-right: ${(p) => p.theme.spacing.s1};
@@ -225,18 +237,3 @@ const RaidCpOutput = styled.span`
   letter-spacing: 1px;
   font-variant-numeric: tabular-nums;
 `;
-
-RaidCard.propTypes = {
-  id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  type1: PropTypes.string.isRequired,
-  type2: PropTypes.string,
-  shiny: PropTypes.bool.isRequired,
-  baseStamina: PropTypes.number.isRequired,
-  baseAttack: PropTypes.number.isRequired,
-  baseDefense: PropTypes.number.isRequired,
-};
-
-RaidCard.defaultProps = {
-  type2: null,
-};

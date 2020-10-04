@@ -1,7 +1,32 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ChevronRightIcon from '../../assets/chevron_right.svg';
-import EventTimer from './EventTimer';
+import { EventTimer } from './EventTimer';
+
+interface EventProps {
+  img: string;
+  name: string;
+  description: string;
+  starts: string;
+  ends: string;
+}
+
+export function Event({ img, name, description, starts, ends }: EventProps) {
+  return (
+    <EventCard>
+      <EventImg imgUrl={img} alt={name} />
+      <EventData>
+        <div>
+          <EventTitle>{name}</EventTitle>
+          <EventDesc>{description}</EventDesc>
+        </div>
+        <EventTimer starts={starts} ends={ends} />
+      </EventData>
+      <EventArrow>
+        <ChevronRightIcon />
+      </EventArrow>
+    </EventCard>
+  );
+}
 
 const EventCard = styled.div`
   display: flex;
@@ -41,7 +66,7 @@ const EventDesc = styled.p`
   padding-bottom: ${(p) => p.theme.spacing.s2};
 `;
 
-const EventImg = styled.div`
+const EventImg = styled.div<{ imgUrl: string; alt: string }>`
   background: url(${(p) => p.imgUrl}) 50% 50% no-repeat;
   background-size: cover;
   min-width: 12rem;
@@ -60,29 +85,3 @@ const EventArrow = styled.div`
   height: 2.4rem;
   width: 2.4rem;
 `;
-
-export function Event({ img, name, description, starts, ends }) {
-  return (
-    <EventCard>
-      <EventImg imgUrl={img} alt={name} />
-      <EventData>
-        <div>
-          <EventTitle>{name}</EventTitle>
-          <EventDesc>{description}</EventDesc>
-        </div>
-        <EventTimer start={starts} end={ends} />
-      </EventData>
-      <EventArrow>
-        <ChevronRightIcon />
-      </EventArrow>
-    </EventCard>
-  );
-}
-
-Event.propTypes = {
-  img: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  starts: PropTypes.string.isRequired,
-  ends: PropTypes.string.isRequired,
-};

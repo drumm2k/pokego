@@ -2,10 +2,34 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { RaidCard } from './RaidCard';
 
-export function RaidTier(props) {
-  const { id, tiersData } = props;
+interface PokemonRaidProps {
+  name: string;
+  pokedex: number;
+  type1: string;
+  type2: string | null;
+  baseStamina: number;
+  baseAttack: number;
+  baseDefense: number;
+}
 
-  const tier = id.replace(/[^0-9]/g, '');
+interface RaidsProps {
+  shiny: boolean;
+  verified: boolean;
+  cp: number;
+  pokemon: PokemonRaidProps;
+}
+
+interface TiersDataProps {
+  tier: string;
+  raids: [RaidsProps];
+}
+
+interface RaidTierProps {
+  tiersData: TiersDataProps;
+}
+
+export function RaidTier({ tiersData }: RaidTierProps) {
+  const tier = tiersData.tier.replace(/[^0-9]/g, '');
   const tierIcon = [...Array(parseInt(tier, 10))].map((e, index) => {
     const key = tier + index;
     return (
@@ -71,8 +95,3 @@ const Tier = styled.div`
 const TierIconContainer = styled.div`
   line-height: 0;
 `;
-
-RaidTier.propTypes = {
-  id: PropTypes.string.isRequired,
-  tiersData: PropTypes.oneOfType([PropTypes.object]).isRequired,
-};

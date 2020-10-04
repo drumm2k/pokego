@@ -1,6 +1,22 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Link from 'next/link';
+
+interface NavItemProps {
+  url: string;
+  children: string;
+  open: boolean;
+  setOpen: (open: boolean) => void;
+}
+
+export function NavItem({ url, children, open, setOpen }: NavItemProps) {
+  return (
+    <Link href={url} passHref>
+      <NavItemLink role="menuitem" onClick={() => setOpen(!open)}>
+        {children}
+      </NavItemLink>
+    </Link>
+  );
+}
 
 const NavItemLink = styled.a`
   display: inline-block;
@@ -21,28 +37,3 @@ const NavItemLink = styled.a`
     border-bottom: none;
   }
 `;
-
-const NavItem = (props) => {
-  const { url, children, open, setOpen } = props;
-
-  return (
-    <Link href={url} passHref>
-      <NavItemLink role="menuitem" onClick={() => setOpen(!open)}>
-        {children}
-      </NavItemLink>
-    </Link>
-  );
-};
-
-NavItem.propTypes = {
-  url: PropTypes.string,
-  children: PropTypes.string.isRequired,
-  open: PropTypes.bool.isRequired,
-  setOpen: PropTypes.func.isRequired,
-};
-
-NavItem.defaultProps = {
-  url: '/',
-};
-
-export default NavItem;

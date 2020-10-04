@@ -1,4 +1,4 @@
-const CP_MULTIPLIER = {
+const CP_MULTIPLIER: any = {
   1: 0.094,
   1.5: 0.1351374318,
   2: 0.16639787,
@@ -85,14 +85,14 @@ const CP_MULTIPLIER = {
   45: 0.81529999,
 };
 
-export default function pokeCalcCp(
-  attack,
-  stamina,
-  defence,
-  level,
-  ivAttack,
-  ivStamina,
-  ivDefence
+export function pokeCalcCp(
+  attack: number,
+  stamina: number,
+  defence: number,
+  level: number,
+  ivAttack: number,
+  ivStamina: number,
+  ivDefence: number
 ) {
   const multiplier = CP_MULTIPLIER[level];
 

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
-import pokeCalcCp from '../../lib/pokeCp';
+import pokeCalcCp from '../../lib/pokeCp.ts';
 import { pokeEvoItemImages, pokeEvoItems } from '../../lib/pokeEvoItems';
 import { pokeGenFull } from '../../lib/pokeGen';
 import { pokeImg, pokeImgShiny } from '../../lib/pokeImg';

@@ -38,7 +38,7 @@ const ALL_TYPE_WEARTHER_IMG = {
   Windy: '/img/weather/windy.png',
 } as AllWeatherImg;
 
-export function pokeTypeWeather(type: string, type2: string) {
+export function pokeTypeWeather(type: string, type2: string | null | undefined) {
   if (type === '') return null;
 
   const first = ALL_TYPE_WEATHER[type];
@@ -66,8 +66,8 @@ export function pokeTypeWeather(type: string, type2: string) {
   return res;
 }
 
-export function pokeTypeWeatherImg(weather: string) {
-  if (weather === '') return null;
+export function pokeTypeWeatherImg(weather: any) {
+  if (weather === '' || weather === null) return null;
 
   const res = [];
 
