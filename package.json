@@ -34,7 +34,7 @@
     "jwt-decode": "^2.2.0",
     "leaflet": "^1.6.0",
     "leaflet.markercluster": "^1.4.1",
-    "next": "^9.5.1",
+    "next": "^10.0.0",
     "nprogress": "^0.2.0",
     "prop-types": "^15.7.2",
     "qrcode.react": "^1.0.0",
@@ -61,8 +61,5 @@
     "eslint-plugin-react": "^7.20.4",
     "eslint-plugin-react-hooks": "^4.0.8",
     "prettier": "^2.0.5"
-  },
-  "resolutions": {
-    "webpack": "^5.0.0-beta.22"
   }
 }
