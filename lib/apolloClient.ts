@@ -1,12 +1,12 @@
-import { ApolloClient, from, HttpLink, InMemoryCache } from '@apollo/client';
+import { ApolloClient, from, HttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import { TokenRefreshLink } from 'apollo-link-token-refresh';
 import jwtDecode from 'jwt-decode';
 import { useMemo } from 'react';
-import { getAccessToken, setAccessToken } from './accessToken.ts';
+import { getAccessToken, setAccessToken } from './accessToken';
 
-let apolloClient;
+let apolloClient: ApolloClient<NormalizedCacheObject> | null = null;
 
 const linkError = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
@@ -93,7 +93,7 @@ function createApolloClient() {
   });
 }
 
-export function initializeApollo(initialState = null) {
+export function initializeApollo(initialState: NormalizedCacheObject | null = null) {
   const _apolloClient = apolloClient ?? createApolloClient();
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
@@ -109,7 +109,7 @@ export function initializeApollo(initialState = null) {
   return _apolloClient;
 }
 
-export function useApollo(initialState) {
+export function useApollo(initialState: NormalizedCacheObject) {
   const store = useMemo(() => initializeApollo(initialState), [initialState]);
   return store;
 }
