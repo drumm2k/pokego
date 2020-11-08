@@ -1,0 +1,21 @@
+query GetPokemons {
+  getPokemons {
+    name
+    pokedex
+    gen
+    shiny
+    released
+    type1
+    type2
+    baseStamina
+    baseAttack
+    baseDefense
+    pokemonClass
+    evolutionBranch {
+      evolution
+      evolutionItemRequirement
+      lureItemRequirement
+      candyCost
+    }
+  }
+}
