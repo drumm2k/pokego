@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import ClockIcon from 'assets/clock.svg';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import ClockIcon from '../../assets/clock.svg';
 
 interface EventTimerProps {
   starts: string;

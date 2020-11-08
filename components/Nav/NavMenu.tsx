@@ -1,6 +1,6 @@
+import MenuIcon from 'assets/menu.svg';
 import { createRef, useState } from 'react';
 import styled from 'styled-components';
-import MenuIcon from '../../assets/menu.svg';
 import { NavList } from './NavList';
 
 export function NavMenu() {

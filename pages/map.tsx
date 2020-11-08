@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 
-const MapWithNoSSR = dynamic(() => import('../components/Map/Map'), {
+const MapWithNoSSR = dynamic(() => import('components/Map/Map'), {
   ssr: false,
 });
 

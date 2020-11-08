@@ -1,10 +1,10 @@
+import { pokeCalcCp } from 'lib/pokeCp';
+import { pokeEvoItemImages, pokeEvoItems } from 'lib/pokeEvoItems';
+import { pokeGenFull } from 'lib/pokeGen';
+import { pokeImg, pokeImgShiny } from 'lib/pokeImg';
+import pokeCheckName from 'lib/pokeName';
+import { pokeTypeColor, pokeTypeName } from 'lib/pokeTypes';
 import styled, { keyframes } from 'styled-components';
-import { pokeCalcCp } from '../../lib/pokeCp';
-import { pokeEvoItemImages, pokeEvoItems } from '../../lib/pokeEvoItems';
-import { pokeGenFull } from '../../lib/pokeGen';
-import { pokeImg, pokeImgShiny } from '../../lib/pokeImg';
-import pokeCheckName from '../../lib/pokeName';
-import { pokeTypeColor, pokeTypeName } from '../../lib/pokeTypes';
 
 interface PokedexModalType {
   modalStatus: boolean;

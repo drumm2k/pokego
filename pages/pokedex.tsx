@@ -1,8 +1,8 @@
 import { Pdex } from 'components/Pokedex/Pokedex';
 import { Title } from 'components/Title';
+import getPokemons from 'graphql/queries/pokemons.graphql';
 import { initializeApollo } from 'lib/apolloClient';
 import { useGetPokemonsQuery } from '../graphql/graphql';
-import getPokemons from '../graphql/queries/pokemons.graphql';
 
 export default function Pokedex() {
   const { data, loading, error } = useGetPokemonsQuery();

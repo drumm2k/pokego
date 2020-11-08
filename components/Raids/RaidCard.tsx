@@ -1,9 +1,9 @@
 import { pokeCalcCp } from 'lib/pokeCp';
+import { pokeImg } from 'lib/pokeImg';
+import pokeCheckName from 'lib/pokeName';
+import { pokeTypeColor, pokeTypeName } from 'lib/pokeTypes';
 import { pokeTypeWeather, pokeTypeWeatherImg } from 'lib/pokeWeather';
 import styled from 'styled-components';
-import { pokeImg } from '../../lib/pokeImg';
-import pokeCheckName from '../../lib/pokeName';
-import { pokeTypeColor, pokeTypeName } from '../../lib/pokeTypes';
 
 interface RaidCardProps {
   id: number;

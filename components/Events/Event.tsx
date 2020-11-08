@@ -1,5 +1,5 @@
+import ChevronRightIcon from 'assets/chevron_right.svg';
 import styled from 'styled-components';
-import ChevronRightIcon from '../../assets/chevron_right.svg';
 import { EventTimer } from './EventTimer';
 
 interface EventProps {

@@ -1,3 +1,4 @@
+import LocationMarker from 'assets/location_marker.svg';
 import { useEffect, useState } from 'react';
 import {
   Circle,
@@ -11,7 +12,6 @@ import {
 import Control from 'react-leaflet-control';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import styled from 'styled-components';
-import LocationMarker from '../../assets/location_marker.svg';
 import { LeafletStyles, MarkerClusterStyles } from './MapStyles';
 
 // Coordinates array
