@@ -4,7 +4,7 @@ import pokeCheckName from 'lib/pokeName';
 import { pokeTypeColor } from 'lib/pokeTypes';
 import styled from 'styled-components';
 
-interface PokeCard {
+export interface PokeCardType {
   pokedex: number;
   name: string;
   type1: string;
@@ -15,7 +15,7 @@ interface PokeCard {
   activeTab?: string;
 }
 
-export function PokeCard(props: PokeCard) {
+export function PokeCard(props: PokeCardType) {
   const {
     pokedex,
     name,

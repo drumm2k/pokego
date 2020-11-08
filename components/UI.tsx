@@ -1,3 +1,4 @@
+import { ChangeEvent } from 'react';
 import styled from 'styled-components';
 
 interface ButtonProps {
@@ -195,6 +196,7 @@ export const Radio = styled.input.attrs({ type: 'radio' })`
 interface SelectProps {
   disabled?: boolean;
   theme?: any;
+  onChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export const Select = styled.select<SelectProps>`
