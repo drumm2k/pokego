@@ -1,3 +1,7 @@
+type PokeAllType = {
+  [key: string]: string;
+};
+
 const ALL_TYPE_NAME = {
   POKEMON_TYPE_NORMAL: 'Normal',
   POKEMON_TYPE_FIGHTING: 'Fighting',
@@ -17,7 +21,7 @@ const ALL_TYPE_NAME = {
   POKEMON_TYPE_DRAGON: 'Dragon',
   POKEMON_TYPE_DARK: 'Dark',
   POKEMON_TYPE_FAIRY: 'Fairy',
-};
+} as PokeAllType;
 
 const ALL_TYPE_COLOR = {
   POKEMON_TYPE_NORMAL: '117, 117, 117',
@@ -38,15 +42,15 @@ const ALL_TYPE_COLOR = {
   POKEMON_TYPE_DRAGON: '81, 13, 133',
   POKEMON_TYPE_DARK: '53, 52, 54',
   POKEMON_TYPE_FAIRY: '145, 25, 133',
-};
+} as PokeAllType;
 
-export function pokeTypeName(type) {
-  if (type === '') return null;
+export function pokeTypeName(type: string) {
+  if (type === '') return;
   return ALL_TYPE_NAME[type];
 }
 
-export function pokeTypeColor(type) {
-  if (type === null) return null;
+export function pokeTypeColor(type: string | undefined) {
+  if (!type) return;
   const alpha = 0.7;
 
   return `rgba(${ALL_TYPE_COLOR[type]}, ${alpha})`;

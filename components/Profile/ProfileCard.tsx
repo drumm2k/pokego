@@ -3,21 +3,21 @@ import styled from 'styled-components';
 import { ProfileSocial } from './ProfileSocial';
 import { ProfileTrainerCode } from './ProfileTrainerCode';
 
-type TrainerProps = {
+interface TrainerProps {
   level: number;
   team: string;
   code: string;
-};
+}
 
-type LocationProps = {
+interface LocationProps {
   latitude: number;
   longtitude: number;
-};
+}
 
-type SocialProps = {
+interface SocialProps {
   telegram?: string;
   discord?: string;
-};
+}
 
 export type ProfileCardProps = {
   userName: string;

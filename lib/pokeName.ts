@@ -1,4 +1,4 @@
-export default function pokeCheckName(name) {
+export default function pokeCheckName(name: string) {
   if (name.includes('_') && name.includes('MIME')) {
     return name.replace(/_/g, ' ');
   }

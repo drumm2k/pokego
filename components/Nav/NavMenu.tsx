@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { createRef, useState } from 'react';
 import styled from 'styled-components';
 import MenuIcon from '../../assets/menu.svg';
 import { NavList } from './NavList';
 
 export function NavMenu() {
   const [open, setOpen] = useState(false);
+  const buttonRef = createRef<any>();
 
   return (
     <>
@@ -13,10 +14,11 @@ export function NavMenu() {
         aria-haspopup="true"
         aria-expanded={open}
         onClick={() => setOpen(!open)}
+        ref={buttonRef}
       >
         <MenuIcon />
       </Button>
-      {open && <NavList open={open} setOpen={setOpen} />}
+      {open && <NavList open={open} setOpen={setOpen} buttonRef={buttonRef} />}
     </>
   );
 }

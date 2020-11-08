@@ -1,3 +1,7 @@
+type PokeEvoItemsType = {
+  [key: string]: string;
+};
+
 const POKEMON_EVOLUTION_ITEMS = {
   ITEM_SUN_STONE: 'Sun Stone',
   ITEM_KINGS_ROCK: `King's Rock`,
@@ -9,7 +13,7 @@ const POKEMON_EVOLUTION_ITEMS = {
   ITEM_TROY_DISK_MAGNETIC: 'Magnetic Lure',
   ITEM_TROY_DISK_GLACIAL: 'Glacial Lure',
   ITEM_TROY_DISK_MOSSY: 'Mossy Lure',
-};
+} as PokeEvoItemsType;
 
 const POKEMON_EVOLUTION_ITEM_IMAGES = {
   ITEM_SUN_STONE: '/images/items/sun_stone.png',
@@ -22,12 +26,12 @@ const POKEMON_EVOLUTION_ITEM_IMAGES = {
   ITEM_TROY_DISK_MAGNETIC: '/images/items/lure_module_magnetic.png',
   ITEM_TROY_DISK_GLACIAL: '/images/items/lure_module_glacial.png',
   ITEM_TROY_DISK_MOSSY: '/images/items/lure_module_mossy.png',
-};
+} as PokeEvoItemsType;
 
-export function pokeEvoItems(item) {
+export function pokeEvoItems(item: string) {
   return POKEMON_EVOLUTION_ITEMS[item];
 }
 
-export function pokeEvoItemImages(item) {
+export function pokeEvoItemImages(item: string) {
   return POKEMON_EVOLUTION_ITEM_IMAGES[item];
 }

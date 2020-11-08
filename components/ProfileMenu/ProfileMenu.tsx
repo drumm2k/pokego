@@ -2,12 +2,11 @@ import SettingsIcon from 'assets/cog.svg';
 import LogoutIcon from 'assets/logout.svg';
 import UserIcon from 'assets/user.svg';
 import AuthContext, { UserDataType } from 'context/auth';
-import useOnClickOutside from 'hooks/useOnClickOutside';
+import { useOnClickOutside } from 'hooks/useOnClickOutside';
 import jwtDecode from 'jwt-decode';
 import { getAccessToken } from 'lib/accessToken';
 import Link from 'next/link';
-import PropTypes from 'prop-types';
-import React, { useContext, useEffect, useState } from 'react';
+import { createRef, useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ProfileItem from './ProfileItem';
 import ProfileLogout from './ProfileLogout';
@@ -15,6 +14,7 @@ import ProfileLogout from './ProfileLogout';
 export function ProfileMenu({ icon }: { icon: JSX.Element }) {
   const [open, setOpen] = useState(false);
   const auth = useContext(AuthContext);
+  const buttonRef = createRef<any>();
 
   useEffect(() => {
     if (!getAccessToken()) {
@@ -37,6 +37,7 @@ export function ProfileMenu({ icon }: { icon: JSX.Element }) {
             aria-label="Profile Menu"
             aria-haspopup="true"
             aria-expanded={open}
+            ref={buttonRef}
           >
             <ProfileAvatar>
               <ProfileAvatarIcon>{icon}</ProfileAvatarIcon>
@@ -49,7 +50,7 @@ export function ProfileMenu({ icon }: { icon: JSX.Element }) {
           <Login>Войти</Login>
         </Link>
       )}
-      {open && <DropdownMenu open={open} setOpen={setOpen} />}
+      {open && <DropdownMenu open={open} setOpen={setOpen} buttonRef={buttonRef} />}
     </>
   );
 }
@@ -57,12 +58,13 @@ export function ProfileMenu({ icon }: { icon: JSX.Element }) {
 type DropdownMenuProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  buttonRef: any;
 };
 
-export function DropdownMenu({ open, setOpen }: DropdownMenuProps) {
-  const dropdownRef = React.createRef<any>();
+export function DropdownMenu({ open, setOpen, buttonRef }: DropdownMenuProps) {
+  const dropdownRef = createRef<any>();
   const auth = useContext<any>(AuthContext);
-  useOnClickOutside(dropdownRef, () => setOpen(false));
+  useOnClickOutside(buttonRef, dropdownRef, () => setOpen(false));
 
   return (
     <Dropdown ref={dropdownRef}>
@@ -169,16 +171,3 @@ const UserName = styled.a`
     color: ${(p) => p.theme.color.black};
   }
 `;
-
-ProfileMenu.propTypes = {
-  icon: PropTypes.oneOfType([PropTypes.object]),
-};
-
-ProfileMenu.defaultProps = {
-  icon: null,
-};
-
-DropdownMenu.propTypes = {
-  open: PropTypes.bool.isRequired,
-  setOpen: PropTypes.func.isRequired,
-};

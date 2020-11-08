@@ -1,12 +1,13 @@
+import nav from 'config/nav.json';
+import { useOnClickOutside } from 'hooks/useOnClickOutside';
 import React from 'react';
 import styled from 'styled-components';
-import nav from 'config/nav.json';
-import useOnClickOutside from '../../hooks/useOnClickOutside';
 import { NavItem } from './NavItem';
 
 interface NavListProps {
   open: boolean;
   setOpen: (open: boolean) => void;
+  buttonRef: any;
 }
 
 interface NavItemProps {
@@ -14,10 +15,10 @@ interface NavItemProps {
   name: string;
 }
 
-export function NavList({ open, setOpen }: NavListProps) {
+export function NavList({ open, setOpen, buttonRef }: NavListProps) {
   const navListRef = React.createRef<any>();
 
-  useOnClickOutside(navListRef, () => setOpen(false));
+  useOnClickOutside(buttonRef, navListRef, () => setOpen(false));
 
   return (
     <NavListContainer open={open} ref={navListRef}>

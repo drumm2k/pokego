@@ -76,12 +76,12 @@ const Card = styled.div<{
 `;
 
 const CardType = styled.div<{
-  typeOneColor: string | null;
-  typeTwoColor?: string | null;
+  typeOneColor?: string;
+  typeTwoColor?: string;
 }>`
   background-image: linear-gradient(
     ${(p) =>
-      p.typeTwoColor
+      p.typeTwoColor && p.typeOneColor
         ? `${p.typeTwoColor}, ${p.typeOneColor}`
         : `${p.typeOneColor}, ${p.typeOneColor}`}
   );

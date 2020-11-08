@@ -1,3 +1,7 @@
+type PokeGenType = {
+  [key: string]: string;
+};
+
 const POKEMON_GEN = {
   GEN_1: 'G1',
   GEN_2: 'G2',
@@ -7,7 +11,7 @@ const POKEMON_GEN = {
   GEN_6: 'G6',
   GEN_7: 'G7',
   GEN_8: 'G8',
-};
+} as PokeGenType;
 
 const POKEMON_GEN_FULL = {
   GEN_1: '1 (Kanto)',
@@ -18,12 +22,12 @@ const POKEMON_GEN_FULL = {
   GEN_6: '6 (Kalos)',
   GEN_7: '7 (Alola)',
   GEN_8: '8 (Galar)',
-};
+} as PokeGenType;
 
-export function pokeGen(gen) {
+export function pokeGen(gen: string) {
   return POKEMON_GEN[gen];
 }
 
-export function pokeGenFull(gen) {
+export function pokeGenFull(gen: string) {
   return POKEMON_GEN_FULL[gen];
 }

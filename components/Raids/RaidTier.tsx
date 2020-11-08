@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { RaidCard } from './RaidCard';
 
@@ -6,7 +5,7 @@ interface PokemonRaidProps {
   name: string;
   pokedex: number;
   type1: string;
-  type2: string | null;
+  type2: string;
   baseStamina: number;
   baseAttack: number;
   baseDefense: number;

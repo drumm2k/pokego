@@ -1,14 +1,14 @@
 import TelegramIcon from 'assets/telegram.svg';
 import styled from 'styled-components';
 
-type SocialProp = {
+interface SocialProp {
   telegram?: string;
   discord?: string;
-};
+}
 
-type ProfileSocialProps = {
+interface ProfileSocialProps {
   social: SocialProp;
-};
+}
 
 export function ProfileSocial({ social }: ProfileSocialProps): JSX.Element | null {
   if (!social.telegram) return null;

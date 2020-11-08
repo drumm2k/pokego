@@ -1,15 +1,15 @@
-import styled from 'styled-components';
 import { pokeCalcCp } from 'lib/pokeCp';
+import { pokeTypeWeather, pokeTypeWeatherImg } from 'lib/pokeWeather';
+import styled from 'styled-components';
 import { pokeImg } from '../../lib/pokeImg';
 import pokeCheckName from '../../lib/pokeName';
 import { pokeTypeColor, pokeTypeName } from '../../lib/pokeTypes';
-import { pokeTypeWeather, pokeTypeWeatherImg } from 'lib/pokeWeather';
 
 interface RaidCardProps {
   id: number;
   name: string;
   type1: string;
-  type2?: string | null;
+  type2: string;
   shiny: boolean;
   baseStamina: number;
   baseAttack: number;
@@ -110,8 +110,8 @@ export function RaidCard({
 }
 
 const Card = styled.div<{
-  typeOneColor: string | null;
-  typeTwoColor?: string | null;
+  typeOneColor?: string;
+  typeTwoColor?: string;
 }>`
   color: ${(p) => p.theme.color.white};
   font-size: ${(p) => p.theme.font.size.xs};
@@ -211,7 +211,7 @@ const WeatherIcons = styled.div`
   line-height: 0;
 `;
 
-const RaidType = styled.span<{ typeColor: string | null }>`
+const RaidType = styled.span<{ typeColor?: string | undefined }>`
   display: inline-block;
   padding: 0.1rem ${(p) => p.theme.spacing.s3};
   margin-right: ${(p) => p.theme.spacing.s1};

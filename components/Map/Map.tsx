@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Circle,
   CircleMarker,
@@ -48,7 +48,7 @@ export default function MyMap() {
     position: any;
     zoom: number;
     trainer: any;
-}>({
+  }>({
     position: [59.93863, 30.31413],
     zoom: 13,
     trainer: null,
@@ -105,7 +105,7 @@ export default function MyMap() {
   // ));
 
   // Usual Markers decided to keep this for now (medium performance)
-  const Markers = coords.map((marker: {x: number, y: number, id: number}) => (
+  const Markers = coords.map((marker: { x: number; y: number; id: number }) => (
     <Marker key={marker.id} position={[marker.x, marker.y]}>
       <Popup>
         <div>

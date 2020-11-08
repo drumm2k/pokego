@@ -9,7 +9,7 @@
     "start": "next start",
     "export": "npm run build && next export",
     "lint": "eslint ./components/** ./pages/** --fix --ext js,jsx",
-    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
+    "format": "prettier --write \"**/*.+(ts|tsx|js|jsx|json|css|md)\"",
     "pre-commit": "npm run lint && npm run format",
     "test": "echo \"Error: no test specified\" && exit 1",
     "gen": "graphql-codegen --config codegen.yml"
